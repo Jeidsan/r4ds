@@ -54,6 +54,7 @@ O que a variável `drv` descreve?
 :::
 
 :::{.solution}
+
 Executamos o comando `?mpg` no console no R e a página de ajuda foi aberta. Nela encontramos o significado de cada variável do conjunto de dados.
 
 A varíável descreve o tipo de tração dos carros analisados, onde `f` significa tração dianteira, `r` significa tração traseira e `4` significa tração nas quatro rodas.
@@ -74,56 +75,187 @@ ggplot(data = mpg) +
 ```
 :::
 
+### Exercício 1.2.5 {- #exr1-2-5}
+
+::: {.enunciado}
+O que acontece se você fizer um gráfico de dispersão de `class` _versus_ `drv`? Por que esse gráfico não é útil?
+:::
+
+:::{.solution}
+```{r}
+ggplot(data = mpg) +
+    geom_point(mapping = aes(x = drv, y = class)) +
+    tema
+```
+
+Apesar de serem exibidos dados no gráfico, nenhuma informação substancial é extraída, uma vez que o tipo de tração não está (a princípio) relacionado com a categoria do carro. Outro fator que torno o gráfico pouco informativo é que há, por exemplo, diversas SUVs com tração nas 4 rodas, contudo os valores ficam sobrepostos no gráfico, não dando dimensão do quanto de dados temos.
+
+Abaixo seguem duas opções de como trazer mais informação ao gráfico:
+
+- a primeira opção adiciona um ruído aos dados (`position = jitter` ou `geom_jitter()`) de modo que não haja sobreposição;
+
+```{r}
+ggplot(data = mpg) +
+    geom_point(mapping = aes(x = drv, y = class), position = "jitter") +
+    tema
+```
+
+- a segunda opção, bem mais avançada, adiciona uma estética de `size` considerando a quantidade de registros.
+
+```{r}
+mpg %>%
+    group_by(class, drv) %>%
+    summarize(count = n()) %>%
+    ggplot(mapping = aes(x = drv, y = class, size = count)) +
+        geom_point() +
+        tema
+```
+:::
+
 ## Mapeamentos estéticos
 
 ### Exercício 1.3.1 {- #exr1-3-1}
 
-::: {.exercise}
-x
+::: {.enunciado}
+O que há de errado com este código? Por que os pontos não estão azuis?
+
+```{r}
+ggplot(data = mpg) +
+    geom_point(mapping = aes(x = displ, y = hwy, color = "blue")) +
+    tema
+```
 :::
 
 :::{.solution}
-x
+
+Ao invés de atribuir uma cor aos elementos de `geom_point`, o atributo `color` foi passado como uma estética. O gráfico deveria ser construído da seguinte maneira:
+
+```{r}
+ggplot(data = mpg) +
+    geom_point(mapping = aes(x = displ, y = hwy), color = "blue") +
+    tema
+```
+:::
+
+### Exercício 1.3.2 {- #exr1-3-2}
+
+::: {.enunciado}
+Quais variáveis em `mpg` são categóricas? Quais variáveis são contínuas? Como você pode ver essa informação quando executa `mpg`?
+:::
+
+:::{.solution}
+
+Usando `?mpg` vemos que as variáveis categóricas são: `manufacturer`, `model`, `trans`, `drv`, `fl` e `class`. As variáveis contínuas são: `displ`, `cty`, `hwy`.
+:::
+
+### Exercício 1.3.3 {- #exr1-3-3}
+
+::: {.enunciado}
+Mapeie uma variável contínua para `color`, `size` e `shape`. Como essas estéticas se comportam de maneira diferente para variáveis categóricas e contínuas?
+:::
+
+:::{.solution}
+```{r}
+ggplot(data = mpg) +
+    geom_point(mapping = aes(x = displ, y = hwy, color = displ)) +
+    tema
+```
+
+```{r}
+ggplot(data = mpg) +
+    geom_point(mapping = aes(x = displ, y = hwy, size = displ)) +
+    tema
+```
+
+```{r error=TRUE}
+ggplot(data = mpg) +
+    geom_point(mapping = aes(x = displ, y = hwy, shape = displ)) +
+    tema
+```
+
+Quando possível, a biblioteca _ggplot_ apesenta a estética em um gradiente, como em color e size. Porém, nem sempre isso é possível, como vemos em `shape`, que só pode ser utilizada com variáveis discretas ou categóricas.
+:::
+
+### Exercício 1.3.4 {- #exr1-3-4}
+
+::: {.enunciado}
+O que acontece se você mapear a mesma variável a várias estéticas?
+:::
+
+:::{.solution}
+```{r}
+ggplot(data = mpg) +
+    geom_point(mapping = aes(x = displ, y = hwy, size = class, color = class, shape = class)) +
+    tema
+```
+
+Os valores da variável serão representados de modo a atender todas as estéticas simultaneamente, por exemplo, no gráfico acima é dada uma cor, um formato e um tamanho específicos para cada classe de veículo. Os veículos de dois lugares são exibidos como um disco rosa pequeno.
+:::
+
+### Exercício 1.3.5 {- #exr1-3-5}
+
+::: {.enunciado}
+O que a estética `stroke` faz? com que formas ela trabalha?
+:::
+
+:::{.solution}
+```{r}
+ggplot(data = mpg) +
+    geom_point(mapping = aes(x = displ, y = hwy, stroke = displ)) +
+    tema
+```
+
+A estética `stroke` controla a espessura do ponto ou elemento a ser representado.
+:::
+
+### Exercício 1.3.6 {- #exr1-3-6}
+
+::: {.enunciado}
+O que acontece se você mapear uma estética a algo diferente de um nome de variável, como `aes(color = displ < 5)`?
+:::
+
+::: {.solution}
+```{r}
+ggplot(data = mpg) +
+    geom_point(mapping = aes(x = displ, y = hwy, color = displ < 5)) +
+    tema
+```
+
+A expressão é avaliada para cada um dos valores da variável e o resultado é utilizado para plotagem da estética no gráfico.
 :::
 
 ## Problemas comuns
 
-::: {.exercise}
 x
-:::
 
 ## Facetas
 
-::: {.exercise}
 x
-:::
 
 ## Objetos geométricos
 
-::: {.exercise}
 x
-:::
 
 ## Transformações estatísticas
 
-::: {.exercise}
 x
-:::
 
 ## Ajustes de posição
 
-::: {.exercise}
 x
-:::
 
 ## Sistemas de coordenadas
 
-::: {.exercise}
 x
-:::
 
 ## A gramática em camadas de gráficos
 
-::: {.exercise}
+### Exercício  {- #exr}
+
+::: {.enunciado}
+x
+:::
+
+:::{.solution}
 x
 :::

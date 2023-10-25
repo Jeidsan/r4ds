@@ -270,6 +270,10 @@
 \setcounter{tocdepth}{1}
 \tableofcontents
 }
+\hypertarget{welcome}{%
+\chapter*{Welcome}\label{welcome}}
+\addcontentsline{toc}{chapter}{Welcome}
+
 \hypertarget{prefuxe1cio}{%
 \chapter*{Prefácio}\label{prefuxe1cio}}
 \addcontentsline{toc}{chapter}{Prefácio}
@@ -384,6 +388,71 @@ Faça um gráfico de dispersão de \texttt{hwy} \emph{versus} \texttt{cyl}.
 
 \end{solution}
 
+\hypertarget{exr1-2-5}{%
+\subsection*{Exercício 1.2.5}\label{exr1-2-5}}
+\addcontentsline{toc}{subsection}{Exercício 1.2.5}
+
+O que acontece se você fizer um gráfico de dispersão de \texttt{class} \emph{versus} \texttt{drv}? Por que esse gráfico não é útil?
+
+\begin{solution}
+\leavevmode
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ mpg) }\SpecialCharTok{+}
+    \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ drv, }\AttributeTok{y =}\NormalTok{ class)) }\SpecialCharTok{+}
+\NormalTok{    tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-6-1.pdf}
+
+Apesar de serem exibidos dados no gráfico, nenhuma informação substancial é extraída, uma vez que o tipo de tração não está (a princípio) relacionado com a categoria do carro. Outro fator que torno o gráfico pouco informativo é que há, por exemplo, diversas SUVs com tração nas 4 rodas, contudo os valores ficam sobrepostos no gráfico, não dando dimensão do quanto de dados temos.
+
+Abaixo seguem duas opções de como trazer mais informação ao gráfico:
+
+\begin{itemize}
+\tightlist
+\item
+  a primeira opção adiciona um ruído aos dados (\texttt{position\ =\ jitter} ou \texttt{geom\_jitter()}) de modo que não haja sobreposição;
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ mpg) }\SpecialCharTok{+}
+    \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ drv, }\AttributeTok{y =}\NormalTok{ class), }\AttributeTok{position =} \StringTok{"jitter"}\NormalTok{) }\SpecialCharTok{+}
+\NormalTok{    tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-7-1.pdf}
+
+\begin{itemize}
+\tightlist
+\item
+  a segunda opção, bem mais avançada, adiciona uma estética de \texttt{size} considerando a quantidade de registros.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mpg }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{group\_by}\NormalTok{(class, drv) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{summarize}\NormalTok{(}\AttributeTok{count =} \FunctionTok{n}\NormalTok{()) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ drv, }\AttributeTok{y =}\NormalTok{ class, }\AttributeTok{size =}\NormalTok{ count)) }\SpecialCharTok{+}
+        \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+\NormalTok{        tema}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `summarise()` has grouped output by 'class'. You can override using the
+## `.groups` argument.
+\end{verbatim}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-8-1.pdf}
+
+\end{solution}
+
 \hypertarget{mapeamentos-estuxe9ticos}{%
 \section{Mapeamentos estéticos}\label{mapeamentos-estuxe9ticos}}
 
@@ -391,62 +460,217 @@ Faça um gráfico de dispersão de \texttt{hwy} \emph{versus} \texttt{cyl}.
 \subsection*{Exercício 1.3.1}\label{exr1-3-1}}
 \addcontentsline{toc}{subsection}{Exercício 1.3.1}
 
-\begin{exercise}
-x
-\end{exercise}
+O que há de errado com este código? Por que os pontos não estão azuis?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ mpg) }\SpecialCharTok{+}
+    \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ displ, }\AttributeTok{y =}\NormalTok{ hwy, }\AttributeTok{color =} \StringTok{"blue"}\NormalTok{)) }\SpecialCharTok{+}
+\NormalTok{    tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-9-1.pdf}
 
 \begin{solution}
-x
+Ao invés de atribuir uma cor aos elementos de \texttt{geom\_point}, o atributo \texttt{color} foi passado como uma estética. O gráfico deveria ser construído da seguinte maneira:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ mpg) }\SpecialCharTok{+}
+    \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ displ, }\AttributeTok{y =}\NormalTok{ hwy), }\AttributeTok{color =} \StringTok{"blue"}\NormalTok{) }\SpecialCharTok{+}
+\NormalTok{    tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-10-1.pdf}
+\end{solution}
+
+\hypertarget{exr1-3-2}{%
+\subsection*{Exercício 1.3.2}\label{exr1-3-2}}
+\addcontentsline{toc}{subsection}{Exercício 1.3.2}
+
+Quais variáveis em \texttt{mpg} são categóricas? Quais variáveis são contínuas? Como você pode ver essa informação quando executa \texttt{mpg}?
+
+\begin{solution}
+Usando \texttt{?mpg} vemos que as variáveis categóricas são: \texttt{manufacturer}, \texttt{model}, \texttt{trans}, \texttt{drv}, \texttt{fl} e \texttt{class}. As variáveis contínuas são: \texttt{displ}, \texttt{cty}, \texttt{hwy}.
+\end{solution}
+
+\hypertarget{exr1-3-3}{%
+\subsection*{Exercício 1.3.3}\label{exr1-3-3}}
+\addcontentsline{toc}{subsection}{Exercício 1.3.3}
+
+Mapeie uma variável contínua para \texttt{color}, \texttt{size} e \texttt{shape}. Como essas estéticas se comportam de maneira diferente para variáveis categóricas e contínuas?
+
+\begin{solution}
+\leavevmode
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ mpg) }\SpecialCharTok{+}
+    \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ displ, }\AttributeTok{y =}\NormalTok{ hwy, }\AttributeTok{color =}\NormalTok{ displ)) }\SpecialCharTok{+}
+\NormalTok{    tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-11-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ mpg) }\SpecialCharTok{+}
+    \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ displ, }\AttributeTok{y =}\NormalTok{ hwy, }\AttributeTok{size =}\NormalTok{ displ)) }\SpecialCharTok{+}
+\NormalTok{    tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-12-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ mpg) }\SpecialCharTok{+}
+    \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ displ, }\AttributeTok{y =}\NormalTok{ hwy, }\AttributeTok{shape =}\NormalTok{ displ)) }\SpecialCharTok{+}
+\NormalTok{    tema}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Error in `geom_point()`:
+## ! Problem while computing aesthetics.
+## i Error occurred in the 1st layer.
+## Caused by error in `scale_f()`:
+## ! A continuous variable cannot be mapped to the shape aesthetic
+## i choose a different aesthetic or use `scale_shape_binned()`
+\end{verbatim}
+
+Quando possível, a biblioteca \emph{ggplot} apesenta a estética em um gradiente, como em color e size. Porém, nem sempre isso é possível, como vemos em \texttt{shape}, que só pode ser utilizada com variáveis discretas ou categóricas.
+
+\end{solution}
+
+\hypertarget{exr1-3-4}{%
+\subsection*{Exercício 1.3.4}\label{exr1-3-4}}
+\addcontentsline{toc}{subsection}{Exercício 1.3.4}
+
+O que acontece se você mapear a mesma variável a várias estéticas?
+
+\begin{solution}
+\leavevmode
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ mpg) }\SpecialCharTok{+}
+    \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ displ, }\AttributeTok{y =}\NormalTok{ hwy, }\AttributeTok{size =}\NormalTok{ class, }\AttributeTok{color =}\NormalTok{ class, }\AttributeTok{shape =}\NormalTok{ class)) }\SpecialCharTok{+}
+\NormalTok{    tema}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Using size for a discrete variable is not advised.
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: The shape palette can deal with a maximum of 6 discrete values because
+## more than 6 becomes difficult to discriminate; you have 7. Consider
+## specifying shapes manually if you must have them.
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Removed 62 rows containing missing values (`geom_point()`).
+\end{verbatim}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-14-1.pdf}
+
+Os valores da variável serão representados de modo a atender todas as estéticas simultaneamente, por exemplo, no gráfico acima é dada uma cor, um formato e um tamanho específicos para cada classe de veículo. Os veículos de dois lugares são exibidos como um disco rosa pequeno.
+
+\end{solution}
+
+\hypertarget{exr1-3-5}{%
+\subsection*{Exercício 1.3.5}\label{exr1-3-5}}
+\addcontentsline{toc}{subsection}{Exercício 1.3.5}
+
+O que a estética \texttt{stroke} faz? com que formas ela trabalha?
+
+\begin{solution}
+\leavevmode
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ mpg) }\SpecialCharTok{+}
+    \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ displ, }\AttributeTok{y =}\NormalTok{ hwy, }\AttributeTok{stroke =}\NormalTok{ displ)) }\SpecialCharTok{+}
+\NormalTok{    tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-15-1.pdf}
+
+A estética \texttt{stroke} controla a espessura do ponto ou elemento a ser representado.
+
+\end{solution}
+
+\hypertarget{exr1-3-6}{%
+\subsection*{Exercício 1.3.6}\label{exr1-3-6}}
+\addcontentsline{toc}{subsection}{Exercício 1.3.6}
+
+O que acontece se você mapear uma estética a algo diferente de um nome de variável, como \texttt{aes(color\ =\ displ\ \textless{}\ 5)}?
+
+\begin{solution}
+\leavevmode
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ mpg) }\SpecialCharTok{+}
+    \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ displ, }\AttributeTok{y =}\NormalTok{ hwy, }\AttributeTok{color =}\NormalTok{ displ }\SpecialCharTok{\textless{}} \DecValTok{5}\NormalTok{)) }\SpecialCharTok{+}
+\NormalTok{    tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-16-1.pdf}
+
+A expressão é avaliada para cada um dos valores da variável e o resultado é utilizado para plotagem da estética no gráfico.
+
 \end{solution}
 
 \hypertarget{problemas-comuns}{%
 \section{Problemas comuns}\label{problemas-comuns}}
 
-\begin{exercise}
 x
-\end{exercise}
 
 \hypertarget{facetas}{%
 \section{Facetas}\label{facetas}}
 
-\begin{exercise}
 x
-\end{exercise}
 
 \hypertarget{objetos-geomuxe9tricos}{%
 \section{Objetos geométricos}\label{objetos-geomuxe9tricos}}
 
-\begin{exercise}
 x
-\end{exercise}
 
 \hypertarget{transformauxe7uxf5es-estatuxedsticas}{%
 \section{Transformações estatísticas}\label{transformauxe7uxf5es-estatuxedsticas}}
 
-\begin{exercise}
 x
-\end{exercise}
 
 \hypertarget{ajustes-de-posiuxe7uxe3o}{%
 \section{Ajustes de posição}\label{ajustes-de-posiuxe7uxe3o}}
 
-\begin{exercise}
 x
-\end{exercise}
 
 \hypertarget{sistemas-de-coordenadas}{%
 \section{Sistemas de coordenadas}\label{sistemas-de-coordenadas}}
 
-\begin{exercise}
 x
-\end{exercise}
 
 \hypertarget{a-gramuxe1tica-em-camadas-de-gruxe1ficos}{%
 \section{A gramática em camadas de gráficos}\label{a-gramuxe1tica-em-camadas-de-gruxe1ficos}}
 
-\begin{exercise}
+\hypertarget{exr}{%
+\subsection*{Exercício}\label{exr}}
+\addcontentsline{toc}{subsection}{Exercício}
+
 x
-\end{exercise}
+
+\begin{solution}
+x
+\end{solution}
 
 \hypertarget{fluxo-de-trabalho-o-buxe1sico}{%
 \chapter{Fluxo de trabalho: o básico}\label{fluxo-de-trabalho-o-buxe1sico}}

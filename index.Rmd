@@ -22,11 +22,14 @@ library(tidyverse)
 options(repr.plot.width = 24, repr.plot.height = 13)
 
 tema <- theme(
-        plot.title = element_text(size = 32, hjust = 0.5),
-        axis.title.y = element_text(size = 24, vjust = +0.2),
-        axis.title.x = element_text(size = 24, vjust = -0.2),
-        axis.text.y = element_text(size = 22),
-        axis.text.x = element_text(size = 22),
-        strip.text = element_text(size = 24)
+        plot.title   = element_text(size = 14, vjust = +2, hjust = 0.5),
+        axis.title.y = element_text(size = 12, vjust = +4),
+        axis.title.x = element_text(size = 12, vjust = -2),
+        axis.text.y  = element_text(size = 10),
+        axis.text.x  = element_text(size = 10),
+        legend.text  = element_text(size = 10),
+        strip.text   = element_text(size = 10)
     )
 ```
+
+# Welcome {-}
