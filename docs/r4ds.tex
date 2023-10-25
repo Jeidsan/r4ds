@@ -274,6 +274,16 @@
 \chapter*{Welcome}\label{welcome}}
 \addcontentsline{toc}{chapter}{Welcome}
 
+\hypertarget{penduxeancias}{%
+\section{Pendências}\label{penduxeancias}}
+
+\begin{itemize}
+\tightlist
+\item
+  \protect\hyperlink{exr1-7-4}{Exercício 1.7.4};
+\item
+\end{itemize}
+
 \hypertarget{prefuxe1cio}{%
 \chapter*{Prefácio}\label{prefuxe1cio}}
 \addcontentsline{toc}{chapter}{Prefácio}
@@ -976,7 +986,183 @@ f <- ggplot(data = mpg, mapping = aes(x = displ, y = hwy, fill = drv)) +
 \hypertarget{transformauxe7uxf5es-estatuxedsticas}{%
 \section{Transformações estatísticas}\label{transformauxe7uxf5es-estatuxedsticas}}
 
-x
+\hypertarget{exr1-7-1}{%
+\subsection*{Exercício 1.7.1}\label{exr1-7-1}}
+\addcontentsline{toc}{subsection}{Exercício 1.7.1}
+
+Qual é o \texttt{geom} padrão associado ao \texttt{stat\_summary()}? Como você poderia reescrever o gráfico anterior usando essa função \texttt{geom}, em vez da função \texttt{stat}?
+
+\begin{solution}
+\leavevmode
+
+\begin{verbatim}
+?stat_summary
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ diamonds) }\SpecialCharTok{+}
+    \FunctionTok{stat\_summary}\NormalTok{(}
+        \AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ cut, }\AttributeTok{y =}\NormalTok{ depth),}
+        \AttributeTok{fun.min =}\NormalTok{ min,}
+        \AttributeTok{fun.max =}\NormalTok{ max,}
+        \AttributeTok{fun =}\NormalTok{ median}
+\NormalTok{    ) }\SpecialCharTok{+}
+\NormalTok{    tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-29-1.pdf}
+
+A \texttt{geom} associada é a \texttt{geom\_pointrange} e o gráfico poderia ser reescrito da seguinte maneira.
+
+\end{solution}
+
+\hypertarget{exr1-7-2}{%
+\subsection*{Exercício 1.7.2}\label{exr1-7-2}}
+\addcontentsline{toc}{subsection}{Exercício 1.7.2}
+
+O que \texttt{geom\_col()} faz? Qual é a diferença entre ele e \texttt{geom\_bar()}?
+
+\begin{solution}
+\leavevmode
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ diamonds, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ cut)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_bar}\NormalTok{() }\SpecialCharTok{+}
+\NormalTok{    tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-30-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ diamonds, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ cut, }\AttributeTok{y =}\NormalTok{ carat)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_col}\NormalTok{() }\SpecialCharTok{+}
+\NormalTok{    tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-31-1.pdf}
+
+Enquanto no \texttt{geom\_bar} a altura das barras representa uma transformação estatística relacionada às observações (como \texttt{count}, por exemplo), no \texttt{geom\_col} podemos exibir o acumulado (soma) de uma variável para cada categoria exibida.
+
+\end{solution}
+
+\hypertarget{exr1-7-3}{%
+\subsection*{Exercício 1.7.3}\label{exr1-7-3}}
+\addcontentsline{toc}{subsection}{Exercício 1.7.3}
+
+A maioria dos \texttt{geoms} e \texttt{stats} vem em pares, que são quase sempre usados juntos. Leia a documentação e faça uma lista de todos os pares. O que eles têm em comum?
+
+\begin{solution}
+\leavevmode
+
+\begin{longtable}[]{@{}ccc@{}}
+\toprule\noalign{}
+\# & Geom & Stat \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+01 & Blank & Identity \\
+02 & Curve & Identity \\
+03 & Segment & Identity \\
+04 & Path & Identity \\
+05 & Line & Identity \\
+06 & Step & Identity \\
+07 & Poligon & Identity \\
+08 & Raster & Identity \\
+09 & Rect & Identity \\
+10 & Tile & Identity \\
+11 & Ribbon & Identity \\
+12 & Area & Identity \\
+13 & Align & ? \\
+14 & ABLine & ? \\
+15 & HLine & ? \\
+16 & Density & Density \\
+17 & DotPlot & ? \\
+18 & Freqpoly & Bin \\
+19 & Histogram & Bin \\
+20 & Col & Identity \\
+21 & Bar & Count \\
+22 & Label & Identity \\
+23 & Text & Identity \\
+24 & Jitter & Identity \\
+25 & Point & Identity \\
+26 & Quantile & Quantile \\
+27 & Rug & Identity \\
+28 & Boxplot & Boxplot \\
+29 & Violin & YDensity \\
+30 & Count & Sum \\
+31 & Bin 2D & Bin 2D \\
+32 & Density 2D & Density 2D \\
+33 & Hex & Bin Hex \\
+34 & Cross Bar & Identity \\
+35 & Error Bar & Identity \\
+36 & Line Range & Identity \\
+37 & Point Range & Identity \\
+38 & Map & Identity \\
+39 & Contour & Contour \\
+40 & Contour Filled & Contour Filled \\
+\end{longtable}
+
+\end{solution}
+
+\hypertarget{exr1-7-4}{%
+\subsection*{Exercício 1.7.4}\label{exr1-7-4}}
+\addcontentsline{toc}{subsection}{Exercício 1.7.4}
+
+Quais variáveis \texttt{stat\_smooth()} calcula? Quais parâmetros controlam seu comportamento?
+
+\begin{solution}
+\leavevmode
+
+\begin{verbatim}
+?stat_smooth
+\end{verbatim}
+
+\end{solution}
+
+\hypertarget{exr1-7-5}{%
+\subsection*{Exercício 1.7.5}\label{exr1-7-5}}
+\addcontentsline{toc}{subsection}{Exercício 1.7.5}
+
+Em nosso gráfico de barra de \emph{proportion}, precisamos configurar \texttt{group\ =\ 1}. Por quê? Em outras palavras, qual é o problema com esses dois gráficos?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ diamonds) }\SpecialCharTok{+}
+    \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ cut, }\AttributeTok{y =} \FunctionTok{after\_stat}\NormalTok{(prop), }\AttributeTok{group =} \DecValTok{1}\NormalTok{)) }\SpecialCharTok{+}
+\NormalTok{    tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-32-1.pdf}
+
+\begin{solution}
+\leavevmode
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ diamonds) }\SpecialCharTok{+}
+    \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}
+        \AttributeTok{x =}\NormalTok{ cut, }
+        \AttributeTok{fill =}\NormalTok{ color, }
+        \AttributeTok{y =} \FunctionTok{after\_stat}\NormalTok{(prop), }
+        \AttributeTok{group =}\NormalTok{ color}
+\NormalTok{    )) }\SpecialCharTok{+}
+\NormalTok{    tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-33-1.pdf}
+
+Quando estamos trabalhando com proporções (ou estátisticas em geral), é importante destacar para o \texttt{ggplot} qual agrupamento ele deve considerar, caso contrário ele irá considerar um único grupo e dará uma impressão incorreta ao gráfico. No primeiro exemplo, foi utilizado \texttt{group\ =\ 1} (e, na verdade, poderia ser qualquer valor) apenas para indicar que deveria ser realizado um agrupamento.
+
+\end{solution}
 
 \hypertarget{ajustes-de-posiuxe7uxe3o}{%
 \section{Ajustes de posição}\label{ajustes-de-posiuxe7uxe3o}}
@@ -990,6 +1176,8 @@ x
 
 \hypertarget{a-gramuxe1tica-em-camadas-de-gruxe1ficos}{%
 \section{A gramática em camadas de gráficos}\label{a-gramuxe1tica-em-camadas-de-gruxe1ficos}}
+
+x
 
 \hypertarget{exr}{%
 \subsection*{Exercício}\label{exr}}

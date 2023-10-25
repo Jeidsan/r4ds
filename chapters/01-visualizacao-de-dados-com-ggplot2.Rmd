@@ -513,7 +513,144 @@ f <- ggplot(data = mpg, mapping = aes(x = displ, y = hwy, fill = drv)) +
 
 ## Transformações estatísticas
 
-x
+### Exercício 1.7.1 {- #exr1-7-1}
+
+::: {.enunciado}
+Qual é o `geom` padrão associado ao `stat_summary()`? Como você poderia reescrever o gráfico anterior usando essa função `geom`, em vez da função `stat`?
+:::
+
+:::{.solution}
+```
+?stat_summary
+```
+
+```{r}
+ggplot(data = diamonds) +
+    stat_summary(
+        mapping = aes(x = cut, y = depth),
+        fun.min = min,
+        fun.max = max,
+        fun = median
+    ) +
+    tema
+```
+
+A `geom` associada é a `geom_pointrange` e o gráfico poderia ser reescrito da seguinte maneira.
+:::
+
+### Exercício 1.7.2 {- #exr1-7-2}
+
+::: {.enunciado}
+O que `geom_col()` faz? Qual é a diferença entre ele e `geom_bar()`?
+:::
+
+:::{.solution}
+```{r}
+ggplot(data = diamonds, mapping = aes(x = cut)) +
+    geom_bar() +
+    tema
+```
+
+```{r}
+ggplot(data = diamonds, mapping = aes(x = cut, y = carat)) +
+    geom_col() +
+    tema
+```
+
+Enquanto no `geom_bar` a altura das barras representa uma transformação estatística relacionada às observações (como `count`, por exemplo), no `geom_col` podemos exibir o acumulado (soma) de uma variável para cada categoria exibida.
+:::
+
+### Exercício 1.7.3 {- #exr1-7-3}
+
+::: {.enunciado}
+A maioria dos `geoms` e `stats` vem em pares, que são quase sempre usados juntos. Leia a documentação e faça uma lista de todos os pares. O que eles têm em comum?
+:::
+
+:::{.solution}
+| #  | Geom             | Stat              |
+|:--:|:----------------:|:-----------------:|
+| 01 | Blank            | Identity          |
+| 02 | Curve            | Identity          |
+| 03 | Segment          | Identity          |
+| 04 | Path             | Identity          |
+| 05 | Line             | Identity          |
+| 06 | Step             | Identity          |
+| 07 | Poligon          | Identity          |
+| 08 | Raster           | Identity          |
+| 09 | Rect             | Identity          |
+| 10 | Tile             | Identity          |
+| 11 | Ribbon           | Identity          |
+| 12 | Area             | Identity          |
+| 13 | Align            | ?                 |
+| 14 | ABLine           | ?                 |
+| 15 | HLine            | ?                 |
+| 16 | Density          | Density           |
+| 17 | DotPlot          | ?                 |
+| 18 | Freqpoly         | Bin               |
+| 19 | Histogram        | Bin               | 
+| 20 | Col              | Identity          |
+| 21 | Bar              | Count             |
+| 22 | Label            | Identity          |
+| 23 | Text             | Identity          |
+| 24 | Jitter           | Identity          |
+| 25 | Point            | Identity          |
+| 26 | Quantile         | Quantile          |
+| 27 | Rug              | Identity          |
+| 28 | Boxplot          | Boxplot           |
+| 29 | Violin           | YDensity          |
+| 30 | Count            | Sum               |
+| 31 | Bin 2D           | Bin 2D            |
+| 32 | Density 2D       | Density 2D        |
+| 33 | Hex              | Bin Hex           |
+| 34 | Cross Bar        | Identity          |
+| 35 | Error Bar        | Identity          |
+| 36 | Line Range       | Identity          |
+| 37 | Point Range      | Identity          |
+| 38 | Map              | Identity          |
+| 39 | Contour          | Contour           |
+| 40 | Contour Filled   | Contour Filled    |
+:::
+
+### Exercício 1.7.4 {- #exr1-7-4}
+
+::: {.enunciado}
+Quais variáveis `stat_smooth()` calcula? Quais parâmetros controlam seu comportamento?
+:::
+
+:::{.solution}
+```
+?stat_smooth
+```
+
+
+:::
+
+### Exercício 1.7.5 {- #exr1-7-5}
+
+::: {.enunciado}
+Em nosso gráfico de barra de _proportion_, precisamos configurar `group = 1`. Por quê? Em outras palavras, qual é o problema com esses dois gráficos?
+
+```{r}
+ggplot(data = diamonds) +
+    geom_bar(mapping = aes(x = cut, y = after_stat(prop), group = 1)) +
+    tema
+```
+:::
+
+:::{.solution}
+```{r}
+ggplot(data = diamonds) +
+    geom_bar(mapping = aes(
+        x = cut, 
+        fill = color, 
+        y = after_stat(prop), 
+        group = color
+    )) +
+    tema
+```
+
+Quando estamos trabalhando com proporções (ou estátisticas em geral), é importante destacar para o `ggplot` qual agrupamento ele deve considerar, caso contrário ele irá considerar um único grupo e dará uma impressão incorreta ao gráfico. No primeiro exemplo, foi utilizado `group = 1` (e, na verdade, poderia ser qualquer valor) apenas para indicar que deveria ser realizado um agrupamento.
+:::
 
 ## Ajustes de posição
 
@@ -524,6 +661,8 @@ x
 x
 
 ## A gramática em camadas de gráficos
+
+x
 
 ### Exercício  {- #exr}
 

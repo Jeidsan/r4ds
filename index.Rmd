@@ -33,3 +33,8 @@ tema <- theme(
 ```
 
 # Welcome {-}
+
+## Pendências
+
+- [Exercício 1.7.4](#exr1-7-4);
+- 

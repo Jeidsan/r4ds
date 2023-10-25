@@ -163,7 +163,10 @@ div.csl-indent {
 <li><a href="https://www.jeidsan.com.br/r4ds">R para Data Science: Solução dos Exercícios</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a>
+<ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#pendências"><i class="fa fa-check"></i><b>0.1</b> Pendências</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="prefácio.html"><a href="prefácio.html"><i class="fa fa-check"></i>Prefácio</a></li>
 <li class="part"><span><b>I Explorar</b></span></li>
 <li class="chapter" data-level="1" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html"><i class="fa fa-check"></i><b>1</b> Visualização de dados com <code>ggplot2</code></a>
@@ -205,7 +208,14 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#exr1-6-5"><i class="fa fa-check"></i>Exercício 1.6.5</a></li>
 <li class="chapter" data-level="" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#exr1-6-6"><i class="fa fa-check"></i>Exercício 1.6.6</a></li>
 </ul></li>
-<li class="chapter" data-level="1.7" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#transformações-estatísticas"><i class="fa fa-check"></i><b>1.7</b> Transformações estatísticas</a></li>
+<li class="chapter" data-level="1.7" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#transformações-estatísticas"><i class="fa fa-check"></i><b>1.7</b> Transformações estatísticas</a>
+<ul>
+<li class="chapter" data-level="" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#exr1-7-1"><i class="fa fa-check"></i>Exercício 1.7.1</a></li>
+<li class="chapter" data-level="" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#exr1-7-2"><i class="fa fa-check"></i>Exercício 1.7.2</a></li>
+<li class="chapter" data-level="" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#exr1-7-3"><i class="fa fa-check"></i>Exercício 1.7.3</a></li>
+<li class="chapter" data-level="" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#exr1-7-4"><i class="fa fa-check"></i>Exercício 1.7.4</a></li>
+<li class="chapter" data-level="" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#exr1-7-5"><i class="fa fa-check"></i>Exercício 1.7.5</a></li>
+</ul></li>
 <li class="chapter" data-level="1.8" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#ajustes-de-posição"><i class="fa fa-check"></i><b>1.8</b> Ajustes de posição</a></li>
 <li class="chapter" data-level="1.9" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#sistemas-de-coordenadas"><i class="fa fa-check"></i><b>1.9</b> Sistemas de coordenadas</a></li>
 <li class="chapter" data-level="1.10" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#a-gramática-em-camadas-de-gráficos"><i class="fa fa-check"></i><b>1.10</b> A gramática em camadas de gráficos</a>
@@ -685,7 +695,297 @@ f &lt;- ggplot(data = mpg, mapping = aes(x = displ, y = hwy, fill = drv)) +
 </div>
 <div id="transformações-estatísticas" class="section level2 hasAnchor" number="1.7">
 <h2><span class="header-section-number">1.7</span> Transformações estatísticas<a href="visualização-de-dados-com-ggplot2.html#transformações-estatísticas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>x</p>
+<div id="exr1-7-1" class="section level3 unnumbered hasAnchor">
+<h3>Exercício 1.7.1<a href="visualização-de-dados-com-ggplot2.html#exr1-7-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="enunciado">
+<p>Qual é o <code>geom</code> padrão associado ao <code>stat_summary()</code>? Como você poderia reescrever o gráfico anterior usando essa função <code>geom</code>, em vez da função <code>stat</code>?</p>
+</div>
+<div class="solution">
+<p><span id="unlabeled-div-24" class="solution"><em>Solução</em>. </span></p>
+<pre><code>?stat_summary</code></pre>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="visualização-de-dados-com-ggplot2.html#cb43-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> diamonds) <span class="sc">+</span></span>
+<span id="cb43-2"><a href="visualização-de-dados-com-ggplot2.html#cb43-2" tabindex="-1"></a>    <span class="fu">stat_summary</span>(</span>
+<span id="cb43-3"><a href="visualização-de-dados-com-ggplot2.html#cb43-3" tabindex="-1"></a>        <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> cut, <span class="at">y =</span> depth),</span>
+<span id="cb43-4"><a href="visualização-de-dados-com-ggplot2.html#cb43-4" tabindex="-1"></a>        <span class="at">fun.min =</span> min,</span>
+<span id="cb43-5"><a href="visualização-de-dados-com-ggplot2.html#cb43-5" tabindex="-1"></a>        <span class="at">fun.max =</span> max,</span>
+<span id="cb43-6"><a href="visualização-de-dados-com-ggplot2.html#cb43-6" tabindex="-1"></a>        <span class="at">fun =</span> median</span>
+<span id="cb43-7"><a href="visualização-de-dados-com-ggplot2.html#cb43-7" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb43-8"><a href="visualização-de-dados-com-ggplot2.html#cb43-8" tabindex="-1"></a>    tema</span></code></pre></div>
+<p><img src="r4ds_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
+<p>A <code>geom</code> associada é a <code>geom_pointrange</code> e o gráfico poderia ser reescrito da seguinte maneira.</p>
+</div>
+</div>
+<div id="exr1-7-2" class="section level3 unnumbered hasAnchor">
+<h3>Exercício 1.7.2<a href="visualização-de-dados-com-ggplot2.html#exr1-7-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="enunciado">
+<p>O que <code>geom_col()</code> faz? Qual é a diferença entre ele e <code>geom_bar()</code>?</p>
+</div>
+<div class="solution">
+<p><span id="unlabeled-div-25" class="solution"><em>Solução</em>. </span></p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="visualização-de-dados-com-ggplot2.html#cb44-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> diamonds, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> cut)) <span class="sc">+</span></span>
+<span id="cb44-2"><a href="visualização-de-dados-com-ggplot2.html#cb44-2" tabindex="-1"></a>    <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb44-3"><a href="visualização-de-dados-com-ggplot2.html#cb44-3" tabindex="-1"></a>    tema</span></code></pre></div>
+<p><img src="r4ds_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="visualização-de-dados-com-ggplot2.html#cb45-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> diamonds, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> cut, <span class="at">y =</span> carat)) <span class="sc">+</span></span>
+<span id="cb45-2"><a href="visualização-de-dados-com-ggplot2.html#cb45-2" tabindex="-1"></a>    <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb45-3"><a href="visualização-de-dados-com-ggplot2.html#cb45-3" tabindex="-1"></a>    tema</span></code></pre></div>
+<p><img src="r4ds_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
+<p>Enquanto no <code>geom_bar</code> a altura das barras representa uma transformação estatística relacionada às observações (como <code>count</code>, por exemplo), no <code>geom_col</code> podemos exibir o acumulado (soma) de uma variável para cada categoria exibida.</p>
+</div>
+</div>
+<div id="exr1-7-3" class="section level3 unnumbered hasAnchor">
+<h3>Exercício 1.7.3<a href="visualização-de-dados-com-ggplot2.html#exr1-7-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="enunciado">
+<p>A maioria dos <code>geoms</code> e <code>stats</code> vem em pares, que são quase sempre usados juntos. Leia a documentação e faça uma lista de todos os pares. O que eles têm em comum?</p>
+</div>
+<div class="solution">
+<p><span id="unlabeled-div-26" class="solution"><em>Solução</em>. </span></p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">#</th>
+<th align="center">Geom</th>
+<th align="center">Stat</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">01</td>
+<td align="center">Blank</td>
+<td align="center">Identity</td>
+</tr>
+<tr class="even">
+<td align="center">02</td>
+<td align="center">Curve</td>
+<td align="center">Identity</td>
+</tr>
+<tr class="odd">
+<td align="center">03</td>
+<td align="center">Segment</td>
+<td align="center">Identity</td>
+</tr>
+<tr class="even">
+<td align="center">04</td>
+<td align="center">Path</td>
+<td align="center">Identity</td>
+</tr>
+<tr class="odd">
+<td align="center">05</td>
+<td align="center">Line</td>
+<td align="center">Identity</td>
+</tr>
+<tr class="even">
+<td align="center">06</td>
+<td align="center">Step</td>
+<td align="center">Identity</td>
+</tr>
+<tr class="odd">
+<td align="center">07</td>
+<td align="center">Poligon</td>
+<td align="center">Identity</td>
+</tr>
+<tr class="even">
+<td align="center">08</td>
+<td align="center">Raster</td>
+<td align="center">Identity</td>
+</tr>
+<tr class="odd">
+<td align="center">09</td>
+<td align="center">Rect</td>
+<td align="center">Identity</td>
+</tr>
+<tr class="even">
+<td align="center">10</td>
+<td align="center">Tile</td>
+<td align="center">Identity</td>
+</tr>
+<tr class="odd">
+<td align="center">11</td>
+<td align="center">Ribbon</td>
+<td align="center">Identity</td>
+</tr>
+<tr class="even">
+<td align="center">12</td>
+<td align="center">Area</td>
+<td align="center">Identity</td>
+</tr>
+<tr class="odd">
+<td align="center">13</td>
+<td align="center">Align</td>
+<td align="center">?</td>
+</tr>
+<tr class="even">
+<td align="center">14</td>
+<td align="center">ABLine</td>
+<td align="center">?</td>
+</tr>
+<tr class="odd">
+<td align="center">15</td>
+<td align="center">HLine</td>
+<td align="center">?</td>
+</tr>
+<tr class="even">
+<td align="center">16</td>
+<td align="center">Density</td>
+<td align="center">Density</td>
+</tr>
+<tr class="odd">
+<td align="center">17</td>
+<td align="center">DotPlot</td>
+<td align="center">?</td>
+</tr>
+<tr class="even">
+<td align="center">18</td>
+<td align="center">Freqpoly</td>
+<td align="center">Bin</td>
+</tr>
+<tr class="odd">
+<td align="center">19</td>
+<td align="center">Histogram</td>
+<td align="center">Bin</td>
+</tr>
+<tr class="even">
+<td align="center">20</td>
+<td align="center">Col</td>
+<td align="center">Identity</td>
+</tr>
+<tr class="odd">
+<td align="center">21</td>
+<td align="center">Bar</td>
+<td align="center">Count</td>
+</tr>
+<tr class="even">
+<td align="center">22</td>
+<td align="center">Label</td>
+<td align="center">Identity</td>
+</tr>
+<tr class="odd">
+<td align="center">23</td>
+<td align="center">Text</td>
+<td align="center">Identity</td>
+</tr>
+<tr class="even">
+<td align="center">24</td>
+<td align="center">Jitter</td>
+<td align="center">Identity</td>
+</tr>
+<tr class="odd">
+<td align="center">25</td>
+<td align="center">Point</td>
+<td align="center">Identity</td>
+</tr>
+<tr class="even">
+<td align="center">26</td>
+<td align="center">Quantile</td>
+<td align="center">Quantile</td>
+</tr>
+<tr class="odd">
+<td align="center">27</td>
+<td align="center">Rug</td>
+<td align="center">Identity</td>
+</tr>
+<tr class="even">
+<td align="center">28</td>
+<td align="center">Boxplot</td>
+<td align="center">Boxplot</td>
+</tr>
+<tr class="odd">
+<td align="center">29</td>
+<td align="center">Violin</td>
+<td align="center">YDensity</td>
+</tr>
+<tr class="even">
+<td align="center">30</td>
+<td align="center">Count</td>
+<td align="center">Sum</td>
+</tr>
+<tr class="odd">
+<td align="center">31</td>
+<td align="center">Bin 2D</td>
+<td align="center">Bin 2D</td>
+</tr>
+<tr class="even">
+<td align="center">32</td>
+<td align="center">Density 2D</td>
+<td align="center">Density 2D</td>
+</tr>
+<tr class="odd">
+<td align="center">33</td>
+<td align="center">Hex</td>
+<td align="center">Bin Hex</td>
+</tr>
+<tr class="even">
+<td align="center">34</td>
+<td align="center">Cross Bar</td>
+<td align="center">Identity</td>
+</tr>
+<tr class="odd">
+<td align="center">35</td>
+<td align="center">Error Bar</td>
+<td align="center">Identity</td>
+</tr>
+<tr class="even">
+<td align="center">36</td>
+<td align="center">Line Range</td>
+<td align="center">Identity</td>
+</tr>
+<tr class="odd">
+<td align="center">37</td>
+<td align="center">Point Range</td>
+<td align="center">Identity</td>
+</tr>
+<tr class="even">
+<td align="center">38</td>
+<td align="center">Map</td>
+<td align="center">Identity</td>
+</tr>
+<tr class="odd">
+<td align="center">39</td>
+<td align="center">Contour</td>
+<td align="center">Contour</td>
+</tr>
+<tr class="even">
+<td align="center">40</td>
+<td align="center">Contour Filled</td>
+<td align="center">Contour Filled</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="exr1-7-4" class="section level3 unnumbered hasAnchor">
+<h3>Exercício 1.7.4<a href="visualização-de-dados-com-ggplot2.html#exr1-7-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="enunciado">
+<p>Quais variáveis <code>stat_smooth()</code> calcula? Quais parâmetros controlam seu comportamento?</p>
+</div>
+<div class="solution">
+<p><span id="unlabeled-div-27" class="solution"><em>Solução</em>. </span></p>
+<pre><code>?stat_smooth</code></pre>
+</div>
+</div>
+<div id="exr1-7-5" class="section level3 unnumbered hasAnchor">
+<h3>Exercício 1.7.5<a href="visualização-de-dados-com-ggplot2.html#exr1-7-5" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="enunciado">
+<p>Em nosso gráfico de barra de <em>proportion</em>, precisamos configurar <code>group = 1</code>. Por quê? Em outras palavras, qual é o problema com esses dois gráficos?</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="visualização-de-dados-com-ggplot2.html#cb47-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> diamonds) <span class="sc">+</span></span>
+<span id="cb47-2"><a href="visualização-de-dados-com-ggplot2.html#cb47-2" tabindex="-1"></a>    <span class="fu">geom_bar</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> cut, <span class="at">y =</span> <span class="fu">after_stat</span>(prop), <span class="at">group =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb47-3"><a href="visualização-de-dados-com-ggplot2.html#cb47-3" tabindex="-1"></a>    tema</span></code></pre></div>
+<p><img src="r4ds_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
+</div>
+<div class="solution">
+<p><span id="unlabeled-div-28" class="solution"><em>Solução</em>. </span></p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="visualização-de-dados-com-ggplot2.html#cb48-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> diamonds) <span class="sc">+</span></span>
+<span id="cb48-2"><a href="visualização-de-dados-com-ggplot2.html#cb48-2" tabindex="-1"></a>    <span class="fu">geom_bar</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(</span>
+<span id="cb48-3"><a href="visualização-de-dados-com-ggplot2.html#cb48-3" tabindex="-1"></a>        <span class="at">x =</span> cut, </span>
+<span id="cb48-4"><a href="visualização-de-dados-com-ggplot2.html#cb48-4" tabindex="-1"></a>        <span class="at">fill =</span> color, </span>
+<span id="cb48-5"><a href="visualização-de-dados-com-ggplot2.html#cb48-5" tabindex="-1"></a>        <span class="at">y =</span> <span class="fu">after_stat</span>(prop), </span>
+<span id="cb48-6"><a href="visualização-de-dados-com-ggplot2.html#cb48-6" tabindex="-1"></a>        <span class="at">group =</span> color</span>
+<span id="cb48-7"><a href="visualização-de-dados-com-ggplot2.html#cb48-7" tabindex="-1"></a>    )) <span class="sc">+</span></span>
+<span id="cb48-8"><a href="visualização-de-dados-com-ggplot2.html#cb48-8" tabindex="-1"></a>    tema</span></code></pre></div>
+<p><img src="r4ds_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
+<p>Quando estamos trabalhando com proporções (ou estátisticas em geral), é importante destacar para o <code>ggplot</code> qual agrupamento ele deve considerar, caso contrário ele irá considerar um único grupo e dará uma impressão incorreta ao gráfico. No primeiro exemplo, foi utilizado <code>group = 1</code> (e, na verdade, poderia ser qualquer valor) apenas para indicar que deveria ser realizado um agrupamento.</p>
+</div>
+</div>
 </div>
 <div id="ajustes-de-posição" class="section level2 hasAnchor" number="1.8">
 <h2><span class="header-section-number">1.8</span> Ajustes de posição<a href="visualização-de-dados-com-ggplot2.html#ajustes-de-posição" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -697,13 +997,14 @@ f &lt;- ggplot(data = mpg, mapping = aes(x = displ, y = hwy, fill = drv)) +
 </div>
 <div id="a-gramática-em-camadas-de-gráficos" class="section level2 hasAnchor" number="1.10">
 <h2><span class="header-section-number">1.10</span> A gramática em camadas de gráficos<a href="visualização-de-dados-com-ggplot2.html#a-gramática-em-camadas-de-gráficos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>x</p>
 <div id="exr" class="section level3 unnumbered hasAnchor">
 <h3>Exercício<a href="visualização-de-dados-com-ggplot2.html#exr" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="enunciado">
 <p>x</p>
 </div>
 <div class="solution">
-<p><span id="unlabeled-div-24" class="solution"><em>Solução</em>. </span>x</p>
+<p><span id="unlabeled-div-29" class="solution"><em>Solução</em>. </span>x</p>
 </div>
 
 </div>
