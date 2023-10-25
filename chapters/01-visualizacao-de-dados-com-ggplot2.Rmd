@@ -654,15 +654,81 @@ Quando estamos trabalhando com proporções (ou estátisticas em geral), é impo
 
 ## Ajustes de posição
 
-x
+### Exercício 1.8.1 {- #exr1-8-1}
+
+::: {.enunciado}
+Qual é o problema com este gráfico? Como você poderia melhorá-lo?
+
+```{r}
+ggplot(data = mpg, mapping = aes(x = cty, y = hwy)) +
+    geom_point() +
+    tema
+```
+:::
+
+:::{.solution}
+Há pontos sobrepostos. Uma melhoria poderia ser usar `geom_jitter` em lugar de `geom_point`.
+
+```{r}
+ggplot(data = mpg, mapping = aes(x = cty, y = hwy)) +
+    geom_jitter() +
+    tema
+```
+:::
+
+### Exercício 1.8.2 {- #exr1-8-2}
+
+::: {.enunciado}
+Quais parâmetros para `geom_jitter` controlam a quantidade de oscilação?
+:::
+
+:::{.solution}
+Conforme a documentação disposta em `?geom_jitter`, são utilizados os parâmetros `width` e `height`.
+:::
+
+### Exercício 1.8.3 {- #exr1-8-3}
+
+::: {.enunciado}
+Compare o contraste entre `geom_jitter` e `geom_count`.
+:::
+
+:::{.solution}
+```{r}
+a <- ggplot(data = mpg, mapping = aes(x = cty, y = hwy)) +
+      geom_jitter() +
+      tema
+
+b <- ggplot(data = mpg, mapping = aes(x = cty, y = hwy)) +
+      geom_count(show.legend = FALSE) +
+      tema
+
+grid.arrange(a, b, nrow = 2)
+```
+
+Para contornar o problema da sobreposição de pontos, `geom_jitter` adiciona um pequeno ruído aleatório aos dados, enquanto o `geom_count` contabiliza os pontos sobrepostos e altera o tamanho dos pontos conforme a quantidade.
+:::
+
+### Exercício 1.8.4 {- #exr1-8-4}
+
+::: {.enunciado}
+Qual é o ajuste de posição padrão para `geom_boxplot()`? Crie uma visualização do conjunto de dados `mpg` que demonstre isso.
+:::
+
+:::{.solution}
+Conforme pode ser visto em `?geom_boxplot`, a `position` padrão é a `dodge2`.
+
+```{r}
+ggplot(data = mpg, mapping = aes(x = class, y = hwy)) +
+    geom_boxplot() +
+    tema
+```
+:::
 
 ## Sistemas de coordenadas
 
 x
 
 ## A gramática em camadas de gráficos
-
-x
 
 ### Exercício  {- #exr}
 

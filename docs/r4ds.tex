@@ -1167,7 +1167,94 @@ Quando estamos trabalhando com proporções (ou estátisticas em geral), é impo
 \hypertarget{ajustes-de-posiuxe7uxe3o}{%
 \section{Ajustes de posição}\label{ajustes-de-posiuxe7uxe3o}}
 
-x
+\hypertarget{exr1-8-1}{%
+\subsection*{Exercício 1.8.1}\label{exr1-8-1}}
+\addcontentsline{toc}{subsection}{Exercício 1.8.1}
+
+Qual é o problema com este gráfico? Como você poderia melhorá-lo?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ mpg, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ cty, }\AttributeTok{y =}\NormalTok{ hwy)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+\NormalTok{    tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-34-1.pdf}
+
+\begin{solution}
+Há pontos sobrepostos. Uma melhoria poderia ser usar \texttt{geom\_jitter} em lugar de \texttt{geom\_point}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ mpg, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ cty, }\AttributeTok{y =}\NormalTok{ hwy)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_jitter}\NormalTok{() }\SpecialCharTok{+}
+\NormalTok{    tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-35-1.pdf}
+\end{solution}
+
+\hypertarget{exr1-8-2}{%
+\subsection*{Exercício 1.8.2}\label{exr1-8-2}}
+\addcontentsline{toc}{subsection}{Exercício 1.8.2}
+
+Quais parâmetros para \texttt{geom\_jitter} controlam a quantidade de oscilação?
+
+\begin{solution}
+Conforme a documentação disposta em \texttt{?geom\_jitter}, são utilizados os parâmetros \texttt{width} e \texttt{height}.
+\end{solution}
+
+\hypertarget{exr1-8-3}{%
+\subsection*{Exercício 1.8.3}\label{exr1-8-3}}
+\addcontentsline{toc}{subsection}{Exercício 1.8.3}
+
+Compare o contraste entre \texttt{geom\_jitter} e \texttt{geom\_count}.
+
+\begin{solution}
+\leavevmode
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{a }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ mpg, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ cty, }\AttributeTok{y =}\NormalTok{ hwy)) }\SpecialCharTok{+}
+      \FunctionTok{geom\_jitter}\NormalTok{() }\SpecialCharTok{+}
+\NormalTok{      tema}
+
+\NormalTok{b }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ mpg, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ cty, }\AttributeTok{y =}\NormalTok{ hwy)) }\SpecialCharTok{+}
+      \FunctionTok{geom\_count}\NormalTok{(}\AttributeTok{show.legend =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+}
+\NormalTok{      tema}
+
+\FunctionTok{grid.arrange}\NormalTok{(a, b, }\AttributeTok{nrow =} \DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-36-1.pdf}
+
+Para contornar o problema da sobreposição de pontos, \texttt{geom\_jitter} adiciona um pequeno ruído aleatório aos dados, enquanto o \texttt{geom\_count} contabiliza os pontos sobrepostos e altera o tamanho dos pontos conforme a quantidade.
+
+\end{solution}
+
+\hypertarget{exr1-8-4}{%
+\subsection*{Exercício 1.8.4}\label{exr1-8-4}}
+\addcontentsline{toc}{subsection}{Exercício 1.8.4}
+
+Qual é o ajuste de posição padrão para \texttt{geom\_boxplot()}? Crie uma visualização do conjunto de dados \texttt{mpg} que demonstre isso.
+
+\begin{solution}
+Conforme pode ser visto em \texttt{?geom\_boxplot}, a \texttt{position} padrão é a \texttt{dodge2}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ mpg, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ class, }\AttributeTok{y =}\NormalTok{ hwy)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_boxplot}\NormalTok{() }\SpecialCharTok{+}
+\NormalTok{    tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-37-1.pdf}
+\end{solution}
 
 \hypertarget{sistemas-de-coordenadas}{%
 \section{Sistemas de coordenadas}\label{sistemas-de-coordenadas}}
@@ -1176,8 +1263,6 @@ x
 
 \hypertarget{a-gramuxe1tica-em-camadas-de-gruxe1ficos}{%
 \section{A gramática em camadas de gráficos}\label{a-gramuxe1tica-em-camadas-de-gruxe1ficos}}
-
-x
 
 \hypertarget{exr}{%
 \subsection*{Exercício}\label{exr}}

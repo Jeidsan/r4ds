@@ -216,7 +216,13 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#exr1-7-4"><i class="fa fa-check"></i>Exercício 1.7.4</a></li>
 <li class="chapter" data-level="" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#exr1-7-5"><i class="fa fa-check"></i>Exercício 1.7.5</a></li>
 </ul></li>
-<li class="chapter" data-level="1.8" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#ajustes-de-posição"><i class="fa fa-check"></i><b>1.8</b> Ajustes de posição</a></li>
+<li class="chapter" data-level="1.8" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#ajustes-de-posição"><i class="fa fa-check"></i><b>1.8</b> Ajustes de posição</a>
+<ul>
+<li class="chapter" data-level="" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#exr1-8-1"><i class="fa fa-check"></i>Exercício 1.8.1</a></li>
+<li class="chapter" data-level="" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#exr1-8-2"><i class="fa fa-check"></i>Exercício 1.8.2</a></li>
+<li class="chapter" data-level="" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#exr1-8-3"><i class="fa fa-check"></i>Exercício 1.8.3</a></li>
+<li class="chapter" data-level="" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#exr1-8-4"><i class="fa fa-check"></i>Exercício 1.8.4</a></li>
+</ul></li>
 <li class="chapter" data-level="1.9" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#sistemas-de-coordenadas"><i class="fa fa-check"></i><b>1.9</b> Sistemas de coordenadas</a></li>
 <li class="chapter" data-level="1.10" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#a-gramática-em-camadas-de-gráficos"><i class="fa fa-check"></i><b>1.10</b> A gramática em camadas de gráficos</a>
 <ul>
@@ -989,7 +995,65 @@ f &lt;- ggplot(data = mpg, mapping = aes(x = displ, y = hwy, fill = drv)) +
 </div>
 <div id="ajustes-de-posição" class="section level2 hasAnchor" number="1.8">
 <h2><span class="header-section-number">1.8</span> Ajustes de posição<a href="visualização-de-dados-com-ggplot2.html#ajustes-de-posição" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>x</p>
+<div id="exr1-8-1" class="section level3 unnumbered hasAnchor">
+<h3>Exercício 1.8.1<a href="visualização-de-dados-com-ggplot2.html#exr1-8-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="enunciado">
+<p>Qual é o problema com este gráfico? Como você poderia melhorá-lo?</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="visualização-de-dados-com-ggplot2.html#cb49-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> cty, <span class="at">y =</span> hwy)) <span class="sc">+</span></span>
+<span id="cb49-2"><a href="visualização-de-dados-com-ggplot2.html#cb49-2" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb49-3"><a href="visualização-de-dados-com-ggplot2.html#cb49-3" tabindex="-1"></a>    tema</span></code></pre></div>
+<p><img src="r4ds_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
+</div>
+<div class="solution">
+<p><span id="unlabeled-div-29" class="solution"><em>Solução</em>. </span>Há pontos sobrepostos. Uma melhoria poderia ser usar <code>geom_jitter</code> em lugar de <code>geom_point</code>.</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="visualização-de-dados-com-ggplot2.html#cb50-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> cty, <span class="at">y =</span> hwy)) <span class="sc">+</span></span>
+<span id="cb50-2"><a href="visualização-de-dados-com-ggplot2.html#cb50-2" tabindex="-1"></a>    <span class="fu">geom_jitter</span>() <span class="sc">+</span></span>
+<span id="cb50-3"><a href="visualização-de-dados-com-ggplot2.html#cb50-3" tabindex="-1"></a>    tema</span></code></pre></div>
+<p><img src="r4ds_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
+</div>
+</div>
+<div id="exr1-8-2" class="section level3 unnumbered hasAnchor">
+<h3>Exercício 1.8.2<a href="visualização-de-dados-com-ggplot2.html#exr1-8-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="enunciado">
+<p>Quais parâmetros para <code>geom_jitter</code> controlam a quantidade de oscilação?</p>
+</div>
+<div class="solution">
+<p><span id="unlabeled-div-30" class="solution"><em>Solução</em>. </span>Conforme a documentação disposta em <code>?geom_jitter</code>, são utilizados os parâmetros <code>width</code> e <code>height</code>.</p>
+</div>
+</div>
+<div id="exr1-8-3" class="section level3 unnumbered hasAnchor">
+<h3>Exercício 1.8.3<a href="visualização-de-dados-com-ggplot2.html#exr1-8-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="enunciado">
+<p>Compare o contraste entre <code>geom_jitter</code> e <code>geom_count</code>.</p>
+</div>
+<div class="solution">
+<p><span id="unlabeled-div-31" class="solution"><em>Solução</em>. </span></p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="visualização-de-dados-com-ggplot2.html#cb51-1" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> cty, <span class="at">y =</span> hwy)) <span class="sc">+</span></span>
+<span id="cb51-2"><a href="visualização-de-dados-com-ggplot2.html#cb51-2" tabindex="-1"></a>      <span class="fu">geom_jitter</span>() <span class="sc">+</span></span>
+<span id="cb51-3"><a href="visualização-de-dados-com-ggplot2.html#cb51-3" tabindex="-1"></a>      tema</span>
+<span id="cb51-4"><a href="visualização-de-dados-com-ggplot2.html#cb51-4" tabindex="-1"></a></span>
+<span id="cb51-5"><a href="visualização-de-dados-com-ggplot2.html#cb51-5" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> cty, <span class="at">y =</span> hwy)) <span class="sc">+</span></span>
+<span id="cb51-6"><a href="visualização-de-dados-com-ggplot2.html#cb51-6" tabindex="-1"></a>      <span class="fu">geom_count</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb51-7"><a href="visualização-de-dados-com-ggplot2.html#cb51-7" tabindex="-1"></a>      tema</span>
+<span id="cb51-8"><a href="visualização-de-dados-com-ggplot2.html#cb51-8" tabindex="-1"></a></span>
+<span id="cb51-9"><a href="visualização-de-dados-com-ggplot2.html#cb51-9" tabindex="-1"></a><span class="fu">grid.arrange</span>(a, b, <span class="at">nrow =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p><img src="r4ds_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
+<p>Para contornar o problema da sobreposição de pontos, <code>geom_jitter</code> adiciona um pequeno ruído aleatório aos dados, enquanto o <code>geom_count</code> contabiliza os pontos sobrepostos e altera o tamanho dos pontos conforme a quantidade.</p>
+</div>
+</div>
+<div id="exr1-8-4" class="section level3 unnumbered hasAnchor">
+<h3>Exercício 1.8.4<a href="visualização-de-dados-com-ggplot2.html#exr1-8-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="enunciado">
+<p>Qual é o ajuste de posição padrão para <code>geom_boxplot()</code>? Crie uma visualização do conjunto de dados <code>mpg</code> que demonstre isso.</p>
+</div>
+<div class="solution">
+<p><span id="unlabeled-div-32" class="solution"><em>Solução</em>. </span>Conforme pode ser visto em <code>?geom_boxplot</code>, a <code>position</code> padrão é a <code>dodge2</code>.</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="visualização-de-dados-com-ggplot2.html#cb52-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> class, <span class="at">y =</span> hwy)) <span class="sc">+</span></span>
+<span id="cb52-2"><a href="visualização-de-dados-com-ggplot2.html#cb52-2" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb52-3"><a href="visualização-de-dados-com-ggplot2.html#cb52-3" tabindex="-1"></a>    tema</span></code></pre></div>
+<p><img src="r4ds_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
+</div>
+</div>
 </div>
 <div id="sistemas-de-coordenadas" class="section level2 hasAnchor" number="1.9">
 <h2><span class="header-section-number">1.9</span> Sistemas de coordenadas<a href="visualização-de-dados-com-ggplot2.html#sistemas-de-coordenadas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -997,14 +1061,13 @@ f &lt;- ggplot(data = mpg, mapping = aes(x = displ, y = hwy, fill = drv)) +
 </div>
 <div id="a-gramática-em-camadas-de-gráficos" class="section level2 hasAnchor" number="1.10">
 <h2><span class="header-section-number">1.10</span> A gramática em camadas de gráficos<a href="visualização-de-dados-com-ggplot2.html#a-gramática-em-camadas-de-gráficos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>x</p>
 <div id="exr" class="section level3 unnumbered hasAnchor">
 <h3>Exercício<a href="visualização-de-dados-com-ggplot2.html#exr" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="enunciado">
 <p>x</p>
 </div>
 <div class="solution">
-<p><span id="unlabeled-div-29" class="solution"><em>Solução</em>. </span>x</p>
+<p><span id="unlabeled-div-33" class="solution"><em>Solução</em>. </span>x</p>
 </div>
 
 </div>
