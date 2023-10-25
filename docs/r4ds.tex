@@ -299,8 +299,20 @@ Inicialmente, precisaremos carregar o pacote \texttt{nycflights13}, que contém 
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(nycflights13)}
+\FunctionTok{library}\NormalTok{(gridExtra)}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'gridExtra'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:dplyr':
+## 
+##     combine
+\end{verbatim}
 
 \hypertarget{introduuxe7uxe3o}{%
 \section{Introdução}\label{introduuxe7uxe3o}}
@@ -768,7 +780,198 @@ Para melhor aproveitamento do espaço em tela.
 \hypertarget{objetos-geomuxe9tricos}{%
 \section{Objetos geométricos}\label{objetos-geomuxe9tricos}}
 
-x
+\hypertarget{exr1-6-1}{%
+\subsection*{Exercício 1.6.1}\label{exr1-6-1}}
+\addcontentsline{toc}{subsection}{Exercício 1.6.1}
+
+Que \emph{geom} você usaria para desenhar um gráfico de linha? Um diagrama de caixas (\emph{boxplot})? Um histograma? Um gráfico de área?
+
+\begin{solution}
+\leavevmode
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ mpg, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ displ, }\AttributeTok{y =}\NormalTok{ hwy)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_line}\NormalTok{() }\SpecialCharTok{+}
+\NormalTok{    tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-22-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ mpg) }\SpecialCharTok{+}
+    \FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ hwy, }\AttributeTok{x =}\NormalTok{ class)) }\SpecialCharTok{+}
+\NormalTok{    tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-23-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ mpg, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ hwy)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_histogram}\NormalTok{() }\SpecialCharTok{+}
+\NormalTok{    tema}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+\end{verbatim}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-24-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ economics, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ date, }\AttributeTok{y =}\NormalTok{ unemploy)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_area}\NormalTok{() }\SpecialCharTok{+}
+\NormalTok{    tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-25-1.pdf}
+
+Podem ser utilizados, respectivamente as \emph{geoms}: \emph{line}, \emph{boxplot}, \emph{histogram} e \emph{area}.
+
+\end{solution}
+
+\hypertarget{exr1-6-2}{%
+\subsection*{Exercício 1.6.2}\label{exr1-6-2}}
+\addcontentsline{toc}{subsection}{Exercício 1.6.2}
+
+Execute este código em sua cabeça e preveja como será o resultado. Depois execute o código no R e confira suas previsões:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ mpg, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ displ, }\AttributeTok{y =}\NormalTok{ hwy, }\AttributeTok{color =}\NormalTok{ drv)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+    \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{se =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+}
+\NormalTok{    tema}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using method = 'loess' and formula = 'y ~ x'
+\end{verbatim}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-26-1.pdf}
+
+\begin{solution}
+O gráfico bateu com a expectativa.
+\end{solution}
+
+\hypertarget{exr1-6-3}{%
+\subsection*{Exercício 1.6.3}\label{exr1-6-3}}
+\addcontentsline{toc}{subsection}{Exercício 1.6.3}
+
+O que o \texttt{show.legend\ =\ FALSE} faz? O que acontece se você removê-lo? Por que você acha que usei isso anteriormente no capítulo?
+
+\begin{solution}
+\leavevmode
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ mpg, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ displ, }\AttributeTok{y =}\NormalTok{ hwy, }\AttributeTok{color =}\NormalTok{ drv)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{show.legend =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{se =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{show.legend =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+}
+\NormalTok{    tema}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using method = 'loess' and formula = 'y ~ x'
+\end{verbatim}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-27-1.pdf}
+
+Ele indica que, para a camada à qual se aplica, não serão geradas as legendas de identificação.
+
+\end{solution}
+
+\hypertarget{exr1-6-4}{%
+\subsection*{Exercício 1.6.4}\label{exr1-6-4}}
+\addcontentsline{toc}{subsection}{Exercício 1.6.4}
+
+O que o argumento \texttt{se} para \texttt{geom\_smooth} faz?
+
+\begin{solution}
+\leavevmode
+
+\begin{verbatim}
+?geom_smooth
+\end{verbatim}
+
+Esse argumento indica se o intervalo de confiança utilizado no processo de suavização da linha deve ou não ser exibido no gráfico.
+
+\end{solution}
+
+\hypertarget{exr1-6-5}{%
+\subsection*{Exercício 1.6.5}\label{exr1-6-5}}
+\addcontentsline{toc}{subsection}{Exercício 1.6.5}
+
+Esses dois gráficos serão diferentes? Por quê/por que não?
+
+\begin{verbatim}
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +
+    geom_point() +
+    geom_smooth() +
+    tema
+    
+ggplot() + 
+    geom_point(data = mpg, mapping = aes(x = displ, y = hwy)) +
+    geom_smooth(data = mpg, mapping = aes(x = displ, y = hwy)) +
+    tema
+\end{verbatim}
+
+\begin{solution}
+Os gráficos serão iguais. Ao informar os parâmetros \texttt{data} e \texttt{mapping} na função \texttt{ggplot} essas atributos serão considerados como globais, sendo utilizado em todos as camadas do gráfico, a menos que alguma das camadas os sobrescreva. No segundo gráfico, não são definidos parâmetros globais, porém, o mesmo parâmetro é passado para ambas as camadas, sendo assim, a única diferença é o código estar duplicado.
+\end{solution}
+
+\hypertarget{exr1-6-6}{%
+\subsection*{Exercício 1.6.6}\label{exr1-6-6}}
+\addcontentsline{toc}{subsection}{Exercício 1.6.6}
+
+Recrie o código R necessário para gerar os seguintes gráficos:
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-28-1.pdf}
+
+\begin{solution}
+\leavevmode
+
+\begin{verbatim}
+a <- ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +
+        geom_point() +
+        geom_smooth(se = FALSE) +
+        tema
+
+b <- ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +
+        geom_point() +
+        geom_smooth(mapping = aes(group = drv), se = FALSE) +
+        tema
+
+c <- ggplot(data = mpg, mapping = aes(x = displ, y = hwy, color = drv)) +
+        geom_point() +
+        geom_smooth(se = FALSE) +
+        tema
+
+d <- ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +
+        geom_point(mapping = aes(color = drv)) +
+        geom_smooth(se = FALSE) +
+        tema
+
+e <- ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +
+        geom_point(mapping = aes(color = drv)) +
+        geom_smooth(mapping = aes(linetype = drv), se = FALSE) +
+        tema
+
+f <- ggplot(data = mpg, mapping = aes(x = displ, y = hwy, fill = drv)) +
+        geom_point(color = "white", shape = 21, size = 3, stroke = 2) +
+        tema
+\end{verbatim}
+
+\end{solution}
 
 \hypertarget{transformauxe7uxf5es-estatuxedsticas}{%
 \section{Transformações estatísticas}\label{transformauxe7uxf5es-estatuxedsticas}}

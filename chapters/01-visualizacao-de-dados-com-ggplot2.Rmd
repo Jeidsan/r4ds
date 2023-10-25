@@ -10,6 +10,7 @@ Inicialmente, precisaremos carregar o pacote `nycflights13`, que contém os dado
 
 ```{r}
 library(nycflights13)
+library(gridExtra)
 ```
 
 ## Introdução
@@ -334,7 +335,181 @@ Para melhor aproveitamento do espaço em tela.
 
 ## Objetos geométricos
 
-x
+### Exercício 1.6.1 {- #exr1-6-1}
+
+::: {.enunciado}
+Que _geom_ você usaria para desenhar um gráfico de linha? Um diagrama de caixas (_boxplot_)? Um histograma? Um gráfico de área?
+:::
+
+:::{.solution}
+```{r}
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +
+    geom_line() +
+    tema
+```
+
+```{r}
+ggplot(data = mpg) +
+    geom_boxplot(mapping = aes(y = hwy, x = class)) +
+    tema
+```
+
+```{r}
+ggplot(data = mpg, mapping = aes(x = hwy)) +
+    geom_histogram() +
+    tema
+```
+
+```{r}
+ggplot(data = economics, mapping = aes(x = date, y = unemploy)) +
+    geom_area() +
+    tema
+```
+
+Podem ser utilizados, respectivamente as _geoms_: _line_, _boxplot_, _histogram_ e _area_.
+:::
+
+### Exercício 1.6.2 {- #exr1-6-2}
+
+::: {.enunciado}
+Execute este código em sua cabeça e preveja como será o resultado. Depois execute o código no R e confira suas previsões:
+
+```{r}
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy, color = drv)) +
+    geom_point() +
+    geom_smooth(se = FALSE) +
+    tema
+```
+:::
+
+:::{.solution}
+O gráfico bateu com a expectativa.
+:::
+
+### Exercício 1.6.3 {- #exr1-6-3}
+
+::: {.enunciado}
+O que o `show.legend = FALSE` faz? O que acontece se você removê-lo? Por que você acha que usei isso anteriormente no capítulo?
+:::
+
+:::{.solution}
+```{r}
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy, color = drv)) +
+    geom_point(show.legend = FALSE) +
+    geom_smooth(se = FALSE, show.legend = FALSE) +
+    tema
+```
+
+Ele indica que, para a camada à qual se aplica, não serão geradas as legendas de identificação.
+:::
+
+### Exercício 1.6.4 {- #exr1-6-4}
+
+::: {.enunciado}
+O que o argumento `se` para `geom_smooth` faz?
+:::
+
+:::{.solution}
+```
+?geom_smooth
+```
+
+Esse argumento indica se o intervalo de confiança utilizado no processo de suavização da linha deve ou não ser exibido no gráfico.
+:::
+
+### Exercício 1.6.5 {- #exr1-6-5}
+
+::: {.enunciado}
+Esses dois gráficos serão diferentes? Por quê/por que não?
+
+```
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +
+    geom_point() +
+    geom_smooth() +
+    tema
+    
+ggplot() + 
+    geom_point(data = mpg, mapping = aes(x = displ, y = hwy)) +
+    geom_smooth(data = mpg, mapping = aes(x = displ, y = hwy)) +
+    tema
+```
+:::
+
+:::{.solution}
+Os gráficos serão iguais. Ao informar os parâmetros `data` e `mapping` na função `ggplot` essas atributos serão considerados como globais, sendo utilizado em todos as camadas do gráfico, a menos que alguma das camadas os sobrescreva. No segundo gráfico, não são definidos parâmetros globais, porém, o mesmo parâmetro é passado para ambas as camadas, sendo assim, a única diferença é o código estar duplicado. 
+:::
+
+### Exercício 1.6.6 {- #exr1-6-6}
+
+::: {.enunciado}
+Recrie o código R necessário para gerar os seguintes gráficos:
+
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+a <- ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +
+        geom_point() +
+        geom_smooth(se = FALSE) +
+        tema
+
+b <- ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +
+        geom_point() +
+        geom_smooth(mapping = aes(group = drv), se = FALSE) +
+        tema
+
+c <- ggplot(data = mpg, mapping = aes(x = displ, y = hwy, color = drv)) +
+        geom_point() +
+        geom_smooth(se = FALSE) +
+        tema
+
+d <- ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +
+        geom_point(mapping = aes(color = drv)) +
+        geom_smooth(se = FALSE) +
+        tema
+
+e <- ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +
+        geom_point(mapping = aes(color = drv)) +
+        geom_smooth(mapping = aes(linetype = drv), se = FALSE) +
+        tema
+
+f <- ggplot(data = mpg, mapping = aes(x = displ, y = hwy, fill = drv)) +
+        geom_point(color = "white", shape = 21, size = 3, stroke = 2) +
+        tema
+
+grid.arrange(a, b, c, d, e, f, nrow = 3)
+```
+:::
+
+:::{.solution}
+```
+a <- ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +
+        geom_point() +
+        geom_smooth(se = FALSE) +
+        tema
+
+b <- ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +
+        geom_point() +
+        geom_smooth(mapping = aes(group = drv), se = FALSE) +
+        tema
+
+c <- ggplot(data = mpg, mapping = aes(x = displ, y = hwy, color = drv)) +
+        geom_point() +
+        geom_smooth(se = FALSE) +
+        tema
+
+d <- ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +
+        geom_point(mapping = aes(color = drv)) +
+        geom_smooth(se = FALSE) +
+        tema
+
+e <- ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +
+        geom_point(mapping = aes(color = drv)) +
+        geom_smooth(mapping = aes(linetype = drv), se = FALSE) +
+        tema
+
+f <- ggplot(data = mpg, mapping = aes(x = displ, y = hwy, fill = drv)) +
+        geom_point(color = "white", shape = 21, size = 3, stroke = 2) +
+        tema
+```
+:::
 
 ## Transformações estatísticas
 
