@@ -23,7 +23,6 @@ language:
     appendix_name: 'Apêndice '
 rmd_files:
   - 'index.Rmd'
-  - 'chapters/00-preface.Rmd'
   - 'chapters/01-visualizacao-de-dados-com-ggplot2.Rmd'
   - 'chapters/02-fluxo-de-trabalho-o-basico.Rmd'
   - 'chapters/03-transformacao-de-dados-com-dplyr.Rmd'

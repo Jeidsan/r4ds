@@ -1,1 +1,65 @@
 # Fluxo de trabalho: o básico
+
+## O básico de programação
+
+Não temos exercícios nesta seção.
+
+## O que há em um nome?
+
+Não temos exercícios nesta seção.
+
+## Chamando funções
+
+### Exercício 2.3.1 {- #exr2-3-1}
+
+::: {.enunciado}
+Por que esse código não funciona?
+
+```
+my_variable <- 10
+my_varIable
+```
+:::
+
+:::{.solution}
+Foi atribuído um valor à variável `my_variable`, contudo depois tentou-se utilizar essa variável, porém a escrita está incorreta e o `R` não reconheceu a variável. 
+O `R` diferencia letras maiúsculas e minúsculas, isto é, as variáveis `my_variable` e `my_varIable` são distintas.
+:::
+
+### Exercício 2.3.2 {- #exr2-3-2}
+
+::: {.enunciado}
+Ajuste cada um dos seguintes comandos de `R` para que executem corretamente.
+
+```
+library(tidyverse)
+
+ggplot(dota = mpg) +
+    geom_point(mapping = aes(x = displ, y = hwy))
+    
+filter(mpg, cyl = 8)
+filter(diamond, carat > 3)
+```
+:::
+
+:::{.solution}
+```{r}
+library(tidyverse)
+
+ggplot(data = mpg) +
+    geom_point(mapping = aes(x = displ, y = hwy))
+    
+filter(mpg, cyl == 8)
+filter(diamonds, carat > 3)
+```
+:::
+
+### Exercício 2.3.3 {- #exr2-3-3}
+
+::: {.enunciado}
+Pressione Alt-Shift-K. O que acontece? Como você pode chegar ao mesmo resultado usando os menus?
+:::
+
+:::{.solution}
+x
+:::

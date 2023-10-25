@@ -32,9 +32,21 @@ tema <- theme(
     )
 ```
 
-# Welcome {-}
+# Prefácio {-}
 
-## Pendências
+Esta página serviu para estudo e prática com o pacote R Bookdown e contém a solução encontrada por mim para os exercícios propostos no livro R para Data Sciente, de Hadley Wickham e Garret Grolemund, publicado no Brasil em 2019 pela Alta Books Editora [@wickham2019].
 
+```{r fig.align='center', echo=FALSE, include=identical(knitr:::pandoc_to(), 'html'), out.width='250px'}
+knitr::include_graphics('images/cover.png', dpi = NA)
+```
+
+Por se tratar de um produto construído durante o processo de aprendizagem, o conteúdo pode conter erros, tanto no texto em si, como na lógica utilizada para solução dos exercícios.
+
+Dúvidas ou sugestões de melhoria podem ser encaminhadas para o e-mail *jeidsan.pereira@gmail.com*.
+
+## Pendências {-}
+
+- No PDF, o prefácio está sendo exibido duas vezes no sumário;
 - [Exercício 1.7.4](#exr1-7-4);
+- [Exercício 2.3.3](#exr2-3-3);
 - 

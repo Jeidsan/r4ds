@@ -270,20 +270,6 @@
 \setcounter{tocdepth}{1}
 \tableofcontents
 }
-\hypertarget{welcome}{%
-\chapter*{Welcome}\label{welcome}}
-\addcontentsline{toc}{chapter}{Welcome}
-
-\hypertarget{penduxeancias}{%
-\section{Pendências}\label{penduxeancias}}
-
-\begin{itemize}
-\tightlist
-\item
-  \protect\hyperlink{exr1-7-4}{Exercício 1.7.4};
-\item
-\end{itemize}
-
 \hypertarget{prefuxe1cio}{%
 \chapter*{Prefácio}\label{prefuxe1cio}}
 \addcontentsline{toc}{chapter}{Prefácio}
@@ -293,6 +279,21 @@ Esta página serviu para estudo e prática com o pacote R Bookdown e contém a s
 Por se tratar de um produto construído durante o processo de aprendizagem, o conteúdo pode conter erros, tanto no texto em si, como na lógica utilizada para solução dos exercícios.
 
 Dúvidas ou sugestões de melhoria podem ser encaminhadas para o e-mail \emph{\href{mailto:jeidsan.pereira@gmail.com}{\nolinkurl{jeidsan.pereira@gmail.com}}}.
+
+\hypertarget{penduxeancias}{%
+\section*{Pendências}\label{penduxeancias}}
+\addcontentsline{toc}{section}{Pendências}
+
+\begin{itemize}
+\tightlist
+\item
+  No PDF, o prefácio está sendo exibido duas vezes no sumário;
+\item
+  \protect\hyperlink{exr1-7-4}{Exercício 1.7.4};
+\item
+  \protect\hyperlink{exr2-3-3}{Exercício 2.3.3};
+\item
+\end{itemize}
 
 \mainmatter
 
@@ -1332,6 +1333,123 @@ Não temos exercícios nesta seção.
 
 \hypertarget{fluxo-de-trabalho-o-buxe1sico}{%
 \chapter{Fluxo de trabalho: o básico}\label{fluxo-de-trabalho-o-buxe1sico}}
+
+\hypertarget{o-buxe1sico-de-programauxe7uxe3o}{%
+\section{O básico de programação}\label{o-buxe1sico-de-programauxe7uxe3o}}
+
+Não temos exercícios nesta seção.
+
+\hypertarget{o-que-huxe1-em-um-nome}{%
+\section{O que há em um nome?}\label{o-que-huxe1-em-um-nome}}
+
+Não temos exercícios nesta seção.
+
+\hypertarget{chamando-funuxe7uxf5es}{%
+\section{Chamando funções}\label{chamando-funuxe7uxf5es}}
+
+\hypertarget{exr2-3-1}{%
+\subsection*{Exercício 2.3.1}\label{exr2-3-1}}
+\addcontentsline{toc}{subsection}{Exercício 2.3.1}
+
+Por que esse código não funciona?
+
+\begin{verbatim}
+my_variable <- 10
+my_varIable
+\end{verbatim}
+
+\begin{solution}
+Foi atribuído um valor à variável \texttt{my\_variable}, contudo depois tentou-se utilizar essa variável, porém a escrita está incorreta e o \texttt{R} não reconheceu a variável.
+O \texttt{R} diferencia letras maiúsculas e minúsculas, isto é, as variáveis \texttt{my\_variable} e \texttt{my\_varIable} são distintas.
+\end{solution}
+
+\hypertarget{exr2-3-2}{%
+\subsection*{Exercício 2.3.2}\label{exr2-3-2}}
+\addcontentsline{toc}{subsection}{Exercício 2.3.2}
+
+Ajuste cada um dos seguintes comandos de \texttt{R} para que executem corretamente.
+
+\begin{verbatim}
+library(tidyverse)
+
+ggplot(dota = mpg) +
+    geom_point(mapping = aes(x = displ, y = hwy))
+    
+filter(mpg, cyl = 8)
+filter(diamond, carat > 3)
+\end{verbatim}
+
+\begin{solution}
+\leavevmode
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ mpg) }\SpecialCharTok{+}
+    \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ displ, }\AttributeTok{y =}\NormalTok{ hwy))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-40-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{filter}\NormalTok{(mpg, cyl }\SpecialCharTok{==} \DecValTok{8}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 70 x 11
+##    manufacturer model      displ  year   cyl trans drv     cty   hwy fl    class
+##    <chr>        <chr>      <dbl> <int> <int> <chr> <chr> <int> <int> <chr> <chr>
+##  1 audi         a6 quattro   4.2  2008     8 auto~ 4        16    23 p     mids~
+##  2 chevrolet    c1500 sub~   5.3  2008     8 auto~ r        14    20 r     suv  
+##  3 chevrolet    c1500 sub~   5.3  2008     8 auto~ r        11    15 e     suv  
+##  4 chevrolet    c1500 sub~   5.3  2008     8 auto~ r        14    20 r     suv  
+##  5 chevrolet    c1500 sub~   5.7  1999     8 auto~ r        13    17 r     suv  
+##  6 chevrolet    c1500 sub~   6    2008     8 auto~ r        12    17 r     suv  
+##  7 chevrolet    corvette     5.7  1999     8 manu~ r        16    26 p     2sea~
+##  8 chevrolet    corvette     5.7  1999     8 auto~ r        15    23 p     2sea~
+##  9 chevrolet    corvette     6.2  2008     8 manu~ r        16    26 p     2sea~
+## 10 chevrolet    corvette     6.2  2008     8 auto~ r        15    25 p     2sea~
+## # i 60 more rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{filter}\NormalTok{(diamonds, carat }\SpecialCharTok{\textgreater{}} \DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 32 x 10
+##    carat cut     color clarity depth table price     x     y     z
+##    <dbl> <ord>   <ord> <ord>   <dbl> <dbl> <int> <dbl> <dbl> <dbl>
+##  1  3.01 Premium I     I1       62.7    58  8040  9.1   8.97  5.67
+##  2  3.11 Fair    J     I1       65.9    57  9823  9.15  9.02  5.98
+##  3  3.01 Premium F     I1       62.2    56  9925  9.24  9.13  5.73
+##  4  3.05 Premium E     I1       60.9    58 10453  9.26  9.25  5.66
+##  5  3.02 Fair    I     I1       65.2    56 10577  9.11  9.02  5.91
+##  6  3.01 Fair    H     I1       56.1    62 10761  9.54  9.38  5.31
+##  7  3.65 Fair    H     I1       67.1    53 11668  9.53  9.48  6.38
+##  8  3.24 Premium H     I1       62.1    58 12300  9.44  9.4   5.85
+##  9  3.22 Ideal   I     I1       62.6    55 12545  9.49  9.42  5.92
+## 10  3.5  Ideal   H     I1       62.8    57 12587  9.65  9.59  6.03
+## # i 22 more rows
+\end{verbatim}
+
+\end{solution}
+
+\hypertarget{exr2-3-3}{%
+\subsection*{Exercício 2.3.3}\label{exr2-3-3}}
+\addcontentsline{toc}{subsection}{Exercício 2.3.3}
+
+Pressione Alt-Shift-K. O que acontece? Como você pode chegar ao mesmo resultado usando os menus?
+
+\begin{solution}
+x
+\end{solution}
 
 \hypertarget{transformauxe7uxe3o-de-dados-com-dplyr}{%
 \chapter{\texorpdfstring{Transformação de dados com \texttt{dplyr}}{Transformação de dados com dplyr}}\label{transformauxe7uxe3o-de-dados-com-dplyr}}

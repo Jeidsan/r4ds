@@ -1,4 +1,3 @@
-pendências
 visualização-de-dados-com-ggplot2
 introdução
 primeiros-passos
@@ -11,6 +10,9 @@ ajustes-de-posição
 sistemas-de-coordenadas
 a-gramática-em-camadas-de-gráficos
 fluxo-de-trabalho-o-básico
+o-básico-de-programação
+o-que-há-em-um-nome
+chamando-funções
 transformação-de-dados-com-dplyr
 fluxo-de-trabalho-scripts
 análise-exploratória-de-dados
