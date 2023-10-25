@@ -4,9 +4,9 @@ subtitle: "Solução dos exercícios"
 author: "Jeidsan A. da C. Pereira"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
-documentclass: krantz
+documentclass: "latex/krantz"
 bibliography: [book.bib, packages.bib]
-csl: abnt.csl
+csl: "latex/abnt.csl"
 url: "https://www.jeidsan.com.br/r4ds"
 cover-image: "images/cover.png"
 description: |
