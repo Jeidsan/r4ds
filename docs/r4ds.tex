@@ -1454,6 +1454,685 @@ x
 \hypertarget{transformauxe7uxe3o-de-dados-com-dplyr}{%
 \chapter{\texorpdfstring{Transformação de dados com \texttt{dplyr}}{Transformação de dados com dplyr}}\label{transformauxe7uxe3o-de-dados-com-dplyr}}
 
+\hypertarget{introduuxe7uxe3o-1}{%
+\section{Introdução}\label{introduuxe7uxe3o-1}}
+
+Não temos exercícios nesta seção.
+
+\hypertarget{filtrar-linhas-com-filter}{%
+\section{\texorpdfstring{Filtrar linhas com \texttt{filter()}}{Filtrar linhas com filter()}}\label{filtrar-linhas-com-filter}}
+
+Não temos exercícios nesta seção.
+
+\hypertarget{comparauxe7uxf5es}{%
+\section{Comparações}\label{comparauxe7uxf5es}}
+
+\hypertarget{exr3-3-1}{%
+\subsection*{Exercício 3.3.1}\label{exr3-3-1}}
+\addcontentsline{toc}{subsection}{Exercício 3.3.1}
+
+Encontre todos os voos que:
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  Tiveram um atraso de duas horas ou mais na chegada.
+\item
+  Foram para Houston (IAH ou HOU).
+\item
+  Foram operados pela United, American ou Delta.
+\item
+  Partiram em julho, agosto e setembro.
+\item
+  Chegaram com mais de duas horas de atraso, mas não saíram atrasados.
+\item
+  Atrasaram pelo menos uma hora, mas compensaram mais de 30 minutos durante o trajeto.
+\item
+  Saíram entre meia-noite e 6h (incluindo esses horários).
+\end{enumerate}
+
+\begin{solution}
+\leavevmode
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  Tiveram um atraso de duas horas ou mais na chegada.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{filter}\NormalTok{(flights, arr\_delay }\SpecialCharTok{\textgreater{}=} \DecValTok{120}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 10,200 x 19
+##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+##    <int> <int> <int>    <int>          <int>     <dbl>    <int>          <int>
+##  1  2013     1     1      811            630       101     1047            830
+##  2  2013     1     1      848           1835       853     1001           1950
+##  3  2013     1     1      957            733       144     1056            853
+##  4  2013     1     1     1114            900       134     1447           1222
+##  5  2013     1     1     1505           1310       115     1638           1431
+##  6  2013     1     1     1525           1340       105     1831           1626
+##  7  2013     1     1     1549           1445        64     1912           1656
+##  8  2013     1     1     1558           1359       119     1718           1515
+##  9  2013     1     1     1732           1630        62     2028           1825
+## 10  2013     1     1     1803           1620       103     2008           1750
+## # i 10,190 more rows
+## # i 11 more variables: arr_delay <dbl>, carrier <chr>, flight <int>,
+## #   tailnum <chr>, origin <chr>, dest <chr>, air_time <dbl>, distance <dbl>,
+## #   hour <dbl>, minute <dbl>, time_hour <dttm>
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Foram para Houston (IAH ou HOU).
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{filter}\NormalTok{(flights, dest }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"IAH"}\NormalTok{, }\StringTok{"HOU"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 9,313 x 19
+##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+##    <int> <int> <int>    <int>          <int>     <dbl>    <int>          <int>
+##  1  2013     1     1      517            515         2      830            819
+##  2  2013     1     1      533            529         4      850            830
+##  3  2013     1     1      623            627        -4      933            932
+##  4  2013     1     1      728            732        -4     1041           1038
+##  5  2013     1     1      739            739         0     1104           1038
+##  6  2013     1     1      908            908         0     1228           1219
+##  7  2013     1     1     1028           1026         2     1350           1339
+##  8  2013     1     1     1044           1045        -1     1352           1351
+##  9  2013     1     1     1114            900       134     1447           1222
+## 10  2013     1     1     1205           1200         5     1503           1505
+## # i 9,303 more rows
+## # i 11 more variables: arr_delay <dbl>, carrier <chr>, flight <int>,
+## #   tailnum <chr>, origin <chr>, dest <chr>, air_time <dbl>, distance <dbl>,
+## #   hour <dbl>, minute <dbl>, time_hour <dttm>
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Foram operados pela United, American ou Delta.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{filter}\NormalTok{(flights, carrier }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"AA"}\NormalTok{, }\StringTok{"DL"}\NormalTok{, }\StringTok{"UA"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 139,504 x 19
+##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+##    <int> <int> <int>    <int>          <int>     <dbl>    <int>          <int>
+##  1  2013     1     1      517            515         2      830            819
+##  2  2013     1     1      533            529         4      850            830
+##  3  2013     1     1      542            540         2      923            850
+##  4  2013     1     1      554            600        -6      812            837
+##  5  2013     1     1      554            558        -4      740            728
+##  6  2013     1     1      558            600        -2      753            745
+##  7  2013     1     1      558            600        -2      924            917
+##  8  2013     1     1      558            600        -2      923            937
+##  9  2013     1     1      559            600        -1      941            910
+## 10  2013     1     1      559            600        -1      854            902
+## # i 139,494 more rows
+## # i 11 more variables: arr_delay <dbl>, carrier <chr>, flight <int>,
+## #   tailnum <chr>, origin <chr>, dest <chr>, air_time <dbl>, distance <dbl>,
+## #   hour <dbl>, minute <dbl>, time_hour <dttm>
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Partiram em julho, agosto e setembro.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{filter}\NormalTok{(flights, month }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\DecValTok{7}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{9}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 86,326 x 19
+##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+##    <int> <int> <int>    <int>          <int>     <dbl>    <int>          <int>
+##  1  2013     7     1        1           2029       212      236           2359
+##  2  2013     7     1        2           2359         3      344            344
+##  3  2013     7     1       29           2245       104      151              1
+##  4  2013     7     1       43           2130       193      322             14
+##  5  2013     7     1       44           2150       174      300            100
+##  6  2013     7     1       46           2051       235      304           2358
+##  7  2013     7     1       48           2001       287      308           2305
+##  8  2013     7     1       58           2155       183      335             43
+##  9  2013     7     1      100           2146       194      327             30
+## 10  2013     7     1      100           2245       135      337            135
+## # i 86,316 more rows
+## # i 11 more variables: arr_delay <dbl>, carrier <chr>, flight <int>,
+## #   tailnum <chr>, origin <chr>, dest <chr>, air_time <dbl>, distance <dbl>,
+## #   hour <dbl>, minute <dbl>, time_hour <dttm>
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  Chegaram com mais de duas horas de atraso, mas não saíram atrasados.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{filter}\NormalTok{(flights, dep\_delay }\SpecialCharTok{\textless{}=} \DecValTok{0}\NormalTok{, arr\_delay }\SpecialCharTok{\textgreater{}} \DecValTok{120}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 29 x 19
+##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+##    <int> <int> <int>    <int>          <int>     <dbl>    <int>          <int>
+##  1  2013     1    27     1419           1420        -1     1754           1550
+##  2  2013    10     7     1350           1350         0     1736           1526
+##  3  2013    10     7     1357           1359        -2     1858           1654
+##  4  2013    10    16      657            700        -3     1258           1056
+##  5  2013    11     1      658            700        -2     1329           1015
+##  6  2013     3    18     1844           1847        -3       39           2219
+##  7  2013     4    17     1635           1640        -5     2049           1845
+##  8  2013     4    18      558            600        -2     1149            850
+##  9  2013     4    18      655            700        -5     1213            950
+## 10  2013     5    22     1827           1830        -3     2217           2010
+## # i 19 more rows
+## # i 11 more variables: arr_delay <dbl>, carrier <chr>, flight <int>,
+## #   tailnum <chr>, origin <chr>, dest <chr>, air_time <dbl>, distance <dbl>,
+## #   hour <dbl>, minute <dbl>, time_hour <dttm>
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{5}
+\tightlist
+\item
+  Atrasaram pelo menos uma hora, mas compensaram mais de 30 minutos durante o trajeto.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{filter}\NormalTok{(flights, dep\_delay }\SpecialCharTok{\textgreater{}=} \DecValTok{60} \SpecialCharTok{\&}\NormalTok{ dep\_delay }\SpecialCharTok{{-}}\NormalTok{ arr\_delay }\SpecialCharTok{\textgreater{}=} \DecValTok{30}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 2,074 x 19
+##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+##    <int> <int> <int>    <int>          <int>     <dbl>    <int>          <int>
+##  1  2013     1     1     1716           1545        91     2140           2039
+##  2  2013     1     1     2205           1720       285       46           2040
+##  3  2013     1     1     2326           2130       116      131             18
+##  4  2013     1     3     1503           1221       162     1803           1555
+##  5  2013     1     3     1821           1530       171     2131           1910
+##  6  2013     1     3     1839           1700        99     2056           1950
+##  7  2013     1     3     1850           1745        65     2148           2120
+##  8  2013     1     3     1923           1815        68     2036           1958
+##  9  2013     1     3     1941           1759       102     2246           2139
+## 10  2013     1     3     1950           1845        65     2228           2227
+## # i 2,064 more rows
+## # i 11 more variables: arr_delay <dbl>, carrier <chr>, flight <int>,
+## #   tailnum <chr>, origin <chr>, dest <chr>, air_time <dbl>, distance <dbl>,
+## #   hour <dbl>, minute <dbl>, time_hour <dttm>
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{6}
+\tightlist
+\item
+  Saíram entre meia-noite e 6h (incluindo esses horários).
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{filter}\NormalTok{(flights, dep\_time }\SpecialCharTok{\textgreater{}=} \DecValTok{0}\NormalTok{, dep\_time }\SpecialCharTok{\textless{}=} \DecValTok{600}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 9,344 x 19
+##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+##    <int> <int> <int>    <int>          <int>     <dbl>    <int>          <int>
+##  1  2013     1     1      517            515         2      830            819
+##  2  2013     1     1      533            529         4      850            830
+##  3  2013     1     1      542            540         2      923            850
+##  4  2013     1     1      544            545        -1     1004           1022
+##  5  2013     1     1      554            600        -6      812            837
+##  6  2013     1     1      554            558        -4      740            728
+##  7  2013     1     1      555            600        -5      913            854
+##  8  2013     1     1      557            600        -3      709            723
+##  9  2013     1     1      557            600        -3      838            846
+## 10  2013     1     1      558            600        -2      753            745
+## # i 9,334 more rows
+## # i 11 more variables: arr_delay <dbl>, carrier <chr>, flight <int>,
+## #   tailnum <chr>, origin <chr>, dest <chr>, air_time <dbl>, distance <dbl>,
+## #   hour <dbl>, minute <dbl>, time_hour <dttm>
+\end{verbatim}
+
+\end{solution}
+
+\hypertarget{exr3-3-2}{%
+\subsection*{Exercício 3.3.2}\label{exr3-3-2}}
+\addcontentsline{toc}{subsection}{Exercício 3.3.2}
+
+Outro ajudante da filtragem do \textbf{dplyr} é \texttt{between()}. O que ele faz? Você consegue utilizá-lo para simplificar o código necessário para responder os desafios anteriores?
+
+\begin{solution}
+
+O \texttt{between} recebe três parâmetros e verifica se o primeiro está entre o segundo e o terceiro.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{filter}\NormalTok{(flights, }\FunctionTok{between}\NormalTok{(dep\_time, }\DecValTok{0}\NormalTok{, }\DecValTok{600}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 9,344 x 19
+##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+##    <int> <int> <int>    <int>          <int>     <dbl>    <int>          <int>
+##  1  2013     1     1      517            515         2      830            819
+##  2  2013     1     1      533            529         4      850            830
+##  3  2013     1     1      542            540         2      923            850
+##  4  2013     1     1      544            545        -1     1004           1022
+##  5  2013     1     1      554            600        -6      812            837
+##  6  2013     1     1      554            558        -4      740            728
+##  7  2013     1     1      555            600        -5      913            854
+##  8  2013     1     1      557            600        -3      709            723
+##  9  2013     1     1      557            600        -3      838            846
+## 10  2013     1     1      558            600        -2      753            745
+## # i 9,334 more rows
+## # i 11 more variables: arr_delay <dbl>, carrier <chr>, flight <int>,
+## #   tailnum <chr>, origin <chr>, dest <chr>, air_time <dbl>, distance <dbl>,
+## #   hour <dbl>, minute <dbl>, time_hour <dttm>
+\end{verbatim}
+
+\end{solution}
+
+\hypertarget{exr3-3-3}{%
+\subsection*{Exercício 3.3.3}\label{exr3-3-3}}
+\addcontentsline{toc}{subsection}{Exercício 3.3.3}
+
+Quantos voos têm um \texttt{dep\_time} faltante? Que outras variáveis estão faltando? O que essas linhas podem representar?
+
+\begin{solution}
+\leavevmode
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{count}\NormalTok{(flights, }\FunctionTok{is.na}\NormalTok{(dep\_time))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 2 x 2
+##   `is.na(dep_time)`      n
+##   <lgl>              <int>
+## 1 FALSE             328521
+## 2 TRUE                8255
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(flights))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##     year           month            day           dep_time      
+##  Mode :logical   Mode :logical   Mode :logical   Mode :logical  
+##  FALSE:336776    FALSE:336776    FALSE:336776    FALSE:328521   
+##                                                  TRUE :8255     
+##  sched_dep_time  dep_delay        arr_time       sched_arr_time 
+##  Mode :logical   Mode :logical   Mode :logical   Mode :logical  
+##  FALSE:336776    FALSE:328521    FALSE:328063    FALSE:336776   
+##                  TRUE :8255      TRUE :8713                     
+##  arr_delay        carrier          flight         tailnum       
+##  Mode :logical   Mode :logical   Mode :logical   Mode :logical  
+##  FALSE:327346    FALSE:336776    FALSE:336776    FALSE:334264   
+##  TRUE :9430                                      TRUE :2512     
+##    origin           dest          air_time        distance      
+##  Mode :logical   Mode :logical   Mode :logical   Mode :logical  
+##  FALSE:336776    FALSE:336776    FALSE:327346    FALSE:336776   
+##                                  TRUE :9430                     
+##     hour           minute        time_hour      
+##  Mode :logical   Mode :logical   Mode :logical  
+##  FALSE:336776    FALSE:336776    FALSE:336776   
+## 
+\end{verbatim}
+
+São 8255 voos com \texttt{dep\_time} faltante, o que pode indicar voos cancelados. As seguintes colunas também possuem dados faltantes: \texttt{dep\_delay}, \texttt{arr\_time}, \texttt{arr\_delay}, \texttt{tailnum} e \texttt{air\_time}.
+
+\end{solution}
+
+\hypertarget{exr3-3-4}{%
+\subsection*{Exercício 3.3.4}\label{exr3-3-4}}
+\addcontentsline{toc}{subsection}{Exercício 3.3.4}
+
+Por que \texttt{NA\ \^{}\ 0} não é um valor faltante? Por que \texttt{NA\ \textbar{}\ TRUE} não é um valor faltante? Por que \texttt{FALSE\ \&\ NA} não é um valor faltante? Você consegue descobrir a regra geral? (\texttt{NA\ *\ 0} é um contraexemplo complicado!)
+
+\begin{solution}
+\texttt{NA\ \^{}\ 0} resulta em um, pois qualquer número real satisfaz essa mesma condição. A regra geral parece ser que, ao avaliar a expressão, sempre que o valor que \texttt{NA} representaria for indiferente para o resultado da expressão, então será retornado um valor diferente de \texttt{NA}.
+\end{solution}
+
+\hypertarget{ordenar-linhas-com-arrange}{%
+\section{\texorpdfstring{Ordenar linhas com \texttt{arrange()}}{Ordenar linhas com arrange()}}\label{ordenar-linhas-com-arrange}}
+
+\hypertarget{exr3-4-1}{%
+\subsection*{Exercício 3.4.1}\label{exr3-4-1}}
+\addcontentsline{toc}{subsection}{Exercício 3.4.1}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr3-4-2}{%
+\subsection*{Exercício 3.4.2}\label{exr3-4-2}}
+\addcontentsline{toc}{subsection}{Exercício 3.4.2}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr3-4-3}{%
+\subsection*{Exercício 3.4.3}\label{exr3-4-3}}
+\addcontentsline{toc}{subsection}{Exercício 3.4.3}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr3-4-4}{%
+\subsection*{Exercício 3.4.4}\label{exr3-4-4}}
+\addcontentsline{toc}{subsection}{Exercício 3.4.4}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{selecionar-colunas-com-select}{%
+\section{\texorpdfstring{Selecionar colunas com \texttt{select()}}{Selecionar colunas com select()}}\label{selecionar-colunas-com-select}}
+
+\hypertarget{exr3-5-1}{%
+\subsection*{Exercício 3.5.1}\label{exr3-5-1}}
+\addcontentsline{toc}{subsection}{Exercício 3.5.1}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr3-5-2}{%
+\subsection*{Exercício 3.5.2}\label{exr3-5-2}}
+\addcontentsline{toc}{subsection}{Exercício 3.5.2}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr3-5-3}{%
+\subsection*{Exercício 3.5.3}\label{exr3-5-3}}
+\addcontentsline{toc}{subsection}{Exercício 3.5.3}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr3-5-4}{%
+\subsection*{Exercício 3.5.4}\label{exr3-5-4}}
+\addcontentsline{toc}{subsection}{Exercício 3.5.4}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{adicionar-novas-variuxe1veis-com-mutate}{%
+\section{\texorpdfstring{Adicionar novas variáveis com \texttt{mutate()}}{Adicionar novas variáveis com mutate()}}\label{adicionar-novas-variuxe1veis-com-mutate}}
+
+\hypertarget{exr3-6-1}{%
+\subsection*{Exercício 3.6.1}\label{exr3-6-1}}
+\addcontentsline{toc}{subsection}{Exercício 3.6.1}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr3-6-2}{%
+\subsection*{Exercício 3.6.2}\label{exr3-6-2}}
+\addcontentsline{toc}{subsection}{Exercício 3.6.2}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr3-6-3}{%
+\subsection*{Exercício 3.6.3}\label{exr3-6-3}}
+\addcontentsline{toc}{subsection}{Exercício 3.6.3}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr3-6-4}{%
+\subsection*{Exercício 3.6.4}\label{exr3-6-4}}
+\addcontentsline{toc}{subsection}{Exercício 3.6.4}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr3-6-5}{%
+\subsection*{Exercício 3.6.5}\label{exr3-6-5}}
+\addcontentsline{toc}{subsection}{Exercício 3.6.5}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr3-6-6}{%
+\subsection*{Exercício 3.6.6}\label{exr3-6-6}}
+\addcontentsline{toc}{subsection}{Exercício 3.6.6}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{resumos-agrupados-com-summarize}{%
+\section{\texorpdfstring{Resumos agrupados com \texttt{summarize()}}{Resumos agrupados com summarize()}}\label{resumos-agrupados-com-summarize}}
+
+\hypertarget{exr3-7-1}{%
+\subsection*{Exercício 3.7.1}\label{exr3-7-1}}
+\addcontentsline{toc}{subsection}{Exercício 3.7.1}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr3-7-2}{%
+\subsection*{Exercício 3.7.2}\label{exr3-7-2}}
+\addcontentsline{toc}{subsection}{Exercício 3.7.2}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr3-7-3}{%
+\subsection*{Exercício 3.7.3}\label{exr3-7-3}}
+\addcontentsline{toc}{subsection}{Exercício 3.7.3}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr3-7-4}{%
+\subsection*{Exercício 3.7.4}\label{exr3-7-4}}
+\addcontentsline{toc}{subsection}{Exercício 3.7.4}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr3-7-5}{%
+\subsection*{Exercício 3.7.5}\label{exr3-7-5}}
+\addcontentsline{toc}{subsection}{Exercício 3.7.5}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr3-7-6}{%
+\subsection*{Exercício 3.7.6}\label{exr3-7-6}}
+\addcontentsline{toc}{subsection}{Exercício 3.7.6}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr3-7-7}{%
+\subsection*{Exercício 3.7.7}\label{exr3-7-7}}
+\addcontentsline{toc}{subsection}{Exercício 3.7.7}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{mudanuxe7as-agrupadas-e-filtros}{%
+\section{Mudanças agrupadas (e filtros)}\label{mudanuxe7as-agrupadas-e-filtros}}
+
+\hypertarget{exr3-8-1}{%
+\subsection*{Exercício 3.8.1}\label{exr3-8-1}}
+\addcontentsline{toc}{subsection}{Exercício 3.8.1}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr3-8-2}{%
+\subsection*{Exercício 3.8.2}\label{exr3-8-2}}
+\addcontentsline{toc}{subsection}{Exercício 3.8.2}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr3-8-3}{%
+\subsection*{Exercício 3.8.3}\label{exr3-8-3}}
+\addcontentsline{toc}{subsection}{Exercício 3.8.3}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr3-8-4}{%
+\subsection*{Exercício 3.8.4}\label{exr3-8-4}}
+\addcontentsline{toc}{subsection}{Exercício 3.8.4}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr3-8-5}{%
+\subsection*{Exercício 3.8.5}\label{exr3-8-5}}
+\addcontentsline{toc}{subsection}{Exercício 3.8.5}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr3-8-6}{%
+\subsection*{Exercício 3.8.6}\label{exr3-8-6}}
+\addcontentsline{toc}{subsection}{Exercício 3.8.6}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr3-8-7}{%
+\subsection*{Exercício 3.8.7}\label{exr3-8-7}}
+\addcontentsline{toc}{subsection}{Exercício 3.8.7}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
 \hypertarget{fluxo-de-trabalho-scripts}{%
 \chapter{Fluxo de trabalho: scripts}\label{fluxo-de-trabalho-scripts}}
 

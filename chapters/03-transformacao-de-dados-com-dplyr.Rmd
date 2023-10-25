@@ -1,1 +1,401 @@
 # Transformação de dados com `dplyr`
+
+```{r include=FALSE}
+not_cancelled <- flights %>%
+                    filter(!is.na(dep_delay), !is.na(arr_delay))
+```
+
+## Introdução
+
+Não temos exercícios nesta seção.
+
+## Filtrar linhas com `filter()`
+
+Não temos exercícios nesta seção.
+
+## Comparações
+
+### Exercício 3.3.1 {- #exr3-3-1}
+
+::: {.enunciado}
+Encontre todos os voos que:
+
+a. Tiveram um atraso de duas horas ou mais na chegada.
+b. Foram para Houston (IAH ou HOU).
+c. Foram operados pela United, American ou Delta.
+d. Partiram em julho, agosto e setembro.
+e. Chegaram com mais de duas horas de atraso, mas não saíram atrasados.
+f. Atrasaram pelo menos uma hora, mas compensaram mais de 30 minutos durante o trajeto.
+g. Saíram entre meia-noite e 6h (incluindo esses horários).
+:::
+
+:::{.solution}
+
+
+a. Tiveram um atraso de duas horas ou mais na chegada.
+```{r}
+filter(flights, arr_delay >= 120)
+```
+
+b. Foram para Houston (IAH ou HOU).
+```{r}
+filter(flights, dest %in% c("IAH", "HOU"))
+```
+
+
+c. Foram operados pela United, American ou Delta. 
+```{r}
+filter(flights, carrier %in% c("AA", "DL", "UA"))
+```
+
+d. Partiram em julho, agosto e setembro.
+```{r}
+filter(flights, month %in% c(7, 8, 9))
+```
+
+e. Chegaram com mais de duas horas de atraso, mas não saíram atrasados.
+```{r}
+filter(flights, dep_delay <= 0, arr_delay > 120)
+```
+
+f. Atrasaram pelo menos uma hora, mas compensaram mais de 30 minutos durante o trajeto.
+```{r}
+filter(flights, dep_delay >= 60 & dep_delay - arr_delay >= 30)
+```
+
+g. Saíram entre meia-noite e 6h (incluindo esses horários).
+```{r}
+filter(flights, dep_time >= 0, dep_time <= 600)
+```
+
+:::
+
+### Exercício 3.3.2 {- #exr3-3-2}
+
+::: {.enunciado}
+Outro ajudante da filtragem do **dplyr** é `between()`. O que ele faz? Você consegue utilizá-lo para simplificar o código necessário para responder os desafios anteriores?
+:::
+
+:::{.solution}
+O `between` recebe três parâmetros e verifica se o primeiro está entre o segundo e o terceiro.
+
+```{r}
+filter(flights, between(dep_time, 0, 600))
+```
+
+:::
+
+### Exercício 3.3.3 {- #exr3-3-3}
+
+::: {.enunciado}
+Quantos voos têm um `dep_time` faltante? Que outras variáveis estão faltando? O que essas linhas podem representar?
+:::
+
+:::{.solution}
+```{r}
+count(flights, is.na(dep_time))
+summary(is.na(flights))
+```
+
+São 8255 voos com `dep_time` faltante, o que pode indicar voos cancelados. As seguintes colunas também possuem dados faltantes: `dep_delay`, `arr_time`, `arr_delay`, `tailnum` e `air_time`.
+:::
+
+### Exercício 3.3.4 {- #exr3-3-4}
+
+::: {.enunciado}
+Por que `NA ^ 0` não é um valor faltante? Por que `NA | TRUE` não é um valor faltante? Por que `FALSE & NA` não é um valor faltante? Você consegue descobrir a regra geral? (`NA * 0` é um contraexemplo complicado!)
+:::
+
+:::{.solution}
+`NA ^ 0` resulta em um, pois qualquer número real satisfaz essa mesma condição. A regra geral parece ser que, ao avaliar a expressão, sempre que o valor que `NA` representaria for indiferente para o resultado da expressão, então será retornado um valor diferente de `NA`.
+:::
+
+## Ordenar linhas com `arrange()`
+
+### Exercício 3.4.1 {- #exr3-4-1}
+
+::: {.enunciado}
+x
+:::
+
+:::{.solution}
+x
+:::
+
+### Exercício 3.4.2 {- #exr3-4-2}
+
+::: {.enunciado}
+x
+:::
+
+:::{.solution}
+x
+:::
+
+### Exercício 3.4.3 {- #exr3-4-3}
+
+::: {.enunciado}
+x
+:::
+
+:::{.solution}
+x
+:::
+
+### Exercício 3.4.4 {- #exr3-4-4}
+
+::: {.enunciado}
+x
+:::
+
+:::{.solution}
+x
+:::
+
+## Selecionar colunas com `select()`
+
+### Exercício 3.5.1 {- #exr3-5-1}
+
+::: {.enunciado}
+x
+:::
+
+:::{.solution}
+x
+:::
+
+### Exercício 3.5.2 {- #exr3-5-2}
+
+::: {.enunciado}
+x
+:::
+
+:::{.solution}
+x
+:::
+
+### Exercício 3.5.3 {- #exr3-5-3}
+
+::: {.enunciado}
+x
+:::
+
+:::{.solution}
+x
+:::
+
+### Exercício 3.5.4 {- #exr3-5-4}
+
+::: {.enunciado}
+x
+:::
+
+:::{.solution}
+x
+:::
+
+## Adicionar novas variáveis com `mutate()`
+
+### Exercício 3.6.1 {- #exr3-6-1}
+
+::: {.enunciado}
+x
+:::
+
+:::{.solution}
+x
+:::
+
+### Exercício 3.6.2 {- #exr3-6-2}
+
+::: {.enunciado}
+x
+:::
+
+:::{.solution}
+x
+:::
+
+### Exercício 3.6.3 {- #exr3-6-3}
+
+::: {.enunciado}
+x
+:::
+
+:::{.solution}
+x
+:::
+
+### Exercício 3.6.4 {- #exr3-6-4}
+
+::: {.enunciado}
+x
+:::
+
+:::{.solution}
+x
+:::
+
+### Exercício 3.6.5 {- #exr3-6-5}
+
+::: {.enunciado}
+x
+:::
+
+:::{.solution}
+x
+:::
+
+### Exercício 3.6.6 {- #exr3-6-6}
+
+::: {.enunciado}
+x
+:::
+
+:::{.solution}
+x
+:::
+
+## Resumos agrupados com `summarize()`
+
+### Exercício 3.7.1 {- #exr3-7-1}
+
+::: {.enunciado}
+x
+:::
+
+:::{.solution}
+x
+:::
+
+### Exercício 3.7.2 {- #exr3-7-2}
+
+::: {.enunciado}
+x
+:::
+
+:::{.solution}
+x
+:::
+
+### Exercício 3.7.3 {- #exr3-7-3}
+
+::: {.enunciado}
+x
+:::
+
+:::{.solution}
+x
+:::
+
+### Exercício 3.7.4 {- #exr3-7-4}
+
+::: {.enunciado}
+x
+:::
+
+:::{.solution}
+x
+:::
+
+### Exercício 3.7.5 {- #exr3-7-5}
+
+::: {.enunciado}
+x
+:::
+
+:::{.solution}
+x
+:::
+
+### Exercício 3.7.6 {- #exr3-7-6}
+
+::: {.enunciado}
+x
+:::
+
+:::{.solution}
+x
+:::
+
+### Exercício 3.7.7 {- #exr3-7-7}
+
+::: {.enunciado}
+x
+:::
+
+:::{.solution}
+x
+:::
+
+## Mudanças agrupadas (e filtros)
+
+### Exercício 3.8.1 {- #exr3-8-1}
+
+::: {.enunciado}
+x
+:::
+
+:::{.solution}
+x
+:::
+
+### Exercício 3.8.2 {- #exr3-8-2}
+
+::: {.enunciado}
+x
+:::
+
+:::{.solution}
+x
+:::
+
+### Exercício 3.8.3 {- #exr3-8-3}
+
+::: {.enunciado}
+x
+:::
+
+:::{.solution}
+x
+:::
+
+### Exercício 3.8.4 {- #exr3-8-4}
+
+::: {.enunciado}
+x
+:::
+
+:::{.solution}
+x
+:::
+
+### Exercício 3.8.5 {- #exr3-8-5}
+
+::: {.enunciado}
+x
+:::
+
+:::{.solution}
+x
+:::
+
+### Exercício 3.8.6 {- #exr3-8-6}
+
+::: {.enunciado}
+x
+:::
+
+:::{.solution}
+x
+:::
+
+### Exercício 3.8.7 {- #exr3-8-7}
+
+::: {.enunciado}
+x
+:::
+
+:::{.solution}
+x
+:::

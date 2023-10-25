@@ -14,6 +14,14 @@ o-básico-de-programação
 o-que-há-em-um-nome
 chamando-funções
 transformação-de-dados-com-dplyr
+introdução-1
+filtrar-linhas-com-filter
+comparações
+ordenar-linhas-com-arrange
+selecionar-colunas-com-select
+adicionar-novas-variáveis-com-mutate
+resumos-agrupados-com-summarize
+mudanças-agrupadas-e-filtros
 fluxo-de-trabalho-scripts
 análise-exploratória-de-dados
 fluxo-de-trabalho-projetos
