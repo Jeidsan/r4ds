@@ -1,5 +1,5 @@
 visualização-de-dados-com-ggplot2
-introdução-1
+introdução
 primeiros-passos
 mapeamentos-estéticos
 problemas-comuns

@@ -1,0 +1,771 @@
+
+\documentclass[a4paper,
+                             twoside,
+                             BCOR1.0cm,
+                             DIV11,
+                             parskip=full,
+                             11pt]{scrbook}
+\usepackage[standardsections]{scrhack}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{xspace}
+\usepackage{bera}
+\usepackage{pifont}
+\usepackage{amssymb}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{graphicx}
+\usepackage{pgf}
+\usepackage{tikz}
+\usetikzlibrary{shapes}
+\usepackage{color}
+
+%%%%%%%%%%%%
+
+\DeclareFixedFont{\numcap}{T1}{phv}{bx}{n}{3cm}
+\DeclareFixedFont{\textcap}{T1}{phv}{bx}{n}{1.5cm}
+\DeclareFixedFont{\textaut}{T1}{phv}{bx}{n}{0.8cm} 
+
+\addtokomafont{chapter}{\color{gray}\textcap}
+\addtokomafont{section}{\color{white}}
+\addtokomafont{subsection}{\color{white}}
+\setkomafont{pagehead}{\sffamily\small}
+\setkomafont{captionlabel}{\sffamily\small\bfseries}
+\setkomafont{caption}{\sffamily\small}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usetikzlibrary{calc,trees,positioning,arrows,chains,shapes.geometric,
+    decorations.pathreplacing,decorations.pathmorphing,shapes,
+    matrix,shapes.symbols}
+
+\tikzset{
+  punktchain/.style={
+    rectangle, 
+    rounded corners, 
+    draw=black!20, thin,
+    minimum height=3em, 
+    text centered},
+  peu/.style={
+    rectangle,
+    fill opacity=1,
+    %rounded corners, 
+    fill=white,
+    top color=white,
+    draw=black!20, thin,
+    %text width=10em, 
+    %minimum height=3em, 
+    text centered},
+  line/.style={draw, thin, <-},
+  element/.style={
+    tape,
+    top color=white,
+    bottom color=blue!50!black!60!,
+    minimum width=8em,
+    draw=blue!40!black!90, very thick,
+    text width=10em, 
+    minimum height=3.5em, 
+    text centered, 
+    on chain},
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{scrlayer-scrpage}
+\setlength{\headheight}{25pt}
+\pagestyle{scrheadings}
+\setheadwidth{textwithmarginpar}
+\setheadsepline{.4pt}
+\addtokomafont{headsepline}{\color{lightgray}}
+
+\lefoot{\color{black!40}{\hrulefill}}
+\cefoot{\parbox[c][.5in][c]{1cm}{\fcolorbox{black!40}{white}{\thepage}}}
+\refoot{}
+
+\lofoot{\color{black!40}{\hrulefill}}
+\cofoot[{\color{black!40}{---}} {\thepage} {\color{black!40}{---}}]{\parbox[c][.5in][c]{1cm}{\fcolorbox{black!40}{white}{\thepage}}}
+\rofoot[]{}
+
+\usepackage[pdftex,             
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=blue,
+    citecolor=blue,
+    pdftitle={Llibre amb estil},
+    pdfauthor={Joan Queralt Gil},
+    pdfsubject={tema},
+    pdfkeywords={Keyword1, Keyword 2},
+    bookmarks, bookmarksnumbered=true]{hyperref}
+
+\tolerance=4000
+\emergencystretch=20pt
+
+\setcounter{secnumdepth}{3}
+\usepackage{titlesec}
+
+\titleformat{\chapter}[display]
+    {\usekomafont{sectioning} \usekomafont{chapter}\filleft}
+    {\numcap\textcolor[named]{gray}\thechapter}
+    {1em}
+    {}
+
+\titleformat{\section}[block]
+    {\usekomafont{sectioning}\usekomafont{section}
+     \tikz[overlay]  \fill[color=black,rounded corners=.2ex] (0,-1ex) rectangle (\textwidth-2cm,1em);}
+    { \thesection}
+    {1em}
+    {}
+
+\titleformat{\subsection}[block]
+    {\usekomafont{sectioning}\usekomafont{subsection}
+       \tikz[overlay] \fill[color=black!60] (0,-1ex) rectangle (\textwidth-2cm,1em);}
+    { \thesubsection}
+    {1em}
+    {}
+
+\usepackage{lipsum}
+%%%%%%%%%%%%%%%%%%%%
+\usepackage{enumitem}
+
+\newlist{steps}{enumerate}{4}
+\setlist[steps]{topsep=0pt,partopsep=0pt,itemsep=0pt,parsep=0pt,labelindent=0.5cm,leftmargin=*}
+\setlist[steps,1]{label*=\arabic*.}
+\setlist[steps,2]{label*=\arabic*.}
+\setlist[steps,3]{label*=\arabic*.}
+\setlist[steps,4]{label*=\arabic*.}
+
+\newlist{points}{itemize}{4}
+\setlist[points]{topsep=0pt,partopsep=0pt,itemsep=0pt,parsep=0pt,labelindent=0.5cm,leftmargin=*}
+\setlist[points,1]{label=\tiny\ding{110}}
+\setlist[points,2]{label=\tiny\ding{108}}
+\setlist[points,3]{label=\tiny\ding{72}}
+\setlist[points,4]{label=\tiny\ding{117}}
+
+\newlist{objectives}{itemize}{1}
+\setlist[objectives]{topsep=0pt,partopsep=0pt,itemsep=0pt,parsep=0pt,labelindent=0.5cm,leftmargin=*}
+\setlist[objectives,1]{label=\tiny$\blacktriangleright$}
+
+\newlist{attention}{itemize}{1}
+\setlist[attention]{topsep=0pt,partopsep=0pt,itemsep=0pt,parsep=0pt,labelindent=0.5cm,leftmargin=*}
+\setlist[attention,1]{label=\ding{224}}
+
+
+\newlist{arrows}{itemize}{4}
+\setlist[arrows]{topsep=0pt,partopsep=0pt,itemsep=0pt,parsep=0pt,labelindent=0.5cm,leftmargin=*}
+\setlist[arrows,1]{label=\tiny\ding{252}}
+\setlist[arrows,2]{label=\tiny\ding{212}}
+\setlist[arrows,3]{label=\tiny\ding{232}}
+\setlist[arrows,4]{label=\tiny\ding{217}}
+%%%%%%%%%%%%%%%%%%%%
+\usepackage[tikz]{bclogo}
+\newcommand\novaimatge{\includegraphics[width=14pt]{write}}
+\renewcommand\logowidth{14pt}
+
+\usepackage{colortbl}
+\arrayrulecolor{gray}
+\let\shline\hline
+\def\hline{\noalign{\vskip3pt}\shline\noalign{\vskip4pt}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%% First Page
+\title{\textcap{Latex Template}}
+\author{
+    \textaut{Joan Queralt Gil}\\http://catalatex.blogspot.com/
+}
+\date{\today}
+
+\maketitle
+%%%%%%%%%%%%%%%%%%%%%%
+\tableofcontents
+
+%*************************************************************************
+\chapter{Format of chapters}\label{cap:primer}
+%*************************************************************************
+\dictum%
+[Timothy K. Paine]%author
+{Find an interesting quote, \dots
+} %text
+
+This entry, which is located on the right side of the page, is called \textit {Sentence} and is obtained with the command
+ \verb+\dictum[author]{text}+.
+%*************************************************************************
+\section{Titles}\label{sec:titles}
+%*************************************************************************
+The package \verb+titlesec+ has been used to finish formatting section headings. The command that allows us to do so is:
+\begin{scriptsize}
+\begin{verbatim}
+\titleformat{command}[shape]%
+  {format}%
+  {label}%
+  {sep}% horizontal separation between label and body of the title
+  {before}[after]% precedent / next code in the title body
+ 
+
+\end{verbatim}
+\end{scriptsize}
+
+%*******************
+\subsection{Chapter Titles}\label{sbsec:captit}
+%*******************
+The chapters begin with the number and the name in gray letter, which is obtained with the command:
+\begin{scriptsize}
+\begin{verbatim}
+\addtokomafont{chapter}{\color{gray}\textcap}   % gives size to the title of the document
+\end{verbatim}
+\end{scriptsize}
+The font is Helvetica and of different size, the number (\verb+\numcap+) of 3 cm and the text (\verb+\textcap+) of 1.5 cm, format that is obtained with the initial definition:
+
+\begin{scriptsize}
+\begin{verbatim}
+\DeclareFixedFont{\numcap}{T1}{phv}{bx}{n}{3cm}   %creates big chapter tag numbers
+\DeclareFixedFont{\textcap}{T1}{phv}{bx}{n}{1.5cm} %create big letters name of the chapter
+\end{verbatim}
+\end{scriptsize}
+The package \verb+titlesec+ has been used to finish formatting section headings. Specifically for the chapters is defined:
+\begin{scriptsize}
+\begin{verbatim}
+ \titleformat{\chapter}[display]%              
+    {\usekomafont{sectioning} \usekomafont{chapter}\filleft}% 
+                     %Formatted according to definitions of KOMA and aligns right
+    {\numcap\textcolor[named]{gray}\thechapter}%                   
+                     % format the color capitol number
+    {1em}%
+    {}
+\end{verbatim}
+\end{scriptsize}
+
+%*******************
+\subsection{Section Titles}\label{sbsec:sectit}
+%*******************
+Section headings have the white text on a color background, the color is obtained with the command:
+\begin{scriptsize}
+\begin{verbatim}
+\addtokomafont{section}{\color{white}}
+\end{verbatim}
+\end{scriptsize}
+and the color of black background is achieved with the mentioned package \verb+titlesec+ and the use of a background image generated by the package
+\begin{tiny}
+\begin{verbatim}
+\titleformat{\section}[block]%              
+    {\usekomafont{sectioning}\usekomafont{section}% 
+     \tikz[overlay]  \fill[color=black,rounded corners=.2ex] (0,-1ex) rectangle (\textwidth-2cm,1em);}%  
+    { \thesection}%                   
+    {1em}%
+    {}
+\end{verbatim}
+\end{tiny}
+
+
+%*******************
+\subsection{Subsection Title}\label{sbsec:subsectit}
+%*******************
+The subsection titles have the white text on a color background, the color of the text, as in the case of the sections, is obtained with the command:
+\begin{scriptsize}
+\begin{verbatim}
+\addtokomafont{subsection}{\color{white}}
+\end{verbatim}
+\end{scriptsize}
+and the black background color is achieved with the package \verb+titlesec+ and the use of a background image generated by the package \verb+\tikz+:
+\begin{tiny}
+\begin{verbatim}
+\titleformat{\subsection}[block]%              
+    {\usekomafont{sectioning}\usekomafont{subsection}% 
+       \tikz[overlay] \fill[color=black!60] (0,-1ex) rectangle (\textwidth-2cm,1em);}%  
+    {\thesubsection}%                   
+    {1em}%
+    {}
+\end{verbatim}
+\end{tiny}
+
+%*************************************************************************
+\section{Page Style} \label{sec:pagstyle}
+%*************************************************************************
+The pages use the style \verb+scrheadings+ defined by KOMA and customized so that:
+
+\begin{objectives}%[labelindent=20pt,leftmargin=*]
+\item  The heading consists of the chapter name on the left page and section on the right page, with a small black sans serif underlined with a gray line that goes beyond the width of the text.
+\item  The foot consists of the centered page number and in a gray box that stands above a gray line that goes from side to side of the text.
+\end{objectives}
+This is achieved by using the \verb+scrpage2+ package of the KOMA set, where it is defined:
+\begin{tiny}
+\begin{verbatim}
+\setlength{\headheight}{25pt}	      		   
+\pagestyle{scrheadings}			         % page style
+\setheadwidth{textwithmarginpar}	    	% lengthens the header
+\setheadsepline{.4pt}					%line under the header
+\addtokomafont{headsepline}{\color{lightgray}}% gives gray line under header
+%left page footer:
+\lefoot{\color{black!40}{\hrulefill}}
+\cefoot{\parbox[c][.5in][c]{1cm}{\fcolorbox{black!40}{white}{\thepage}}}
+\refoot{}
+\lofoot{\color{black!40}{\hrulefill}}
+\cofoot[{\color{black!40}{---}} {\thepage} {\color{black!40}{---}}]%
+     {\parbox[c][.5in][c]{1cm}{\fcolorbox{black!40}{white}{\thepage}}}
+\rofoot[]{}
+\end{verbatim}
+\end{tiny}
+Chapter start pages, in style \verb+plain+, are defined in the preceding commands as the option of the corresponding command, for example:
+\begin{scriptsize}\verb+\cfoot[style scrplain ]{style scrheadings}+\end{scriptsize}
+
+
+%*************************************************************************
+\chapter{Improvements}\label{cap:improvements}
+%*************************************************************************
+
+Different packages have been used to achieve improvements in different aspects of the body of the text. For example, for the lists the package \verb+enumerate+, for the tables the package \verb+colortbl+ or the package \verb+bclogo+ for the calls, whose details will be seen in the next sections.
+
+%*************************************************************************
+\section{Lists}\label{sec:lists}
+%*************************************************************************
+With the package \verb+enumitem+ we can define new styles of lists with the command:
+\begin{tiny}
+\begin{verbatim}
+\newlist{listname}{tipus=enumerate,itemize,description}{number of levels of nesting} 
+\setlist[listname]{format}
+\setlist[listname,1]{label=format etiqueta1}
+\end{verbatim}
+\end{tiny}
+
+In this document we have predetermined a series of lists that we think can be useful.
+
+%*******************
+\subsection{Numbered Lists}\label{sbsec:listnum}
+%*******************
+\subsubsection{Steps}\label{ssbsec:steps}
+%******
+It is a compact list numbered in the scheme (1. - 1.1 - 1.1.1) indented to the left 0.5 cm to indicate steps. The code to get it is:
+\begin{tiny}
+\begin{verbatim}
+\newlist{steps}{enumerate}{4}
+\setlist[steps]{topsep=0pt,partopsep=0pt,itemsep=0pt,parsep=0pt,labelindent=0.5cm,leftmargin=*}
+\setlist[steps,1]{label*=\arabic*.}
+\setlist[steps,2]{label*=\arabic*.}
+\setlist[steps,3]{label*=\arabic*.}
+\setlist[steps,4]{label*=\arabic*.}
+\end{verbatim}
+\end{tiny}
+and the result this:
+ \begin{steps}
+\item first
+\item second
+\item third
+\item fourth
+\item fifth
+\item sixth
+\item seventh
+\end{steps}
+%*********************
+\subsubsection{With numbers from the pifont package}\label{ssbsec:pifont}
+%******
+This list uses predefined numbers in the package \verb+pifont+ and which are quite interesting. However it can not be defined with the \verb+\newlist+ command and the code must be indicated each time it is used in the body of the text.
+
+The code to generate it is this:
+\begin{scriptsize}
+\begin{verbatim}
+\begin{enumerate}[nolistsep,label=\ding{\value{enumi}},start=202]
+\end{verbatim}
+\end{scriptsize}
+where 202 is the character code of the package \verb+pifont+. See the result:
+
+%% this environment is not allowed to be defined as a \ newlist. You have to put the options in the middle of the doc
+
+\minisec{Starting with character 172 \ding{172}}
+\begin{enumerate}[nolistsep,label=\ding{\value{enumi}},start=172]
+\item first
+\item second
+\item third
+\item fourth
+\item fifth
+\item sixth
+\item seventh
+\item eigth
+\item ninth
+\item tenth
+\end{enumerate}
+\minisec{Starting with character 182 \ding{182}}
+\begin{enumerate}[nolistsep,label=\ding{\value{enumi}},start=182]
+\item first
+\item second
+\item third
+\item fourth
+\item fifth
+\item sixth
+\item seventh
+\item eigth
+\item ninth
+\item tenth
+\end{enumerate}
+
+\minisec{Starting with character 202 \ding{202}}
+
+\begin{enumerate}[nolistsep,label=\ding{\value{enumi}},start=202]
+\item first
+\item second
+\item third
+\item fourth
+\item fifth
+\item sixth
+\item seventh
+\item eigth
+\item ninth
+\item tenth
+\end{enumerate}
+
+%*******************
+\subsection{Bulleted lists}\label{sbsec:bullist}
+%*******************
+\subsubsection{Objectives}\label{ssbsec:objs}
+%******
+It is a compact list with vignettes corresponding to a small black triangle (it is necessary to call the package \verb+\usepackage {amssymb}+) of a single level of depth indented to the left 0.5 cm to indicate objectives. The code to get it is:
+\begin{tiny}
+\begin{verbatim}
+\newlist{objectives}{itemize}{1}
+\setlist[objectives]{topsep=0pt,partopsep=0pt,itemsep=0pt,parsep=0pt,labelindent=0.5cm,leftmargin=*}
+\setlist[objectives,1]{label=\tiny$\blacktriangleright$}
+\end{verbatim}
+\end{tiny}
+and the result this:
+
+\begin{objectives}
+\item  first objective
+\item second objective
+\item third objective
+\item fourth objective
+\end{objectives}
+
+\subsubsection{Attention}\label{ssbsec:at}
+%******
+It is a compact list with bullets corresponding to an arrow (the character 224 of the package \ verb + pifont +) of a single depth level indented to the left 0.5 cm to indicate entries to be taken into account. The code to get it is:
+\begin{tiny}
+\begin{verbatim}
+\newlist{atencio}{itemize}{1}
+\setlist[atencio]{topsep=0pt,partopsep=0pt,itemsep=0pt,parsep=0pt,labelindent=0.5cm,leftmargin=*}
+\setlist[atencio,1]{label=\ding{224}}
+\end{verbatim}
+\end{tiny}
+and the result this:
+
+\begin{attention}
+\item  first point
+\item second point
+\item third point
+\item fourth point
+\end{attention}
+
+\subsubsection{Points}\label{ssbsec:points}
+%******
+It is a compact list with vignettes corresponding to various types of points (the characters 110, 108, 72 and 117 of the package \verb+pifont+), of 4 levels of depth, indented to the left 0.5 cm to indicate nested entries to keep in mind. The code to get it is:
+
+\begin{tiny}
+\begin{verbatim}
+\newlist{points}{itemize}{4}
+\setlist[points]{topsep=0pt,partopsep=0pt,itemsep=0pt,parsep=0pt,labelindent=0.5cm,leftmargin=*}
+\setlist[points,1]{label=\tiny\ding{110}}
+\setlist[points,2]{label=\tiny\ding{108}}
+\setlist[points,3]{label=\tiny\ding{72}}
+\setlist[points,4]{label=\tiny\ding{117}}
+\end{verbatim}
+\end{tiny}
+and the result this:
+\begin{points}
+\item flying devices
+	\begin{points}
+		\item biplanes
+		\item jets
+		\item of transport
+			\begin{points}
+				\item of a single engine
+					\begin{points}
+						\item to reaction
+						\item to helix
+					\end{points}
+				\item different motors
+			\end{points}
+		\item helicopters
+	\end{points}
+\item automobiles
+	\begin{points}
+		\item racing cars
+		\item private cars
+		\item trucks
+\end{points}
+\item bicycles
+\end{points}
+
+\subsubsection{Arrows}\label{ssbsec:arrows}
+%******
+It is a compact list with vignettes corresponding to various types of arrows (252, 212, 232 and 217 characters of the package \verb+pifont+), with 4 levels of depth, indented to the left 0.5 cm to indicate nested entries to keep in mind. The code to get it is:
+\begin{tiny}
+\begin{verbatim}
+\newlist{arrows}{itemize}{4}
+\setlist[arrows]{topsep=0pt,partopsep=0pt,itemsep=0pt,parsep=0pt,labelindent=0.5cm,leftmargin=*}
+\setlist[arrows,1]{label=\tiny\ding{252}}
+\setlist[arrows,2]{label=\tiny\ding{212}}
+\setlist[arrows,3]{label=\tiny\ding{232}}
+\setlist[arrows,4]{label=\tiny\ding{217}}
+\end{verbatim}
+\end{tiny}
+and the result this:
+
+\begin{arrows}
+\item flying devices
+	\begin{arrows}
+		\item biplanes
+		\item jets
+		\item of transport
+			\begin{arrows}
+				\item of a single engine
+					\begin{arrows}
+						\item to reaction
+						\item to helix
+					\end{arrows}
+				\item different motors
+			\end{arrows}
+		\item helicopters
+	\end{arrows}
+\item automobiles
+	\begin{arrows}
+		\item racing cars
+		\item private cars
+		\item trucks
+\end{arrows}
+\item bicycles
+\end{arrows}
+
+\section{Verses and Citations}\label{sec:quote}
+%*************************************************************************
+\subsection{Poetry}\label{sbsec:poetry}
+%*******************
+
+We can write poetry using the \verb+verse+ environment that bleeds to the left and also to the right. To terminate the end of a verse two counter-turns are used: \verb+\\+ i to separate a stanza from the following we can leave more space (with \verb+\bigskip+) or less, with \verb+\medskip+.
+
+\begin{verse}
+Touching head in both sides, \\*
+moving forward along the water path, \\*
+the cow is alone. It's blind. \\*
+\medskip
+
+From a rocket thrown with too much trace, \\*
+the vailet cleared her an eye, and in the other \\*
+He has been given a phone: the cow is blind. \\*
+\medskip
+
+Go over to the source as usual, \\*
+but not with the stubbornness of other times \\*
+nor with your companions, no: comes alone. \\*
+\medskip
+
+Their companions, by the cliffs, by the commas, \\*
+due to the silence of the meadows and the riverside, \\*
+they make the skeleton cling while grazing \\*
+fresh grass at random \ dots She would fall. \\*
+\medskip
+
+Muzzle top in the crushed sink \\*
+and faces back \ dots But returns, \\*
+and lower your head to the water, and drink calm. \\*
+\medskip
+
+Drink little, not very thirsty. Then raise \\*
+to the sky, huge, the embroidered forehead \\*
+with a great tragic gesture; blinks \\*
+Over the dead dolls, and it returns \\*
+orphan of light under the sun that burns, \\*
+hesitating for unforgettable paths, \\*
+Flaking the long tail gently. \\*
+\medskip
+\begin{flushright}
+Joan Maragall\\
+Poesies, 1895\\
+\end{flushright}
+\end{verse}
+
+\subsection{Citacions}\label{sbsec:citations}
+%*******************
+Citation can be done with two different environments:
+\subsubsection{quote}\label{sbsec:quote}
+%*******************
+
+\begin{quote}
+There are people who do not like to speak, write or think in Catalan. It is the same people who do not like to talk, write or think.
+
+Ovidi Montllor
+\end{quote}
+
+\subsubsection{quotation}\label{sbsec:quotation}
+%*******************
+\begin{quotation}
+There are people who do not like to speak, write or think in Catalan. It is the same people who do not like to talk, write or think.
+
+Ovidi Montllor
+\end{quotation}
+
+\section{Minisec}\label{sec:minisec}
+%*************************************************************************
+Sometimes you want a header that is easily distinguished but that is very close to the text, without too much vertical separation. The command \verb+\minisec+ of the Koma-Script package creates this type of heading without any structural level within the document. This minisection does not produce an entry in the Table of Contents nor has any numbering.
+
+\minisec{Minisec command of Koma-Script}
+\lipsum[1-2]
+
+\section{Tables}\label{sec:tables}
+%*************************************************************************
+
+Although there is a typographical law that says that vertical lines do not have to be placed in the tables, a very interesting effect can be achieved if these vertical lines are not long enough to touch the upper and lower horizontal lines, a cell
+
+Observe the result:
+
+\begin{table}[h]
+\centering
+\begin{tabular}{l|c|c|l}
+\hline
+Day & Max Temperature ºC & Temperature min. C & Observations \\
+\hline
+Monday & 18 & 8 & Clouds and clearings. \\
+Tuesday & 17 & 9 & Clouds and clearings. \\
+Wednesdays & 10 & 4 & Clear and windy. \\
+Thursday & 8 & 2 & Tramuntana wind, force 5. \\
+Friday & 6 & -2 & Clear and shallow wind. \\
+Saturday & 4 & -3 & Clouds and clearings. \\
+Sunday & 9 & 2 & Clear and shallow wind. \\
+\hline
+\end{tabular}
+\caption{Table of weekly temperatures}\label{tab:temp}
+\end{table}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{c|c|c}
+\hline
+First column and First column and First column \\
+\hline
+$a_{1,1}$ & $a_{1,2}$ & $a_{1,3}$ \\
+$a_{2,1}$ & $a_{2,2}$ & $a_{2,3}$ \\
+$a_{3,1}$ & $a_{3,2}$ & $a_{3,3}$ \\
+\hline
+\end{tabular}
+\caption{Table of ordered items}\label{tab:ordre}
+\end{table}
+
+We do this by using the \verb+colortbl+ package that allows you to color the tables. Then we define the color of the lines, in particular we make them gray with \verb+\arrayrulecolor+, and finally shorten the height of the lines:
+
+\begin{verbatim}
+\usepackage{colortbl}
+\arrayrulecolor{gray}
+\let\shline\hline
+\def\hline{\noalign{\vskip3pt}\shline\noalign{\vskip4pt}}
+\end{verbatim}
+
+\section{Frames}\label{sec:frames}
+%*************************************************************************
+With the help of the package \verb+bclogo+ you can create boxes and frames with an image or logo, a title and the body of the text.
+
+The code used is this:
+
+\begin{verbatim}
+\usepackage[tikz]{bclogo}
+\newcommand\novaimatge{\includegraphics[width=14pt]{write}}
+\renewcommand\logowidth{14pt}
+\end{verbatim}
+
+where \verb+write+ is the name of the image file that appears to the left as the logo of the frame.
+
+In the body of the frame you can put the desired text, even lists such as those defined in the section ~\nameref {sec: lists} on page ~\pageref {sec: lists}.
+
+Let's see an example:
+
+\begin{bclogo}[logo=\novaimatge,couleur=gray!30,barre=none,noborder=true,marge=10,ombre=true,couleurOmbre=black!60,blur]%
+{\sffamily{  Objectives}}
+\sffamily\scriptsize
+%\lipsum[1]
+\begin{objectives}
+\item  first objective
+\item second objective
+\item third objective
+\item fourth objective
+\end{objectives}
+\end{bclogo}
+
+
+\chapter{Show}\label{cap:show}
+\dictum%
+[Albert Einstein]%author
+{There are two infinite things: the Universe and human stupidity. And I'm not sure about the Universe.
+} %text
+\lipsum[2-3]
+\begin{bclogo}[logo=\novaimatge,couleur=gray!30,barre=none,noborder=true,marge=10,ombre=true,couleurOmbre=black!60,blur]%
+{\sffamily{  Objectives}}
+\sffamily\scriptsize
+%\lipsum[1]
+\begin{arrows}
+\item  first objective
+\item second objective
+\item third objective
+\item fourth objective
+\end{arrows}
+\end{bclogo}
+
+
+\lipsum[4]
+%*************************************************************************
+\section{Fourth section}\label{sec:fourth}
+%*************************************************************************
+\lipsum[1]
+\begin{steps}
+\item  first
+\item  second
+\item  third
+\item  fourth
+\item  fifth
+\item  sixth
+\item  seventh
+\end{steps}
+\subsection{First subsection of the fourth section}\label{sbsec:first}
+\lipsum[1-3]
+\begin{quote}
+There are people who do not like to speak, write or think in Catalan. It is the same people who do not like to talk, write or think.
+
+Ovidi Montllor
+\end{quote}
+\subsection{Second subsection of the fourth section}\label{sbsec:second}
+\minisec{Minisec Command of Koma-Script}
+\lipsum[4-5]
+\begin{table}[h]
+\centering\scriptsize
+\begin{tabular}{l|c|c|l}
+\hline
+Day & Max Temperature ºC & Temperature min. C & Observations \\
+\ hline
+Monday & 18 & 8 & Clouds and clearings. \\
+Tuesday & 17 & 9 & Clouds and clearings. \\
+Wednesdays & 10 & 4 & Clear and windy. \\
+Thursday & 8 & 2 & Tramuntana wind, force 5. \\
+Friday & 6 & -2 & Clear and shallow wind. \\
+Saturday & 4 & -3 & Clouds and clearings. \\
+Sunday & 9 & 2 & Clear and shallow wind. \\
+\hline
+\end{tabular}
+\caption{Table of weekly temperatures}\label{tab:temp2}
+\end{table}
+\lipsum[8-9]
+\end{document}
+
+
+
+\begin{tiny}
+\begin{verbatim}
+
+\end{verbatim}
+\end{tiny}
+
+
+
+
+
+\titleformat{\section}[block]%              
+    {\usekomafont{sectioning}\usekomafont{section}%
+     \tikz[overlay]\shade[left color=blue!20,right color=white](0,-1ex)rectangle(\textwidth,1em);}%    
+    {\thesection}%                   
+    {1em}%
+    {}
+    
+    
+    
+         \begin{pgfonlayer}{background}
+            \shade[left color=blue!20,right color=white]let \p1=(counter.north),\p2=(content.north)in            (0,{max(\y1,\y2)})rectangle(content.south east);
+        \end{pgfonlayer}

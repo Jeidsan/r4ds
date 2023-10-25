@@ -163,11 +163,11 @@ div.csl-indent {
 <li><a href="https://www.jeidsan.com.br/r4ds">R para Data Science: Solução dos Exercícios</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introdução</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Prefácio</a></li>
 <li class="part"><span><b>I Explorar</b></span></li>
 <li class="chapter" data-level="1" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html"><i class="fa fa-check"></i><b>1</b> Visualização de dados com <code>ggplot2</code></a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#introdução-1"><i class="fa fa-check"></i><b>1.1</b> Introdução</a></li>
+<li class="chapter" data-level="1.1" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#introdução"><i class="fa fa-check"></i><b>1.1</b> Introdução</a></li>
 <li class="chapter" data-level="1.2" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#primeiros-passos"><i class="fa fa-check"></i><b>1.2</b> Primeiros passos</a>
 <ul>
 <li class="chapter" data-level="" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#exr1-2-1"><i class="fa fa-check"></i>Exercício 1.2.1</a></li>
@@ -239,9 +239,9 @@ div.csl-indent {
 <h1><span class="header-section-number">Capítulo 1</span> Visualização de dados com <code>ggplot2</code><a href="visualização-de-dados-com-ggplot2.html#visualização-de-dados-com-ggplot2" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Para a correta execução dos códigos desse capítulo, utilizaremos algumas configurações específicas.</p>
 <p>Inicialmente, precisaremos carregar o pacote <code>nycflights13</code>, que contém os dados de todos os voos da cidade de Nova York em 2013.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="visualização-de-dados-com-ggplot2.html#cb2-1" tabindex="-1"></a><span class="fu">library</span>(nycflights13)</span></code></pre></div>
-<div id="introdução-1" class="section level2 hasAnchor" number="1.1">
-<h2><span class="header-section-number">1.1</span> Introdução<a href="visualização-de-dados-com-ggplot2.html#introdução-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="visualização-de-dados-com-ggplot2.html#cb1-1" tabindex="-1"></a><span class="fu">library</span>(nycflights13)</span></code></pre></div>
+<div id="introdução" class="section level2 hasAnchor" number="1.1">
+<h2><span class="header-section-number">1.1</span> Introdução<a href="visualização-de-dados-com-ggplot2.html#introdução" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Não temos exercícios nesta seção.</p>
 </div>
 <div id="primeiros-passos" class="section level2 hasAnchor" number="1.2">
@@ -253,9 +253,9 @@ div.csl-indent {
 </div>
 <div class="solution">
 <p><span id="unlabeled-div-1" class="solution"><em>Solução</em>. </span></p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="visualização-de-dados-com-ggplot2.html#cb3-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>mpg) <span class="sc">+</span></span>
-<span id="cb3-2"><a href="visualização-de-dados-com-ggplot2.html#cb3-2" tabindex="-1"></a>    tema</span></code></pre></div>
-<p><img src="r4ds_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="visualização-de-dados-com-ggplot2.html#cb2-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>mpg) <span class="sc">+</span></span>
+<span id="cb2-2"><a href="visualização-de-dados-com-ggplot2.html#cb2-2" tabindex="-1"></a>    tema</span></code></pre></div>
+<p><img src="r4ds_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <p>É exibido um quadro em branco. Este quadro contém o sistema de coordenadas sobre o qual serão desenhados os grpaficos que pretendemos exibir.</p>
 </div>
 </div>
@@ -266,7 +266,7 @@ div.csl-indent {
 </div>
 <div class="solution">
 <p><span id="unlabeled-div-2" class="solution"><em>Solução</em>. </span></p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="visualização-de-dados-com-ggplot2.html#cb4-1" tabindex="-1"></a><span class="fu">dim</span>(mtcars)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="visualização-de-dados-com-ggplot2.html#cb3-1" tabindex="-1"></a><span class="fu">dim</span>(mtcars)</span></code></pre></div>
 <pre><code>## [1] 32 11</code></pre>
 <p>R.: Existem 32 linhas e 11 colunas.</p>
 </div>
@@ -288,10 +288,10 @@ div.csl-indent {
 </div>
 <div class="solution">
 <p><span id="unlabeled-div-4" class="solution"><em>Solução</em>. </span></p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="visualização-de-dados-com-ggplot2.html#cb6-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg) <span class="sc">+</span></span>
-<span id="cb6-2"><a href="visualização-de-dados-com-ggplot2.html#cb6-2" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> hwy, <span class="at">y =</span> cyl)) <span class="sc">+</span></span>
-<span id="cb6-3"><a href="visualização-de-dados-com-ggplot2.html#cb6-3" tabindex="-1"></a>    tema</span></code></pre></div>
-<p><img src="r4ds_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="visualização-de-dados-com-ggplot2.html#cb5-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg) <span class="sc">+</span></span>
+<span id="cb5-2"><a href="visualização-de-dados-com-ggplot2.html#cb5-2" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> hwy, <span class="at">y =</span> cyl)) <span class="sc">+</span></span>
+<span id="cb5-3"><a href="visualização-de-dados-com-ggplot2.html#cb5-3" tabindex="-1"></a>    tema</span></code></pre></div>
+<p><img src="r4ds_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 </div>
 </div>
 </div>
