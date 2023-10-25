@@ -632,12 +632,138 @@ A expressão é avaliada para cada um dos valores da variável e o resultado é 
 \hypertarget{problemas-comuns}{%
 \section{Problemas comuns}\label{problemas-comuns}}
 
-x
+Não temos exercícios nessa seção.
 
 \hypertarget{facetas}{%
 \section{Facetas}\label{facetas}}
 
-x
+\hypertarget{exr1-5-1}{%
+\subsection*{Exercício 1.5.1}\label{exr1-5-1}}
+\addcontentsline{toc}{subsection}{Exercício 1.5.1}
+
+O que acontece se você criar facetas em uma variável contínua?
+
+\begin{solution}
+\leavevmode
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ mpg) }\SpecialCharTok{+}
+    \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ displ, }\AttributeTok{y =}\NormalTok{ hwy)) }\SpecialCharTok{+}
+    \FunctionTok{facet\_wrap}\NormalTok{(. }\SpecialCharTok{\textasciitilde{}}\NormalTok{ displ) }\SpecialCharTok{+}
+\NormalTok{    tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-17-1.pdf}
+
+O \emph{ggplot} se encarrega de dividir o conjunto em classes e toma o ponto médio de cada classe para realizar a quebra em facetas.
+
+\end{solution}
+
+\hypertarget{exr1-5-2}{%
+\subsection*{Exercício 1.5.2}\label{exr1-5-2}}
+\addcontentsline{toc}{subsection}{Exercício 1.5.2}
+
+O que significam as célula em branco em um gráfico com \texttt{facet\_grid(drv\ \textasciitilde{}\ cyl)}? Como elas se relacionam a este gráfico?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ mpg) }\SpecialCharTok{+}
+    \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ displ, }\AttributeTok{y =}\NormalTok{ hwy)) }\SpecialCharTok{+}
+    \FunctionTok{facet\_grid}\NormalTok{(drv }\SpecialCharTok{\textasciitilde{}}\NormalTok{ cyl) }\SpecialCharTok{+}
+\NormalTok{    tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-18-1.pdf}
+
+\begin{solution}
+Significa que para aquela combinação de variáveis, não há nenhum valor observado. Por exemplo, não há nenhum veículo com 5 cilindros e tração nas quatro rodas.
+\end{solution}
+
+\hypertarget{exr1-5-3}{%
+\subsection*{Exercício 1.5.3}\label{exr1-5-3}}
+\addcontentsline{toc}{subsection}{Exercício 1.5.3}
+
+Que gráficos o código a seguir faz? O que \texttt{.} faz?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ mpg) }\SpecialCharTok{+}
+    \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ displ, }\AttributeTok{y =}\NormalTok{ hwy)) }\SpecialCharTok{+}
+    \FunctionTok{facet\_grid}\NormalTok{(drv }\SpecialCharTok{\textasciitilde{}}\NormalTok{ .) }\SpecialCharTok{+}
+\NormalTok{    tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-19-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ mpg) }\SpecialCharTok{+}
+    \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ displ, }\AttributeTok{y =}\NormalTok{ hwy)) }\SpecialCharTok{+}
+    \FunctionTok{facet\_grid}\NormalTok{(. }\SpecialCharTok{\textasciitilde{}}\NormalTok{ cyl) }\SpecialCharTok{+}
+\NormalTok{    tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-20-1.pdf}
+
+\begin{solution}
+São gerados os gráficos de dispersão segregados pelas variáveis \texttt{drv} e \texttt{cyl}, respectivamente. O \texttt{.} indica que não queremos considerar nenhuma segregação naquela dimensão do \emph{grid} (linha ou coluna).
+\end{solution}
+
+\hypertarget{exr1-5-4}{%
+\subsection*{Exercício 1.5.4}\label{exr1-5-4}}
+\addcontentsline{toc}{subsection}{Exercício 1.5.4}
+
+Pegue o primeiro gráfico em facetas dessa seção.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ mpg) }\SpecialCharTok{+}
+    \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{data =} \FunctionTok{transform}\NormalTok{(mpg, }\AttributeTok{class =} \ConstantTok{NULL}\NormalTok{), }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ displ, }\AttributeTok{y =}\NormalTok{ hwy), }\AttributeTok{color =} \StringTok{"gray80"}\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ displ, }\AttributeTok{y =}\NormalTok{ hwy)) }\SpecialCharTok{+}
+    \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{ class, }\AttributeTok{nrow =} \DecValTok{2}\NormalTok{) }\SpecialCharTok{+}
+\NormalTok{    tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-21-1.pdf}
+
+Quais são as vantagens de usar facetas, em vez de estética de cor? Quais são as desvantagens? Como o equilíbrio poderia mudar se você tivesse um conjunto de dados maior?
+
+\begin{solution}
+A principal vantagem no uso de facetas é que fica mais fácil analisar os dados quando eles estão separados em seu próprio contexto, contudo visualizá-los assim dificulta a comparação entre grupos.
+\end{solution}
+
+\hypertarget{exr1-5-5}{%
+\subsection*{Exercício 1.5.5}\label{exr1-5-5}}
+\addcontentsline{toc}{subsection}{Exercício 1.5.5}
+
+Leia \texttt{?facet\_wrap}. O que \texttt{nrow} faz? o que \texttt{ncol} faz? Quais outras opções controlam o layout de paineis individuais? Por que \texttt{facet\_grid()} não tem variáveis \texttt{nrow}e \texttt{ncol}?
+
+\begin{solution}
+\leavevmode
+
+\begin{verbatim}
+?facet_wrap
+\end{verbatim}
+
+Os atributos \texttt{ncol} e \texttt{nrow} são utilizados pelo \texttt{facet\_wrap} para determinar o número de colunas ou linhas (respectivamente) nas quais serão distribuídos os gráficos segregados. Esses atributos não figuram em \texttt{facet\_grid} pelo fato deste já organizar as facetas retangularmente.
+
+\end{solution}
+
+\hypertarget{exr1-5-6}{%
+\subsection*{Exercício 1.5.6}\label{exr1-5-6}}
+\addcontentsline{toc}{subsection}{Exercício 1.5.6}
+
+Ao usar \texttt{facet\_grid()} você normalmente deveria colocar a variável com níveis mais singulares nas colunas. Por quê?
+
+\begin{solution}
+Para melhor aproveitamento do espaço em tela.
+\end{solution}
 
 \hypertarget{objetos-geomuxe9tricos}{%
 \section{Objetos geométricos}\label{objetos-geomuxe9tricos}}

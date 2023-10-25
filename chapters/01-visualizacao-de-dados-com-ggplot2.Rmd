@@ -226,11 +226,111 @@ A expressão é avaliada para cada um dos valores da variável e o resultado é 
 
 ## Problemas comuns
 
-x
+Não temos exercícios nessa seção.
 
 ## Facetas
 
-x
+### Exercício 1.5.1 {- #exr1-5-1}
+
+::: {.enunciado}
+O que acontece se você criar facetas em uma variável contínua?
+:::
+
+:::{.solution}
+```{r}
+ggplot(data = mpg) +
+    geom_point(mapping = aes(x = displ, y = hwy)) +
+    facet_wrap(. ~ displ) +
+    tema
+```
+
+O _ggplot_ se encarrega de dividir o conjunto em classes e toma o ponto médio de cada classe para realizar a quebra em facetas.
+:::
+
+### Exercício 1.5.2 {- #exr1-5-2}
+
+::: {.enunciado}
+O que significam as célula em branco em um gráfico com `facet_grid(drv ~ cyl)`? Como elas se relacionam a este gráfico?
+
+```{r}
+ggplot(data = mpg) +
+    geom_point(mapping = aes(x = displ, y = hwy)) +
+    facet_grid(drv ~ cyl) +
+    tema
+```
+:::
+
+:::{.solution}
+Significa que para aquela combinação de variáveis, não há nenhum valor observado. Por exemplo, não há nenhum veículo com 5 cilindros e tração nas quatro rodas.
+:::
+
+### Exercício 1.5.3 {- #exr1-5-3}
+
+::: {.enunciado}
+Que gráficos o código a seguir faz? O que `.` faz?
+
+```{r}
+ggplot(data = mpg) +
+    geom_point(mapping = aes(x = displ, y = hwy)) +
+    facet_grid(drv ~ .) +
+    tema
+```
+
+```{r}
+ggplot(data = mpg) +
+    geom_point(mapping = aes(x = displ, y = hwy)) +
+    facet_grid(. ~ cyl) +
+    tema
+```
+:::
+
+:::{.solution}
+São gerados os gráficos de dispersão segregados pelas variáveis `drv` e `cyl`, respectivamente. O `.` indica que não queremos considerar nenhuma segregação naquela dimensão do _grid_ (linha ou coluna).
+:::
+
+### Exercício 1.5.4 {- #exr1-5-4}
+
+::: {.enunciado}
+Pegue o primeiro gráfico em facetas dessa seção.
+
+```{r}
+ggplot(data = mpg) +
+    geom_point(data = transform(mpg, class = NULL), mapping = aes(x = displ, y = hwy), color = "gray80") +
+    geom_point(mapping = aes(x = displ, y = hwy)) +
+    facet_wrap(~ class, nrow = 2) +
+    tema
+```
+
+Quais são as vantagens de usar facetas, em vez de estética de cor? Quais são as desvantagens? Como o equilíbrio poderia mudar se você tivesse um conjunto de dados maior?
+:::
+
+:::{.solution}
+A principal vantagem no uso de facetas é que fica mais fácil analisar os dados quando eles estão separados em seu próprio contexto, contudo visualizá-los assim dificulta a comparação entre grupos.
+:::
+
+### Exercício 1.5.5 {- #exr1-5-5}
+
+::: {.enunciado}
+Leia `?facet_wrap`. O que `nrow` faz? o que `ncol` faz? Quais outras opções controlam o layout de paineis individuais? Por que `facet_grid()` não tem variáveis `nrow`e `ncol`?
+:::
+
+:::{.solution}
+```
+?facet_wrap
+```
+
+Os atributos `ncol` e `nrow` são utilizados pelo `facet_wrap` para determinar o número de colunas ou linhas (respectivamente) nas quais serão distribuídos os gráficos segregados. Esses atributos não figuram em `facet_grid` pelo fato deste já organizar as facetas retangularmente.
+:::
+
+### Exercício 1.5.6 {- #exr1-5-6}
+
+::: {.enunciado}
+Ao usar `facet_grid()` você normalmente deveria colocar a variável com níveis mais singulares nas colunas. Por quê?
+:::
+
+:::{.solution}
+Para melhor aproveitamento do espaço em tela.
+:::
 
 ## Objetos geométricos
 

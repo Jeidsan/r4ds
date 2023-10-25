@@ -187,7 +187,15 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#exr1-3-6"><i class="fa fa-check"></i>Exercício 1.3.6</a></li>
 </ul></li>
 <li class="chapter" data-level="1.4" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#problemas-comuns"><i class="fa fa-check"></i><b>1.4</b> Problemas comuns</a></li>
-<li class="chapter" data-level="1.5" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#facetas"><i class="fa fa-check"></i><b>1.5</b> Facetas</a></li>
+<li class="chapter" data-level="1.5" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#facetas"><i class="fa fa-check"></i><b>1.5</b> Facetas</a>
+<ul>
+<li class="chapter" data-level="" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#exr1-5-1"><i class="fa fa-check"></i>Exercício 1.5.1</a></li>
+<li class="chapter" data-level="" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#exr1-5-2"><i class="fa fa-check"></i>Exercício 1.5.2</a></li>
+<li class="chapter" data-level="" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#exr1-5-3"><i class="fa fa-check"></i>Exercício 1.5.3</a></li>
+<li class="chapter" data-level="" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#exr1-5-4"><i class="fa fa-check"></i>Exercício 1.5.4</a></li>
+<li class="chapter" data-level="" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#exr1-5-5"><i class="fa fa-check"></i>Exercício 1.5.5</a></li>
+<li class="chapter" data-level="" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#exr1-5-6"><i class="fa fa-check"></i>Exercício 1.5.6</a></li>
+</ul></li>
 <li class="chapter" data-level="1.6" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#objetos-geométricos"><i class="fa fa-check"></i><b>1.6</b> Objetos geométricos</a></li>
 <li class="chapter" data-level="1.7" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#transformações-estatísticas"><i class="fa fa-check"></i><b>1.7</b> Transformações estatísticas</a></li>
 <li class="chapter" data-level="1.8" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#ajustes-de-posição"><i class="fa fa-check"></i><b>1.8</b> Ajustes de posição</a></li>
@@ -444,11 +452,94 @@ div.csl-indent {
 </div>
 <div id="problemas-comuns" class="section level2 hasAnchor" number="1.4">
 <h2><span class="header-section-number">1.4</span> Problemas comuns<a href="visualização-de-dados-com-ggplot2.html#problemas-comuns" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>x</p>
+<p>Não temos exercícios nessa seção.</p>
 </div>
 <div id="facetas" class="section level2 hasAnchor" number="1.5">
 <h2><span class="header-section-number">1.5</span> Facetas<a href="visualização-de-dados-com-ggplot2.html#facetas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>x</p>
+<div id="exr1-5-1" class="section level3 unnumbered hasAnchor">
+<h3>Exercício 1.5.1<a href="visualização-de-dados-com-ggplot2.html#exr1-5-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="enunciado">
+<p>O que acontece se você criar facetas em uma variável contínua?</p>
+</div>
+<div class="solution">
+<p><span id="unlabeled-div-12" class="solution"><em>Solução</em>. </span></p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="visualização-de-dados-com-ggplot2.html#cb22-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg) <span class="sc">+</span></span>
+<span id="cb22-2"><a href="visualização-de-dados-com-ggplot2.html#cb22-2" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy)) <span class="sc">+</span></span>
+<span id="cb22-3"><a href="visualização-de-dados-com-ggplot2.html#cb22-3" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(. <span class="sc">~</span> displ) <span class="sc">+</span></span>
+<span id="cb22-4"><a href="visualização-de-dados-com-ggplot2.html#cb22-4" tabindex="-1"></a>    tema</span></code></pre></div>
+<p><img src="r4ds_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p>O <em>ggplot</em> se encarrega de dividir o conjunto em classes e toma o ponto médio de cada classe para realizar a quebra em facetas.</p>
+</div>
+</div>
+<div id="exr1-5-2" class="section level3 unnumbered hasAnchor">
+<h3>Exercício 1.5.2<a href="visualização-de-dados-com-ggplot2.html#exr1-5-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="enunciado">
+<p>O que significam as célula em branco em um gráfico com <code>facet_grid(drv ~ cyl)</code>? Como elas se relacionam a este gráfico?</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="visualização-de-dados-com-ggplot2.html#cb23-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg) <span class="sc">+</span></span>
+<span id="cb23-2"><a href="visualização-de-dados-com-ggplot2.html#cb23-2" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy)) <span class="sc">+</span></span>
+<span id="cb23-3"><a href="visualização-de-dados-com-ggplot2.html#cb23-3" tabindex="-1"></a>    <span class="fu">facet_grid</span>(drv <span class="sc">~</span> cyl) <span class="sc">+</span></span>
+<span id="cb23-4"><a href="visualização-de-dados-com-ggplot2.html#cb23-4" tabindex="-1"></a>    tema</span></code></pre></div>
+<p><img src="r4ds_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+</div>
+<div class="solution">
+<p><span id="unlabeled-div-13" class="solution"><em>Solução</em>. </span>Significa que para aquela combinação de variáveis, não há nenhum valor observado. Por exemplo, não há nenhum veículo com 5 cilindros e tração nas quatro rodas.</p>
+</div>
+</div>
+<div id="exr1-5-3" class="section level3 unnumbered hasAnchor">
+<h3>Exercício 1.5.3<a href="visualização-de-dados-com-ggplot2.html#exr1-5-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="enunciado">
+<p>Que gráficos o código a seguir faz? O que <code>.</code> faz?</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="visualização-de-dados-com-ggplot2.html#cb24-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg) <span class="sc">+</span></span>
+<span id="cb24-2"><a href="visualização-de-dados-com-ggplot2.html#cb24-2" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy)) <span class="sc">+</span></span>
+<span id="cb24-3"><a href="visualização-de-dados-com-ggplot2.html#cb24-3" tabindex="-1"></a>    <span class="fu">facet_grid</span>(drv <span class="sc">~</span> .) <span class="sc">+</span></span>
+<span id="cb24-4"><a href="visualização-de-dados-com-ggplot2.html#cb24-4" tabindex="-1"></a>    tema</span></code></pre></div>
+<p><img src="r4ds_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="visualização-de-dados-com-ggplot2.html#cb25-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg) <span class="sc">+</span></span>
+<span id="cb25-2"><a href="visualização-de-dados-com-ggplot2.html#cb25-2" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy)) <span class="sc">+</span></span>
+<span id="cb25-3"><a href="visualização-de-dados-com-ggplot2.html#cb25-3" tabindex="-1"></a>    <span class="fu">facet_grid</span>(. <span class="sc">~</span> cyl) <span class="sc">+</span></span>
+<span id="cb25-4"><a href="visualização-de-dados-com-ggplot2.html#cb25-4" tabindex="-1"></a>    tema</span></code></pre></div>
+<p><img src="r4ds_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+</div>
+<div class="solution">
+<p><span id="unlabeled-div-14" class="solution"><em>Solução</em>. </span>São gerados os gráficos de dispersão segregados pelas variáveis <code>drv</code> e <code>cyl</code>, respectivamente. O <code>.</code> indica que não queremos considerar nenhuma segregação naquela dimensão do <em>grid</em> (linha ou coluna).</p>
+</div>
+</div>
+<div id="exr1-5-4" class="section level3 unnumbered hasAnchor">
+<h3>Exercício 1.5.4<a href="visualização-de-dados-com-ggplot2.html#exr1-5-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="enunciado">
+<p>Pegue o primeiro gráfico em facetas dessa seção.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="visualização-de-dados-com-ggplot2.html#cb26-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg) <span class="sc">+</span></span>
+<span id="cb26-2"><a href="visualização-de-dados-com-ggplot2.html#cb26-2" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">data =</span> <span class="fu">transform</span>(mpg, <span class="at">class =</span> <span class="cn">NULL</span>), <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy), <span class="at">color =</span> <span class="st">&quot;gray80&quot;</span>) <span class="sc">+</span></span>
+<span id="cb26-3"><a href="visualização-de-dados-com-ggplot2.html#cb26-3" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy)) <span class="sc">+</span></span>
+<span id="cb26-4"><a href="visualização-de-dados-com-ggplot2.html#cb26-4" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span> class, <span class="at">nrow =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb26-5"><a href="visualização-de-dados-com-ggplot2.html#cb26-5" tabindex="-1"></a>    tema</span></code></pre></div>
+<p><img src="r4ds_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p>Quais são as vantagens de usar facetas, em vez de estética de cor? Quais são as desvantagens? Como o equilíbrio poderia mudar se você tivesse um conjunto de dados maior?</p>
+</div>
+<div class="solution">
+<p><span id="unlabeled-div-15" class="solution"><em>Solução</em>. </span>A principal vantagem no uso de facetas é que fica mais fácil analisar os dados quando eles estão separados em seu próprio contexto, contudo visualizá-los assim dificulta a comparação entre grupos.</p>
+</div>
+</div>
+<div id="exr1-5-5" class="section level3 unnumbered hasAnchor">
+<h3>Exercício 1.5.5<a href="visualização-de-dados-com-ggplot2.html#exr1-5-5" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="enunciado">
+<p>Leia <code>?facet_wrap</code>. O que <code>nrow</code> faz? o que <code>ncol</code> faz? Quais outras opções controlam o layout de paineis individuais? Por que <code>facet_grid()</code> não tem variáveis <code>nrow</code>e <code>ncol</code>?</p>
+</div>
+<div class="solution">
+<p><span id="unlabeled-div-16" class="solution"><em>Solução</em>. </span></p>
+<pre><code>?facet_wrap</code></pre>
+<p>Os atributos <code>ncol</code> e <code>nrow</code> são utilizados pelo <code>facet_wrap</code> para determinar o número de colunas ou linhas (respectivamente) nas quais serão distribuídos os gráficos segregados. Esses atributos não figuram em <code>facet_grid</code> pelo fato deste já organizar as facetas retangularmente.</p>
+</div>
+</div>
+<div id="exr1-5-6" class="section level3 unnumbered hasAnchor">
+<h3>Exercício 1.5.6<a href="visualização-de-dados-com-ggplot2.html#exr1-5-6" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="enunciado">
+<p>Ao usar <code>facet_grid()</code> você normalmente deveria colocar a variável com níveis mais singulares nas colunas. Por quê?</p>
+</div>
+<div class="solution">
+<p><span id="unlabeled-div-17" class="solution"><em>Solução</em>. </span>Para melhor aproveitamento do espaço em tela.</p>
+</div>
+</div>
 </div>
 <div id="objetos-geométricos" class="section level2 hasAnchor" number="1.6">
 <h2><span class="header-section-number">1.6</span> Objetos geométricos<a href="visualização-de-dados-com-ggplot2.html#objetos-geométricos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -474,7 +565,7 @@ div.csl-indent {
 <p>x</p>
 </div>
 <div class="solution">
-<p><span id="unlabeled-div-12" class="solution"><em>Solução</em>. </span>x</p>
+<p><span id="unlabeled-div-18" class="solution"><em>Solução</em>. </span>x</p>
 </div>
 
 </div>
