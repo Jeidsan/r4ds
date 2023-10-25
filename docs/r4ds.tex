@@ -294,6 +294,9 @@ Dúvidas ou sugestões de melhoria podem ser encaminhadas para o e-mail \emph{\h
   \protect\hyperlink{exr2-3-3}{Exercício 2.3.3};
 \item
   \protect\hyperlink{exr3-5-1}{Exercício 3.5.1};
+\item
+  \protect\hyperlink{exr3-7-1}{Exercício 3.7.1};
+\item
 \end{itemize}
 
 \mainmatter
@@ -2419,7 +2422,21 @@ O R fornece as funções \texttt{cos(x)}, \texttt{sin(x)}, \texttt{tan(x)}, \tex
 \subsection*{Exercício 3.7.1}\label{exr3-7-1}}
 \addcontentsline{toc}{subsection}{Exercício 3.7.1}
 
-x
+Faça um \emph{brainstorming} de pelo menos cinco maneiras diferentes de avaliar as características do atraso típico de um grupo de voos. Considere os seguintes cenários:
+
+\begin{itemize}
+\tightlist
+\item
+  Um voo está 15 minutos adiantado em 50\% do tempo e 15 minutos atrasado em 50\% do tempo.
+\item
+  Um voo está sempre 10 min atrasado.
+\item
+  Um voo está 30 minutos adiantado em 50\% do tempo e 30 minutos atrasado em 50\% do tempo.
+\item
+  Em 99\% do tempo um voo está no horário. Em 1\% do tempo, está 2 horas atrasado.
+\end{itemize}
+
+O que é mais importante: atrsado na chegada ou atraso na partida?
 
 \begin{solution}
 x
@@ -2429,60 +2446,355 @@ x
 \subsection*{Exercício 3.7.2}\label{exr3-7-2}}
 \addcontentsline{toc}{subsection}{Exercício 3.7.2}
 
-x
+Crie outra abordagem que lhe dará o mesmo resultado que \texttt{not\_cancelled\ \%\textgreater{}\%\ count(dest)} e \texttt{not\_cancelled\ \%\textgreater{}\%\ count(tailnum,\ wt\ =\ distance)} (sem usar \texttt{count()}).
 
 \begin{solution}
-x
+\leavevmode
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{not\_cancelled }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{group\_by}\NormalTok{(dest) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{summarise}\NormalTok{(}\AttributeTok{n =} \FunctionTok{n}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 104 x 2
+##    dest      n
+##    <chr> <int>
+##  1 ABQ     254
+##  2 ACK     264
+##  3 ALB     418
+##  4 ANC       8
+##  5 ATL   16837
+##  6 AUS    2411
+##  7 AVL     261
+##  8 BDL     412
+##  9 BGR     358
+## 10 BHM     269
+## # i 94 more rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{not\_cancelled }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{group\_by}\NormalTok{(tailnum) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{summarise}\NormalTok{(}\AttributeTok{n =} \FunctionTok{sum}\NormalTok{(distance))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 4,037 x 2
+##    tailnum      n
+##    <chr>    <dbl>
+##  1 D942DN    3418
+##  2 N0EGMQ  239143
+##  3 N10156  109664
+##  4 N102UW   25722
+##  5 N103US   24619
+##  6 N104UW   24616
+##  7 N10575  139903
+##  8 N105UW   23618
+##  9 N107US   21677
+## 10 N108UW   32070
+## # i 4,027 more rows
+\end{verbatim}
+
 \end{solution}
 
 \hypertarget{exr3-7-3}{%
 \subsection*{Exercício 3.7.3}\label{exr3-7-3}}
 \addcontentsline{toc}{subsection}{Exercício 3.7.3}
 
-x
+Nossa definição de voos cancelados (\texttt{is.na(dep\_delay)\ \textbar{}\ is.na(arr\_delay)}) é ligeiramente insuficiente. Por quê? Qual é a coluna mais importante?
 
 \begin{solution}
-x
+As váriáveis \texttt{dep\_delay} e \texttt{arr\_delay} se referem ao atraso na partida ou na chegada dos voos. Caso um voo tenha saído e chegado no horário exato, esses valores podem estar \texttt{NA}, ou seja, o voo não foi cancelado, apenas partiu e chegou no horário planejado. Nesse caso, o mais correto seria considerar como cancelados os voos \texttt{dep\_time} é \texttt{NA}.
 \end{solution}
 
 \hypertarget{exr3-7-4}{%
 \subsection*{Exercício 3.7.4}\label{exr3-7-4}}
 \addcontentsline{toc}{subsection}{Exercício 3.7.4}
 
-x
+Veja o número de voos cancelados por dia. Existe um padrão? A proporção de voos cancelados está relacionado ao atraso médio?
 
 \begin{solution}
-x
+\leavevmode
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cancelled\_by\_day }\OtherTok{\textless{}{-}}\NormalTok{ flights }\SpecialCharTok{\%\textgreater{}\%}
+                        \FunctionTok{group\_by}\NormalTok{(year, month, day) }\SpecialCharTok{\%\textgreater{}\%}
+                        \FunctionTok{summarise}\NormalTok{(}
+                            \AttributeTok{date =} \FunctionTok{as.Date}\NormalTok{(}\FunctionTok{paste}\NormalTok{(year, month, day, }\AttributeTok{sep=}\StringTok{\textquotesingle{}{-}\textquotesingle{}}\NormalTok{)),}
+                            \AttributeTok{count =} \FunctionTok{n}\NormalTok{(),}
+                            \AttributeTok{count\_cancelled =} \FunctionTok{sum}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(dep\_time)),}
+                            \AttributeTok{count\_not\_cancelled =} \FunctionTok{sum}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(dep\_time)),}
+                            \AttributeTok{mean\_dep\_delay =} \FunctionTok{mean}\NormalTok{(dep\_delay, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+                            \AttributeTok{mean\_arr\_delay =} \FunctionTok{mean}\NormalTok{(arr\_delay, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+\NormalTok{                        )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Returning more (or less) than 1 row per `summarise()` group was deprecated in
+## dplyr 1.1.0.
+## i Please use `reframe()` instead.
+## i When switching from `summarise()` to `reframe()`, remember that `reframe()`
+##   always returns an ungrouped data frame and adjust accordingly.
+## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+## generated.
+\end{verbatim}
+
+\begin{verbatim}
+## `summarise()` has grouped output by 'year', 'month', 'day'. You can override
+## using the `.groups` argument.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cancelled\_by\_day }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(mean\_dep\_delay, count\_cancelled }\SpecialCharTok{/}\NormalTok{ count)) }\SpecialCharTok{+}
+        \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+        \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{se =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+}
+        \FunctionTok{labs}\NormalTok{(}
+            \AttributeTok{title =} \StringTok{"Número de voos cancelados conforme o tempo médio de atraso no dia"}\NormalTok{,}
+            \AttributeTok{x =} \StringTok{"Tempo médio de atraso na partida (min)"}\NormalTok{,}
+            \AttributeTok{y =} \StringTok{"Número de cancelamentos"}
+\NormalTok{        ) }\SpecialCharTok{+}
+        \FunctionTok{xlim}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{80}\NormalTok{) }\SpecialCharTok{+}
+        \FunctionTok{ylim}\NormalTok{(}\DecValTok{0}\NormalTok{, }\FloatTok{0.3}\NormalTok{) }\SpecialCharTok{+}
+\NormalTok{        tema}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using method = 'gam' and formula = 'y ~ s(x, bs = "cs")'
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Removed 12409 rows containing non-finite values (`stat_smooth()`).
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Removed 12409 rows containing missing values (`geom_point()`).
+\end{verbatim}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-67-1.pdf}
+
+Parece existir uma relação entre o número de coos cancelados no dia e a média de atraso nos voos desse mesmo dia. Caso haja alguma condição desfavorável (tempo ruim, problemas na pista de decolagem/pouso, etc), o intervalo entre uma decolagem/pouso e outro pode aumentar significativamente gerando atrasos que se acumulam a ponto de alguns voos terem que ser cancelados (esse comportamento é real?).
+
 \end{solution}
 
 \hypertarget{exr3-7-5}{%
 \subsection*{Exercício 3.7.5}\label{exr3-7-5}}
 \addcontentsline{toc}{subsection}{Exercício 3.7.5}
 
-x
+Qual companhia tem os piores atrasos? Desafio: você consegue desembaralhar o efeito dos aeroportus ruins \emph{versus} companhiars ruins? Por quê/Por que não? ( Dica: pense em \texttt{flights\ \%\textgreater{}\%\ group\_by(cartier,\ dest)\ \%\textgreater{}\%\ summarize(n())})
 
 \begin{solution}
-x
+Para verificar qual companhia tem os piores atrasos, vamos calcular o atraso médio por companhia.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{flights }\SpecialCharTok{\%\textgreater{}\%} 
+    \FunctionTok{group\_by}\NormalTok{(carrier) }\SpecialCharTok{\%\textgreater{}\%} 
+    \FunctionTok{summarize}\NormalTok{(}
+        \AttributeTok{mean\_delay =} \FunctionTok{mean}\NormalTok{(arr\_delay, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{    ) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{arrange}\NormalTok{(}\FunctionTok{desc}\NormalTok{(mean\_delay))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 16 x 2
+##    carrier mean_delay
+##    <chr>        <dbl>
+##  1 F9          21.9  
+##  2 FL          20.1  
+##  3 EV          15.8  
+##  4 YV          15.6  
+##  5 OO          11.9  
+##  6 MQ          10.8  
+##  7 WN           9.65 
+##  8 B6           9.46 
+##  9 9E           7.38 
+## 10 UA           3.56 
+## 11 US           2.13 
+## 12 VX           1.76 
+## 13 DL           1.64 
+## 14 AA           0.364
+## 15 HA          -6.92 
+## 16 AS          -9.93
+\end{verbatim}
+
+Podemos notar que a companhia com o maior atraso médio é a F9 (Frontier Airlines Inc).
+
+Para tentar desembaralhar o efeito de aeroportos ruins e companhias ruins, vamos:
+
+\begin{itemize}
+\tightlist
+\item
+  filtrar apenas os voos com atraso;
+\item
+  agrupar os voos conforme as rotas e companhias;
+\item
+  calcular o atraso médio e o total de voos por companhia no trecho (\texttt{arr\_delay} e \texttt{flights});
+\item
+  calcular o atraso médio e o total de voos do trecho de todas as companhias (\texttt{arr\_delay\_total} e \texttt{flights\_total});
+\item
+  calcular o atraso médio por voo da companhia (\texttt{arr\_delay\_mean\ \textless{}-\ arr\_delay\ /\ flights});
+\item
+  calcular o atraso ``médio'' das demais companhias (\texttt{arr\_delay\_others\ \textless{}-\ (arr\_delay\_total\ -\ arr\_delay)\ /\ (flights\_total\ -\ fligths)});
+\item
+  calcular a diferença entre o atraso médio da companhia e o atraso médio das outras companhias juntas (\texttt{arr\_delay\_diff\ \textless{}-\ arr\_delay\_mean\ -\ arr\_delay\_others});
+\item
+  remover valores cuja diferença não faça sentido (\texttt{is.finite(arr\_delay\_diff)});
+\item
+  agrupar por companhia;
+\item
+  calcular a média das diferenças de atraso da companhia (\texttt{arr\_delay\_diff});
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(atrasos }\OtherTok{\textless{}{-}}\NormalTok{ flights }\SpecialCharTok{\%\textgreater{}\%} 
+                \FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(arr\_delay)) }\SpecialCharTok{\%\textgreater{}\%}
+                \FunctionTok{group\_by}\NormalTok{(origin, dest, carrier) }\SpecialCharTok{\%\textgreater{}\%}
+                \FunctionTok{summarise}\NormalTok{(}
+                    \AttributeTok{arr\_delay =} \FunctionTok{sum}\NormalTok{(arr\_delay),}
+                    \AttributeTok{flights =} \FunctionTok{n}\NormalTok{()}
+\NormalTok{                ) }\SpecialCharTok{\%\textgreater{}\%}
+                \FunctionTok{group\_by}\NormalTok{(origin, dest) }\SpecialCharTok{\%\textgreater{}\%}
+                \FunctionTok{mutate}\NormalTok{(}
+                    \AttributeTok{arr\_delay\_total =} \FunctionTok{sum}\NormalTok{(arr\_delay),}
+                    \AttributeTok{flights\_total =} \FunctionTok{sum}\NormalTok{(flights)}
+\NormalTok{                ) }\SpecialCharTok{\%\textgreater{}\%}
+                \FunctionTok{ungroup}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+                \FunctionTok{mutate}\NormalTok{(        }
+                    \AttributeTok{arr\_delay\_mean =}\NormalTok{ arr\_delay }\SpecialCharTok{/}\NormalTok{ flights, }\CommentTok{\# atraso médio da companhia}
+                    \AttributeTok{arr\_delay\_others =}\NormalTok{ (arr\_delay\_total }\SpecialCharTok{{-}}\NormalTok{ arr\_delay) }\SpecialCharTok{/}\NormalTok{ (flights\_total }\SpecialCharTok{{-}}\NormalTok{ flights), }\CommentTok{\# atraso médio das demais companhias}
+                    \AttributeTok{arr\_delay\_diff =}\NormalTok{ arr\_delay\_mean }\SpecialCharTok{{-}}\NormalTok{ arr\_delay\_others }\CommentTok{\# diferença do atraso em relação às demais companhias}
+\NormalTok{                ) }\SpecialCharTok{\%\textgreater{}\%}
+                \FunctionTok{filter}\NormalTok{(}\FunctionTok{is.finite}\NormalTok{(arr\_delay\_diff)) }\SpecialCharTok{\%\textgreater{}\%}
+                \FunctionTok{group\_by}\NormalTok{(carrier) }\SpecialCharTok{\%\textgreater{}\%}
+                \FunctionTok{summarise}\NormalTok{(}
+                    \AttributeTok{arr\_delay\_diff =} \FunctionTok{mean}\NormalTok{(arr\_delay\_diff)}
+\NormalTok{                ) }\SpecialCharTok{\%\textgreater{}\%}
+                \FunctionTok{arrange}\NormalTok{(}\FunctionTok{desc}\NormalTok{(arr\_delay\_diff)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `summarise()` has grouped output by 'origin', 'dest'. You can override using
+## the `.groups` argument.
+\end{verbatim}
+
+\begin{verbatim}
+## # A tibble: 15 x 2
+##    carrier arr_delay_diff
+##    <chr>            <dbl>
+##  1 OO              27.3  
+##  2 F9              17.3  
+##  3 EV              11.0  
+##  4 B6               6.41 
+##  5 FL               2.57 
+##  6 VX              -0.202
+##  7 AA              -0.970
+##  8 WN              -1.27 
+##  9 UA              -1.86 
+## 10 MQ              -2.48 
+## 11 YV              -2.81 
+## 12 9E              -3.54 
+## 13 US              -4.14 
+## 14 DL             -10.2  
+## 15 AS             -15.8
+\end{verbatim}
+
+Desconsiderando o efeito de trechos e aeroportos ruins, a companhia com maior atraso é a OO (SkyWest Airlines Inc.).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{atrasos }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{left\_join}\NormalTok{(airlines, }\AttributeTok{by =} \StringTok{"carrier"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}
+\NormalTok{        arr\_delay\_diff, }
+        \FunctionTok{reorder}\NormalTok{(name, }\FunctionTok{desc}\NormalTok{(arr\_delay\_diff))}
+\NormalTok{    )) }\SpecialCharTok{+}
+        \FunctionTok{geom\_col}\NormalTok{() }\SpecialCharTok{+}
+        \FunctionTok{labs}\NormalTok{(}
+            \AttributeTok{title =} \StringTok{"Atrasos por companhia aérea"}\NormalTok{,}
+            \AttributeTok{y =} \StringTok{"Companhia aérea"}\NormalTok{,}
+            \AttributeTok{x =} \StringTok{"Tempo médio de atraso (em min.)"}
+\NormalTok{        ) }\SpecialCharTok{+}
+\NormalTok{        tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-70-1.pdf}
 \end{solution}
 
 \hypertarget{exr3-7-6}{%
 \subsection*{Exercício 3.7.6}\label{exr3-7-6}}
 \addcontentsline{toc}{subsection}{Exercício 3.7.6}
 
-x
+Para cada avião, conte o número de voos antes do primeiro atraso de mais de uma hora.
 
 \begin{solution}
-x
+
+Utilizando a variável \texttt{flight} para identificar o voo e a variável \texttt{arr\_delay} como parâmetro para determinar o tempo de atraso:
+
+\begin{itemize}
+\tightlist
+\item
+  ordenamos o data-frame conforme a hora agendada para decolagem;
+\item
+  agrupamos pelo número do voo;
+\item
+  utilizamos as funções \texttt{first()} e \texttt{which()} para buscar a posição do primeiro elemento que é \texttt{NA} ou o atraso é maior do que 60 min.
+\end{itemize}
+
+Obs.: \texttt{NA} indica que aquele voo não teve nenhum atraso superior a 60 min.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{flights }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{arrange}\NormalTok{(time\_hour) }\SpecialCharTok{\%\textgreater{}\%}    
+    \FunctionTok{group\_by}\NormalTok{(flight) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{summarise}\NormalTok{(}
+        \AttributeTok{first\_delay\_pos =} \FunctionTok{first}\NormalTok{(}\FunctionTok{which}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(arr\_delay) }\SpecialCharTok{|}\NormalTok{ arr\_delay }\SpecialCharTok{\textgreater{}} \DecValTok{60}\NormalTok{)) }\SpecialCharTok{{-}} \DecValTok{1}
+\NormalTok{    )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 3,844 x 2
+##    flight first_delay_pos
+##     <int>           <dbl>
+##  1      1              47
+##  2      2              NA
+##  3      3               9
+##  4      4              77
+##  5      5              11
+##  6      6              23
+##  7      7              17
+##  8      8              15
+##  9      9              12
+## 10     10              24
+## # i 3,834 more rows
+\end{verbatim}
+
 \end{solution}
 
 \hypertarget{exr3-7-7}{%
 \subsection*{Exercício 3.7.7}\label{exr3-7-7}}
 \addcontentsline{toc}{subsection}{Exercício 3.7.7}
 
-x
+O que o argumento \texttt{sort} para \texttt{count()} faz? Quando você pode usá-lo?
 
 \begin{solution}
-x
+Utilizando o comando \texttt{?count}, identificamos que o argumento \texttt{sort} organiza a contagem em ordem decrescente.
 \end{solution}
 
 \hypertarget{mudanuxe7as-agrupadas-e-filtros}{%

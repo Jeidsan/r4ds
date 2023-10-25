@@ -1004,7 +1004,14 @@ div.csl-indent {
 <div id="exr3-7-1" class="section level3 unnumbered hasAnchor">
 <h3>Exercício 3.7.1<a href="transformação-de-dados-com-dplyr.html#exr3-7-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="enunciado">
-<p>x</p>
+<p>Faça um <em>brainstorming</em> de pelo menos cinco maneiras diferentes de avaliar as características do atraso típico de um grupo de voos. Considere os seguintes cenários:</p>
+<ul>
+<li>Um voo está 15 minutos adiantado em 50% do tempo e 15 minutos atrasado em 50% do tempo.</li>
+<li>Um voo está sempre 10 min atrasado.</li>
+<li>Um voo está 30 minutos adiantado em 50% do tempo e 30 minutos atrasado em 50% do tempo.</li>
+<li>Em 99% do tempo um voo está no horário. Em 1% do tempo, está 2 horas atrasado.</li>
+</ul>
+<p>O que é mais importante: atrsado na chegada ou atraso na partida?</p>
 </div>
 <div class="solution">
 <p><span id="unlabeled-div-59" class="solution"><em>Solução</em>. </span>x</p>
@@ -1013,55 +1020,249 @@ div.csl-indent {
 <div id="exr3-7-2" class="section level3 unnumbered hasAnchor">
 <h3>Exercício 3.7.2<a href="transformação-de-dados-com-dplyr.html#exr3-7-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="enunciado">
-<p>x</p>
+<p>Crie outra abordagem que lhe dará o mesmo resultado que <code>not_cancelled %&gt;% count(dest)</code> e <code>not_cancelled %&gt;% count(tailnum, wt = distance)</code> (sem usar <code>count()</code>).</p>
 </div>
 <div class="solution">
-<p><span id="unlabeled-div-60" class="solution"><em>Solução</em>. </span>x</p>
+<p><span id="unlabeled-div-60" class="solution"><em>Solução</em>. </span></p>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="transformação-de-dados-com-dplyr.html#cb115-1" tabindex="-1"></a>not_cancelled <span class="sc">%&gt;%</span></span>
+<span id="cb115-2"><a href="transformação-de-dados-com-dplyr.html#cb115-2" tabindex="-1"></a>    <span class="fu">group_by</span>(dest) <span class="sc">%&gt;%</span></span>
+<span id="cb115-3"><a href="transformação-de-dados-com-dplyr.html#cb115-3" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>())</span></code></pre></div>
+<pre><code>## # A tibble: 104 × 2
+##    dest      n
+##    &lt;chr&gt; &lt;int&gt;
+##  1 ABQ     254
+##  2 ACK     264
+##  3 ALB     418
+##  4 ANC       8
+##  5 ATL   16837
+##  6 AUS    2411
+##  7 AVL     261
+##  8 BDL     412
+##  9 BGR     358
+## 10 BHM     269
+## # ℹ 94 more rows</code></pre>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="transformação-de-dados-com-dplyr.html#cb117-1" tabindex="-1"></a>not_cancelled <span class="sc">%&gt;%</span></span>
+<span id="cb117-2"><a href="transformação-de-dados-com-dplyr.html#cb117-2" tabindex="-1"></a>    <span class="fu">group_by</span>(tailnum) <span class="sc">%&gt;%</span></span>
+<span id="cb117-3"><a href="transformação-de-dados-com-dplyr.html#cb117-3" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">sum</span>(distance))</span></code></pre></div>
+<pre><code>## # A tibble: 4,037 × 2
+##    tailnum      n
+##    &lt;chr&gt;    &lt;dbl&gt;
+##  1 D942DN    3418
+##  2 N0EGMQ  239143
+##  3 N10156  109664
+##  4 N102UW   25722
+##  5 N103US   24619
+##  6 N104UW   24616
+##  7 N10575  139903
+##  8 N105UW   23618
+##  9 N107US   21677
+## 10 N108UW   32070
+## # ℹ 4,027 more rows</code></pre>
 </div>
 </div>
 <div id="exr3-7-3" class="section level3 unnumbered hasAnchor">
 <h3>Exercício 3.7.3<a href="transformação-de-dados-com-dplyr.html#exr3-7-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="enunciado">
-<p>x</p>
+<p>Nossa definição de voos cancelados (<code>is.na(dep_delay) | is.na(arr_delay)</code>) é ligeiramente insuficiente. Por quê? Qual é a coluna mais importante?</p>
 </div>
 <div class="solution">
-<p><span id="unlabeled-div-61" class="solution"><em>Solução</em>. </span>x</p>
+<p><span id="unlabeled-div-61" class="solution"><em>Solução</em>. </span>As váriáveis <code>dep_delay</code> e <code>arr_delay</code> se referem ao atraso na partida ou na chegada dos voos. Caso um voo tenha saído e chegado no horário exato, esses valores podem estar <code>NA</code>, ou seja, o voo não foi cancelado, apenas partiu e chegou no horário planejado. Nesse caso, o mais correto seria considerar como cancelados os voos <code>dep_time</code> é <code>NA</code>.</p>
 </div>
 </div>
 <div id="exr3-7-4" class="section level3 unnumbered hasAnchor">
 <h3>Exercício 3.7.4<a href="transformação-de-dados-com-dplyr.html#exr3-7-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="enunciado">
-<p>x</p>
+<p>Veja o número de voos cancelados por dia. Existe um padrão? A proporção de voos cancelados está relacionado ao atraso médio?</p>
 </div>
 <div class="solution">
-<p><span id="unlabeled-div-62" class="solution"><em>Solução</em>. </span>x</p>
+<p><span id="unlabeled-div-62" class="solution"><em>Solução</em>. </span></p>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="transformação-de-dados-com-dplyr.html#cb119-1" tabindex="-1"></a>cancelled_by_day <span class="ot">&lt;-</span> flights <span class="sc">%&gt;%</span></span>
+<span id="cb119-2"><a href="transformação-de-dados-com-dplyr.html#cb119-2" tabindex="-1"></a>                        <span class="fu">group_by</span>(year, month, day) <span class="sc">%&gt;%</span></span>
+<span id="cb119-3"><a href="transformação-de-dados-com-dplyr.html#cb119-3" tabindex="-1"></a>                        <span class="fu">summarise</span>(</span>
+<span id="cb119-4"><a href="transformação-de-dados-com-dplyr.html#cb119-4" tabindex="-1"></a>                            <span class="at">date =</span> <span class="fu">as.Date</span>(<span class="fu">paste</span>(year, month, day, <span class="at">sep=</span><span class="st">&#39;-&#39;</span>)),</span>
+<span id="cb119-5"><a href="transformação-de-dados-com-dplyr.html#cb119-5" tabindex="-1"></a>                            <span class="at">count =</span> <span class="fu">n</span>(),</span>
+<span id="cb119-6"><a href="transformação-de-dados-com-dplyr.html#cb119-6" tabindex="-1"></a>                            <span class="at">count_cancelled =</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(dep_time)),</span>
+<span id="cb119-7"><a href="transformação-de-dados-com-dplyr.html#cb119-7" tabindex="-1"></a>                            <span class="at">count_not_cancelled =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(dep_time)),</span>
+<span id="cb119-8"><a href="transformação-de-dados-com-dplyr.html#cb119-8" tabindex="-1"></a>                            <span class="at">mean_dep_delay =</span> <span class="fu">mean</span>(dep_delay, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb119-9"><a href="transformação-de-dados-com-dplyr.html#cb119-9" tabindex="-1"></a>                            <span class="at">mean_arr_delay =</span> <span class="fu">mean</span>(arr_delay, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb119-10"><a href="transformação-de-dados-com-dplyr.html#cb119-10" tabindex="-1"></a>                        )</span></code></pre></div>
+<pre><code>## Warning: Returning more (or less) than 1 row per `summarise()` group was deprecated in
+## dplyr 1.1.0.
+## ℹ Please use `reframe()` instead.
+## ℹ When switching from `summarise()` to `reframe()`, remember that `reframe()`
+##   always returns an ungrouped data frame and adjust accordingly.
+## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+## generated.</code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;year&#39;, &#39;month&#39;, &#39;day&#39;. You can override
+## using the `.groups` argument.</code></pre>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="transformação-de-dados-com-dplyr.html#cb122-1" tabindex="-1"></a>cancelled_by_day <span class="sc">%&gt;%</span></span>
+<span id="cb122-2"><a href="transformação-de-dados-com-dplyr.html#cb122-2" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(mean_dep_delay, count_cancelled <span class="sc">/</span> count)) <span class="sc">+</span></span>
+<span id="cb122-3"><a href="transformação-de-dados-com-dplyr.html#cb122-3" tabindex="-1"></a>        <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb122-4"><a href="transformação-de-dados-com-dplyr.html#cb122-4" tabindex="-1"></a>        <span class="fu">geom_smooth</span>(<span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb122-5"><a href="transformação-de-dados-com-dplyr.html#cb122-5" tabindex="-1"></a>        <span class="fu">labs</span>(</span>
+<span id="cb122-6"><a href="transformação-de-dados-com-dplyr.html#cb122-6" tabindex="-1"></a>            <span class="at">title =</span> <span class="st">&quot;Número de voos cancelados conforme o tempo médio de atraso no dia&quot;</span>,</span>
+<span id="cb122-7"><a href="transformação-de-dados-com-dplyr.html#cb122-7" tabindex="-1"></a>            <span class="at">x =</span> <span class="st">&quot;Tempo médio de atraso na partida (min)&quot;</span>,</span>
+<span id="cb122-8"><a href="transformação-de-dados-com-dplyr.html#cb122-8" tabindex="-1"></a>            <span class="at">y =</span> <span class="st">&quot;Número de cancelamentos&quot;</span></span>
+<span id="cb122-9"><a href="transformação-de-dados-com-dplyr.html#cb122-9" tabindex="-1"></a>        ) <span class="sc">+</span></span>
+<span id="cb122-10"><a href="transformação-de-dados-com-dplyr.html#cb122-10" tabindex="-1"></a>        <span class="fu">xlim</span>(<span class="dv">0</span>, <span class="dv">80</span>) <span class="sc">+</span></span>
+<span id="cb122-11"><a href="transformação-de-dados-com-dplyr.html#cb122-11" tabindex="-1"></a>        <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb122-12"><a href="transformação-de-dados-com-dplyr.html#cb122-12" tabindex="-1"></a>        tema</span></code></pre></div>
+<pre><code>## `geom_smooth()` using method = &#39;gam&#39; and formula = &#39;y ~ s(x, bs = &quot;cs&quot;)&#39;</code></pre>
+<pre><code>## Warning: Removed 12409 rows containing non-finite values (`stat_smooth()`).</code></pre>
+<pre><code>## Warning: Removed 12409 rows containing missing values (`geom_point()`).</code></pre>
+<p><img src="r4ds_files/figure-html/unnamed-chunk-67-1.png" width="672" /></p>
+<p>Parece existir uma relação entre o número de coos cancelados no dia e a média de atraso nos voos desse mesmo dia. Caso haja alguma condição desfavorável (tempo ruim, problemas na pista de decolagem/pouso, etc), o intervalo entre uma decolagem/pouso e outro pode aumentar significativamente gerando atrasos que se acumulam a ponto de alguns voos terem que ser cancelados (esse comportamento é real?).</p>
 </div>
 </div>
 <div id="exr3-7-5" class="section level3 unnumbered hasAnchor">
 <h3>Exercício 3.7.5<a href="transformação-de-dados-com-dplyr.html#exr3-7-5" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="enunciado">
-<p>x</p>
+<p>Qual companhia tem os piores atrasos? Desafio: você consegue desembaralhar o efeito dos aeroportus ruins <em>versus</em> companhiars ruins? Por quê/Por que não? ( Dica: pense em <code>flights %&gt;% group_by(cartier, dest) %&gt;% summarize(n())</code>)</p>
 </div>
 <div class="solution">
-<p><span id="unlabeled-div-63" class="solution"><em>Solução</em>. </span>x</p>
+<p><span id="unlabeled-div-63" class="solution"><em>Solução</em>. </span>Para verificar qual companhia tem os piores atrasos, vamos calcular o atraso médio por companhia.</p>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="transformação-de-dados-com-dplyr.html#cb126-1" tabindex="-1"></a>flights <span class="sc">%&gt;%</span> </span>
+<span id="cb126-2"><a href="transformação-de-dados-com-dplyr.html#cb126-2" tabindex="-1"></a>    <span class="fu">group_by</span>(carrier) <span class="sc">%&gt;%</span> </span>
+<span id="cb126-3"><a href="transformação-de-dados-com-dplyr.html#cb126-3" tabindex="-1"></a>    <span class="fu">summarize</span>(</span>
+<span id="cb126-4"><a href="transformação-de-dados-com-dplyr.html#cb126-4" tabindex="-1"></a>        <span class="at">mean_delay =</span> <span class="fu">mean</span>(arr_delay, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb126-5"><a href="transformação-de-dados-com-dplyr.html#cb126-5" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb126-6"><a href="transformação-de-dados-com-dplyr.html#cb126-6" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(mean_delay))</span></code></pre></div>
+<pre><code>## # A tibble: 16 × 2
+##    carrier mean_delay
+##    &lt;chr&gt;        &lt;dbl&gt;
+##  1 F9          21.9  
+##  2 FL          20.1  
+##  3 EV          15.8  
+##  4 YV          15.6  
+##  5 OO          11.9  
+##  6 MQ          10.8  
+##  7 WN           9.65 
+##  8 B6           9.46 
+##  9 9E           7.38 
+## 10 UA           3.56 
+## 11 US           2.13 
+## 12 VX           1.76 
+## 13 DL           1.64 
+## 14 AA           0.364
+## 15 HA          -6.92 
+## 16 AS          -9.93</code></pre>
+<p>Podemos notar que a companhia com o maior atraso médio é a F9 (Frontier Airlines Inc).</p>
+<p>Para tentar desembaralhar o efeito de aeroportos ruins e companhias ruins, vamos:</p>
+<ul>
+<li>filtrar apenas os voos com atraso;</li>
+<li>agrupar os voos conforme as rotas e companhias;</li>
+<li>calcular o atraso médio e o total de voos por companhia no trecho (<code>arr_delay</code> e <code>flights</code>);</li>
+<li>calcular o atraso médio e o total de voos do trecho de todas as companhias (<code>arr_delay_total</code> e <code>flights_total</code>);</li>
+<li>calcular o atraso médio por voo da companhia (<code>arr_delay_mean &lt;- arr_delay / flights</code>);</li>
+<li>calcular o atraso “médio” das demais companhias (<code>arr_delay_others &lt;- (arr_delay_total - arr_delay) / (flights_total - fligths)</code>);</li>
+<li>calcular a diferença entre o atraso médio da companhia e o atraso médio das outras companhias juntas (<code>arr_delay_diff &lt;- arr_delay_mean - arr_delay_others</code>);</li>
+<li>remover valores cuja diferença não faça sentido (<code>is.finite(arr_delay_diff)</code>);</li>
+<li>agrupar por companhia;</li>
+<li>calcular a média das diferenças de atraso da companhia (<code>arr_delay_diff</code>);</li>
+</ul>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="transformação-de-dados-com-dplyr.html#cb128-1" tabindex="-1"></a>(atrasos <span class="ot">&lt;-</span> flights <span class="sc">%&gt;%</span> </span>
+<span id="cb128-2"><a href="transformação-de-dados-com-dplyr.html#cb128-2" tabindex="-1"></a>                <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(arr_delay)) <span class="sc">%&gt;%</span></span>
+<span id="cb128-3"><a href="transformação-de-dados-com-dplyr.html#cb128-3" tabindex="-1"></a>                <span class="fu">group_by</span>(origin, dest, carrier) <span class="sc">%&gt;%</span></span>
+<span id="cb128-4"><a href="transformação-de-dados-com-dplyr.html#cb128-4" tabindex="-1"></a>                <span class="fu">summarise</span>(</span>
+<span id="cb128-5"><a href="transformação-de-dados-com-dplyr.html#cb128-5" tabindex="-1"></a>                    <span class="at">arr_delay =</span> <span class="fu">sum</span>(arr_delay),</span>
+<span id="cb128-6"><a href="transformação-de-dados-com-dplyr.html#cb128-6" tabindex="-1"></a>                    <span class="at">flights =</span> <span class="fu">n</span>()</span>
+<span id="cb128-7"><a href="transformação-de-dados-com-dplyr.html#cb128-7" tabindex="-1"></a>                ) <span class="sc">%&gt;%</span></span>
+<span id="cb128-8"><a href="transformação-de-dados-com-dplyr.html#cb128-8" tabindex="-1"></a>                <span class="fu">group_by</span>(origin, dest) <span class="sc">%&gt;%</span></span>
+<span id="cb128-9"><a href="transformação-de-dados-com-dplyr.html#cb128-9" tabindex="-1"></a>                <span class="fu">mutate</span>(</span>
+<span id="cb128-10"><a href="transformação-de-dados-com-dplyr.html#cb128-10" tabindex="-1"></a>                    <span class="at">arr_delay_total =</span> <span class="fu">sum</span>(arr_delay),</span>
+<span id="cb128-11"><a href="transformação-de-dados-com-dplyr.html#cb128-11" tabindex="-1"></a>                    <span class="at">flights_total =</span> <span class="fu">sum</span>(flights)</span>
+<span id="cb128-12"><a href="transformação-de-dados-com-dplyr.html#cb128-12" tabindex="-1"></a>                ) <span class="sc">%&gt;%</span></span>
+<span id="cb128-13"><a href="transformação-de-dados-com-dplyr.html#cb128-13" tabindex="-1"></a>                <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb128-14"><a href="transformação-de-dados-com-dplyr.html#cb128-14" tabindex="-1"></a>                <span class="fu">mutate</span>(        </span>
+<span id="cb128-15"><a href="transformação-de-dados-com-dplyr.html#cb128-15" tabindex="-1"></a>                    <span class="at">arr_delay_mean =</span> arr_delay <span class="sc">/</span> flights, <span class="co"># atraso médio da companhia</span></span>
+<span id="cb128-16"><a href="transformação-de-dados-com-dplyr.html#cb128-16" tabindex="-1"></a>                    <span class="at">arr_delay_others =</span> (arr_delay_total <span class="sc">-</span> arr_delay) <span class="sc">/</span> (flights_total <span class="sc">-</span> flights), <span class="co"># atraso médio das demais companhias</span></span>
+<span id="cb128-17"><a href="transformação-de-dados-com-dplyr.html#cb128-17" tabindex="-1"></a>                    <span class="at">arr_delay_diff =</span> arr_delay_mean <span class="sc">-</span> arr_delay_others <span class="co"># diferença do atraso em relação às demais companhias</span></span>
+<span id="cb128-18"><a href="transformação-de-dados-com-dplyr.html#cb128-18" tabindex="-1"></a>                ) <span class="sc">%&gt;%</span></span>
+<span id="cb128-19"><a href="transformação-de-dados-com-dplyr.html#cb128-19" tabindex="-1"></a>                <span class="fu">filter</span>(<span class="fu">is.finite</span>(arr_delay_diff)) <span class="sc">%&gt;%</span></span>
+<span id="cb128-20"><a href="transformação-de-dados-com-dplyr.html#cb128-20" tabindex="-1"></a>                <span class="fu">group_by</span>(carrier) <span class="sc">%&gt;%</span></span>
+<span id="cb128-21"><a href="transformação-de-dados-com-dplyr.html#cb128-21" tabindex="-1"></a>                <span class="fu">summarise</span>(</span>
+<span id="cb128-22"><a href="transformação-de-dados-com-dplyr.html#cb128-22" tabindex="-1"></a>                    <span class="at">arr_delay_diff =</span> <span class="fu">mean</span>(arr_delay_diff)</span>
+<span id="cb128-23"><a href="transformação-de-dados-com-dplyr.html#cb128-23" tabindex="-1"></a>                ) <span class="sc">%&gt;%</span></span>
+<span id="cb128-24"><a href="transformação-de-dados-com-dplyr.html#cb128-24" tabindex="-1"></a>                <span class="fu">arrange</span>(<span class="fu">desc</span>(arr_delay_diff)))</span></code></pre></div>
+<pre><code>## `summarise()` has grouped output by &#39;origin&#39;, &#39;dest&#39;. You can override using
+## the `.groups` argument.</code></pre>
+<pre><code>## # A tibble: 15 × 2
+##    carrier arr_delay_diff
+##    &lt;chr&gt;            &lt;dbl&gt;
+##  1 OO              27.3  
+##  2 F9              17.3  
+##  3 EV              11.0  
+##  4 B6               6.41 
+##  5 FL               2.57 
+##  6 VX              -0.202
+##  7 AA              -0.970
+##  8 WN              -1.27 
+##  9 UA              -1.86 
+## 10 MQ              -2.48 
+## 11 YV              -2.81 
+## 12 9E              -3.54 
+## 13 US              -4.14 
+## 14 DL             -10.2  
+## 15 AS             -15.8</code></pre>
+<p>Desconsiderando o efeito de trechos e aeroportos ruins, a companhia com maior atraso é a OO (SkyWest Airlines Inc.).</p>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="transformação-de-dados-com-dplyr.html#cb131-1" tabindex="-1"></a>atrasos <span class="sc">%&gt;%</span></span>
+<span id="cb131-2"><a href="transformação-de-dados-com-dplyr.html#cb131-2" tabindex="-1"></a>    <span class="fu">left_join</span>(airlines, <span class="at">by =</span> <span class="st">&quot;carrier&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb131-3"><a href="transformação-de-dados-com-dplyr.html#cb131-3" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(</span>
+<span id="cb131-4"><a href="transformação-de-dados-com-dplyr.html#cb131-4" tabindex="-1"></a>        arr_delay_diff, </span>
+<span id="cb131-5"><a href="transformação-de-dados-com-dplyr.html#cb131-5" tabindex="-1"></a>        <span class="fu">reorder</span>(name, <span class="fu">desc</span>(arr_delay_diff))</span>
+<span id="cb131-6"><a href="transformação-de-dados-com-dplyr.html#cb131-6" tabindex="-1"></a>    )) <span class="sc">+</span></span>
+<span id="cb131-7"><a href="transformação-de-dados-com-dplyr.html#cb131-7" tabindex="-1"></a>        <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb131-8"><a href="transformação-de-dados-com-dplyr.html#cb131-8" tabindex="-1"></a>        <span class="fu">labs</span>(</span>
+<span id="cb131-9"><a href="transformação-de-dados-com-dplyr.html#cb131-9" tabindex="-1"></a>            <span class="at">title =</span> <span class="st">&quot;Atrasos por companhia aérea&quot;</span>,</span>
+<span id="cb131-10"><a href="transformação-de-dados-com-dplyr.html#cb131-10" tabindex="-1"></a>            <span class="at">y =</span> <span class="st">&quot;Companhia aérea&quot;</span>,</span>
+<span id="cb131-11"><a href="transformação-de-dados-com-dplyr.html#cb131-11" tabindex="-1"></a>            <span class="at">x =</span> <span class="st">&quot;Tempo médio de atraso (em min.)&quot;</span></span>
+<span id="cb131-12"><a href="transformação-de-dados-com-dplyr.html#cb131-12" tabindex="-1"></a>        ) <span class="sc">+</span></span>
+<span id="cb131-13"><a href="transformação-de-dados-com-dplyr.html#cb131-13" tabindex="-1"></a>        tema</span></code></pre></div>
+<p><img src="r4ds_files/figure-html/unnamed-chunk-70-1.png" width="672" /></p>
 </div>
 </div>
 <div id="exr3-7-6" class="section level3 unnumbered hasAnchor">
 <h3>Exercício 3.7.6<a href="transformação-de-dados-com-dplyr.html#exr3-7-6" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="enunciado">
-<p>x</p>
+<p>Para cada avião, conte o número de voos antes do primeiro atraso de mais de uma hora.</p>
 </div>
 <div class="solution">
-<p><span id="unlabeled-div-64" class="solution"><em>Solução</em>. </span>x</p>
+<p><span id="unlabeled-div-64" class="solution"><em>Solução</em>. </span>Utilizando a variável <code>flight</code> para identificar o voo e a variável <code>arr_delay</code> como parâmetro para determinar o tempo de atraso:</p>
+<ul>
+<li>ordenamos o data-frame conforme a hora agendada para decolagem;</li>
+<li>agrupamos pelo número do voo;</li>
+<li>utilizamos as funções <code>first()</code> e <code>which()</code> para buscar a posição do primeiro elemento que é <code>NA</code> ou o atraso é maior do que 60 min.</li>
+</ul>
+<p>Obs.: <code>NA</code> indica que aquele voo não teve nenhum atraso superior a 60 min.</p>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="transformação-de-dados-com-dplyr.html#cb132-1" tabindex="-1"></a>flights <span class="sc">%&gt;%</span></span>
+<span id="cb132-2"><a href="transformação-de-dados-com-dplyr.html#cb132-2" tabindex="-1"></a>    <span class="fu">arrange</span>(time_hour) <span class="sc">%&gt;%</span>    </span>
+<span id="cb132-3"><a href="transformação-de-dados-com-dplyr.html#cb132-3" tabindex="-1"></a>    <span class="fu">group_by</span>(flight) <span class="sc">%&gt;%</span></span>
+<span id="cb132-4"><a href="transformação-de-dados-com-dplyr.html#cb132-4" tabindex="-1"></a>    <span class="fu">summarise</span>(</span>
+<span id="cb132-5"><a href="transformação-de-dados-com-dplyr.html#cb132-5" tabindex="-1"></a>        <span class="at">first_delay_pos =</span> <span class="fu">first</span>(<span class="fu">which</span>(<span class="fu">is.na</span>(arr_delay) <span class="sc">|</span> arr_delay <span class="sc">&gt;</span> <span class="dv">60</span>)) <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb132-6"><a href="transformação-de-dados-com-dplyr.html#cb132-6" tabindex="-1"></a>    )</span></code></pre></div>
+<pre><code>## # A tibble: 3,844 × 2
+##    flight first_delay_pos
+##     &lt;int&gt;           &lt;dbl&gt;
+##  1      1              47
+##  2      2              NA
+##  3      3               9
+##  4      4              77
+##  5      5              11
+##  6      6              23
+##  7      7              17
+##  8      8              15
+##  9      9              12
+## 10     10              24
+## # ℹ 3,834 more rows</code></pre>
 </div>
 </div>
 <div id="exr3-7-7" class="section level3 unnumbered hasAnchor">
 <h3>Exercício 3.7.7<a href="transformação-de-dados-com-dplyr.html#exr3-7-7" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="enunciado">
-<p>x</p>
+<p>O que o argumento <code>sort</code> para <code>count()</code> faz? Quando você pode usá-lo?</p>
 </div>
 <div class="solution">
-<p><span id="unlabeled-div-65" class="solution"><em>Solução</em>. </span>x</p>
+<p><span id="unlabeled-div-65" class="solution"><em>Solução</em>. </span>Utilizando o comando <code>?count</code>, identificamos que o argumento <code>sort</code> organiza a contagem em ordem decrescente.</p>
 </div>
 </div>
 </div>

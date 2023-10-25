@@ -366,7 +366,14 @@ O R fornece as funções `cos(x)`, `sin(x)`, `tan(x)`, `acos(x)`, `asin(x)`, `at
 ### Exercício 3.7.1 {- #exr3-7-1}
 
 ::: {.enunciado}
-x
+Faça um *brainstorming* de pelo menos cinco maneiras diferentes de avaliar as características do atraso típico de um grupo de voos. Considere os seguintes cenários:
+
+- Um voo está 15 minutos adiantado em 50% do tempo e 15 minutos atrasado em 50% do tempo.
+- Um voo está sempre 10 min atrasado.
+- Um voo está 30 minutos adiantado em 50% do tempo e 30 minutos atrasado em 50% do tempo.
+- Em 99% do tempo um voo está no horário. Em 1% do tempo, está 2 horas atrasado.
+
+O que é mais importante: atrsado na chegada ou atraso na partida?
 :::
 
 :::{.solution}
@@ -376,61 +383,182 @@ x
 ### Exercício 3.7.2 {- #exr3-7-2}
 
 ::: {.enunciado}
-x
+Crie outra abordagem que lhe dará o mesmo resultado que `not_cancelled %>% count(dest)` e `not_cancelled %>% count(tailnum, wt = distance)` (sem usar `count()`).
 :::
 
 :::{.solution}
-x
+```{r}
+not_cancelled %>%
+    group_by(dest) %>%
+    summarise(n = n())
+
+not_cancelled %>%
+    group_by(tailnum) %>%
+    summarise(n = sum(distance))
+```
+
 :::
 
 ### Exercício 3.7.3 {- #exr3-7-3}
 
 ::: {.enunciado}
-x
+Nossa definição de voos cancelados (`is.na(dep_delay) | is.na(arr_delay)`) é ligeiramente insuficiente. Por quê? Qual é a coluna mais importante?
 :::
 
 :::{.solution}
-x
+As váriáveis `dep_delay` e `arr_delay` se referem ao atraso na partida ou na chegada dos voos. Caso um voo tenha saído e chegado no horário exato, esses valores podem estar `NA`, ou seja, o voo não foi cancelado, apenas partiu e chegou no horário planejado. Nesse caso, o mais correto seria considerar como cancelados os voos `dep_time` é `NA`. 
 :::
 
 ### Exercício 3.7.4 {- #exr3-7-4}
 
 ::: {.enunciado}
-x
+Veja o número de voos cancelados por dia. Existe um padrão? A proporção de voos cancelados está relacionado ao atraso médio?
 :::
 
 :::{.solution}
-x
+```{r}
+cancelled_by_day <- flights %>%
+                        group_by(year, month, day) %>%
+                        summarise(
+                            date = as.Date(paste(year, month, day, sep='-')),
+                            count = n(),
+                            count_cancelled = sum(is.na(dep_time)),
+                            count_not_cancelled = sum(!is.na(dep_time)),
+                            mean_dep_delay = mean(dep_delay, na.rm = TRUE),
+                            mean_arr_delay = mean(arr_delay, na.rm = TRUE),
+                        )
+
+cancelled_by_day %>%
+    ggplot(aes(mean_dep_delay, count_cancelled / count)) +
+        geom_point() +
+        geom_smooth(se = FALSE) +
+        labs(
+            title = "Número de voos cancelados conforme o tempo médio de atraso no dia",
+            x = "Tempo médio de atraso na partida (min)",
+            y = "Número de cancelamentos"
+        ) +
+        xlim(0, 80) +
+        ylim(0, 0.3) +
+        tema
+```
+
+Parece existir uma relação entre o número de coos cancelados no dia e a média de atraso nos voos desse mesmo dia. Caso haja alguma condição desfavorável (tempo ruim, problemas na pista de decolagem/pouso, etc), o intervalo entre uma decolagem/pouso e outro pode aumentar significativamente gerando atrasos que se acumulam a ponto de alguns voos terem que ser cancelados (esse comportamento é real?).
 :::
 
 ### Exercício 3.7.5 {- #exr3-7-5}
 
 ::: {.enunciado}
-x
+Qual companhia tem os piores atrasos? Desafio: você consegue desembaralhar o efeito dos aeroportus ruins *versus* companhiars ruins? Por quê/Por que não? ( Dica: pense em `flights %>% group_by(cartier, dest) %>% summarize(n())`)
 :::
 
 :::{.solution}
-x
+Para verificar qual companhia tem os piores atrasos, vamos calcular o atraso médio por companhia.
+
+```{r}
+flights %>% 
+    group_by(carrier) %>% 
+    summarize(
+        mean_delay = mean(arr_delay, na.rm = TRUE)
+    ) %>%
+    arrange(desc(mean_delay))
+```
+
+Podemos notar que a companhia com o maior atraso médio é a F9 (Frontier Airlines Inc).
+
+Para tentar desembaralhar o efeito de aeroportos ruins e companhias ruins, vamos:
+
+- filtrar apenas os voos com atraso;
+- agrupar os voos conforme as rotas e companhias;
+- calcular o atraso médio e o total de voos por companhia no trecho (`arr_delay` e `flights`);
+- calcular o atraso médio e o total de voos do trecho de todas as companhias (`arr_delay_total` e `flights_total`);
+- calcular o atraso médio por voo da companhia (`arr_delay_mean <- arr_delay / flights`);
+- calcular o atraso "médio" das demais companhias (`arr_delay_others <- (arr_delay_total - arr_delay) / (flights_total - fligths)`);
+- calcular a diferença entre o atraso médio da companhia e o atraso médio das outras companhias juntas (`arr_delay_diff <- arr_delay_mean - arr_delay_others`);
+- remover valores cuja diferença não faça sentido (`is.finite(arr_delay_diff)`);
+- agrupar por companhia;
+- calcular a média das diferenças de atraso da companhia (`arr_delay_diff`);
+
+```{r}
+(atrasos <- flights %>% 
+                filter(!is.na(arr_delay)) %>%
+                group_by(origin, dest, carrier) %>%
+                summarise(
+                    arr_delay = sum(arr_delay),
+                    flights = n()
+                ) %>%
+                group_by(origin, dest) %>%
+                mutate(
+                    arr_delay_total = sum(arr_delay),
+                    flights_total = sum(flights)
+                ) %>%
+                ungroup() %>%
+                mutate(        
+                    arr_delay_mean = arr_delay / flights, # atraso médio da companhia
+                    arr_delay_others = (arr_delay_total - arr_delay) / (flights_total - flights), # atraso médio das demais companhias
+                    arr_delay_diff = arr_delay_mean - arr_delay_others # diferença do atraso em relação às demais companhias
+                ) %>%
+                filter(is.finite(arr_delay_diff)) %>%
+                group_by(carrier) %>%
+                summarise(
+                    arr_delay_diff = mean(arr_delay_diff)
+                ) %>%
+                arrange(desc(arr_delay_diff)))
+```
+
+Desconsiderando o efeito de trechos e aeroportos ruins, a companhia com maior atraso é a OO (SkyWest Airlines Inc.).
+
+```{r}
+atrasos %>%
+    left_join(airlines, by = "carrier") %>%
+    ggplot(aes(
+        arr_delay_diff, 
+        reorder(name, desc(arr_delay_diff))
+    )) +
+        geom_col() +
+        labs(
+            title = "Atrasos por companhia aérea",
+            y = "Companhia aérea",
+            x = "Tempo médio de atraso (em min.)"
+        ) +
+        tema
+```
+
 :::
 
 ### Exercício 3.7.6 {- #exr3-7-6}
 
 ::: {.enunciado}
-x
+Para cada avião, conte o número de voos antes do primeiro atraso de mais de uma hora.
 :::
 
 :::{.solution}
-x
+Utilizando a variável `flight` para identificar o voo e a variável `arr_delay` como parâmetro para determinar o tempo de atraso:
+
+- ordenamos o data-frame conforme a hora agendada para decolagem;
+- agrupamos pelo número do voo;
+- utilizamos as funções `first()` e `which()` para buscar a posição do primeiro elemento que é `NA` ou o atraso é maior do que 60 min.
+
+Obs.: `NA` indica que aquele voo não teve nenhum atraso superior a 60 min.
+
+```{r}
+flights %>%
+    arrange(time_hour) %>%    
+    group_by(flight) %>%
+    summarise(
+        first_delay_pos = first(which(is.na(arr_delay) | arr_delay > 60)) - 1
+    )
+```
+
 :::
 
 ### Exercício 3.7.7 {- #exr3-7-7}
 
 ::: {.enunciado}
-x
+O que o argumento `sort` para `count()` faz? Quando você pode usá-lo?
 :::
 
 :::{.solution}
-x
+Utilizando o comando `?count`, identificamos que o argumento `sort` organiza a contagem em ordem decrescente.
 :::
 
 ## Mudanças agrupadas (e filtros)
