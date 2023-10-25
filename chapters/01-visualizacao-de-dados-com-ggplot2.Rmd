@@ -726,16 +726,62 @@ ggplot(data = mpg, mapping = aes(x = class, y = hwy)) +
 
 ## Sistemas de coordenadas
 
-x
-
-## A gramática em camadas de gráficos
-
-### Exercício  {- #exr}
+### Exercício 1.9.1 {- #exr1-9-1}
 
 ::: {.enunciado}
-x
+Transforme um gráfico de barras empilhadas em um gráfico de pizza usando `coord_polar()`.
 :::
 
 :::{.solution}
-x
+```{r}
+ggplot(data = diamonds, mapping = aes(x = cut, fill = cut)) +
+    geom_bar(show.legend = FALSE, width = 1) +
+    coord_polar() +
+    labs(x = NULL, y = NULL) +
+    theme(aspect.ratio = 1) +
+    tema
+```
+
 :::
+
+### Exercício 1.9.2 {- #exr1-9-2}
+
+::: {.enunciado}
+O que `labs()` faz? Leia a documentação.
+:::
+
+:::{.solution}
+Usando o comando `?labs`, vimos que esta função é utilizada para definir labels do gráfico, como título, subtítulo, títulos de eixos, etc.
+:::
+
+### Exercício 1.9.3 {- #exr1-9-3}
+
+::: {.enunciado}
+Qual é a diferença entre `coord_quickmap()` e `coord_map()`?
+:::
+
+:::{.solution}
+Usando o comando `?coord_map`, notamos que a diferença é que enquanto `coord_map()` não preserva linhas retas, sendo assim, mais custoso computacionalmente, o `coord_quickmap()` o faz.
+:::
+
+### Exercício 1.9.4 {- #exr1-9-4}
+
+::: {.enunciado}
+O que o gráfico a seguir lhe diz sobre a relação entre `mpg` de cidade e estrada? Por que `coord_fixed()` é importante? O que `geom_abline()` faz?
+
+```{r}
+ggplot(data = mpg, mapping = aes(x = cty, y = hwy)) +
+    geom_point() +
+    geom_abline() +
+    coord_fixed(ratio = 1, xlim = c(5, 45), ylim = c(5, 45)) +
+    tema
+```
+:::
+
+:::{.solution}
+O gráfico mostra a relação entre a eficiência na cidade e na estrada. O `coord_fixed()` força que seja mantida uma proporção entre os eixos x e y, isto é, garante que uma unidade no eixo y corresponda a um número determinado de unidades no eixo x. A razão padrão é 1. Já o `geom_abline()` define uma linha de referência diagonal ao gráfico, no nosso caso, a linha é a reta dada por $y - x = 0$.
+:::
+
+## A gramática em camadas de gráficos
+
+Não temos exercícios nesta seção.

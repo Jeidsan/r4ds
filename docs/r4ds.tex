@@ -1259,20 +1259,76 @@ Conforme pode ser visto em \texttt{?geom\_boxplot}, a \texttt{position} padrão 
 \hypertarget{sistemas-de-coordenadas}{%
 \section{Sistemas de coordenadas}\label{sistemas-de-coordenadas}}
 
-x
+\hypertarget{exr1-9-1}{%
+\subsection*{Exercício 1.9.1}\label{exr1-9-1}}
+\addcontentsline{toc}{subsection}{Exercício 1.9.1}
+
+Transforme um gráfico de barras empilhadas em um gráfico de pizza usando \texttt{coord\_polar()}.
+
+\begin{solution}
+\leavevmode
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ diamonds, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ cut, }\AttributeTok{fill =}\NormalTok{ cut)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{show.legend =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{width =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{coord\_polar}\NormalTok{() }\SpecialCharTok{+}
+    \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \ConstantTok{NULL}\NormalTok{, }\AttributeTok{y =} \ConstantTok{NULL}\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{theme}\NormalTok{(}\AttributeTok{aspect.ratio =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
+\NormalTok{    tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-38-1.pdf}
+
+\end{solution}
+
+\hypertarget{exr1-9-2}{%
+\subsection*{Exercício 1.9.2}\label{exr1-9-2}}
+\addcontentsline{toc}{subsection}{Exercício 1.9.2}
+
+O que \texttt{labs()} faz? Leia a documentação.
+
+\begin{solution}
+Usando o comando \texttt{?labs}, vimos que esta função é utilizada para definir labels do gráfico, como título, subtítulo, títulos de eixos, etc.
+\end{solution}
+
+\hypertarget{exr1-9-3}{%
+\subsection*{Exercício 1.9.3}\label{exr1-9-3}}
+\addcontentsline{toc}{subsection}{Exercício 1.9.3}
+
+Qual é a diferença entre \texttt{coord\_quickmap()} e \texttt{coord\_map()}?
+
+\begin{solution}
+Usando o comando \texttt{?coord\_map}, notamos que a diferença é que enquanto \texttt{coord\_map()} não preserva linhas retas, sendo assim, mais custoso computacionalmente, o \texttt{coord\_quickmap()} o faz.
+\end{solution}
+
+\hypertarget{exr1-9-4}{%
+\subsection*{Exercício 1.9.4}\label{exr1-9-4}}
+\addcontentsline{toc}{subsection}{Exercício 1.9.4}
+
+O que o gráfico a seguir lhe diz sobre a relação entre \texttt{mpg} de cidade e estrada? Por que \texttt{coord\_fixed()} é importante? O que \texttt{geom\_abline()} faz?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ mpg, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ cty, }\AttributeTok{y =}\NormalTok{ hwy)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+    \FunctionTok{geom\_abline}\NormalTok{() }\SpecialCharTok{+}
+    \FunctionTok{coord\_fixed}\NormalTok{(}\AttributeTok{ratio =} \DecValTok{1}\NormalTok{, }\AttributeTok{xlim =} \FunctionTok{c}\NormalTok{(}\DecValTok{5}\NormalTok{, }\DecValTok{45}\NormalTok{), }\AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\DecValTok{5}\NormalTok{, }\DecValTok{45}\NormalTok{)) }\SpecialCharTok{+}
+\NormalTok{    tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-39-1.pdf}
+
+\begin{solution}
+O gráfico mostra a relação entre a eficiência na cidade e na estrada. O \texttt{coord\_fixed()} força que seja mantida uma proporção entre os eixos x e y, isto é, garante que uma unidade no eixo y corresponda a um número determinado de unidades no eixo x. A razão padrão é 1. Já o \texttt{geom\_abline()} define uma linha de referência diagonal ao gráfico, no nosso caso, a linha é a reta dada por \(y - x = 0\).
+\end{solution}
 
 \hypertarget{a-gramuxe1tica-em-camadas-de-gruxe1ficos}{%
 \section{A gramática em camadas de gráficos}\label{a-gramuxe1tica-em-camadas-de-gruxe1ficos}}
 
-\hypertarget{exr}{%
-\subsection*{Exercício}\label{exr}}
-\addcontentsline{toc}{subsection}{Exercício}
-
-x
-
-\begin{solution}
-x
-\end{solution}
+Não temos exercícios nesta seção.
 
 \hypertarget{fluxo-de-trabalho-o-buxe1sico}{%
 \chapter{Fluxo de trabalho: o básico}\label{fluxo-de-trabalho-o-buxe1sico}}

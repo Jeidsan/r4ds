@@ -223,11 +223,14 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#exr1-8-3"><i class="fa fa-check"></i>Exercício 1.8.3</a></li>
 <li class="chapter" data-level="" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#exr1-8-4"><i class="fa fa-check"></i>Exercício 1.8.4</a></li>
 </ul></li>
-<li class="chapter" data-level="1.9" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#sistemas-de-coordenadas"><i class="fa fa-check"></i><b>1.9</b> Sistemas de coordenadas</a></li>
-<li class="chapter" data-level="1.10" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#a-gramática-em-camadas-de-gráficos"><i class="fa fa-check"></i><b>1.10</b> A gramática em camadas de gráficos</a>
+<li class="chapter" data-level="1.9" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#sistemas-de-coordenadas"><i class="fa fa-check"></i><b>1.9</b> Sistemas de coordenadas</a>
 <ul>
-<li class="chapter" data-level="" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#exr"><i class="fa fa-check"></i>Exercício</a></li>
+<li class="chapter" data-level="" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#exr1-9-1"><i class="fa fa-check"></i>Exercício 1.9.1</a></li>
+<li class="chapter" data-level="" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#exr1-9-2"><i class="fa fa-check"></i>Exercício 1.9.2</a></li>
+<li class="chapter" data-level="" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#exr1-9-3"><i class="fa fa-check"></i>Exercício 1.9.3</a></li>
+<li class="chapter" data-level="" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#exr1-9-4"><i class="fa fa-check"></i>Exercício 1.9.4</a></li>
 </ul></li>
+<li class="chapter" data-level="1.10" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#a-gramática-em-camadas-de-gráficos"><i class="fa fa-check"></i><b>1.10</b> A gramática em camadas de gráficos</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="fluxo-de-trabalho-o-básico.html"><a href="fluxo-de-trabalho-o-básico.html"><i class="fa fa-check"></i><b>2</b> Fluxo de trabalho: o básico</a></li>
 <li class="chapter" data-level="3" data-path="transformação-de-dados-com-dplyr.html"><a href="transformação-de-dados-com-dplyr.html"><i class="fa fa-check"></i><b>3</b> Transformação de dados com <code>dplyr</code></a></li>
@@ -1057,20 +1060,60 @@ f &lt;- ggplot(data = mpg, mapping = aes(x = displ, y = hwy, fill = drv)) +
 </div>
 <div id="sistemas-de-coordenadas" class="section level2 hasAnchor" number="1.9">
 <h2><span class="header-section-number">1.9</span> Sistemas de coordenadas<a href="visualização-de-dados-com-ggplot2.html#sistemas-de-coordenadas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>x</p>
+<div id="exr1-9-1" class="section level3 unnumbered hasAnchor">
+<h3>Exercício 1.9.1<a href="visualização-de-dados-com-ggplot2.html#exr1-9-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="enunciado">
+<p>Transforme um gráfico de barras empilhadas em um gráfico de pizza usando <code>coord_polar()</code>.</p>
+</div>
+<div class="solution">
+<p><span id="unlabeled-div-33" class="solution"><em>Solução</em>. </span></p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="visualização-de-dados-com-ggplot2.html#cb53-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> diamonds, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> cut, <span class="at">fill =</span> cut)) <span class="sc">+</span></span>
+<span id="cb53-2"><a href="visualização-de-dados-com-ggplot2.html#cb53-2" tabindex="-1"></a>    <span class="fu">geom_bar</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>, <span class="at">width =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb53-3"><a href="visualização-de-dados-com-ggplot2.html#cb53-3" tabindex="-1"></a>    <span class="fu">coord_polar</span>() <span class="sc">+</span></span>
+<span id="cb53-4"><a href="visualização-de-dados-com-ggplot2.html#cb53-4" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb53-5"><a href="visualização-de-dados-com-ggplot2.html#cb53-5" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">aspect.ratio =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb53-6"><a href="visualização-de-dados-com-ggplot2.html#cb53-6" tabindex="-1"></a>    tema</span></code></pre></div>
+<p><img src="r4ds_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
+</div>
+</div>
+<div id="exr1-9-2" class="section level3 unnumbered hasAnchor">
+<h3>Exercício 1.9.2<a href="visualização-de-dados-com-ggplot2.html#exr1-9-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="enunciado">
+<p>O que <code>labs()</code> faz? Leia a documentação.</p>
+</div>
+<div class="solution">
+<p><span id="unlabeled-div-34" class="solution"><em>Solução</em>. </span>Usando o comando <code>?labs</code>, vimos que esta função é utilizada para definir labels do gráfico, como título, subtítulo, títulos de eixos, etc.</p>
+</div>
+</div>
+<div id="exr1-9-3" class="section level3 unnumbered hasAnchor">
+<h3>Exercício 1.9.3<a href="visualização-de-dados-com-ggplot2.html#exr1-9-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="enunciado">
+<p>Qual é a diferença entre <code>coord_quickmap()</code> e <code>coord_map()</code>?</p>
+</div>
+<div class="solution">
+<p><span id="unlabeled-div-35" class="solution"><em>Solução</em>. </span>Usando o comando <code>?coord_map</code>, notamos que a diferença é que enquanto <code>coord_map()</code> não preserva linhas retas, sendo assim, mais custoso computacionalmente, o <code>coord_quickmap()</code> o faz.</p>
+</div>
+</div>
+<div id="exr1-9-4" class="section level3 unnumbered hasAnchor">
+<h3>Exercício 1.9.4<a href="visualização-de-dados-com-ggplot2.html#exr1-9-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="enunciado">
+<p>O que o gráfico a seguir lhe diz sobre a relação entre <code>mpg</code> de cidade e estrada? Por que <code>coord_fixed()</code> é importante? O que <code>geom_abline()</code> faz?</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="visualização-de-dados-com-ggplot2.html#cb54-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> cty, <span class="at">y =</span> hwy)) <span class="sc">+</span></span>
+<span id="cb54-2"><a href="visualização-de-dados-com-ggplot2.html#cb54-2" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb54-3"><a href="visualização-de-dados-com-ggplot2.html#cb54-3" tabindex="-1"></a>    <span class="fu">geom_abline</span>() <span class="sc">+</span></span>
+<span id="cb54-4"><a href="visualização-de-dados-com-ggplot2.html#cb54-4" tabindex="-1"></a>    <span class="fu">coord_fixed</span>(<span class="at">ratio =</span> <span class="dv">1</span>, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">45</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">45</span>)) <span class="sc">+</span></span>
+<span id="cb54-5"><a href="visualização-de-dados-com-ggplot2.html#cb54-5" tabindex="-1"></a>    tema</span></code></pre></div>
+<p><img src="r4ds_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
+</div>
+<div class="solution">
+<p><span id="unlabeled-div-36" class="solution"><em>Solução</em>. </span>O gráfico mostra a relação entre a eficiência na cidade e na estrada. O <code>coord_fixed()</code> força que seja mantida uma proporção entre os eixos x e y, isto é, garante que uma unidade no eixo y corresponda a um número determinado de unidades no eixo x. A razão padrão é 1. Já o <code>geom_abline()</code> define uma linha de referência diagonal ao gráfico, no nosso caso, a linha é a reta dada por <span class="math inline">\(y - x = 0\)</span>.</p>
+</div>
+</div>
 </div>
 <div id="a-gramática-em-camadas-de-gráficos" class="section level2 hasAnchor" number="1.10">
 <h2><span class="header-section-number">1.10</span> A gramática em camadas de gráficos<a href="visualização-de-dados-com-ggplot2.html#a-gramática-em-camadas-de-gráficos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="exr" class="section level3 unnumbered hasAnchor">
-<h3>Exercício<a href="visualização-de-dados-com-ggplot2.html#exr" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="enunciado">
-<p>x</p>
-</div>
-<div class="solution">
-<p><span id="unlabeled-div-33" class="solution"><em>Solução</em>. </span>x</p>
-</div>
+<p>Não temos exercícios nesta seção.</p>
 
-</div>
 </div>
 </div>
             </section>
@@ -1134,6 +1177,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>
