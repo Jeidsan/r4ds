@@ -1,0 +1,61 @@
+# (PART) Explorar {-}
+
+# Visualização de dados com `ggplot2`
+
+## Introdução
+
+Não temos exercícios nesta seção.
+
+## Primeiros passos
+
+::: {.exercise}
+Execute `ggplot(data=mpg);`. O que você vê?
+:::
+
+## Mapeamentos estéticos
+
+::: {.exercise}
+x
+:::
+
+## Problemas comuns
+
+::: {.exercise}
+x
+:::
+
+## Facetas
+
+::: {.exercise}
+x
+:::
+
+## Objetos geométricos
+
+::: {.exercise}
+x
+:::
+
+## Transformações estatísticas
+
+::: {.exercise}
+x
+:::
+
+## Ajustes de posição
+
+::: {.exercise}
+x
+:::
+
+## Sistemas de coordenadas
+
+::: {.exercise}
+x
+:::
+
+## A gramática em camadas de gráficos
+
+::: {.exercise}
+x
+:::

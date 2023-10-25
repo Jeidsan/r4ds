@@ -1,0 +1,27 @@
+book_filename: "r4ds"
+repo: "https://github.com/jeidsan/r4ds/"
+view: "https://github.com/jeidsan/r4ds/blob/main/%s"
+edit: "https://github.com/jeidsan/r4ds/edit/main/%s"
+output_dir: "docs"
+delete_merged_file: true
+language:
+  label:
+    fig: 'Figura '
+    tab: 'Tabela '
+    eq: 'Equação '
+    thm: 'Teorema '
+    lem: 'Lema '
+    cor: 'Corolário '
+    prp: 'Proposição '
+    cnj: 'Conjectura '
+    def: 'Definição '
+    exm: 'Exemplo '
+    exr: 'Exercício '
+    hyp: 'Hipótese '
+    proof: 'Prova '
+    remark: 'Observação '
+    solution: 'Solução '
+  ui:
+    edit: 'Editar '
+    chapter_name: 'Capítulo '
+    appendix_name: 'Apêndice '

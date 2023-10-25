@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 21 Muitos modelos com purrr e broom | R para Data Science</title>
+  <meta name="description" content="Esta página contém a solução encontrada por mim para os exercícios propostos no livro R para Data Sciente, de Hadley Wickham e Garret Grolemund, publicado no Brasil em 2019 pela Alta Books Editora." />
+  <meta name="generator" content="bookdown 0.36 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 21 Muitos modelos com purrr e broom | R para Data Science" />
+  <meta property="og:type" content="book" />
+  <meta property="og:image" content="https://www.jeidsan.com.br/r4ds/images/cover.png" />
+  <meta property="og:description" content="Esta página contém a solução encontrada por mim para os exercícios propostos no livro R para Data Sciente, de Hadley Wickham e Garret Grolemund, publicado no Brasil em 2019 pela Alta Books Editora." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 21 Muitos modelos com purrr e broom | R para Data Science" />
+  
+  <meta name="twitter:description" content="Esta página contém a solução encontrada por mim para os exercícios propostos no livro R para Data Sciente, de Hadley Wickham e Garret Grolemund, publicado no Brasil em 2019 pela Alta Books Editora." />
+  <meta name="twitter:image" content="https://www.jeidsan.com.br/r4ds/images/cover.png" />
+
+<meta name="author" content="Jeidsan A. da C. Pereira" />
+
+
+<meta name="date" content="2023-10-25" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="construção-de-modelos.html"/>
+<link rel="next" href="r-markdown.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 1em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="https://www.jeidsan.com.br/r4ds">R para Data Science: Solução dos Exercícios</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introdução</a></li>
+<li class="part"><span><b>I Explorar</b></span></li>
+<li class="chapter" data-level="1" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html"><i class="fa fa-check"></i><b>1</b> Visualização de dados com <code>ggplot2</code></a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#introdução-1"><i class="fa fa-check"></i><b>1.1</b> Introdução</a></li>
+<li class="chapter" data-level="1.2" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#primeiros-passos"><i class="fa fa-check"></i><b>1.2</b> Primeiros passos</a></li>
+<li class="chapter" data-level="1.3" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#mapeamentos-estéticos"><i class="fa fa-check"></i><b>1.3</b> Mapeamentos estéticos</a></li>
+<li class="chapter" data-level="1.4" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#problemas-comuns"><i class="fa fa-check"></i><b>1.4</b> Problemas comuns</a></li>
+<li class="chapter" data-level="1.5" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#facetas"><i class="fa fa-check"></i><b>1.5</b> Facetas</a></li>
+<li class="chapter" data-level="1.6" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#objetos-geométricos"><i class="fa fa-check"></i><b>1.6</b> Objetos geométricos</a></li>
+<li class="chapter" data-level="1.7" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#transformações-estatísticas"><i class="fa fa-check"></i><b>1.7</b> Transformações estatísticas</a></li>
+<li class="chapter" data-level="1.8" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#ajustes-de-posição"><i class="fa fa-check"></i><b>1.8</b> Ajustes de posição</a></li>
+<li class="chapter" data-level="1.9" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#sistemas-de-coordenadas"><i class="fa fa-check"></i><b>1.9</b> Sistemas de coordenadas</a></li>
+<li class="chapter" data-level="1.10" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#a-gramática-em-camadas-de-gráficos"><i class="fa fa-check"></i><b>1.10</b> A gramática em camadas de gráficos</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="fluxo-de-trabalho-o-básico.html"><a href="fluxo-de-trabalho-o-básico.html"><i class="fa fa-check"></i><b>2</b> Fluxo de trabalho: o básico</a></li>
+<li class="chapter" data-level="3" data-path="transformação-de-dados-com-dplyr.html"><a href="transformação-de-dados-com-dplyr.html"><i class="fa fa-check"></i><b>3</b> Transformação de dados com <code>dplyr</code></a></li>
+<li class="chapter" data-level="4" data-path="fluxo-de-trabalho-scripts.html"><a href="fluxo-de-trabalho-scripts.html"><i class="fa fa-check"></i><b>4</b> Fluxo de trabalho: scripts</a></li>
+<li class="chapter" data-level="5" data-path="análise-exploratória-de-dados.html"><a href="análise-exploratória-de-dados.html"><i class="fa fa-check"></i><b>5</b> Análise exploratória de dados</a></li>
+<li class="chapter" data-level="6" data-path="fluxo-de-trabalho-projetos.html"><a href="fluxo-de-trabalho-projetos.html"><i class="fa fa-check"></i><b>6</b> Fluxo de trabalho: projetos</a></li>
+<li class="part"><span><b>II Wrangle</b></span></li>
+<li class="chapter" data-level="7" data-path="tibbles-com-tibble.html"><a href="tibbles-com-tibble.html"><i class="fa fa-check"></i><b>7</b> Tibbles com <code>tibble</code></a></li>
+<li class="chapter" data-level="8" data-path="importando-dados-com-readr.html"><a href="importando-dados-com-readr.html"><i class="fa fa-check"></i><b>8</b> Importando dados com <code>readr</code></a></li>
+<li class="chapter" data-level="9" data-path="arrumando-dados-com-tidyr.html"><a href="arrumando-dados-com-tidyr.html"><i class="fa fa-check"></i><b>9</b> Arrumando dados com <code>tidyr</code></a></li>
+<li class="chapter" data-level="10" data-path="dados-relacionais-com-dplyr.html"><a href="dados-relacionais-com-dplyr.html"><i class="fa fa-check"></i><b>10</b> Dados relacionais com <code>dplyr</code></a></li>
+<li class="chapter" data-level="11" data-path="strings-com-stringr.html"><a href="strings-com-stringr.html"><i class="fa fa-check"></i><b>11</b> Strings com <code>stringr</code></a></li>
+<li class="chapter" data-level="12" data-path="fatores-com-forcats.html"><a href="fatores-com-forcats.html"><i class="fa fa-check"></i><b>12</b> Fatores com <code>forcats</code></a></li>
+<li class="chapter" data-level="13" data-path="datas-e-horas-com-lubridate.html"><a href="datas-e-horas-com-lubridate.html"><i class="fa fa-check"></i><b>13</b> Datas e horas com <code>lubridate</code></a></li>
+<li class="part"><span><b>III Programar</b></span></li>
+<li class="chapter" data-level="14" data-path="pipes-com-magrittr.html"><a href="pipes-com-magrittr.html"><i class="fa fa-check"></i><b>14</b> Pipes com <code>magrittr</code></a></li>
+<li class="chapter" data-level="15" data-path="funções.html"><a href="funções.html"><i class="fa fa-check"></i><b>15</b> Funções</a></li>
+<li class="chapter" data-level="16" data-path="vetores.html"><a href="vetores.html"><i class="fa fa-check"></i><b>16</b> Vetores</a></li>
+<li class="chapter" data-level="17" data-path="iteração-com-purrr.html"><a href="iteração-com-purrr.html"><i class="fa fa-check"></i><b>17</b> Iteração com <code>purrr</code></a></li>
+<li class="chapter" data-level="18" data-path="part-modelar.html"><a href="part-modelar.html"><i class="fa fa-check"></i><b>18</b> (PART) Modelar</a></li>
+<li class="chapter" data-level="19" data-path="o-básico-de-modelos-com-modelr.html"><a href="o-básico-de-modelos-com-modelr.html"><i class="fa fa-check"></i><b>19</b> O básico de modelos com <code>modelr</code></a></li>
+<li class="chapter" data-level="20" data-path="construção-de-modelos.html"><a href="construção-de-modelos.html"><i class="fa fa-check"></i><b>20</b> Construção de modelos</a></li>
+<li class="chapter" data-level="21" data-path="muitos-modelos-com-purrr-e-broom.html"><a href="muitos-modelos-com-purrr-e-broom.html"><i class="fa fa-check"></i><b>21</b> Muitos modelos com <code>purrr</code> e <code>broom</code></a></li>
+<li class="part"><span><b>IV Comunicar</b></span></li>
+<li class="chapter" data-level="22" data-path="r-markdown.html"><a href="r-markdown.html"><i class="fa fa-check"></i><b>22</b> R Markdown</a></li>
+<li class="chapter" data-level="23" data-path="gráficos-para-comunicação-com-ggplot2.html"><a href="gráficos-para-comunicação-com-ggplot2.html"><i class="fa fa-check"></i><b>23</b> Gráficos para comunicação com <code>ggplot2</code></a></li>
+<li class="chapter" data-level="24" data-path="formatos-r-markdown.html"><a href="formatos-r-markdown.html"><i class="fa fa-check"></i><b>24</b> Formatos R Markdown</a></li>
+<li class="chapter" data-level="25" data-path="fluxo-de-trabalho-de-r-markdown.html"><a href="fluxo-de-trabalho-de-r-markdown.html"><i class="fa fa-check"></i><b>25</b> Fluxo de trabalho de R Markdown</a></li>
+<li class="chapter" data-level="" data-path="referências.html"><a href="referências.html"><i class="fa fa-check"></i>Referências</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Publicado com bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R para Data Science</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="muitos-modelos-com-purrr-e-broom" class="section level1 hasAnchor" number="21">
+<h1><span class="header-section-number">Capítulo 21</span> Muitos modelos com <code>purrr</code> e <code>broom</code><a href="muitos-modelos-com-purrr-e-broom.html#muitos-modelos-com-purrr-e-broom" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+
+</div>
+
+
+
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="construção-de-modelos.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="r-markdown.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/20-muitos-modelos-com-purrr-e-broom.Rmd",
+"text": "Editar "
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/jeidsan/r4ds/blob/main/20-muitos-modelos-com-purrr-e-broom.Rmd",
+"text": null
+},
+"download": ["r4ds.pdf", "r4ds.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
