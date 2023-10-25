@@ -76,13 +76,12 @@ filter(flights, dep_time >= 0, dep_time <= 600)
 Outro ajudante da filtragem do **dplyr** é `between()`. O que ele faz? Você consegue utilizá-lo para simplificar o código necessário para responder os desafios anteriores?
 :::
 
-:::{.solution}
+::: {.solution}
 O `between` recebe três parâmetros e verifica se o primeiro está entre o segundo e o terceiro.
 
 ```{r}
 filter(flights, between(dep_time, 0, 600))
 ```
-
 :::
 
 ### Exercício 3.3.3 {- #exr3-3-3}
@@ -115,41 +114,90 @@ Por que `NA ^ 0` não é um valor faltante? Por que `NA | TRUE` não é um valor
 ### Exercício 3.4.1 {- #exr3-4-1}
 
 ::: {.enunciado}
-x
+Como você poderia usar `arrange()` para classificar todos os valores faltantes no começo? (dica: use `is.na()`.)
 :::
 
 :::{.solution}
-x
+```{r}
+arrange(
+  flights, 
+  !is.na(year), 
+  !is.na(month), 
+  !is.na(day), 
+  !is.na(dep_time), 
+  !is.na(sched_dep_time), 
+  !is.na(dep_delay), 
+  !is.na(arr_time), 
+  !is.na(sched_arr_time), 
+  !is.na(arr_delay), 
+  !is.na(carrier), 
+  !is.na(flight), 
+  !is.na(tailnum), 
+  !is.na(origin), 
+  !is.na(dest), 
+  !is.na(air_time), 
+  !is.na(distance), 
+  !is.na(hour), 
+  !is.na(minute), 
+  !is.na(time_hour)
+)
+```
+
+:::
+
+::: {.observation}
+Deve haver uma solução muito mais elegante para este problema.
 :::
 
 ### Exercício 3.4.2 {- #exr3-4-2}
 
 ::: {.enunciado}
-x
+Ordene `flights` para encontrar os voos mais atrasados. Encontre os voos que saíram mais cedo.
 :::
 
 :::{.solution}
-x
+
+
+Voos mais atrasados:
+```{r}
+arrange(flights, desc(dep_delay))
+```
+
+
+Voos que saíram mais cedo:
+```{r}
+arrange(flights, dep_time)
+```
 :::
 
 ### Exercício 3.4.3 {- #exr3-4-3}
 
 ::: {.enunciado}
-x
+Ordene `flights` para encontrar os voos mais rápidos.
 :::
 
 :::{.solution}
-x
+arrange(flights, air_time)
 :::
 
 ### Exercício 3.4.4 {- #exr3-4-4}
 
 ::: {.enunciado}
-x
+Quais voos viajaram por mais tempo? Quais viajaram por menos tempo?
 :::
 
 :::{.solution}
-x
+
+
+Voos que viajaram por mais tempo:
+```{r}
+arrange(flights, desc(air_time))
+```
+
+Voos que viajaram por menos tempo:
+```{r}
+arrange(flights, air_time)
+```
 :::
 
 ## Selecionar colunas com `select()`
