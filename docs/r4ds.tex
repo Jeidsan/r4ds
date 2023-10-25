@@ -36,6 +36,46 @@
   \KOMAoptions{parskip=half}}
 \makeatother
 \usepackage{xcolor}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \usepackage{longtable,booktabs,array}
 \usepackage{calc} % for calculating minipage widths
 % Correct order of tables after \paragraph or \subparagraph
@@ -105,8 +145,8 @@
 \theoremstyle{definition}
 \newtheorem{hypothesis}{Hipótese}[chapter]
 \theoremstyle{remark}
-\newtheorem*{remark}{Observação }
-\newtheorem*{solution}{Solução }
+\newtheorem*{remark}{Observação}
+\newtheorem*{solution}{Solução}
 \begin{document}
 \maketitle
 
@@ -143,6 +183,16 @@ Dúvidas ou sugestões de melhoria podem ser encaminhadas para o e-mail \emph{\h
 \hypertarget{visualizauxe7uxe3o-de-dados-com-ggplot2}{%
 \chapter{\texorpdfstring{Visualização de dados com \texttt{ggplot2}}{Visualização de dados com ggplot2}}\label{visualizauxe7uxe3o-de-dados-com-ggplot2}}
 
+Para a correta execução dos códigos desse capítulo, utilizaremos algumas configurações específicas.
+
+Inicialmente, precisaremos carregar o pacote \texttt{nycflights13}, que contém os dados de todos os voos da cidade de Nova York em 2013.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(nycflights13)}
+\end{Highlighting}
+\end{Shaded}
+
 \hypertarget{introduuxe7uxe3o-1}{%
 \section{Introdução}\label{introduuxe7uxe3o-1}}
 
@@ -151,16 +201,98 @@ Não temos exercícios nesta seção.
 \hypertarget{primeiros-passos}{%
 \section{Primeiros passos}\label{primeiros-passos}}
 
-\begin{exercise}
+\hypertarget{exr1-2-1}{%
+\subsection*{Exercício 1.2.1}\label{exr1-2-1}}
+\addcontentsline{toc}{subsection}{Exercício 1.2.1}
+
 Execute \texttt{ggplot(data=mpg);}. O que você vê?
-\end{exercise}
+
+\begin{solution}
+\leavevmode
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data=}\NormalTok{mpg) }\SpecialCharTok{+}
+\NormalTok{    tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-4-1.pdf}
+
+É exibido um quadro em branco. Este quadro contém o sistema de coordenadas sobre o qual serão desenhados os grpaficos que pretendemos exibir.
+
+\end{solution}
+
+\hypertarget{exr1-2-2}{%
+\subsection*{Exercício 1.2.2}\label{exr1-2-2}}
+\addcontentsline{toc}{subsection}{Exercício 1.2.2}
+
+Quantas linhas existem em \texttt{mtcars}? Quantas colunas?
+
+\begin{solution}
+\leavevmode
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dim}\NormalTok{(mtcars)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 32 11
+\end{verbatim}
+
+R.: Existem 32 linhas e 11 colunas.
+
+\end{solution}
+
+\hypertarget{exr1-2-3}{%
+\subsection*{Exercício 1.2.3}\label{exr1-2-3}}
+\addcontentsline{toc}{subsection}{Exercício 1.2.3}
+
+O que a variável \texttt{drv} descreve?
+
+\begin{solution}
+Executamos o comando \texttt{?mpg} no console no R e a página de ajuda foi aberta. Nela encontramos o significado de cada variável do conjunto de dados.
+
+A varíável descreve o tipo de tração dos carros analisados, onde \texttt{f} significa tração dianteira, \texttt{r} significa tração traseira e \texttt{4} significa tração nas quatro rodas.
+\end{solution}
+
+\hypertarget{ex1-2-4}{%
+\subsection*{Exercício 1.2.4}\label{ex1-2-4}}
+\addcontentsline{toc}{subsection}{Exercício 1.2.4}
+
+Faça um gráfico de dispersão de \texttt{hwy} \emph{versus} \texttt{cyl}.
+
+\begin{solution}
+\leavevmode
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ mpg) }\SpecialCharTok{+}
+    \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ hwy, }\AttributeTok{y =}\NormalTok{ cyl)) }\SpecialCharTok{+}
+\NormalTok{    tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-6-1.pdf}
+
+\end{solution}
 
 \hypertarget{mapeamentos-estuxe9ticos}{%
 \section{Mapeamentos estéticos}\label{mapeamentos-estuxe9ticos}}
 
+\hypertarget{exr1-3-1}{%
+\subsection*{Exercício 1.3.1}\label{exr1-3-1}}
+\addcontentsline{toc}{subsection}{Exercício 1.3.1}
+
 \begin{exercise}
 x
 \end{exercise}
+
+\begin{solution}
+x
+\end{solution}
 
 \hypertarget{problemas-comuns}{%
 \section{Problemas comuns}\label{problemas-comuns}}
