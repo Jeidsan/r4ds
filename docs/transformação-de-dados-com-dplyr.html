@@ -643,8 +643,8 @@ div.csl-indent {
 ## #   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
 ## #   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
 </div>
-<div class="observation">
-<p>Deve haver uma solução muito mais elegante para este problema.</p>
+<div class="remark">
+<p><span id="unlabeled-div-45" class="remark"><em>Observação</em>. </span>Deve haver uma solução muito mais elegante para este problema.</p>
 </div>
 </div>
 <div id="exr3-4-2" class="section level3 unnumbered hasAnchor">
@@ -653,7 +653,7 @@ div.csl-indent {
 <p>Ordene <code>flights</code> para encontrar os voos mais atrasados. Encontre os voos que saíram mais cedo.</p>
 </div>
 <div class="solution">
-<p><span id="unlabeled-div-45" class="solution"><em>Solução</em>. </span>Voos mais atrasados:</p>
+<p><span id="unlabeled-div-46" class="solution"><em>Solução</em>. </span>Voos mais atrasados:</p>
 <div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="transformação-de-dados-com-dplyr.html#cb84-1" tabindex="-1"></a><span class="fu">arrange</span>(flights, <span class="fu">desc</span>(dep_delay))</span></code></pre></div>
 <pre><code>## # A tibble: 336,776 × 19
 ##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
@@ -699,7 +699,25 @@ div.csl-indent {
 <p>Ordene <code>flights</code> para encontrar os voos mais rápidos.</p>
 </div>
 <div class="solution">
-<p><span id="unlabeled-div-46" class="solution"><em>Solução</em>. </span>arrange(flights, air_time)</p>
+<p><span id="unlabeled-div-47" class="solution"><em>Solução</em>. </span></p>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="transformação-de-dados-com-dplyr.html#cb88-1" tabindex="-1"></a><span class="fu">arrange</span>(flights, air_time)</span></code></pre></div>
+<pre><code>## # A tibble: 336,776 × 19
+##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
+##  1  2013     1    16     1355           1315        40     1442           1411
+##  2  2013     4    13      537            527        10      622            628
+##  3  2013    12     6      922            851        31     1021            954
+##  4  2013     2     3     2153           2129        24     2247           2224
+##  5  2013     2     5     1303           1315       -12     1342           1411
+##  6  2013     2    12     2123           2130        -7     2211           2225
+##  7  2013     3     2     1450           1500       -10     1547           1608
+##  8  2013     3     8     2026           1935        51     2131           2056
+##  9  2013     3    18     1456           1329        87     1533           1426
+## 10  2013     3    19     2226           2145        41     2305           2246
+## # ℹ 336,766 more rows
+## # ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
+## #   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
+## #   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
 </div>
 </div>
 <div id="exr3-4-4" class="section level3 unnumbered hasAnchor">
@@ -708,8 +726,8 @@ div.csl-indent {
 <p>Quais voos viajaram por mais tempo? Quais viajaram por menos tempo?</p>
 </div>
 <div class="solution">
-<p><span id="unlabeled-div-47" class="solution"><em>Solução</em>. </span>Voos que viajaram por mais tempo:</p>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="transformação-de-dados-com-dplyr.html#cb88-1" tabindex="-1"></a><span class="fu">arrange</span>(flights, <span class="fu">desc</span>(air_time))</span></code></pre></div>
+<p><span id="unlabeled-div-48" class="solution"><em>Solução</em>. </span>Voos que viajaram por mais tempo:</p>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="transformação-de-dados-com-dplyr.html#cb90-1" tabindex="-1"></a><span class="fu">arrange</span>(flights, <span class="fu">desc</span>(air_time))</span></code></pre></div>
 <pre><code>## # A tibble: 336,776 × 19
 ##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
 ##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
@@ -728,7 +746,7 @@ div.csl-indent {
 ## #   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
 ## #   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
 <p>Voos que viajaram por menos tempo:</p>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="transformação-de-dados-com-dplyr.html#cb90-1" tabindex="-1"></a><span class="fu">arrange</span>(flights, air_time)</span></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="transformação-de-dados-com-dplyr.html#cb92-1" tabindex="-1"></a><span class="fu">arrange</span>(flights, air_time)</span></code></pre></div>
 <pre><code>## # A tibble: 336,776 × 19
 ##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
 ##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
@@ -754,37 +772,90 @@ div.csl-indent {
 <div id="exr3-5-1" class="section level3 unnumbered hasAnchor">
 <h3>Exercício 3.5.1<a href="transformação-de-dados-com-dplyr.html#exr3-5-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="enunciado">
-<p>x</p>
-</div>
-<div class="solution">
-<p><span id="unlabeled-div-48" class="solution"><em>Solução</em>. </span>x</p>
-</div>
-</div>
-<div id="exr3-5-2" class="section level3 unnumbered hasAnchor">
-<h3>Exercício 3.5.2<a href="transformação-de-dados-com-dplyr.html#exr3-5-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="enunciado">
-<p>x</p>
+<p>Faça um <em>brainstorm</em> da maior quantidade possível de maneiras de selecionar <code>dep_time</code>, <code>dep_delay</code>, <code>arr_time</code> e <code>air_delay</code> de <code>flights</code>.</p>
 </div>
 <div class="solution">
 <p><span id="unlabeled-div-49" class="solution"><em>Solução</em>. </span>x</p>
 </div>
 </div>
+<div id="exr3-5-2" class="section level3 unnumbered hasAnchor">
+<h3>Exercício 3.5.2<a href="transformação-de-dados-com-dplyr.html#exr3-5-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="enunciado">
+<p>O que acontece se você incluir o nome de uma variável varias vezes em uma chamada <code>select()</code>?</p>
+</div>
+<div class="solution">
+<p><span id="unlabeled-div-50" class="solution"><em>Solução</em>. </span></p>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="transformação-de-dados-com-dplyr.html#cb94-1" tabindex="-1"></a><span class="fu">select</span>(flights, arr_time, arr_time, arr_time)</span></code></pre></div>
+<pre><code>## # A tibble: 336,776 × 1
+##    arr_time
+##       &lt;int&gt;
+##  1      830
+##  2      850
+##  3      923
+##  4     1004
+##  5      812
+##  6      740
+##  7      913
+##  8      709
+##  9      838
+## 10      753
+## # ℹ 336,766 more rows</code></pre>
+<p>A variável em questão é selecionada apenas uma vez.</p>
+</div>
+</div>
 <div id="exr3-5-3" class="section level3 unnumbered hasAnchor">
 <h3>Exercício 3.5.3<a href="transformação-de-dados-com-dplyr.html#exr3-5-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="enunciado">
-<p>x</p>
+<p>O que a função <code>one_of()</code> faz? Por que poderia ser útil em conjunção com este vetor?</p>
+<pre><code>vars &lt;- c(&quot;year&quot;, &quot;month&quot;, &quot;day&quot;, &quot;dep_delay&quot;, &quot;arr_delay&quot;)</code></pre>
 </div>
 <div class="solution">
-<p><span id="unlabeled-div-50" class="solution"><em>Solução</em>. </span>x</p>
+<p><span id="unlabeled-div-51" class="solution"><em>Solução</em>. </span></p>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="transformação-de-dados-com-dplyr.html#cb97-1" tabindex="-1"></a>vars <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;year&quot;</span>, <span class="st">&quot;month&quot;</span>, <span class="st">&quot;day&quot;</span>, <span class="st">&quot;dep_delay&quot;</span>, <span class="st">&quot;arr_delay&quot;</span>)</span>
+<span id="cb97-2"><a href="transformação-de-dados-com-dplyr.html#cb97-2" tabindex="-1"></a><span class="fu">select</span>(flights, <span class="fu">one_of</span>(vars)) <span class="co"># superseded in favor of `any_of()`</span></span></code></pre></div>
+<pre><code>## # A tibble: 336,776 × 5
+##     year month   day dep_delay arr_delay
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+##  1  2013     1     1         2        11
+##  2  2013     1     1         4        20
+##  3  2013     1     1         2        33
+##  4  2013     1     1        -1       -18
+##  5  2013     1     1        -6       -25
+##  6  2013     1     1        -4        12
+##  7  2013     1     1        -5        19
+##  8  2013     1     1        -3       -14
+##  9  2013     1     1        -3        -8
+## 10  2013     1     1        -2         8
+## # ℹ 336,766 more rows</code></pre>
+<p>A função <code>one_of()</code>, substituída por <code>any_of()</code> serve para indicar que devem ser selecionadas todas as colunas cujos nomes estejam no <em>array</em>.</p>
 </div>
 </div>
 <div id="exr3-5-4" class="section level3 unnumbered hasAnchor">
 <h3>Exercício 3.5.4<a href="transformação-de-dados-com-dplyr.html#exr3-5-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="enunciado">
-<p>x</p>
+<p>O resultado ao executar o código a seguir lhe surpreende? Como as funções auxiliares lidam com o caso por padrão? Como você pode mudar esse padrão?</p>
+<pre><code>select(flights, contains(&quot;TIME&quot;))</code></pre>
 </div>
 <div class="solution">
-<p><span id="unlabeled-div-51" class="solution"><em>Solução</em>. </span>x</p>
+<p><span id="unlabeled-div-52" class="solution"><em>Solução</em>. </span></p>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="transformação-de-dados-com-dplyr.html#cb100-1" tabindex="-1"></a><span class="fu">select</span>(flights, <span class="fu">contains</span>(<span class="st">&quot;TIME&quot;</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 336,776 × 6
+##    dep_time sched_dep_time arr_time sched_arr_time air_time time_hour          
+##       &lt;int&gt;          &lt;int&gt;    &lt;int&gt;          &lt;int&gt;    &lt;dbl&gt; &lt;dttm&gt;             
+##  1      517            515      830            819      227 2013-01-01 05:00:00
+##  2      533            529      850            830      227 2013-01-01 05:00:00
+##  3      542            540      923            850      160 2013-01-01 05:00:00
+##  4      544            545     1004           1022      183 2013-01-01 05:00:00
+##  5      554            600      812            837      116 2013-01-01 06:00:00
+##  6      554            558      740            728      150 2013-01-01 05:00:00
+##  7      555            600      913            854      158 2013-01-01 06:00:00
+##  8      557            600      709            723       53 2013-01-01 06:00:00
+##  9      557            600      838            846      140 2013-01-01 06:00:00
+## 10      558            600      753            745      138 2013-01-01 06:00:00
+## # ℹ 336,766 more rows</code></pre>
+<p>O caso não surpreende. São retornadas todas as colunas que possuem “TIME” em seus nomes, não diferenciando maíusculas e minúsculas. O comportamento pode ser alterado da seguinte forma:</p>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="transformação-de-dados-com-dplyr.html#cb102-1" tabindex="-1"></a><span class="fu">select</span>(flights, <span class="fu">contains</span>(<span class="st">&quot;TIME&quot;</span>, <span class="at">ignore.case =</span> <span class="cn">FALSE</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 336,776 × 0</code></pre>
 </div>
 </div>
 </div>
@@ -796,7 +867,7 @@ div.csl-indent {
 <p>x</p>
 </div>
 <div class="solution">
-<p><span id="unlabeled-div-52" class="solution"><em>Solução</em>. </span>x</p>
+<p><span id="unlabeled-div-53" class="solution"><em>Solução</em>. </span>x</p>
 </div>
 </div>
 <div id="exr3-6-2" class="section level3 unnumbered hasAnchor">
@@ -805,7 +876,7 @@ div.csl-indent {
 <p>x</p>
 </div>
 <div class="solution">
-<p><span id="unlabeled-div-53" class="solution"><em>Solução</em>. </span>x</p>
+<p><span id="unlabeled-div-54" class="solution"><em>Solução</em>. </span>x</p>
 </div>
 </div>
 <div id="exr3-6-3" class="section level3 unnumbered hasAnchor">
@@ -814,7 +885,7 @@ div.csl-indent {
 <p>x</p>
 </div>
 <div class="solution">
-<p><span id="unlabeled-div-54" class="solution"><em>Solução</em>. </span>x</p>
+<p><span id="unlabeled-div-55" class="solution"><em>Solução</em>. </span>x</p>
 </div>
 </div>
 <div id="exr3-6-4" class="section level3 unnumbered hasAnchor">
@@ -823,7 +894,7 @@ div.csl-indent {
 <p>x</p>
 </div>
 <div class="solution">
-<p><span id="unlabeled-div-55" class="solution"><em>Solução</em>. </span>x</p>
+<p><span id="unlabeled-div-56" class="solution"><em>Solução</em>. </span>x</p>
 </div>
 </div>
 <div id="exr3-6-5" class="section level3 unnumbered hasAnchor">
@@ -832,7 +903,7 @@ div.csl-indent {
 <p>x</p>
 </div>
 <div class="solution">
-<p><span id="unlabeled-div-56" class="solution"><em>Solução</em>. </span>x</p>
+<p><span id="unlabeled-div-57" class="solution"><em>Solução</em>. </span>x</p>
 </div>
 </div>
 <div id="exr3-6-6" class="section level3 unnumbered hasAnchor">
@@ -841,7 +912,7 @@ div.csl-indent {
 <p>x</p>
 </div>
 <div class="solution">
-<p><span id="unlabeled-div-57" class="solution"><em>Solução</em>. </span>x</p>
+<p><span id="unlabeled-div-58" class="solution"><em>Solução</em>. </span>x</p>
 </div>
 </div>
 </div>
@@ -853,7 +924,7 @@ div.csl-indent {
 <p>x</p>
 </div>
 <div class="solution">
-<p><span id="unlabeled-div-58" class="solution"><em>Solução</em>. </span>x</p>
+<p><span id="unlabeled-div-59" class="solution"><em>Solução</em>. </span>x</p>
 </div>
 </div>
 <div id="exr3-7-2" class="section level3 unnumbered hasAnchor">
@@ -862,7 +933,7 @@ div.csl-indent {
 <p>x</p>
 </div>
 <div class="solution">
-<p><span id="unlabeled-div-59" class="solution"><em>Solução</em>. </span>x</p>
+<p><span id="unlabeled-div-60" class="solution"><em>Solução</em>. </span>x</p>
 </div>
 </div>
 <div id="exr3-7-3" class="section level3 unnumbered hasAnchor">
@@ -871,7 +942,7 @@ div.csl-indent {
 <p>x</p>
 </div>
 <div class="solution">
-<p><span id="unlabeled-div-60" class="solution"><em>Solução</em>. </span>x</p>
+<p><span id="unlabeled-div-61" class="solution"><em>Solução</em>. </span>x</p>
 </div>
 </div>
 <div id="exr3-7-4" class="section level3 unnumbered hasAnchor">
@@ -880,7 +951,7 @@ div.csl-indent {
 <p>x</p>
 </div>
 <div class="solution">
-<p><span id="unlabeled-div-61" class="solution"><em>Solução</em>. </span>x</p>
+<p><span id="unlabeled-div-62" class="solution"><em>Solução</em>. </span>x</p>
 </div>
 </div>
 <div id="exr3-7-5" class="section level3 unnumbered hasAnchor">
@@ -889,7 +960,7 @@ div.csl-indent {
 <p>x</p>
 </div>
 <div class="solution">
-<p><span id="unlabeled-div-62" class="solution"><em>Solução</em>. </span>x</p>
+<p><span id="unlabeled-div-63" class="solution"><em>Solução</em>. </span>x</p>
 </div>
 </div>
 <div id="exr3-7-6" class="section level3 unnumbered hasAnchor">
@@ -898,7 +969,7 @@ div.csl-indent {
 <p>x</p>
 </div>
 <div class="solution">
-<p><span id="unlabeled-div-63" class="solution"><em>Solução</em>. </span>x</p>
+<p><span id="unlabeled-div-64" class="solution"><em>Solução</em>. </span>x</p>
 </div>
 </div>
 <div id="exr3-7-7" class="section level3 unnumbered hasAnchor">
@@ -907,7 +978,7 @@ div.csl-indent {
 <p>x</p>
 </div>
 <div class="solution">
-<p><span id="unlabeled-div-64" class="solution"><em>Solução</em>. </span>x</p>
+<p><span id="unlabeled-div-65" class="solution"><em>Solução</em>. </span>x</p>
 </div>
 </div>
 </div>
@@ -919,7 +990,7 @@ div.csl-indent {
 <p>x</p>
 </div>
 <div class="solution">
-<p><span id="unlabeled-div-65" class="solution"><em>Solução</em>. </span>x</p>
+<p><span id="unlabeled-div-66" class="solution"><em>Solução</em>. </span>x</p>
 </div>
 </div>
 <div id="exr3-8-2" class="section level3 unnumbered hasAnchor">
@@ -928,7 +999,7 @@ div.csl-indent {
 <p>x</p>
 </div>
 <div class="solution">
-<p><span id="unlabeled-div-66" class="solution"><em>Solução</em>. </span>x</p>
+<p><span id="unlabeled-div-67" class="solution"><em>Solução</em>. </span>x</p>
 </div>
 </div>
 <div id="exr3-8-3" class="section level3 unnumbered hasAnchor">
@@ -937,7 +1008,7 @@ div.csl-indent {
 <p>x</p>
 </div>
 <div class="solution">
-<p><span id="unlabeled-div-67" class="solution"><em>Solução</em>. </span>x</p>
+<p><span id="unlabeled-div-68" class="solution"><em>Solução</em>. </span>x</p>
 </div>
 </div>
 <div id="exr3-8-4" class="section level3 unnumbered hasAnchor">
@@ -946,7 +1017,7 @@ div.csl-indent {
 <p>x</p>
 </div>
 <div class="solution">
-<p><span id="unlabeled-div-68" class="solution"><em>Solução</em>. </span>x</p>
+<p><span id="unlabeled-div-69" class="solution"><em>Solução</em>. </span>x</p>
 </div>
 </div>
 <div id="exr3-8-5" class="section level3 unnumbered hasAnchor">
@@ -955,7 +1026,7 @@ div.csl-indent {
 <p>x</p>
 </div>
 <div class="solution">
-<p><span id="unlabeled-div-69" class="solution"><em>Solução</em>. </span>x</p>
+<p><span id="unlabeled-div-70" class="solution"><em>Solução</em>. </span>x</p>
 </div>
 </div>
 <div id="exr3-8-6" class="section level3 unnumbered hasAnchor">
@@ -964,7 +1035,7 @@ div.csl-indent {
 <p>x</p>
 </div>
 <div class="solution">
-<p><span id="unlabeled-div-70" class="solution"><em>Solução</em>. </span>x</p>
+<p><span id="unlabeled-div-71" class="solution"><em>Solução</em>. </span>x</p>
 </div>
 </div>
 <div id="exr3-8-7" class="section level3 unnumbered hasAnchor">
@@ -973,7 +1044,7 @@ div.csl-indent {
 <p>x</p>
 </div>
 <div class="solution">
-<p><span id="unlabeled-div-71" class="solution"><em>Solução</em>. </span>x</p>
+<p><span id="unlabeled-div-72" class="solution"><em>Solução</em>. </span>x</p>
 </div>
 
 </div>

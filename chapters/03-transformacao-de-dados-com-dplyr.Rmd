@@ -145,7 +145,7 @@ arrange(
 
 :::
 
-::: {.observation}
+::: {.remark}
 Deve haver uma solução muito mais elegante para este problema.
 :::
 
@@ -177,7 +177,9 @@ Ordene `flights` para encontrar os voos mais rápidos.
 :::
 
 :::{.solution}
+```{r}
 arrange(flights, air_time)
+```
 :::
 
 ### Exercício 3.4.4 {- #exr3-4-4}
@@ -205,7 +207,7 @@ arrange(flights, air_time)
 ### Exercício 3.5.1 {- #exr3-5-1}
 
 ::: {.enunciado}
-x
+Faça um _brainstorm_ da maior quantidade possível de maneiras de selecionar `dep_time`, `dep_delay`, `arr_time` e `air_delay` de `flights`.
 :::
 
 :::{.solution}
@@ -215,31 +217,57 @@ x
 ### Exercício 3.5.2 {- #exr3-5-2}
 
 ::: {.enunciado}
-x
+O que acontece se você incluir o nome de uma variável varias vezes em uma chamada `select()`?
 :::
 
 :::{.solution}
-x
+```{r}
+select(flights, arr_time, arr_time, arr_time)
+```
+
+A variável em questão é selecionada apenas uma vez.
 :::
 
 ### Exercício 3.5.3 {- #exr3-5-3}
 
 ::: {.enunciado}
-x
+O que a função `one_of()` faz? Por que poderia ser útil em conjunção com este vetor?
+```
+vars <- c("year", "month", "day", "dep_delay", "arr_delay")
+```
+
 :::
 
 :::{.solution}
-x
+```{r}
+vars <- c("year", "month", "day", "dep_delay", "arr_delay")
+select(flights, one_of(vars)) # superseded in favor of `any_of()`
+```
+
+A função  `one_of()`, substituída por `any_of()` serve para indicar que devem ser selecionadas todas as colunas cujos nomes estejam no _array_. 
 :::
 
 ### Exercício 3.5.4 {- #exr3-5-4}
 
 ::: {.enunciado}
-x
+O resultado ao executar o código a seguir lhe surpreende? Como as funções auxiliares lidam com o caso por padrão? Como você pode mudar esse padrão?
+```
+select(flights, contains("TIME"))
+```
+
 :::
 
 :::{.solution}
-x
+```{r}
+select(flights, contains("TIME"))
+```
+
+O caso não surpreende. São retornadas todas as colunas que possuem "TIME" em seus nomes, não diferenciando maíusculas e minúsculas. O comportamento pode ser alterado da seguinte forma:
+
+```{r}
+select(flights, contains("TIME", ignore.case = FALSE))
+```
+
 :::
 
 ## Adicionar novas variáveis com `mutate()`

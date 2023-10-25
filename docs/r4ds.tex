@@ -293,6 +293,7 @@ Dúvidas ou sugestões de melhoria podem ser encaminhadas para o e-mail \emph{\h
 \item
   \protect\hyperlink{exr2-3-3}{Exercício 2.3.3};
 \item
+  \protect\hyperlink{exr3-5-1}{Exercício 3.5.1};
 \end{itemize}
 
 \mainmatter
@@ -1899,7 +1900,9 @@ Como você poderia usar \texttt{arrange()} para classificar todos os valores fal
 
 \end{solution}
 
+\begin{remark}
 Deve haver uma solução muito mais elegante para este problema.
+\end{remark}
 
 \hypertarget{exr3-4-2}{%
 \subsection*{Exercício 3.4.2}\label{exr3-4-2}}
@@ -1974,7 +1977,34 @@ Voos que saíram mais cedo:
 Ordene \texttt{flights} para encontrar os voos mais rápidos.
 
 \begin{solution}
-arrange(flights, air\_time)
+\leavevmode
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{arrange}\NormalTok{(flights, air\_time)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 336,776 x 19
+##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+##    <int> <int> <int>    <int>          <int>     <dbl>    <int>          <int>
+##  1  2013     1    16     1355           1315        40     1442           1411
+##  2  2013     4    13      537            527        10      622            628
+##  3  2013    12     6      922            851        31     1021            954
+##  4  2013     2     3     2153           2129        24     2247           2224
+##  5  2013     2     5     1303           1315       -12     1342           1411
+##  6  2013     2    12     2123           2130        -7     2211           2225
+##  7  2013     3     2     1450           1500       -10     1547           1608
+##  8  2013     3     8     2026           1935        51     2131           2056
+##  9  2013     3    18     1456           1329        87     1533           1426
+## 10  2013     3    19     2226           2145        41     2305           2246
+## # i 336,766 more rows
+## # i 11 more variables: arr_delay <dbl>, carrier <chr>, flight <int>,
+## #   tailnum <chr>, origin <chr>, dest <chr>, air_time <dbl>, distance <dbl>,
+## #   hour <dbl>, minute <dbl>, time_hour <dttm>
+\end{verbatim}
+
 \end{solution}
 
 \hypertarget{exr3-4-4}{%
@@ -2050,7 +2080,7 @@ Voos que viajaram por menos tempo:
 \subsection*{Exercício 3.5.1}\label{exr3-5-1}}
 \addcontentsline{toc}{subsection}{Exercício 3.5.1}
 
-x
+Faça um \emph{brainstorm} da maior quantidade possível de maneiras de selecionar \texttt{dep\_time}, \texttt{dep\_delay}, \texttt{arr\_time} e \texttt{air\_delay} de \texttt{flights}.
 
 \begin{solution}
 x
@@ -2060,30 +2090,127 @@ x
 \subsection*{Exercício 3.5.2}\label{exr3-5-2}}
 \addcontentsline{toc}{subsection}{Exercício 3.5.2}
 
-x
+O que acontece se você incluir o nome de uma variável varias vezes em uma chamada \texttt{select()}?
 
 \begin{solution}
-x
+\leavevmode
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{select}\NormalTok{(flights, arr\_time, arr\_time, arr\_time)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 336,776 x 1
+##    arr_time
+##       <int>
+##  1      830
+##  2      850
+##  3      923
+##  4     1004
+##  5      812
+##  6      740
+##  7      913
+##  8      709
+##  9      838
+## 10      753
+## # i 336,766 more rows
+\end{verbatim}
+
+A variável em questão é selecionada apenas uma vez.
+
 \end{solution}
 
 \hypertarget{exr3-5-3}{%
 \subsection*{Exercício 3.5.3}\label{exr3-5-3}}
 \addcontentsline{toc}{subsection}{Exercício 3.5.3}
 
-x
+O que a função \texttt{one\_of()} faz? Por que poderia ser útil em conjunção com este vetor?
+
+\begin{verbatim}
+vars <- c("year", "month", "day", "dep_delay", "arr_delay")
+\end{verbatim}
 
 \begin{solution}
-x
+\leavevmode
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{vars }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"year"}\NormalTok{, }\StringTok{"month"}\NormalTok{, }\StringTok{"day"}\NormalTok{, }\StringTok{"dep\_delay"}\NormalTok{, }\StringTok{"arr\_delay"}\NormalTok{)}
+\FunctionTok{select}\NormalTok{(flights, }\FunctionTok{one\_of}\NormalTok{(vars)) }\CommentTok{\# superseded in favor of \textasciigrave{}any\_of()\textasciigrave{}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 336,776 x 5
+##     year month   day dep_delay arr_delay
+##    <int> <int> <int>     <dbl>     <dbl>
+##  1  2013     1     1         2        11
+##  2  2013     1     1         4        20
+##  3  2013     1     1         2        33
+##  4  2013     1     1        -1       -18
+##  5  2013     1     1        -6       -25
+##  6  2013     1     1        -4        12
+##  7  2013     1     1        -5        19
+##  8  2013     1     1        -3       -14
+##  9  2013     1     1        -3        -8
+## 10  2013     1     1        -2         8
+## # i 336,766 more rows
+\end{verbatim}
+
+A função \texttt{one\_of()}, substituída por \texttt{any\_of()} serve para indicar que devem ser selecionadas todas as colunas cujos nomes estejam no \emph{array}.
+
 \end{solution}
 
 \hypertarget{exr3-5-4}{%
 \subsection*{Exercício 3.5.4}\label{exr3-5-4}}
 \addcontentsline{toc}{subsection}{Exercício 3.5.4}
 
-x
+O resultado ao executar o código a seguir lhe surpreende? Como as funções auxiliares lidam com o caso por padrão? Como você pode mudar esse padrão?
+
+\begin{verbatim}
+select(flights, contains("TIME"))
+\end{verbatim}
 
 \begin{solution}
-x
+\leavevmode
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{select}\NormalTok{(flights, }\FunctionTok{contains}\NormalTok{(}\StringTok{"TIME"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 336,776 x 6
+##    dep_time sched_dep_time arr_time sched_arr_time air_time time_hour          
+##       <int>          <int>    <int>          <int>    <dbl> <dttm>             
+##  1      517            515      830            819      227 2013-01-01 05:00:00
+##  2      533            529      850            830      227 2013-01-01 05:00:00
+##  3      542            540      923            850      160 2013-01-01 05:00:00
+##  4      544            545     1004           1022      183 2013-01-01 05:00:00
+##  5      554            600      812            837      116 2013-01-01 06:00:00
+##  6      554            558      740            728      150 2013-01-01 05:00:00
+##  7      555            600      913            854      158 2013-01-01 06:00:00
+##  8      557            600      709            723       53 2013-01-01 06:00:00
+##  9      557            600      838            846      140 2013-01-01 06:00:00
+## 10      558            600      753            745      138 2013-01-01 06:00:00
+## # i 336,766 more rows
+\end{verbatim}
+
+O caso não surpreende. São retornadas todas as colunas que possuem ``TIME'' em seus nomes, não diferenciando maíusculas e minúsculas. O comportamento pode ser alterado da seguinte forma:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{select}\NormalTok{(flights, }\FunctionTok{contains}\NormalTok{(}\StringTok{"TIME"}\NormalTok{, }\AttributeTok{ignore.case =} \ConstantTok{FALSE}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 336,776 x 0
+\end{verbatim}
+
 \end{solution}
 
 \hypertarget{adicionar-novas-variuxe1veis-com-mutate}{%

@@ -49,4 +49,4 @@ Dúvidas ou sugestões de melhoria podem ser encaminhadas para o e-mail *jeidsan
 - No PDF, o prefácio está sendo exibido duas vezes no sumário;
 - [Exercício 1.7.4](#exr1-7-4);
 - [Exercício 2.3.3](#exr2-3-3);
-- 
+- [Exercício 3.5.1](#exr3-5-1);
