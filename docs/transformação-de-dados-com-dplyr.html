@@ -864,55 +864,138 @@ div.csl-indent {
 <div id="exr3-6-1" class="section level3 unnumbered hasAnchor">
 <h3>Exercício 3.6.1<a href="transformação-de-dados-com-dplyr.html#exr3-6-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="enunciado">
-<p>x</p>
+<p>Atualmente, <code>dep_time</code> e <code>sched_dep_time</code> são convenientes para observar, mas difíceis de usar para calcular, porque não são realmente números contínuos. Converta-os para uma representação mais apropriada do número de minutos desde a meia-noite.</p>
 </div>
 <div class="solution">
-<p><span id="unlabeled-div-53" class="solution"><em>Solução</em>. </span>x</p>
+<p><span id="unlabeled-div-53" class="solution"><em>Solução</em>. </span></p>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="transformação-de-dados-com-dplyr.html#cb104-1" tabindex="-1"></a>(flights_min <span class="ot">&lt;-</span> <span class="fu">mutate</span>(</span>
+<span id="cb104-2"><a href="transformação-de-dados-com-dplyr.html#cb104-2" tabindex="-1"></a>                    flights,</span>
+<span id="cb104-3"><a href="transformação-de-dados-com-dplyr.html#cb104-3" tabindex="-1"></a>                    <span class="at">dep_time_minutes =</span> <span class="dv">60</span> <span class="sc">*</span> (dep_time <span class="sc">%/%</span> <span class="dv">100</span>) <span class="sc">+</span> (dep_time <span class="sc">%%</span> <span class="dv">100</span>),</span>
+<span id="cb104-4"><a href="transformação-de-dados-com-dplyr.html#cb104-4" tabindex="-1"></a>                    <span class="at">sched_dep_time_minutes =</span> <span class="dv">60</span> <span class="sc">*</span> (sched_dep_time <span class="sc">%/%</span> <span class="dv">100</span>) <span class="sc">+</span> (sched_dep_time <span class="sc">%%</span> <span class="dv">100</span>),</span>
+<span id="cb104-5"><a href="transformação-de-dados-com-dplyr.html#cb104-5" tabindex="-1"></a>                    <span class="at">arr_time_minutes =</span> <span class="dv">60</span> <span class="sc">*</span> (arr_time <span class="sc">%/%</span> <span class="dv">100</span>) <span class="sc">+</span> (arr_time <span class="sc">%%</span> <span class="dv">100</span>)</span>
+<span id="cb104-6"><a href="transformação-de-dados-com-dplyr.html#cb104-6" tabindex="-1"></a>                ))</span></code></pre></div>
+<pre><code>## # A tibble: 336,776 × 22
+##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
+##  1  2013     1     1      517            515         2      830            819
+##  2  2013     1     1      533            529         4      850            830
+##  3  2013     1     1      542            540         2      923            850
+##  4  2013     1     1      544            545        -1     1004           1022
+##  5  2013     1     1      554            600        -6      812            837
+##  6  2013     1     1      554            558        -4      740            728
+##  7  2013     1     1      555            600        -5      913            854
+##  8  2013     1     1      557            600        -3      709            723
+##  9  2013     1     1      557            600        -3      838            846
+## 10  2013     1     1      558            600        -2      753            745
+## # ℹ 336,766 more rows
+## # ℹ 14 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
+## #   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
+## #   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;, dep_time_minutes &lt;dbl&gt;,
+## #   sched_dep_time_minutes &lt;dbl&gt;, arr_time_minutes &lt;dbl&gt;</code></pre>
 </div>
 </div>
 <div id="exr3-6-2" class="section level3 unnumbered hasAnchor">
 <h3>Exercício 3.6.2<a href="transformação-de-dados-com-dplyr.html#exr3-6-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="enunciado">
-<p>x</p>
+<p>Compare <code>air_time</code> e <code>arr_time - dep_time</code>. O que você espera ver? O que você vê? O que você precisa fazer para corrigir isso?</p>
 </div>
 <div class="solution">
-<p><span id="unlabeled-div-54" class="solution"><em>Solução</em>. </span>x</p>
+<p><span id="unlabeled-div-54" class="solution"><em>Solução</em>. </span></p>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="transformação-de-dados-com-dplyr.html#cb106-1" tabindex="-1"></a><span class="fu">transmute</span>(flights_min, air_time, arr_time_minutes <span class="sc">-</span> dep_time_minutes)</span></code></pre></div>
+<pre><code>## # A tibble: 336,776 × 2
+##    air_time `arr_time_minutes - dep_time_minutes`
+##       &lt;dbl&gt;                                 &lt;dbl&gt;
+##  1      227                                   193
+##  2      227                                   197
+##  3      160                                   221
+##  4      183                                   260
+##  5      116                                   138
+##  6      150                                   106
+##  7      158                                   198
+##  8       53                                    72
+##  9      140                                   161
+## 10      138                                   115
+## # ℹ 336,766 more rows</code></pre>
+<p>Como os valores <code>arr_time</code> e <code>dep_time</code> não são números de fato, a diferença não faz sentido e assim o cálculo gera uma diferença muito grande. Para corrigir isso, primeiro teremos que converter os valores dessas duas variáveis para o número de minutos desde a meia noite e, depois, efetuar a diferença. Ainda assim, pode haver divergência entre esse valor e <code>air_time</code>, que pode ser explicada por chegada antecipada, saída atrasada ou porque um vôo chegou ao seu destino após a meia-noite.</p>
 </div>
 </div>
 <div id="exr3-6-3" class="section level3 unnumbered hasAnchor">
 <h3>Exercício 3.6.3<a href="transformação-de-dados-com-dplyr.html#exr3-6-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="enunciado">
-<p>x</p>
+<p>Compare <code>dep_time</code>, <code>sched_dep_time</code> e <code>dep_delay</code>. Como você espera que esses números estejam relacionados?</p>
 </div>
 <div class="solution">
-<p><span id="unlabeled-div-55" class="solution"><em>Solução</em>. </span>x</p>
+<p><span id="unlabeled-div-55" class="solution"><em>Solução</em>. </span></p>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="transformação-de-dados-com-dplyr.html#cb108-1" tabindex="-1"></a><span class="fu">select</span>(flights_min, <span class="st">&quot;dep_time&quot;</span>, <span class="st">&quot;sched_dep_time&quot;</span>, dep_delay)</span></code></pre></div>
+<pre><code>## # A tibble: 336,776 × 3
+##    dep_time sched_dep_time dep_delay
+##       &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;
+##  1      517            515         2
+##  2      533            529         4
+##  3      542            540         2
+##  4      544            545        -1
+##  5      554            600        -6
+##  6      554            558        -4
+##  7      555            600        -5
+##  8      557            600        -3
+##  9      557            600        -3
+## 10      558            600        -2
+## # ℹ 336,766 more rows</code></pre>
+<p>É esperado que <code>dep_time = sched_dep_time + dep_delay</code>.</p>
 </div>
 </div>
 <div id="exr3-6-4" class="section level3 unnumbered hasAnchor">
 <h3>Exercício 3.6.4<a href="transformação-de-dados-com-dplyr.html#exr3-6-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="enunciado">
-<p>x</p>
+<p>Encontre os 10 voos mais atrasados usando uma função de classificação. Como você quer lidar com empates? Leia cuidadosamente a documentação de <code>min_rank()</code>.</p>
 </div>
 <div class="solution">
-<p><span id="unlabeled-div-56" class="solution"><em>Solução</em>. </span>x</p>
+<p><span id="unlabeled-div-56" class="solution"><em>Solução</em>. </span></p>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="transformação-de-dados-com-dplyr.html#cb110-1" tabindex="-1"></a><span class="fu">filter</span>(</span>
+<span id="cb110-2"><a href="transformação-de-dados-com-dplyr.html#cb110-2" tabindex="-1"></a>    flights,</span>
+<span id="cb110-3"><a href="transformação-de-dados-com-dplyr.html#cb110-3" tabindex="-1"></a>    <span class="fu">between</span>(<span class="fu">rank</span>(<span class="fu">desc</span>(flights<span class="sc">$</span>dep_delay), <span class="at">ties.method =</span> <span class="st">&quot;min&quot;</span>), <span class="dv">1</span>, <span class="dv">10</span>)</span>
+<span id="cb110-4"><a href="transformação-de-dados-com-dplyr.html#cb110-4" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## # A tibble: 10 × 19
+##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
+##  1  2013     1     9      641            900      1301     1242           1530
+##  2  2013     1    10     1121           1635      1126     1239           1810
+##  3  2013    12     5      756           1700       896     1058           2020
+##  4  2013     3    17     2321            810       911      135           1020
+##  5  2013     4    10     1100           1900       960     1342           2211
+##  6  2013     6    15     1432           1935      1137     1607           2120
+##  7  2013     6    27      959           1900       899     1236           2226
+##  8  2013     7    22      845           1600      1005     1044           1815
+##  9  2013     7    22     2257            759       898      121           1026
+## 10  2013     9    20     1139           1845      1014     1457           2210
+## # ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
+## #   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
+## #   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+<p>Usei a função <code>rank</code> e os empates foram tratados com o parâmetro <code>ties.method</code> setado como <code>min</code>.</p>
 </div>
 </div>
 <div id="exr3-6-5" class="section level3 unnumbered hasAnchor">
 <h3>Exercício 3.6.5<a href="transformação-de-dados-com-dplyr.html#exr3-6-5" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="enunciado">
-<p>x</p>
+<p>O que <code>1:3 + 1:10</code> retorna? Por quê?</p>
 </div>
 <div class="solution">
-<p><span id="unlabeled-div-57" class="solution"><em>Solução</em>. </span>x</p>
+<p><span id="unlabeled-div-57" class="solution"><em>Solução</em>. </span></p>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="transformação-de-dados-com-dplyr.html#cb112-1" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">3</span> <span class="sc">+</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span></code></pre></div>
+<pre><code>## Warning in 1:3 + 1:10: comprimento do objeto maior não é múltiplo do
+## comprimento do objeto menor</code></pre>
+<pre><code>##  [1]  2  4  6  5  7  9  8 10 12 11</code></pre>
+<p>Como os vetores têm tamanhos diferentes, a soma vai ser executada entre as posições e, quando o menor dos vetores tiver sido completamente consumido, será tomado novamente o primeiro elemento (como em um movimento circular).</p>
 </div>
 </div>
 <div id="exr3-6-6" class="section level3 unnumbered hasAnchor">
 <h3>Exercício 3.6.6<a href="transformação-de-dados-com-dplyr.html#exr3-6-6" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="enunciado">
-<p>x</p>
+<p>Quais funções trigonométricas o R fornece?</p>
 </div>
 <div class="solution">
-<p><span id="unlabeled-div-58" class="solution"><em>Solução</em>. </span>x</p>
+<p><span id="unlabeled-div-58" class="solution"><em>Solução</em>. </span>Utilizamos o comando <code>?cos</code> para chegar até a documentação do pacote <code>Trig</code>, um dos componentes da base do R.</p>
+<p>O R fornece as funções <code>cos(x)</code>, <code>sin(x)</code>, <code>tan(x)</code>, <code>acos(x)</code>, <code>asin(x)</code>, <code>atan(x)</code>, <code>atan2(y, x)</code> (arco tangente entre dois vetores), <code>cospi(x)</code>, <code>sinpi(x)</code> e <code>tanpi(x)</code>.</p>
 </div>
 </div>
 </div>

@@ -2220,60 +2220,196 @@ O caso não surpreende. São retornadas todas as colunas que possuem ``TIME'' em
 \subsection*{Exercício 3.6.1}\label{exr3-6-1}}
 \addcontentsline{toc}{subsection}{Exercício 3.6.1}
 
-x
+Atualmente, \texttt{dep\_time} e \texttt{sched\_dep\_time} são convenientes para observar, mas difíceis de usar para calcular, porque não são realmente números contínuos. Converta-os para uma representação mais apropriada do número de minutos desde a meia-noite.
 
 \begin{solution}
-x
+\leavevmode
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(flights\_min }\OtherTok{\textless{}{-}} \FunctionTok{mutate}\NormalTok{(}
+\NormalTok{                    flights,}
+                    \AttributeTok{dep\_time\_minutes =} \DecValTok{60} \SpecialCharTok{*}\NormalTok{ (dep\_time }\SpecialCharTok{\%/\%} \DecValTok{100}\NormalTok{) }\SpecialCharTok{+}\NormalTok{ (dep\_time }\SpecialCharTok{\%\%} \DecValTok{100}\NormalTok{),}
+                    \AttributeTok{sched\_dep\_time\_minutes =} \DecValTok{60} \SpecialCharTok{*}\NormalTok{ (sched\_dep\_time }\SpecialCharTok{\%/\%} \DecValTok{100}\NormalTok{) }\SpecialCharTok{+}\NormalTok{ (sched\_dep\_time }\SpecialCharTok{\%\%} \DecValTok{100}\NormalTok{),}
+                    \AttributeTok{arr\_time\_minutes =} \DecValTok{60} \SpecialCharTok{*}\NormalTok{ (arr\_time }\SpecialCharTok{\%/\%} \DecValTok{100}\NormalTok{) }\SpecialCharTok{+}\NormalTok{ (arr\_time }\SpecialCharTok{\%\%} \DecValTok{100}\NormalTok{)}
+\NormalTok{                ))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 336,776 x 22
+##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+##    <int> <int> <int>    <int>          <int>     <dbl>    <int>          <int>
+##  1  2013     1     1      517            515         2      830            819
+##  2  2013     1     1      533            529         4      850            830
+##  3  2013     1     1      542            540         2      923            850
+##  4  2013     1     1      544            545        -1     1004           1022
+##  5  2013     1     1      554            600        -6      812            837
+##  6  2013     1     1      554            558        -4      740            728
+##  7  2013     1     1      555            600        -5      913            854
+##  8  2013     1     1      557            600        -3      709            723
+##  9  2013     1     1      557            600        -3      838            846
+## 10  2013     1     1      558            600        -2      753            745
+## # i 336,766 more rows
+## # i 14 more variables: arr_delay <dbl>, carrier <chr>, flight <int>,
+## #   tailnum <chr>, origin <chr>, dest <chr>, air_time <dbl>, distance <dbl>,
+## #   hour <dbl>, minute <dbl>, time_hour <dttm>, dep_time_minutes <dbl>,
+## #   sched_dep_time_minutes <dbl>, arr_time_minutes <dbl>
+\end{verbatim}
+
 \end{solution}
 
 \hypertarget{exr3-6-2}{%
 \subsection*{Exercício 3.6.2}\label{exr3-6-2}}
 \addcontentsline{toc}{subsection}{Exercício 3.6.2}
 
-x
+Compare \texttt{air\_time} e \texttt{arr\_time\ -\ dep\_time}. O que você espera ver? O que você vê? O que você precisa fazer para corrigir isso?
 
 \begin{solution}
-x
+\leavevmode
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{transmute}\NormalTok{(flights\_min, air\_time, arr\_time\_minutes }\SpecialCharTok{{-}}\NormalTok{ dep\_time\_minutes)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 336,776 x 2
+##    air_time `arr_time_minutes - dep_time_minutes`
+##       <dbl>                                 <dbl>
+##  1      227                                   193
+##  2      227                                   197
+##  3      160                                   221
+##  4      183                                   260
+##  5      116                                   138
+##  6      150                                   106
+##  7      158                                   198
+##  8       53                                    72
+##  9      140                                   161
+## 10      138                                   115
+## # i 336,766 more rows
+\end{verbatim}
+
+Como os valores \texttt{arr\_time} e \texttt{dep\_time} não são números de fato, a diferença não faz sentido e assim o cálculo gera uma diferença muito grande. Para corrigir isso, primeiro teremos que converter os valores dessas duas variáveis para o número de minutos desde a meia noite e, depois, efetuar a diferença. Ainda assim, pode haver divergência entre esse valor e \texttt{air\_time}, que pode ser explicada por chegada antecipada, saída atrasada ou porque um vôo chegou ao seu destino após a meia-noite.
+
 \end{solution}
 
 \hypertarget{exr3-6-3}{%
 \subsection*{Exercício 3.6.3}\label{exr3-6-3}}
 \addcontentsline{toc}{subsection}{Exercício 3.6.3}
 
-x
+Compare \texttt{dep\_time}, \texttt{sched\_dep\_time} e \texttt{dep\_delay}. Como você espera que esses números estejam relacionados?
 
 \begin{solution}
-x
+\leavevmode
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{select}\NormalTok{(flights\_min, }\StringTok{"dep\_time"}\NormalTok{, }\StringTok{"sched\_dep\_time"}\NormalTok{, dep\_delay)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 336,776 x 3
+##    dep_time sched_dep_time dep_delay
+##       <int>          <int>     <dbl>
+##  1      517            515         2
+##  2      533            529         4
+##  3      542            540         2
+##  4      544            545        -1
+##  5      554            600        -6
+##  6      554            558        -4
+##  7      555            600        -5
+##  8      557            600        -3
+##  9      557            600        -3
+## 10      558            600        -2
+## # i 336,766 more rows
+\end{verbatim}
+
+É esperado que \texttt{dep\_time\ =\ sched\_dep\_time\ +\ dep\_delay}.
+
 \end{solution}
 
 \hypertarget{exr3-6-4}{%
 \subsection*{Exercício 3.6.4}\label{exr3-6-4}}
 \addcontentsline{toc}{subsection}{Exercício 3.6.4}
 
-x
+Encontre os 10 voos mais atrasados usando uma função de classificação. Como você quer lidar com empates? Leia cuidadosamente a documentação de \texttt{min\_rank()}.
 
 \begin{solution}
-x
+\leavevmode
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{filter}\NormalTok{(}
+\NormalTok{    flights,}
+    \FunctionTok{between}\NormalTok{(}\FunctionTok{rank}\NormalTok{(}\FunctionTok{desc}\NormalTok{(flights}\SpecialCharTok{$}\NormalTok{dep\_delay), }\AttributeTok{ties.method =} \StringTok{"min"}\NormalTok{), }\DecValTok{1}\NormalTok{, }\DecValTok{10}\NormalTok{)}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 10 x 19
+##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+##    <int> <int> <int>    <int>          <int>     <dbl>    <int>          <int>
+##  1  2013     1     9      641            900      1301     1242           1530
+##  2  2013     1    10     1121           1635      1126     1239           1810
+##  3  2013    12     5      756           1700       896     1058           2020
+##  4  2013     3    17     2321            810       911      135           1020
+##  5  2013     4    10     1100           1900       960     1342           2211
+##  6  2013     6    15     1432           1935      1137     1607           2120
+##  7  2013     6    27      959           1900       899     1236           2226
+##  8  2013     7    22      845           1600      1005     1044           1815
+##  9  2013     7    22     2257            759       898      121           1026
+## 10  2013     9    20     1139           1845      1014     1457           2210
+## # i 11 more variables: arr_delay <dbl>, carrier <chr>, flight <int>,
+## #   tailnum <chr>, origin <chr>, dest <chr>, air_time <dbl>, distance <dbl>,
+## #   hour <dbl>, minute <dbl>, time_hour <dttm>
+\end{verbatim}
+
+Usei a função \texttt{rank} e os empates foram tratados com o parâmetro \texttt{ties.method} setado como \texttt{min}.
+
 \end{solution}
 
 \hypertarget{exr3-6-5}{%
 \subsection*{Exercício 3.6.5}\label{exr3-6-5}}
 \addcontentsline{toc}{subsection}{Exercício 3.6.5}
 
-x
+O que \texttt{1:3\ +\ 1:10} retorna? Por quê?
 
 \begin{solution}
-x
+\leavevmode
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{1}\SpecialCharTok{:}\DecValTok{3} \SpecialCharTok{+} \DecValTok{1}\SpecialCharTok{:}\DecValTok{10}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in 1:3 + 1:10: comprimento do objeto maior não é múltiplo do
+## comprimento do objeto menor
+\end{verbatim}
+
+\begin{verbatim}
+##  [1]  2  4  6  5  7  9  8 10 12 11
+\end{verbatim}
+
+Como os vetores têm tamanhos diferentes, a soma vai ser executada entre as posições e, quando o menor dos vetores tiver sido completamente consumido, será tomado novamente o primeiro elemento (como em um movimento circular).
+
 \end{solution}
 
 \hypertarget{exr3-6-6}{%
 \subsection*{Exercício 3.6.6}\label{exr3-6-6}}
 \addcontentsline{toc}{subsection}{Exercício 3.6.6}
 
-x
+Quais funções trigonométricas o R fornece?
 
 \begin{solution}
-x
+Utilizamos o comando \texttt{?cos} para chegar até a documentação do pacote \texttt{Trig}, um dos componentes da base do R.
+
+O R fornece as funções \texttt{cos(x)}, \texttt{sin(x)}, \texttt{tan(x)}, \texttt{acos(x)}, \texttt{asin(x)}, \texttt{atan(x)}, \texttt{atan2(y,\ x)} (arco tangente entre dois vetores), \texttt{cospi(x)}, \texttt{sinpi(x)} e \texttt{tanpi(x)}.
 \end{solution}
 
 \hypertarget{resumos-agrupados-com-summarize}{%

@@ -275,61 +275,90 @@ select(flights, contains("TIME", ignore.case = FALSE))
 ### Exercício 3.6.1 {- #exr3-6-1}
 
 ::: {.enunciado}
-x
+Atualmente, `dep_time` e `sched_dep_time` são convenientes para observar, mas difíceis de usar para calcular, porque não são realmente números contínuos. Converta-os para uma representação mais apropriada do número de minutos desde a meia-noite.
 :::
 
 :::{.solution}
-x
+```{r}
+(flights_min <- mutate(
+                    flights,
+                    dep_time_minutes = 60 * (dep_time %/% 100) + (dep_time %% 100),
+                    sched_dep_time_minutes = 60 * (sched_dep_time %/% 100) + (sched_dep_time %% 100),
+                    arr_time_minutes = 60 * (arr_time %/% 100) + (arr_time %% 100)
+                ))
+```
+
 :::
 
 ### Exercício 3.6.2 {- #exr3-6-2}
 
 ::: {.enunciado}
-x
+Compare `air_time` e `arr_time - dep_time`. O que você espera ver? O que você vê? O que você precisa fazer para corrigir isso?
 :::
 
 :::{.solution}
-x
+```{r}
+transmute(flights_min, air_time, arr_time_minutes - dep_time_minutes)
+```
+
+Como os valores `arr_time` e `dep_time` não são números de fato, a diferença não faz sentido e assim o cálculo gera uma diferença muito grande. Para corrigir isso, primeiro teremos que converter os valores dessas duas variáveis para o número de minutos desde a meia noite e, depois, efetuar a diferença. Ainda assim, pode haver divergência entre esse valor e `air_time`, que pode ser explicada por chegada antecipada, saída atrasada ou porque um vôo chegou ao seu destino após a meia-noite. 
 :::
 
 ### Exercício 3.6.3 {- #exr3-6-3}
 
 ::: {.enunciado}
-x
+Compare `dep_time`, `sched_dep_time` e `dep_delay`. Como você espera que esses números estejam relacionados?
 :::
 
 :::{.solution}
-x
+```{r}
+select(flights_min, "dep_time", "sched_dep_time", dep_delay)
+```
+
+É esperado que `dep_time = sched_dep_time + dep_delay`.
 :::
 
 ### Exercício 3.6.4 {- #exr3-6-4}
 
 ::: {.enunciado}
-x
+Encontre os 10 voos mais atrasados usando uma função de classificação. Como você quer lidar com empates? Leia cuidadosamente a documentação de `min_rank()`.
 :::
 
 :::{.solution}
-x
+```{r}
+filter(
+    flights,
+    between(rank(desc(flights$dep_delay), ties.method = "min"), 1, 10)
+)
+```
+
+Usei a função `rank` e os empates foram tratados com o parâmetro `ties.method` setado como `min`.
 :::
 
 ### Exercício 3.6.5 {- #exr3-6-5}
 
 ::: {.enunciado}
-x
+O que `1:3 + 1:10` retorna? Por quê?
 :::
 
 :::{.solution}
-x
+```{r}
+1:3 + 1:10
+```
+
+Como os vetores têm tamanhos diferentes, a soma vai ser executada entre as posições e, quando o menor dos vetores tiver sido completamente consumido, será tomado novamente o primeiro elemento (como em um movimento circular).
 :::
 
 ### Exercício 3.6.6 {- #exr3-6-6}
 
 ::: {.enunciado}
-x
+Quais funções trigonométricas o R fornece?
 :::
 
 :::{.solution}
-x
+Utilizamos o comando `?cos` para chegar até a documentação do pacote `Trig`, um dos componentes da base do R. 
+
+O R fornece as funções `cos(x)`, `sin(x)`, `tan(x)`, `acos(x)`, `asin(x)`, `atan(x)`, `atan2(y, x)` (arco tangente entre dois vetores), `cospi(x)`, `sinpi(x)` e `tanpi(x)`. 
 :::
 
 ## Resumos agrupados com `summarize()`
