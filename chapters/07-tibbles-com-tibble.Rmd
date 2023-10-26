@@ -1,3 +1,11 @@
 # (PART) Wrangle {-}
 
 # Tibbles com `tibble`
+
+## Introdução
+
+## Criando tibbles
+
+## Tibbles _versus_ `data.frame`
+
+## Interagindo com códigos mais antigos

@@ -1,3 +1,17 @@
 # (PART) Comunicar {-}
 
 # R Markdown
+
+## Introdução
+
+## O Básico de R Markdown
+
+## Formatação de texto com markdown
+
+## Trechos de código
+
+## Resolução de problemas
+
+## Header YAML
+
+## Aprendendo mais

@@ -1,3 +1,13 @@
 # (PART) Modelar
 
 # O básico de modelos com `modelr`
+
+## Introdução
+
+## Um modelo simples
+
+## Visualizando modelos fórmulas e famílias de modelos
+
+## Valores faltantes
+
+## Outras famílias de modelos

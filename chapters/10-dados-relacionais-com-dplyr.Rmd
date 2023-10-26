@@ -1,1 +1,15 @@
 # Dados relacionais com `dplyr`
+
+## Introdução
+
+## `nycflights13`
+
+## Chaves (keys)
+
+## Mutating joins
+
+## Filtering joins
+
+## Problemas de joins
+
+## Operações de conjuntos

@@ -1,1 +1,17 @@
 # Análise exploratória de dados
+
+## Introdução
+
+## Perguntas
+
+## Valiação
+
+## Valores faltantes
+
+## Covariação
+
+## Padrões e modelos
+
+## Chamadas `ggplot2`
+
+## Aprendendo mais

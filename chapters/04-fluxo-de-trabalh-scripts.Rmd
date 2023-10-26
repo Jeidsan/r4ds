@@ -1,1 +1,5 @@
 # Fluxo de trabalho: scripts
+
+## Executando códigos
+
+## Diagnósticos Rstudio

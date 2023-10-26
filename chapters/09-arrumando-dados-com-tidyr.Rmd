@@ -1,1 +1,15 @@
 # Arrumando dados com `tidyr`
+
+## Introdução
+
+## Dados arrumados (Tidy Data)
+
+## Espalhando e reunindo
+
+## Separando e unindo
+
+## Valores faltantes
+
+## Estudo de caso
+
+## Dados desarrumados (não tidy)

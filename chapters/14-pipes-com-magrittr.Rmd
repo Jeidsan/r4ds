@@ -1,3 +1,11 @@
 # (PART) Programar {-}
 
 # Pipes com `magrittr`
+
+## Introdução
+
+## Alternativas ao piping
+
+## Quando não usar o pipe
+
+## Outras ferramentas do `magrittr`

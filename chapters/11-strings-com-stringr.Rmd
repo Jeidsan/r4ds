@@ -1,1 +1,15 @@
 # Strings com `stringr`
+
+## Introdução
+
+## O básico de string
+
+## Combinando padrões com expressões regulares
+
+## Ferramentas 
+
+## Outros tipos de padrões
+
+## Outros usos para expressões regulares
+
+## `string`

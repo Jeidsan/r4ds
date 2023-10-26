@@ -1,1 +1,13 @@
 # Importando dados com `readr`
+
+## Introdução
+
+## Começando
+
+## Analisando um vetor
+
+## Analisando um arquivo
+
+## Escrevendo em um arquivo
+
+## Outros tipos de dados

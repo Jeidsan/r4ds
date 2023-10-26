@@ -1,1 +1,14 @@
 # Muitos modelos com `purrr` e `broom`
+
+## Introdução
+
+## `gapminder`
+
+## List-columns
+
+## Criando list-columns
+
+## Simplificando list-columns 
+
+## Criando dados tidy com `broom`
+

@@ -1,1 +1,11 @@
 # Fluxo de trabalho: projetos
+
+## O que é real?
+
+## Onde sua análise vive?
+
+## Caminhos e diretórios
+
+## Projetos RStudio
+
+## Resumo

@@ -1,1 +1,11 @@
 # Fatores com `forcats`
+
+## Introdução
+
+## Criando fatores
+
+## General Social Survey
+
+## Modificando a ordem dos fatores
+
+## Modificando níveis de fatores

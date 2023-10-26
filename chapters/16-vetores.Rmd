@@ -1,1 +1,15 @@
 # Vetores
+
+## Introdução
+
+## O Básico de vetores
+
+## Tipos importantes de vetores atômicos 
+
+## Usando vetores atómicos
+
+## Vetores recursivos (listas)
+
+## Atributos
+
+## Vetores aumentados

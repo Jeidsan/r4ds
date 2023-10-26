@@ -1,1 +1,15 @@
 # Funções
+
+## Introdução
+
+## Quando você deveria escrever uma função?
+
+## Funções são para humanos e computadores
+
+## Execução condicional
+
+## Argumentos de funções 
+
+## Retorno de valores
+
+## Ambiente

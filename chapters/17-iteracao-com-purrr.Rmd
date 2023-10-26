@@ -1,1 +1,19 @@
 # Iteração com `purrr`
+
+## Introdução
+
+## Loops `for`
+
+## Variações do loop `for`
+
+## Loops `for` _versus_ funcionais
+
+## As funções `map`
+
+## Lidando com falhas
+
+## Fazendo `map` com vários argumentos
+
+## Walk
+
+## Outros padrões para loops `for`
