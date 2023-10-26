@@ -297,6 +297,8 @@ Dúvidas ou sugestões de melhoria podem ser encaminhadas para o e-mail \emph{\h
 \item
   \protect\hyperlink{exr3-7-1}{Exercício 3.7.1};
 \item
+  \protect\hyperlink{exr3-8-1}{Exercício 3.8.1};
+\item
 \end{itemize}
 
 \mainmatter
@@ -1457,6 +1459,15 @@ x
 
 \hypertarget{transformauxe7uxe3o-de-dados-com-dplyr}{%
 \chapter{\texorpdfstring{Transformação de dados com \texttt{dplyr}}{Transformação de dados com dplyr}}\label{transformauxe7uxe3o-de-dados-com-dplyr}}
+
+Para este capítulo, necessitaremos das seguintes configurações iniciais:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{not\_cancelled }\OtherTok{\textless{}{-}}\NormalTok{ flights }\SpecialCharTok{\%\textgreater{}\%}
+                    \FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(dep\_delay), }\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(arr\_delay))}
+\end{Highlighting}
+\end{Shaded}
 
 \hypertarget{introduuxe7uxe3o-1}{%
 \section{Introdução}\label{introduuxe7uxe3o-1}}
@@ -2804,7 +2815,7 @@ Utilizando o comando \texttt{?count}, identificamos que o argumento \texttt{sort
 \subsection*{Exercício 3.8.1}\label{exr3-8-1}}
 \addcontentsline{toc}{subsection}{Exercício 3.8.1}
 
-x
+Volte à tabela de funções de mudança e filtragem úteis. Descreva como cada operaçõa muda quando você as combina com o agrupamento.
 
 \begin{solution}
 x
@@ -2814,60 +2825,371 @@ x
 \subsection*{Exercício 3.8.2}\label{exr3-8-2}}
 \addcontentsline{toc}{subsection}{Exercício 3.8.2}
 
-x
+Qual avião (\texttt{tailnum}) tem o pior registro de pontualidade?
 
 \begin{solution}
-x
+Vamos inicialmente considerar que um voo é pontual se o tempo de atraso na chegada (\texttt{arr\_delay}) é igual ou inferior a zero e, para considerar um avião como mais ou menos pontual, levaremos em consideração a proporção de voos pontuais que ele realizou.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{flights }\SpecialCharTok{\%\textgreater{}\%}
+    \CommentTok{\# Considerar apenas os registros que tem a informação sobre o avião, hora de chegada e atraso na chegada}
+    \FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(tailnum), }\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(arr\_time), }\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(arr\_delay)) }\SpecialCharTok{\%\textgreater{}\%}
+    \CommentTok{\# Criar uma variável booleana (0 ou 1) que indica se o voo foi pontual}
+    \FunctionTok{mutate}\NormalTok{(}
+        \AttributeTok{on\_time =} \SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(arr\_time) }\SpecialCharTok{\&}\NormalTok{ arr\_delay }\SpecialCharTok{\textless{}=} \DecValTok{0}
+\NormalTok{    ) }\SpecialCharTok{\%\textgreater{}\%}
+    \CommentTok{\# Calcular a proporção de voos pontuais e o número de voos por avião}
+    \FunctionTok{group\_by}\NormalTok{(tailnum) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{summarise}\NormalTok{(}
+        \AttributeTok{n =} \FunctionTok{n}\NormalTok{(),}
+        \AttributeTok{arr\_delay =} \FunctionTok{mean}\NormalTok{(arr\_delay),}
+        \AttributeTok{on\_time =} \FunctionTok{mean}\NormalTok{(on\_time)}
+\NormalTok{    ) }\SpecialCharTok{\%\textgreater{}\%}
+    \CommentTok{\# Descartar aviões que voaram 20 vezes ou menos}
+    \FunctionTok{filter}\NormalTok{(n }\SpecialCharTok{\textgreater{}} \DecValTok{20}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+    \CommentTok{\# Ordenar por percentiual de voos pontuais}
+    \FunctionTok{arrange}\NormalTok{(}\FunctionTok{desc}\NormalTok{(on\_time)) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{head}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 4
+##   tailnum     n arr_delay on_time
+##   <chr>   <int>     <dbl>   <dbl>
+## 1 N382HA     26    -23.5    0.885
+## 2 N553AA     51     -6.33   0.863
+## 3 N423AS     29    -22.3    0.862
+## 4 N538AA     35     -9.6    0.857
+## 5 N548AA     49    -15.5    0.857
+## 6 N5EJAA     21    -12.5    0.857
+\end{verbatim}
+
+Com base na configuração acima, o avião N382HA é o mais pontual, com 88,46\% dos 26 voos sendo executados com pontualidade.
 \end{solution}
 
 \hypertarget{exr3-8-3}{%
 \subsection*{Exercício 3.8.3}\label{exr3-8-3}}
 \addcontentsline{toc}{subsection}{Exercício 3.8.3}
 
-x
+A que horas você deverá voar se quiser evitar atrasos ao máximo.
 
 \begin{solution}
-x
+
+O problema depende de encontrar o horário em que ocorrem menos atrasos. Consideraremos a hora inteira como parâmetro para a busca (\texttt{hour}) e utilizaremos a média dos tempos de atraso dos voos.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{flights }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(hour)) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{group\_by}\NormalTok{(hour) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{summarise}\NormalTok{(}
+        \AttributeTok{arr\_delay =} \FunctionTok{mean}\NormalTok{(arr\_delay, }\AttributeTok{na.rm =}\NormalTok{ T)}
+\NormalTok{    ) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{arrange}\NormalTok{(arr\_delay) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{head}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 2
+##    hour arr_delay
+##   <dbl>     <dbl>
+## 1     7    -5.30 
+## 2     5    -4.80 
+## 3     6    -3.38 
+## 4     9    -1.45 
+## 5     8    -1.11 
+## 6    10     0.954
+\end{verbatim}
+
 \end{solution}
 
 \hypertarget{exr3-8-4}{%
 \subsection*{Exercício 3.8.4}\label{exr3-8-4}}
 \addcontentsline{toc}{subsection}{Exercício 3.8.4}
 
-x
+Para cada destino, calcule os minutos totais de atraso. Para cada voo, calcule a proporção de atraso total par seu destino.
 
 \begin{solution}
-x
+
+R.: Para calcular o atraso total (em minutos) por destino, somaremos os valores da variável \texttt{arr\_delay} de todos os voos para cada destino (\texttt{group\_by(dest)}). Em seguida, para calcular a proporção com a qual cada voo colabora para o atraso total do destino, utilizaremos a razão entre o atraso do voo e o total do grupo ao qual pertence.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{flights }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{filter}\NormalTok{(arr\_delay }\SpecialCharTok{\textgreater{}} \DecValTok{0}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{group\_by}\NormalTok{(dest) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{mutate}\NormalTok{(}
+        \AttributeTok{arr\_delay\_total =} \FunctionTok{sum}\NormalTok{(arr\_delay),}
+        \AttributeTok{arr\_delay\_prop =}\NormalTok{ arr\_delay }\SpecialCharTok{/}\NormalTok{ arr\_delay\_total}
+\NormalTok{    ) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{select}\NormalTok{ (dest, flight, dep\_time, arr\_delay, arr\_delay\_total, arr\_delay\_prop) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{arrange}\NormalTok{(dest, }\FunctionTok{desc}\NormalTok{(arr\_delay\_prop)) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{head}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 6
+## # Groups:   dest [1]
+##   dest  flight dep_time arr_delay arr_delay_total arr_delay_prop
+##   <chr>  <int>    <int>     <dbl>           <dbl>          <dbl>
+## 1 ABQ     1505     2145       153            4487         0.0341
+## 2 ABQ       65     2223       149            4487         0.0332
+## 3 ABQ       65     2146       138            4487         0.0308
+## 4 ABQ     1505     2206       137            4487         0.0305
+## 5 ABQ       65     2220       136            4487         0.0303
+## 6 ABQ     1505     2025       126            4487         0.0281
+\end{verbatim}
+
 \end{solution}
 
 \hypertarget{exr3-8-5}{%
 \subsection*{Exercício 3.8.5}\label{exr3-8-5}}
 \addcontentsline{toc}{subsection}{Exercício 3.8.5}
 
-x
+Atrasos são normalmente temporariamente correlacionados: mesmo quando o problema que causou o atraso inicial foi resolvido, , voos posteriores atrasam para permitir que os voos anteriores decolem. Usando \texttt{lag()}, explore como o atraso de um voo está relacionado com o atraso imediatamente anterior.
 
 \begin{solution}
-x
+Considerando o atraso na decolagem, vamos inicialmente ordenar os voos por aeroporto, data e hora da decolagem. Em seguida, agrupando pelo aeroporto, coletamos o atraso do voo anteriot (note que o \texttt{mutate} irá atuar sobre o grupo apenas. Não faz sentido considerar o voo anterior em outro aeroporto!). Na sequência, podemos agrupar pelo tempo de atraso do voo anterior para calcular a média dos atrasos dos voos. Por fim, é exibido o gráfico.
+
+Avaliando a imagem, podemos notar a tendência de que, quanto maior o atraso do voo imediatamente anterior, maior será o atraso do voo atual. O padrão crescente segue até atrasos de aproximadamente 435 minutos. Depois passa a decrescer, o que deve ser analisado mais aprofundadamente.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{flights }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{arrange}\NormalTok{(origin, month, day, dep\_time) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{group\_by}\NormalTok{(origin) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{mutate}\NormalTok{(}\AttributeTok{prev\_dep\_delay =} \FunctionTok{lag}\NormalTok{(dep\_delay)) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(dep\_delay), }\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(prev\_dep\_delay)) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{group\_by}\NormalTok{(origin, prev\_dep\_delay) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{summarise}\NormalTok{(}\AttributeTok{dep\_delay\_mean =} \FunctionTok{mean}\NormalTok{(dep\_delay)) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(prev\_dep\_delay, dep\_delay\_mean)) }\SpecialCharTok{+}
+        \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+        \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{se =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+}        
+        \FunctionTok{scale\_x\_continuous}\NormalTok{(}\AttributeTok{breaks =} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1300}\NormalTok{, }\AttributeTok{by =} \DecValTok{60}\NormalTok{)) }\SpecialCharTok{+}
+        \FunctionTok{scale\_y\_continuous}\NormalTok{(}\AttributeTok{breaks =} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{450}\NormalTok{, }\AttributeTok{by =} \DecValTok{60}\NormalTok{)) }\SpecialCharTok{+}
+        \FunctionTok{labs}\NormalTok{(}
+            \AttributeTok{title =} \StringTok{"Atraso médio na decolagem em função do atraso na decolagem anterior."}\NormalTok{,}
+            \AttributeTok{x =} \StringTok{"Atraso na decolagem anterior (min.)"}\NormalTok{,}
+            \AttributeTok{y =} \StringTok{"Atraso médio na decolagem (min.)"}
+\NormalTok{        ) }\SpecialCharTok{+}
+\NormalTok{        tema}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `summarise()` has grouped output by 'origin'. You can override using the
+## `.groups` argument.
+## `geom_smooth()` using method = 'gam' and formula = 'y ~ s(x, bs = "cs")'
+\end{verbatim}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-75-1.pdf}
+
+É importante notar que o padrão se repete se avaliarmos cada aeroporto individualmente.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{flights }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{arrange}\NormalTok{(origin, month, day, dep\_time) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{group\_by}\NormalTok{(origin) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{mutate}\NormalTok{(}\AttributeTok{prev\_dep\_delay =} \FunctionTok{lag}\NormalTok{(dep\_delay)) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(dep\_delay), }\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(prev\_dep\_delay)) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{group\_by}\NormalTok{(origin, prev\_dep\_delay) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{summarise}\NormalTok{(}\AttributeTok{dep\_delay\_mean =} \FunctionTok{mean}\NormalTok{(dep\_delay)) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(prev\_dep\_delay, dep\_delay\_mean)) }\SpecialCharTok{+}
+        \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+        \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{se =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+}
+        \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{ origin, }\AttributeTok{ncol =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
+        \FunctionTok{scale\_x\_continuous}\NormalTok{(}\AttributeTok{breaks =} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1300}\NormalTok{, }\AttributeTok{by =} \DecValTok{60}\NormalTok{)) }\SpecialCharTok{+}
+        \FunctionTok{scale\_y\_continuous}\NormalTok{(}\AttributeTok{breaks =} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{450}\NormalTok{, }\AttributeTok{by =} \DecValTok{60}\NormalTok{)) }\SpecialCharTok{+}
+        \FunctionTok{labs}\NormalTok{(}
+            \AttributeTok{title =} \StringTok{"Atraso médio na decolagem em função do atraso na decolagem anterior."}\NormalTok{,}
+            \AttributeTok{x =} \StringTok{"Atraso na decolagem anterior (min.)"}\NormalTok{,}
+            \AttributeTok{y =} \StringTok{"Atraso médio na decolagem (min.)"}
+\NormalTok{        ) }\SpecialCharTok{+}
+\NormalTok{        tema}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `summarise()` has grouped output by 'origin'. You can override using the
+## `.groups` argument.
+## `geom_smooth()` using method = 'loess' and formula = 'y ~ x'
+\end{verbatim}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-76-1.pdf}
 \end{solution}
 
 \hypertarget{exr3-8-6}{%
 \subsection*{Exercício 3.8.6}\label{exr3-8-6}}
 \addcontentsline{toc}{subsection}{Exercício 3.8.6}
 
-x
+Veja cada destino. Você consegue encontrar os voos que são suspeitamente rápidos? (Ou seja, voos que representam um erro de entrada de dados em potencial). Calcule o tempo de viagem de um voo relativo ao voo mais curto para aquele destino. Quais voos ficaram mais atrasados no ar?
 
 \begin{solution}
-x
+Inicialmente calcularemos a média e o desvio padrão para cada rota (\texttt{origin}, \texttt{dest}) e, na sequência, calcularemos o \emph{z-score} para avaliar a distribuição dos tempos de voo. Usaremos a mediana e o intervalo interquartílico para escapar do efeito de outliers.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{standardized }\OtherTok{\textless{}{-}}\NormalTok{ flights }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(air\_time)) }\SpecialCharTok{\%\textgreater{}\%}            \CommentTok{\# Remover os voos sem informação do tempo de voo}
+    \FunctionTok{group\_by}\NormalTok{(origin, dest) }\SpecialCharTok{\%\textgreater{}\%}              \CommentTok{\# Agrupar pela rota (origin {-}\textgreater{} dest)}
+    \FunctionTok{mutate}\NormalTok{(}
+        \AttributeTok{median =} \FunctionTok{median}\NormalTok{(air\_time),          }\CommentTok{\# Calcular a média de cada grupo}
+        \AttributeTok{iqr =} \FunctionTok{IQR}\NormalTok{(air\_time),                }\CommentTok{\# Calcular o desvio padrão do grupo}
+        \AttributeTok{n =} \FunctionTok{n}\NormalTok{(),                            }\CommentTok{\# Calcular o tamanho do grupo}
+        \AttributeTok{z =}\NormalTok{ (air\_time }\SpecialCharTok{{-}}\NormalTok{ median) }\SpecialCharTok{/}\NormalTok{ iqr       }\CommentTok{\# Calcular o z{-}score de cada voo dentro do grupo}
+\NormalTok{    ) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{ungroup}\NormalTok{()}
+
+\NormalTok{standardized }\SpecialCharTok{\%\textgreater{}\%}    
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ z)) }\SpecialCharTok{+}
+        \FunctionTok{geom\_density}\NormalTok{() }\SpecialCharTok{+}
+        \FunctionTok{geom\_vline}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{xintercept =} \SpecialCharTok{{-}}\FloatTok{2.5}\NormalTok{), }\AttributeTok{linetype =} \StringTok{"dashed"}\NormalTok{) }\SpecialCharTok{+}
+        \FunctionTok{geom\_vline}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{xintercept =} \FloatTok{2.5}\NormalTok{), }\AttributeTok{linetype =} \StringTok{"dashed"}\NormalTok{) }\SpecialCharTok{+}
+        \FunctionTok{scale\_x\_continuous}\NormalTok{(}\AttributeTok{breaks =} \FunctionTok{seq}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{10}\NormalTok{, }\DecValTok{30}\NormalTok{, }\AttributeTok{by =} \DecValTok{1}\NormalTok{)) }\SpecialCharTok{+}
+\NormalTok{        tema}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Removed 4 rows containing non-finite values (`stat_density()`).
+\end{verbatim}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-77-1.pdf}
+
+Os voos com \emph{z-score} muito baixo, são aqueles cujo tempo de voo foi muito menor do que a média, ou seja, os mais rápidos.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{standardized }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{arrange}\NormalTok{(z) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{select}\NormalTok{(carrier, flight, origin, dest, month, day, air\_time, median, iqr, z) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{head}\NormalTok{(}\DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 10 x 10
+##    carrier flight origin dest  month   day air_time median   iqr     z
+##    <chr>    <int> <chr>  <chr> <int> <int>    <dbl>  <dbl> <dbl> <dbl>
+##  1 EV        4667 EWR    MSP       7     2       93    149    16 -3.5 
+##  2 DL        1499 LGA    ATL       5    25       65    112    14 -3.36
+##  3 US        2132 LGA    BOS       3     2       21     37     5 -3.2 
+##  4 B6          30 JFK    ROC       3    25       35     51     5 -3.2 
+##  5 B6        2002 JFK    BUF      11    10       38     57     6 -3.17
+##  6 EV        4292 EWR    GSP       5    13       55     92    12 -3.08
+##  7 EV        4249 EWR    SYR       3    15       30     39     3 -3   
+##  8 EV        4580 EWR    BTV       6    29       34     46     4 -3   
+##  9 EV        3830 EWR    RIC       7     2       35     53     6 -3   
+## 10 EV        4687 EWR    CVG       9    29       62     95    11 -3
+\end{verbatim}
+
+Adicionalmente, vamos considerar também a velocidade do voo (\texttt{mph\ \textless{}-\ distance\ /\ (air\_time\ /\ 60)}).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{standardized }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{mutate}\NormalTok{(}
+        \AttributeTok{mph =}\NormalTok{ distance }\SpecialCharTok{/}\NormalTok{ (air\_time }\SpecialCharTok{/} \DecValTok{60}\NormalTok{)}
+\NormalTok{    ) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ mph)) }\SpecialCharTok{+}
+        \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{binwidth =} \DecValTok{10}\NormalTok{) }\SpecialCharTok{+}
+        \FunctionTok{scale\_x\_continuous}\NormalTok{(}\AttributeTok{breaks =} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{700}\NormalTok{, }\AttributeTok{by =} \DecValTok{50}\NormalTok{)) }\SpecialCharTok{+}
+\NormalTok{        tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-79-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{standardized }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{mutate}\NormalTok{(}
+        \AttributeTok{mph =}\NormalTok{ distance }\SpecialCharTok{/}\NormalTok{ (air\_time }\SpecialCharTok{/} \DecValTok{60}\NormalTok{)}
+\NormalTok{    ) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{arrange}\NormalTok{(}\FunctionTok{desc}\NormalTok{(mph)) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{select}\NormalTok{(carrier, flight, origin, dest, month, day, mph) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{head}\NormalTok{(}\DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 10 x 7
+##    carrier flight origin dest  month   day   mph
+##    <chr>    <int> <chr>  <chr> <int> <int> <dbl>
+##  1 DL        1499 LGA    ATL       5    25  703.
+##  2 EV        4667 EWR    MSP       7     2  650.
+##  3 EV        4292 EWR    GSP       5    13  648 
+##  4 EV        3805 EWR    BNA       3    23  641.
+##  5 DL        1902 LGA    PBI       1    12  591.
+##  6 DL         315 JFK    SJU      11    17  564 
+##  7 B6         707 JFK    SJU       2    21  557.
+##  8 AA         936 JFK    STT      11    17  556.
+##  9 DL         347 JFK    SJU      11    16  554.
+## 10 B6        1503 JFK    SJU      11    16  554.
+\end{verbatim}
+
+Algum conhecimento prévio nos indica que a a velocidade superior a 550 milhas por hora são suspeitamente altas.
+
+Note que, em ambas as análises, coicidiram quase todos os voos. Poderíamos fazer análises mais acuradas, se tivéssemos mais conhecimento sobre o domínio de negócio, contudo já podemos concluir que aqueles são os voos suspeitos.
 \end{solution}
 
 \hypertarget{exr3-8-7}{%
 \subsection*{Exercício 3.8.7}\label{exr3-8-7}}
 \addcontentsline{toc}{subsection}{Exercício 3.8.7}
 
-x
+Encontre todos os destinos que são feitos por pelo menos duas companhias. Use essa informação para classificar as companhias.
 
 \begin{solution}
-x
+\leavevmode
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{flights }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(arr\_delay)) }\SpecialCharTok{\%\textgreater{}\%}                           \CommentTok{\# Remover os elementos que não tem informação de atraso}
+    \FunctionTok{group\_by}\NormalTok{(origin, dest) }\SpecialCharTok{\%\textgreater{}\%}                              \CommentTok{\# Agrupar pela origem e destino}
+    \FunctionTok{mutate}\NormalTok{(}
+        \AttributeTok{carrier\_count =} \FunctionTok{n\_distinct}\NormalTok{(carrier),                }\CommentTok{\# Calcular quantas empresas fazem o trecho}
+        \AttributeTok{arr\_delay\_mean =} \FunctionTok{mean}\NormalTok{(arr\_delay),                   }\CommentTok{\# Calcular o atraso médio do trecho}
+        \AttributeTok{arr\_delay\_percent =}\NormalTok{ arr\_delay }\SpecialCharTok{/}\NormalTok{ arr\_delay\_mean      }\CommentTok{\# Calcular a proporção do atraso em relação à média do trecho}
+\NormalTok{    ) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{filter}\NormalTok{(carrier\_count }\SpecialCharTok{\textgreater{}} \DecValTok{1}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}                           \CommentTok{\# Considerar apenas trechos operados por mais de uma empresa    }
+    \FunctionTok{group\_by}\NormalTok{(origin, dest, carrier) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{summarise}\NormalTok{(}
+        \AttributeTok{arr\_delay =} \FunctionTok{mean}\NormalTok{(arr\_delay\_percent)}
+\NormalTok{    ) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{arrange}\NormalTok{(origin, dest, }\FunctionTok{desc}\NormalTok{(arr\_delay)) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{head}\NormalTok{(}\DecValTok{25}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `summarise()` has grouped output by 'origin', 'dest'. You can override using
+## the `.groups` argument.
+\end{verbatim}
+
+\begin{verbatim}
+## # A tibble: 25 x 4
+## # Groups:   origin, dest [11]
+##    origin dest  carrier arr_delay
+##    <chr>  <chr> <chr>       <dbl>
+##  1 EWR    ATL   EV          1.48 
+##  2 EWR    ATL   UA          0.793
+##  3 EWR    ATL   DL          0.755
+##  4 EWR    ATL   9E         -0.472
+##  5 EWR    AUS   WN         23.7  
+##  6 EWR    AUS   UA         -9.02 
+##  7 EWR    BDL   UA          3.20 
+##  8 EWR    BDL   EV          0.962
+##  9 EWR    BNA   EV          1.39 
+## 10 EWR    BNA   WN         -0.168
+## # i 15 more rows
+\end{verbatim}
+
 \end{solution}
 
 \hypertarget{fluxo-de-trabalho-scripts}{%
@@ -2885,26 +3207,42 @@ x
 \hypertarget{introduuxe7uxe3o-2}{%
 \section{Introdução}\label{introduuxe7uxe3o-2}}
 
+x
+
 \hypertarget{perguntas}{%
 \section{Perguntas}\label{perguntas}}
+
+x
 
 \hypertarget{valiauxe7uxe3o}{%
 \section{Valiação}\label{valiauxe7uxe3o}}
 
+x
+
 \hypertarget{valores-faltantes}{%
 \section{Valores faltantes}\label{valores-faltantes}}
+
+x
 
 \hypertarget{covariauxe7uxe3o}{%
 \section{Covariação}\label{covariauxe7uxe3o}}
 
+x
+
 \hypertarget{padruxf5es-e-modelos}{%
 \section{Padrões e modelos}\label{padruxf5es-e-modelos}}
+
+x
 
 \hypertarget{chamadas-ggplot2}{%
 \section{\texorpdfstring{Chamadas \texttt{ggplot2}}{Chamadas ggplot2}}\label{chamadas-ggplot2}}
 
+x
+
 \hypertarget{aprendendo-mais}{%
 \section{Aprendendo mais}\label{aprendendo-mais}}
+
+x
 
 \hypertarget{fluxo-de-trabalho-projetos}{%
 \chapter{Fluxo de trabalho: projetos}\label{fluxo-de-trabalho-projetos}}
@@ -2912,17 +3250,27 @@ x
 \hypertarget{o-que-uxe9-real}{%
 \section{O que é real?}\label{o-que-uxe9-real}}
 
+x
+
 \hypertarget{onde-sua-anuxe1lise-vive}{%
 \section{Onde sua análise vive?}\label{onde-sua-anuxe1lise-vive}}
+
+x
 
 \hypertarget{caminhos-e-diretuxf3rios}{%
 \section{Caminhos e diretórios}\label{caminhos-e-diretuxf3rios}}
 
+x
+
 \hypertarget{projetos-rstudio}{%
 \section{Projetos RStudio}\label{projetos-rstudio}}
 
+x
+
 \hypertarget{resumo}{%
 \section{Resumo}\label{resumo}}
+
+x
 
 \hypertarget{part-wrangle}{%
 \part{Wrangle}\label{part-wrangle}}

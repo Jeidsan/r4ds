@@ -2,10 +2,20 @@
 
 ## O que é real?
 
+x
+
 ## Onde sua análise vive?
+
+x
 
 ## Caminhos e diretórios
 
+x
+
 ## Projetos RStudio
 
+x
+
 ## Resumo
+
+x

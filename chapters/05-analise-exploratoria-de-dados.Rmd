@@ -2,16 +2,32 @@
 
 ## Introdução
 
+x
+
 ## Perguntas
+
+x
 
 ## Valiação
 
+x
+
 ## Valores faltantes
+
+x
 
 ## Covariação
 
+x
+
 ## Padrões e modelos
+
+x
 
 ## Chamadas `ggplot2`
 
+x
+
 ## Aprendendo mais
+
+x

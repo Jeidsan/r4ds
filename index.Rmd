@@ -18,6 +18,7 @@ link-citations: yes
 
 ```{r setup, include=FALSE}
 library(tidyverse)
+library(nycflights13)
 
 options(repr.plot.width = 24, repr.plot.height = 13)
 
@@ -51,4 +52,5 @@ Dúvidas ou sugestões de melhoria podem ser encaminhadas para o e-mail *jeidsan
 - [Exercício 2.3.3](#exr2-3-3);
 - [Exercício 3.5.1](#exr3-5-1);
 - [Exercício 3.7.1](#exr3-7-1);
+- [Exercício 3.8.1](#exr3-8-1);
 - 
