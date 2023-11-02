@@ -2,4 +2,27 @@
 
 ## Executando códigos
 
+Não temos exercícios neste seção.
+
 ## Diagnósticos Rstudio
+
+### Exercício 4.2.1 {- #exr4-2-1}
+
+::: {.enunciado}
+Vá para a conta RStudio Tips no Twitter, em *@rstudiotips*, e escolha uma dica que pareça interessante. Pratique o uso dessa dica!
+:::
+
+:::{.solution}
+x
+:::
+
+
+### Exercício 4.2.2 {- #exr4-2-2}
+
+::: {.enunciado}
+Quais outros erros comuns o diagnóstico do RStudio reportará? Leia *http://bit.ly/RStudiocodediag* para descobrir.
+:::
+
+:::{.solution}
+x
+:::

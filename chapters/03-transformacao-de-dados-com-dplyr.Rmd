@@ -586,7 +586,8 @@ Vamos inicialmente considerar que um voo é pontual se o tempo de atraso na cheg
 
 ```{r}
 flights %>%
-    # Considerar apenas os registros que tem a informação sobre o avião, hora de chegada e atraso na chegada
+    # Considerar apenas os registros que tem a informação sobre o avião, 
+    # hora de chegada e atraso na chegada
     filter(!is.na(tailnum), !is.na(arr_time), !is.na(arr_delay)) %>%
     # Criar uma variável booleana (0 ou 1) que indica se o voo foi pontual
     mutate(
