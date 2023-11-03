@@ -4,8 +4,171 @@
 
 ## Introdução
 
+Não temos exercícios nesta seção.
+
 ## Criando tibbles
+
+Não temos exercícios nesta seção.
 
 ## Tibbles _versus_ `data.frame`
 
+Não temos exercícios nesta seção.
+
 ## Interagindo com códigos mais antigos
+
+### Exercício 7.4.1 {- #exr7-4-1}
+
+::: {.enunciado}
+ Como você consegue dizer se um objeto é um tibble? (Dica: tente imprimir `mtcarts`, que é um dat
+:::
+
+::: {.solution}
+```{r}
+print(mtcars)
+print(as.tibble(mtcars))
+
+str(mtcars)
+str(as.tibble(mtcars))
+
+rownames(mtcars)
+row.names(as.tibble(mtcars))
+```
+
+Há várias formas que podem nos ajudar a identificar se o conjunto de dados está organizado como um data frame padrão ou como um tibble:
+
+- Ao utilizar o comando `print()`, um data frame comum imprime todas as observações, enquanto um tibble imprime apenas as 10 primeiras;
+- Ao utilizar a função `str()`, o tipo de objeto é impresso;
+- Ao utilizar a função `rownames()`, um data frame exibirá os nomes das observações (se houver), enquanto um tibble exibirá sempre um sequ~encia numérica (???).
+:::
+
+### Exercício 7.4.2 {- #exr7-4-2}
+
+::: {.enunciado}
+Compare e constraste as seguintes operações em `data.frame` e tibble equivalente. Qual é a diferença? Por que os comportamentos do data frame padrão podem lhe causar frustração?
+
+```
+df <- data.frame(abc = 1, xyz = "a")
+df$x
+df[, "xyz"]
+df[, c("abc", "xyz")]
+```
+:::
+
+::: {.solution}
+Inicialmente vamos definir um tibble com o mesmo conteúdo do data frame proposto.
+
+```{r}
+tb <- tibble(abc = 1, xyz = "a")
+```
+
+A seguir, executaremos os comandos correspondentes para avaliar a saida.
+
+```{r}
+tb$x
+tb[, "xyz"]
+tb[, c("abc", "xyz")]
+```
+
+Concluímos que:
+
+- Ao utilizar o operador `$`, o data frame busca exibir a primeira (?) coluna que contenha `x`, enquando num tibble, busca-se a coluna nomeada exatamente como `x`;
+- Ao utilizar o nome completo de uma única variável com o operador `[`, um data frame imprime um vetor ou um valor singular, enquanto um tibble exibe sempre outro tibble;
+- ao usar o operador `[` passando um vetor de variáveis, o data frame padrão retorna outro data frame e um tibble retorna outro tibble. Neste caso o comportamento é similar.
+:::
+
+### Exercício 7.4.3 {- #exr7-4-3}
+
+::: {.enunciado}
+Se você tem o nome de uma variável armazenada em um objeto, por exemplo `var <- "mpg"`, como você pode extrair a variável de referência para um tibble?
+:::
+
+::: {.solution}
+Tanto para o data frame quanto para um tibble, é possível utilizar o operador `[[`.
+
+```{r}
+var <- "mpg"
+mtcars[[var]]
+as.tibble(mtcars)[[var]]
+```
+
+:::
+
+### Exercício 7.4.4 {- #exr7-4-4}
+
+::: {.enunciado}
+Pratique referir-se a nomes de variáveis não sintáticos, no data frame a seguir:
+
+```{r}
+annoyng <- tibble(
+    `1` = 1:10,
+    `2` = `1` * 2 + rnorm(length(`1`))
+)
+```
+
+a. Extrair a variável chamada 1.
+b. Plotar um diagrama de dispersão de 1 *versus* 2.
+c. Criar uma nova coluna chamada 3 que é 2 dividido por 1.
+d. Renomear as colunas para `one`, `two` e `three`.
+:::
+
+::: {.solution}
+a. Extrair a variável chamada 1.
+
+```{r}
+annoyng$ `1`
+```
+
+b. Plotar um diagrama de dispersão de 1 *versus* 2.
+
+```{r}
+annoyng %>%
+    ggplot(aes(`1`, `2`)) +
+        geom_point()
+```
+
+c. Criar uma nova coluna chamada 3 que é 2 dividido por 1.
+
+```{r}
+annoyng$`3` <- annoyng$`2` / annoyng$`1`
+```
+
+d. Renomear as colunas para `one`, `two` e `three`.
+
+```{r}
+colnames(annoyng) <- c("one", "two", "three")
+annoyng
+```
+
+:::
+
+### Exercício 7.4.5 {- #exr7-4-5}
+
+::: {.enunciado}
+O que `tibble::enframe()` faz? Quando você pode usá-lo?
+:::
+
+::: {.solution}
+Transforma um vetor de valores atômicos ou lista em um tibble de 2 colunas. É útil quando necessitarmos transformar um vetor em um dicionário ou uma lista de pares (nome, valor), por exemplo. 
+
+```{r}
+x <- letters
+enframe(x)
+```
+
+:::
+
+### Exercício 7.4.6 {- #exr7-4-6}
+
+::: {.enunciado}
+Que opção controla quantos nomes de colunas adicionais são impressos no rodapé de um tibble?
+:::
+
+::: {.solution}
+Pode-se usar a opção `tibble.max_extra_cols`.
+
+```{r}
+options(tibble.width = 30, tibble.max_extra_cols = 4)
+print(as.tibble(mtcars))
+```
+
+:::
