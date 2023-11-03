@@ -233,7 +233,7 @@
 \makeatother
 \subtitle{Solução dos exercícios}
 \author{Jeidsan A. da C. Pereira}
-\date{2023-10-25}
+\date{2023-11-03}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Teorema}[chapter]
@@ -298,6 +298,18 @@ Dúvidas ou sugestões de melhoria podem ser encaminhadas para o e-mail \emph{\h
   \protect\hyperlink{exr3-7-1}{Exercício 3.7.1};
 \item
   \protect\hyperlink{exr3-8-1}{Exercício 3.8.1};
+\item
+  \protect\hyperlink{exr4-2-1}{Exercício 4.2.1};
+\item
+  \protect\hyperlink{exr4-2-2}{Exercício 4.2.2};
+\item
+  \protect\hyperlink{exr5-5-4}{Exercício 5.5.4};
+\item
+  \protect\hyperlink{exr5-5-8}{Exercício 5.5.8};
+\item
+  \protect\hyperlink{exr5-5-9}{Exercício 5.5.9};
+\item
+  \protect\hyperlink{exr5-5-12}{Exercício 5.5.12};
 \item
 \end{itemize}
 
@@ -2833,7 +2845,8 @@ Vamos inicialmente considerar que um voo é pontual se o tempo de atraso na cheg
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{flights }\SpecialCharTok{\%\textgreater{}\%}
-    \CommentTok{\# Considerar apenas os registros que tem a informação sobre o avião, hora de chegada e atraso na chegada}
+    \CommentTok{\# Considerar apenas os registros que tem a informação sobre o avião, }
+    \CommentTok{\# hora de chegada e atraso na chegada}
     \FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(tailnum), }\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(arr\_time), }\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(arr\_delay)) }\SpecialCharTok{\%\textgreater{}\%}
     \CommentTok{\# Criar uma variável booleana (0 ou 1) que indica se o voo foi pontual}
     \FunctionTok{mutate}\NormalTok{(}
@@ -3198,8 +3211,30 @@ Encontre todos os destinos que são feitos por pelo menos duas companhias. Use e
 \hypertarget{executando-cuxf3digos}{%
 \section{Executando códigos}\label{executando-cuxf3digos}}
 
+Não temos exercícios neste seção.
+
 \hypertarget{diagnuxf3sticos-rstudio}{%
 \section{Diagnósticos Rstudio}\label{diagnuxf3sticos-rstudio}}
+
+\hypertarget{exr4-2-1}{%
+\subsection*{Exercício 4.2.1}\label{exr4-2-1}}
+\addcontentsline{toc}{subsection}{Exercício 4.2.1}
+
+Vá para a conta RStudio Tips no Twitter, em \emph{\citet{rstudiotips}}, e escolha uma dica que pareça interessante. Pratique o uso dessa dica!
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr4-2-2}{%
+\subsection*{Exercício 4.2.2}\label{exr4-2-2}}
+\addcontentsline{toc}{subsection}{Exercício 4.2.2}
+
+Quais outros erros comuns o diagnóstico do RStudio reportará? Leia \emph{\url{http://bit.ly/RStudiocodediag}} para descobrir.
+
+\begin{solution}
+x
+\end{solution}
 
 \hypertarget{anuxe1lise-exploratuxf3ria-de-dados}{%
 \chapter{Análise exploratória de dados}\label{anuxe1lise-exploratuxf3ria-de-dados}}
@@ -3207,42 +3242,1102 @@ Encontre todos os destinos que são feitos por pelo menos duas companhias. Use e
 \hypertarget{introduuxe7uxe3o-2}{%
 \section{Introdução}\label{introduuxe7uxe3o-2}}
 
-x
+Não temos exercícios nesta seção.
 
 \hypertarget{perguntas}{%
 \section{Perguntas}\label{perguntas}}
 
-x
+Não temos exercícios nesta seção.
 
-\hypertarget{valiauxe7uxe3o}{%
-\section{Valiação}\label{valiauxe7uxe3o}}
+\hypertarget{variauxe7uxe3o}{%
+\section{Variação}\label{variauxe7uxe3o}}
 
-x
+\hypertarget{exr5-3-1}{%
+\subsection*{Exercício 5.3.1}\label{exr5-3-1}}
+\addcontentsline{toc}{subsection}{Exercício 5.3.1}
+
+Explore a distribuição de cada variável \texttt{x}, \texttt{y} e \texttt{z} em \texttt{diamonds}. O que você aprende? Pense em um diamante e como você pode determinar qual dimensão é o comprimento, a largura e a profundidade.
+
+\begin{solution}
+Por se tratar de variáveis continuas, vamos utilizar um gráfico de densidade (ou histograma) para visualizar os dados.
+
+Como x e y possuem distribuição mais parecisa, acredita-se que tratam-se do comprimento e da largura do diamante, sendo z a profundidade (por ter média menor).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{plot }\OtherTok{\textless{}{-}}\NormalTok{ diamonds }\SpecialCharTok{\%\textgreater{}\%} 
+          \FunctionTok{ggplot}\NormalTok{() }\SpecialCharTok{+} 
+            \FunctionTok{coord\_cartesian}\NormalTok{(}
+              \AttributeTok{xlim =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{10}\NormalTok{),}
+              \AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, .}\DecValTok{85}\NormalTok{)}
+\NormalTok{            ) }\SpecialCharTok{+}
+            \FunctionTok{scale\_x\_continuous}\NormalTok{(}\AttributeTok{breaks =} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{10}\NormalTok{, }\AttributeTok{by =} \DecValTok{1}\NormalTok{)) }\SpecialCharTok{+}
+            \FunctionTok{labs}\NormalTok{(}
+              \AttributeTok{y =} \StringTok{""}
+\NormalTok{            ) }\SpecialCharTok{+}
+\NormalTok{            tema}
+
+\NormalTok{x }\OtherTok{\textless{}{-}}\NormalTok{ plot }\SpecialCharTok{+} \FunctionTok{geom\_density}\NormalTok{(}\FunctionTok{aes}\NormalTok{(x))}
+\NormalTok{y }\OtherTok{\textless{}{-}}\NormalTok{ plot }\SpecialCharTok{+} \FunctionTok{geom\_density}\NormalTok{(}\FunctionTok{aes}\NormalTok{(y))}
+\NormalTok{z }\OtherTok{\textless{}{-}}\NormalTok{ plot }\SpecialCharTok{+} \FunctionTok{geom\_density}\NormalTok{(}\FunctionTok{aes}\NormalTok{(z))}
+
+\FunctionTok{grid.arrange}\NormalTok{(x, y, z, }\AttributeTok{nrow =} \DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-81-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{diamonds }\SpecialCharTok{\%\textgreater{}\%} 
+  \CommentTok{\# Remover os outliers}
+  \FunctionTok{filter}\NormalTok{(}\DecValTok{0} \SpecialCharTok{\textless{}}\NormalTok{ x, x }\SpecialCharTok{\textless{}=} \DecValTok{10}\NormalTok{, }\DecValTok{0} \SpecialCharTok{\textless{}}\NormalTok{ y, y }\SpecialCharTok{\textless{}=} \DecValTok{10}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(x, y)) }\SpecialCharTok{+}
+    \CommentTok{\# Mostrar a densidade de x e y em conjunto}
+    \FunctionTok{geom\_density2d}\NormalTok{() }\SpecialCharTok{+}                      
+    \CommentTok{\# Mostrar uma linha guia para visualizar se x e Y crescem de forma }
+    \CommentTok{\# proprocional, isto é, se os diamantes são quadrados/redondos}
+    \FunctionTok{geom\_abline}\NormalTok{(}
+      \FunctionTok{aes}\NormalTok{(}\AttributeTok{intercept =} \DecValTok{0}\NormalTok{, }\AttributeTok{slope =} \DecValTok{1}\NormalTok{),}
+      \AttributeTok{linetype =} \StringTok{"dashed"}
+\NormalTok{    ) }\SpecialCharTok{+}
+    \CommentTok{\# Arrumar a proporção do gráfico}
+    \FunctionTok{coord\_cartesian}\NormalTok{(}
+      \AttributeTok{xlim =} \FunctionTok{c}\NormalTok{(}\FloatTok{3.5}\NormalTok{, }\FloatTok{8.5}\NormalTok{),}
+      \AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\FloatTok{3.5}\NormalTok{, }\FloatTok{8.5}\NormalTok{)}
+\NormalTok{    ) }\SpecialCharTok{+}
+    \CommentTok{\# Aplicar o tema padrão}
+\NormalTok{    tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-82-1.pdf}
+\end{solution}
+
+\hypertarget{exr5-3-2}{%
+\subsection*{Exercício 5.3.2}\label{exr5-3-2}}
+\addcontentsline{toc}{subsection}{Exercício 5.3.2}
+
+Explore a distribuição de \texttt{price}. Você identifica algo incomun ou surpreendente? (Dica: pense cuidadosamente sobre \texttt{binwidth} e certifique-se de experimentar uma ampla gama de valores).
+
+\begin{solution}
+\leavevmode
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(diamonds)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      carat               cut        color        clarity          depth      
+##  Min.   :0.2000   Fair     : 1610   D: 6775   SI1    :13065   Min.   :43.00  
+##  1st Qu.:0.4000   Good     : 4906   E: 9797   VS2    :12258   1st Qu.:61.00  
+##  Median :0.7000   Very Good:12082   F: 9542   SI2    : 9194   Median :61.80  
+##  Mean   :0.7979   Premium  :13791   G:11292   VS1    : 8171   Mean   :61.75  
+##  3rd Qu.:1.0400   Ideal    :21551   H: 8304   VVS2   : 5066   3rd Qu.:62.50  
+##  Max.   :5.0100                     I: 5422   VVS1   : 3655   Max.   :79.00  
+##                                     J: 2808   (Other): 2531                  
+##      table           price             x                y         
+##  Min.   :43.00   Min.   :  326   Min.   : 0.000   Min.   : 0.000  
+##  1st Qu.:56.00   1st Qu.:  950   1st Qu.: 4.710   1st Qu.: 4.720  
+##  Median :57.00   Median : 2401   Median : 5.700   Median : 5.710  
+##  Mean   :57.46   Mean   : 3933   Mean   : 5.731   Mean   : 5.735  
+##  3rd Qu.:59.00   3rd Qu.: 5324   3rd Qu.: 6.540   3rd Qu.: 6.540  
+##  Max.   :95.00   Max.   :18823   Max.   :10.740   Max.   :58.900  
+##                                                                   
+##        z         
+##  Min.   : 0.000  
+##  1st Qu.: 2.910  
+##  Median : 3.530  
+##  Mean   : 3.539  
+##  3rd Qu.: 4.040  
+##  Max.   :31.800  
+## 
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{diamonds }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ price)) }\SpecialCharTok{+}
+        \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{binwidth =} \DecValTok{100}\NormalTok{) }\SpecialCharTok{+}
+\NormalTok{        tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-84-1.pdf}
+
+\end{solution}
+
+\hypertarget{exr5-3-3}{%
+\subsection*{Exercício 5.3.3}\label{exr5-3-3}}
+\addcontentsline{toc}{subsection}{Exercício 5.3.3}
+
+Quantos diamantes têm 0,99 quilates? Quantos têm 1 quilate? Qual você acha que é a causa dessa diferença?
+
+\begin{solution}
+
+Existem 23 diamantes com 0.99 quilates, contra 1558 diamantes com 1 quilate. Provavelmente a concentração de diamantes de 1 quilate se deve a arredondamento.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{diamonds }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{filter}\NormalTok{(carat }\SpecialCharTok{\textgreater{}=}\NormalTok{ .}\DecValTok{99}\NormalTok{, carat }\SpecialCharTok{\textless{}=} \DecValTok{1}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{count}\NormalTok{(carat)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 2 x 2
+##   carat     n
+##   <dbl> <int>
+## 1  0.99    23
+## 2  1     1558
+\end{verbatim}
+
+\end{solution}
+
+\hypertarget{exr5-3-4}{%
+\subsection*{Exercício 5.3.4}\label{exr5-3-4}}
+\addcontentsline{toc}{subsection}{Exercício 5.3.4}
+
+Compare e contraste \texttt{coord\_cartesian} \emph{versus} \texttt{xlim()} ou \texttt{ylim()} ao dar zoom em um histograma. O que acontece se você não configurar \texttt{binwidth}? O que acontece se você tentar dar zoom para que apenas meia barra seja mostrada?
+
+\begin{solution}
+Ao utilizar \texttt{coord\_cartesian()} a restrição nos eixos \texttt{x} e \texttt{y} ocorrem após calculados os valores do gráfico e desenhados os geoms, dessa forma, o cálculo não é afetado pelos limites, apenas é feito o zoom. Já para \texttt{xlim} e \texttt{ylim}, os filtros são aplicados antes da construção do gráfico e as restrições são levadas em consideração, dessa forma, temos pontos que serão realmente descartados, e o leiaute do gráfico acaba ficando bem diferente.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{diamonds }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(carat)) }\SpecialCharTok{+}
+        \FunctionTok{geom\_histogram}\NormalTok{() }\SpecialCharTok{+}
+        \FunctionTok{xlim}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
+\NormalTok{        tema}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Removed 17502 rows containing non-finite values (`stat_bin()`).
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Removed 2 rows containing missing values (`geom_bar()`).
+\end{verbatim}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-86-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{diamonds }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(carat)) }\SpecialCharTok{+}
+        \FunctionTok{geom\_histogram}\NormalTok{() }\SpecialCharTok{+}
+        \FunctionTok{coord\_cartesian}\NormalTok{(}\AttributeTok{xlim =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{)) }\SpecialCharTok{+}
+\NormalTok{        tema}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+\end{verbatim}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-87-1.pdf}
+\end{solution}
 
 \hypertarget{valores-faltantes}{%
 \section{Valores faltantes}\label{valores-faltantes}}
 
-x
+\hypertarget{exr5-4-1}{%
+\subsection*{Exercício 5.4.1}\label{exr5-4-1}}
+\addcontentsline{toc}{subsection}{Exercício 5.4.1}
+
+O que acontece com valores faltantes em um histograma? O que ocorre com valores faltantes em um gráfico de barras? Por que há uma diferença?
+
+\begin{solution}
+A construção de um histograma considera valores continuos, dessa forma os valores faltantes são descartados, uma vez que não é possível dispor valores faltantes na ordenação dos valores (\texttt{NA\ \textgreater{}\ 0} não resulta em um valor lógico). Já para o gráfico de barras, como são considerados valores categóricos, os valores faltantes são exibidos como uma nova categoria.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{diamonds2 }\OtherTok{\textless{}{-}}\NormalTok{ diamonds }\SpecialCharTok{\%\textgreater{}\%}
+                \FunctionTok{mutate}\NormalTok{(}\AttributeTok{y =} \FunctionTok{ifelse}\NormalTok{(y }\SpecialCharTok{\textless{}} \DecValTok{3} \SpecialCharTok{|}\NormalTok{ y }\SpecialCharTok{\textgreater{}} \DecValTok{20}\NormalTok{, }\ConstantTok{NA}\NormalTok{, y))}
+
+\NormalTok{diamonds2 }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ y)) }\SpecialCharTok{+}
+        \FunctionTok{geom\_histogram}\NormalTok{() }\SpecialCharTok{+}
+\NormalTok{        tema}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Removed 9 rows containing non-finite values (`stat_bin()`).
+\end{verbatim}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-88-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{diamonds3 }\OtherTok{\textless{}{-}}\NormalTok{ diamonds2 }\SpecialCharTok{\%\textgreater{}\%}
+                \FunctionTok{mutate}\NormalTok{(}\AttributeTok{cut =} \FunctionTok{ifelse}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(y), }\ConstantTok{NA}\NormalTok{, }\FunctionTok{as.character}\NormalTok{(cut)))}
+
+\NormalTok{diamonds3 }\SpecialCharTok{\%\textgreater{}\%}    
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ cut)) }\SpecialCharTok{+}
+        \FunctionTok{geom\_bar}\NormalTok{() }\SpecialCharTok{+}
+\NormalTok{        tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-89-1.pdf}
+\end{solution}
+
+\hypertarget{exr5-4-2}{%
+\subsection*{Exercício 5.4.2}\label{exr5-4-2}}
+\addcontentsline{toc}{subsection}{Exercício 5.4.2}
+
+O que \texttt{na.rm\ =\ TRUE} faz em \texttt{mean()} e \texttt{sum()}?
+
+\begin{solution}
+
+O parâmetro \texttt{na.rm} serve para indicar que devem ser excluídos da soma ou da média os valores faltantes.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{a }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{, }\ConstantTok{NA}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{9}\NormalTok{, }\DecValTok{10}\NormalTok{)}
+\FunctionTok{mean}\NormalTok{(a)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] NA
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mean}\NormalTok{(a, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 5.555556
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sum}\NormalTok{(a)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] NA
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sum}\NormalTok{(a, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 50
+\end{verbatim}
+
+\end{solution}
 
 \hypertarget{covariauxe7uxe3o}{%
 \section{Covariação}\label{covariauxe7uxe3o}}
 
-x
+\hypertarget{exr5-5-1}{%
+\subsection*{Exercício 5.5.1}\label{exr5-5-1}}
+\addcontentsline{toc}{subsection}{Exercício 5.5.1}
+
+Use o que você aprendeu para melhorar a visualização dos tempos de decolagem dos coos cancelados \emph{versus} não cancelados.
+
+\begin{solution}
+\leavevmode
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{flights }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{mutate}\NormalTok{(}
+        \AttributeTok{cancelled =} \FunctionTok{ifelse}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(dep\_time), }\StringTok{"Cancelled"}\NormalTok{, }\StringTok{"Not cancelled"}\NormalTok{),}
+        \AttributeTok{sched\_hour =}\NormalTok{ sched\_dep\_time }\SpecialCharTok{\%/\%} \DecValTok{100}\NormalTok{,}
+        \AttributeTok{sched\_min =}\NormalTok{ sched\_dep\_time }\SpecialCharTok{\%\%} \DecValTok{100}\NormalTok{,}
+        \AttributeTok{sched\_dep\_time =}\NormalTok{ sched\_hour }\SpecialCharTok{+}\NormalTok{ (sched\_min }\SpecialCharTok{/} \DecValTok{60}\NormalTok{)}
+\NormalTok{    ) }\SpecialCharTok{\%\textgreater{}\%}    
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(cancelled, sched\_dep\_time)) }\SpecialCharTok{+}
+        \FunctionTok{geom\_boxplot}\NormalTok{() }\SpecialCharTok{+}
+\NormalTok{        tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-91-1.pdf}
+
+\end{solution}
+
+\hypertarget{exr5-5-2}{%
+\subsection*{Exercício 5.5.2}\label{exr5-5-2}}
+\addcontentsline{toc}{subsection}{Exercício 5.5.2}
+
+Qual variável no conjunto de dados dos diamantes é mais importante para prever o preço de um diamante? Como essa variável está correlacionada ao corte (\texttt{cut})? Por que a combinação desses dois relacionamentos leva a diamantes de menor qualidade serem mais caros?
+
+\begin{solution}
+Vamos considerar na análise as seguintes variáveis: \texttt{carat}, \texttt{cut}, \texttt{color} e \texttt{clarity}.
+
+Para ãvaliar a correlação entre \texttt{carat} e \texttt{price} (duas variáveis contínuas), podemos usar \texttt{geom\_point()}, \texttt{geom\_boxplot()} com a variável independente discretizada ou \texttt{geom\_quantile()}. Vamos avaliar o melhor dos cenários:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{diamonds }\SpecialCharTok{\%\textgreater{}\%} 
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(carat, price)) }\SpecialCharTok{+}
+        \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+\NormalTok{        tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-92-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{diamonds }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(carat, price)) }\SpecialCharTok{+}
+        \FunctionTok{geom\_boxplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{group =} \FunctionTok{cut\_width}\NormalTok{(carat, .}\DecValTok{1}\NormalTok{))) }\SpecialCharTok{+}
+\NormalTok{        tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-93-1.pdf}
+
+Com base nas imagens acima, podemos ver que existe uma relação positiva entre \texttt{carat} e \texttt{price}, o que indica que possivelmente essas duas variáveis estão bem correlacionadas. Note ainda que a representação via boxplot ficou um pouco melhor do que a representação por pontos.
+
+Vamos agora avaliar a variável \texttt{cut}. Por se tratar de uma variável discreta, podemos utilizar \texttt{geom\_col()}, \texttt{geom\_boxplot()}, \texttt{geom\_dotplot()} ou \texttt{geom\_violin()}. Vamos avaliar cada um deles.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{diamonds }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(cut, price)) }\SpecialCharTok{+}
+        \FunctionTok{geom\_col}\NormalTok{() }\SpecialCharTok{+}
+\NormalTok{        tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-94-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{diamonds }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(cut, }\AttributeTok{y =}\NormalTok{ price)) }\SpecialCharTok{+}
+        \FunctionTok{geom\_boxplot}\NormalTok{() }\SpecialCharTok{+}
+\NormalTok{        tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-95-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{diamonds }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(cut, price)) }\SpecialCharTok{+}
+        \FunctionTok{geom\_dotplot}\NormalTok{(}\AttributeTok{binaxis =} \StringTok{"y"}\NormalTok{) }\SpecialCharTok{+}
+\NormalTok{        tema}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Bin width defaults to 1/30 of the range of the data. Pick better value with
+## `binwidth`.
+\end{verbatim}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-96-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{diamonds }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(cut, price)) }\SpecialCharTok{+}
+        \FunctionTok{geom\_violin}\NormalTok{(}\AttributeTok{scale =} \StringTok{"area"}\NormalTok{) }\SpecialCharTok{+}
+\NormalTok{        tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-97-1.pdf}
+
+Notamos que os gráficos gerados por \texttt{geom\_col()} e \texttt{geom\_dotplot()} não geraram nenhum resultado interessante. Este devido à poluição visual e aquele devido a mostrar uma contagem dos elementos em cada grupo, e não a associação entre as variáveis.
+
+Tanto com \texttt{geom\_boxplot()}, quanto com \texttt{geom\_violin()}, podemos perceber que há uma correlação negativa muito fraca entre as variáveis e, desta forma, podemos considerar que \texttt{cut} não é interessante para predizer os preços dos diamantes.
+
+Sigamos para a variável \texttt{color}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{diamonds }\SpecialCharTok{\%\textgreater{}\%} 
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(color, price)) }\SpecialCharTok{+}
+        \FunctionTok{geom\_boxplot}\NormalTok{() }\SpecialCharTok{+}
+\NormalTok{        tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-98-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{diamonds }\SpecialCharTok{\%\textgreater{}\%} 
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(color, price)) }\SpecialCharTok{+}
+        \FunctionTok{geom\_violin}\NormalTok{(}\AttributeTok{scale =} \StringTok{"area"}\NormalTok{) }\SpecialCharTok{+}
+\NormalTok{        tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-99-1.pdf}
+
+Como podemos perceber, a relação entre as variáveis não é significativa, portanto, descartaremos \texttt{color}.
+
+Seguindo em frente, precisamos avaliar a variável \texttt{clarity}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{diamonds }\SpecialCharTok{\%\textgreater{}\%} 
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(clarity, price)) }\SpecialCharTok{+}
+        \FunctionTok{geom\_boxplot}\NormalTok{() }\SpecialCharTok{+}
+\NormalTok{        tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-100-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{diamonds }\SpecialCharTok{\%\textgreater{}\%} 
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(color, price)) }\SpecialCharTok{+}
+        \FunctionTok{geom\_violin}\NormalTok{(}\AttributeTok{scale =} \StringTok{"area"}\NormalTok{) }\SpecialCharTok{+}
+\NormalTok{        tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-101-1.pdf}
+
+Notamos também que a variável não tem correação com o preço.
+
+Concluímos, portanto, que a melhor variável para predizer o preço do diamante é \texttt{carat}.
+
+Agora, avaliaremos a relação entre \texttt{carat} e \texttt{cut}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{diamonds }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(cut, carat)) }\SpecialCharTok{+}
+        \FunctionTok{geom\_boxplot}\NormalTok{() }\SpecialCharTok{+}
+\NormalTok{        tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-102-1.pdf}
+
+Há uma relação negativa muito leve entre \texttt{cut} e \texttt{carat}, mas isso não é suficiente para dizer que uma impacta na outra. Há grande variabilidade de \texttt{carat} dentro de cada tipo de corte (\texttt{cut}) e, nota-se, os diamantes de grande quilate (provavelmente pedras grandes), tem um corte apenas justo. Isso pode se dar ao fato de que, quanto menor o diamante, melhor precisa ser o corte para que se consiga um bom valor. Além disso, é presumível que é mais fácil vender um diamante pequeno do que um grande, por isso talvez o preço não seja tão alto.
+\end{solution}
+
+\hypertarget{exr5-5-3}{%
+\subsection*{Exercício 5.5.3}\label{exr5-5-3}}
+\addcontentsline{toc}{subsection}{Exercício 5.5.3}
+
+Instale o pacote \textbf{ggstance} e crie um boxplot horizontal. Como isso se compara a usar \texttt{coord\_flip()}?
+
+\begin{solution}
+\leavevmode
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggstance)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'ggstance'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:ggplot2':
+## 
+##     geom_errorbarh, GeomErrorbarh
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{diamonds }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(carat, cut)) }\SpecialCharTok{+}
+        \FunctionTok{geom\_boxploth}\NormalTok{() }\SpecialCharTok{+}
+\NormalTok{        tema}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: The following aesthetics were dropped during statistical transformation: x
+## i This can happen when ggplot fails to infer the correct grouping structure in
+##   the data.
+## i Did you forget to specify a `group` aesthetic or to convert a numerical
+##   variable into a factor?
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Using the `size` aesthetic with geom_segment was deprecated in ggplot2 3.4.0.
+## i Please use the `linewidth` aesthetic instead.
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+## generated.
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Using the `size` aesthetic with geom_polygon was deprecated in ggplot2 3.4.0.
+## i Please use the `linewidth` aesthetic instead.
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+## generated.
+\end{verbatim}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-103-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{diamonds }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(cut, carat)) }\SpecialCharTok{+}
+        \FunctionTok{geom\_boxplot}\NormalTok{() }\SpecialCharTok{+}
+        \FunctionTok{coord\_flip}\NormalTok{() }\SpecialCharTok{+}
+\NormalTok{        tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-104-1.pdf}
+
+A diferença está apenas no mapeamento.
+
+\end{solution}
+
+\hypertarget{exr5-5-4}{%
+\subsection*{Exercício 5.5.4}\label{exr5-5-4}}
+\addcontentsline{toc}{subsection}{Exercício 5.5.4}
+
+Um problema com boxplots é que eles foram desenvolvidos em uma era de conjuntos de dados muito menores e tendem a exibir um número proibitivamente grande de ``valores fora da curva''. Uma abordagem para remediar esse problema é o \emph{letter value plot} . Instale o \textbf{lvplot} e tente usar \texttt{geom\_lv()} para exibir a distribuição de preço \emph{versus} corte. O que você aprendeu? Como você interpreta os gráficos?
+
+\begin{solution}
+???
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(lvplot)}
+
+\NormalTok{diamonds }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(cut, price)) }\SpecialCharTok{+}
+        \FunctionTok{geom\_lv}\NormalTok{(}\AttributeTok{width.method =} \StringTok{"height"}\NormalTok{) }\SpecialCharTok{+}        
+\NormalTok{        tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-105-1.pdf}
+\end{solution}
+
+\hypertarget{exr5-5-5}{%
+\subsection*{Exercício 5.5.5}\label{exr5-5-5}}
+\addcontentsline{toc}{subsection}{Exercício 5.5.5}
+
+Compare e contraste \texttt{geom\_violin()} com \texttt{geom\_histogram()} facetado, ou um \texttt{geom\_freqpoly()} colorido. Quais são os prós e contras de cada método?
+
+\begin{solution}
+Com o polígono de frequência é mais fácil comparar os grupos, uma vez que as linhas são sobrepostas, contudo muitas vezes pode se tornar complicado visualizar o comportamento/variação de cada grupo individualmente. O violino e o histograma permitem visualizar a distribuição em cada grupo, contudo fica mais complicado fazer a comparação.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Violin}
+\NormalTok{diamonds }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(cut, price)) }\SpecialCharTok{+}
+        \FunctionTok{geom\_violin}\NormalTok{() }\SpecialCharTok{+}
+        \FunctionTok{coord\_flip}\NormalTok{() }\SpecialCharTok{+}
+\NormalTok{        tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-106-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Histogram}
+\NormalTok{diamonds }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(price)) }\SpecialCharTok{+}
+        \FunctionTok{geom\_histogram}\NormalTok{() }\SpecialCharTok{+}
+        \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{ cut, }\AttributeTok{ncol =} \DecValTok{1}\NormalTok{, }\AttributeTok{scale =} \StringTok{"free\_y"}\NormalTok{) }\SpecialCharTok{+}
+\NormalTok{        tema}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+\end{verbatim}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-106-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Frequency Polygon}
+\NormalTok{diamonds }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(price, ..density.., }\AttributeTok{color =}\NormalTok{ cut)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_freqpoly}\NormalTok{(}\AttributeTok{binwidth =} \DecValTok{500}\NormalTok{) }\SpecialCharTok{+}
+\NormalTok{    tema}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: The dot-dot notation (`..density..`) was deprecated in ggplot2 3.4.0.
+## i Please use `after_stat(density)` instead.
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+## generated.
+\end{verbatim}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-106-3.pdf}
+\end{solution}
+
+\hypertarget{exr5-5-6}{%
+\subsection*{Exercício 5.5.6}\label{exr5-5-6}}
+\addcontentsline{toc}{subsection}{Exercício 5.5.6}
+
+Se você tem um conjunto de dados pequeno, às vezes é útil usar \texttt{geom\_jitter()} para ver a relação entre uma variável contínua e uma categórica. O pacote \textbf{ggbeeswarm} fornece alguns métodos similares a \texttt{geom\_jitter()}. Liste-os e descreva brevemente o que cada um faz.
+
+\begin{solution}
+O pacote oferece duas geoms. A primeira, \texttt{geom\_quasirandom()} mistura o \emph{jitter} com a a aparencia do gráfico violino. A segunda, \texttt{geom\_beeswarm()} produz gráficos parecidos com violinos, mas com alguma sobreposição.
+
+Em comparação ao \texttt{geom\_jitter()}, o pacote \texttt{ggbeeswarm()} permite uma melhor visualização dos clusteres, caso existam. No nosso exemplo, os clusters seriam as próprias classes, ele evita que os pontos de uma classe se aproximem demais da classe ao lado, gerando uma melhor visualização. Também mantém mais ou menos agrupados as ``alturas'' no eixo y, isto é, o erro é colocado apenas em uma das direções.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggbeeswarm)}
+
+\NormalTok{mpg }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(class, hwy)) }\SpecialCharTok{+}
+        \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+\NormalTok{        tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-107-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mpg }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(class, hwy)) }\SpecialCharTok{+}
+        \FunctionTok{geom\_jitter}\NormalTok{() }\SpecialCharTok{+}
+\NormalTok{        tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-107-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mpg }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(class, hwy)) }\SpecialCharTok{+}
+        \FunctionTok{geom\_quasirandom}\NormalTok{() }\SpecialCharTok{+}
+\NormalTok{        tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-107-3.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mpg }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(class, hwy)) }\SpecialCharTok{+}
+        \FunctionTok{geom\_beeswarm}\NormalTok{() }\SpecialCharTok{+}
+\NormalTok{        tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-107-4.pdf}
+\end{solution}
+
+\hypertarget{exr5-7-7}{%
+\subsection*{Exercício 5.5.7}\label{exr5-7-7}}
+\addcontentsline{toc}{subsection}{Exercício 5.5.7}
+
+Como você alteraria a escala do conjunto de dados \texttt{diamonds} para mostrar mais claramente a distribuição de corte dentro de cor ou cor dentro de corte?
+
+\begin{solution}
+Pode-se melhorar usando a proporção de \texttt{cut} dentro de \texttt{color}, porém a mudança não foi tão significativa.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{diamonds }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{count}\NormalTok{(color, cut) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(color, cut)) }\SpecialCharTok{+}
+        \FunctionTok{geom\_tile}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{fill =}\NormalTok{ n)) }\SpecialCharTok{+} 
+\NormalTok{        tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-108-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{diamonds }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{count}\NormalTok{(color, cut) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{group\_by}\NormalTok{(color) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{mutate}\NormalTok{(}
+        \AttributeTok{prop =}\NormalTok{ n }\SpecialCharTok{/} \FunctionTok{sum}\NormalTok{(n)}
+\NormalTok{    ) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(color, cut)) }\SpecialCharTok{+}
+        \FunctionTok{geom\_tile}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{fill =}\NormalTok{ prop)) }\SpecialCharTok{+} 
+\NormalTok{        tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-108-2.pdf}
+\end{solution}
+
+\hypertarget{exr5-5-8}{%
+\subsection*{Exercício 5.5.8}\label{exr5-5-8}}
+\addcontentsline{toc}{subsection}{Exercício 5.5.8}
+
+Use \texttt{geom\_tile()} junto de \textbf{dplyr} para explorar como os atrasos médios dos voos variam por destino e mês. O que dificulta a leitura do gráfico? Como você poderia melhorá-lo?
+
+\begin{solution}
+???
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{flights }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{group\_by}\NormalTok{(month, dest) }\SpecialCharTok{\%\textgreater{}\%}                           \CommentTok{\# Agrupar por mês e destino}
+    \FunctionTok{summarise}\NormalTok{(}
+        \AttributeTok{dep\_delay =} \FunctionTok{mean}\NormalTok{(dep\_delay, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)       }\CommentTok{\# Calcular o atraso médio}
+\NormalTok{    ) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{group\_by}\NormalTok{(dest) }\SpecialCharTok{\%\textgreater{}\%}                                  \CommentTok{\# Agrupar pelo destino}
+    \FunctionTok{filter}\NormalTok{(}\FunctionTok{n}\NormalTok{() }\SpecialCharTok{==} \DecValTok{12}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}                               \CommentTok{\# Selecionar apenas aqueles destinos que tem informação de todos os meses}
+    \FunctionTok{ungroup}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}                                       \CommentTok{\# Desagrupa pelo destino}
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\FunctionTok{factor}\NormalTok{(month), dest, }\AttributeTok{fill =}\NormalTok{ dep\_delay)) }\SpecialCharTok{+}
+        \FunctionTok{geom\_tile}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `summarise()` has grouped output by 'month'. You can override using the
+## `.groups` argument.
+\end{verbatim}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-109-1.pdf}
+\end{solution}
+
+\hypertarget{exr5-5-9}{%
+\subsection*{Exercício 5.5.9}\label{exr5-5-9}}
+\addcontentsline{toc}{subsection}{Exercício 5.5.9}
+
+Por que é um pouco melhor usar \texttt{aes(x\ =\ color,\ y\ =\ cut)} em vez de \texttt{aes(c\ =\ cut,\ y\ =\ color)} no exemplo anterior?
+
+\begin{solution}
+???
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{diamonds }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{count}\NormalTok{(color, cut) }\SpecialCharTok{\%\textgreater{}\%}    
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(color, cut)) }\SpecialCharTok{+}
+        \FunctionTok{geom\_tile}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{fill =}\NormalTok{ n)) }\SpecialCharTok{+} 
+\NormalTok{        tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-110-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{diamonds }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{count}\NormalTok{(cut, color) }\SpecialCharTok{\%\textgreater{}\%}    
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(cut, color)) }\SpecialCharTok{+}
+        \FunctionTok{geom\_tile}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{fill =}\NormalTok{ n)) }\SpecialCharTok{+} 
+\NormalTok{        tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-110-2.pdf}
+\end{solution}
+
+\hypertarget{exr5-5-10}{%
+\subsection*{Exercício 5.5.10}\label{exr5-5-10}}
+\addcontentsline{toc}{subsection}{Exercício 5.5.10}
+
+Em vez de resumir a distribuição condicional com um boxplot, pode-se usar um polígono de frequência. O que você precisa considerar ao usar \texttt{cut\_width()} \emph{versus} \texttt{cut\_number()}? Como isso impacta uma visualização da distribuição 2D de \texttt{carat} e \texttt{price}?
+
+\begin{solution}
+Utilizamos \texttt{cut\_width()} quando queremos determinar o tamanho das classes que serão exibidas e \texttt{cut\_number()} quando queremos determinar o número de classes.
+
+Se o número total de classes for muito grande, a visualização fica comprometida. Se for pequeno demais, não captaremos comportamentos importantes.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{diamonds }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(carat, price)) }\SpecialCharTok{+}
+        \FunctionTok{geom\_boxplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{group =} \FunctionTok{cut\_number}\NormalTok{(carat, }\DecValTok{5}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-111-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{diamonds }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(price)) }\SpecialCharTok{+}
+        \FunctionTok{geom\_freqpoly}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{color =} \FunctionTok{cut\_number}\NormalTok{(carat, }\DecValTok{5}\NormalTok{))) }\SpecialCharTok{+}
+\NormalTok{        tema}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+\end{verbatim}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-111-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{diamonds }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(price)) }\SpecialCharTok{+}
+        \FunctionTok{geom\_freqpoly}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{color =} \FunctionTok{cut\_width}\NormalTok{(carat, }\DecValTok{1}\NormalTok{))) }\SpecialCharTok{+}
+\NormalTok{        tema}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+\end{verbatim}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-111-3.pdf}
+\end{solution}
+
+\hypertarget{exr5-5-11}{%
+\subsection*{Exercício 5.5.11}\label{exr5-5-11}}
+\addcontentsline{toc}{subsection}{Exercício 5.5.11}
+
+Visualize a distribuição de \texttt{carat}, particionada por \texttt{price}.
+
+\begin{solution}
+Inicialmente vamos utilizar boxplot para visualizar a distribuição. Vamos dividir os preços em 10 grupos.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{diamonds }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\FunctionTok{cut\_number}\NormalTok{(price, }\DecValTok{10}\NormalTok{), carat)) }\SpecialCharTok{+}
+        \FunctionTok{geom\_boxplot}\NormalTok{() }\SpecialCharTok{+}
+        \FunctionTok{coord\_flip}\NormalTok{() }\SpecialCharTok{+}
+\NormalTok{        tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-112-1.pdf}
+
+Note que, \texttt{cut\_number()} dividiu os grupos de modo a ter a mesma quantidade de registros em cada classe e isso acaba gerando classes de larguras diferentes. É mais fácil comparar classes de mesma largura, por isso vamos refazer a visualização utilizando \texttt{cut\_width()}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{diamonds }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\FunctionTok{cut\_width}\NormalTok{(price, }\DecValTok{2000}\NormalTok{), carat)) }\SpecialCharTok{+}
+        \FunctionTok{geom\_boxplot}\NormalTok{() }\SpecialCharTok{+}
+        \FunctionTok{coord\_flip}\NormalTok{() }\SpecialCharTok{+}
+\NormalTok{        tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-113-1.pdf}
+
+A visualização ficou um pouco melhor, porém temos uma classe que inclui valores negativos. Vamos corrigir isso utilizando o argumento \texttt{boundary}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{diamonds }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\FunctionTok{cut\_width}\NormalTok{(price, }\DecValTok{2000}\NormalTok{, }\AttributeTok{boundary =} \DecValTok{0}\NormalTok{), carat)) }\SpecialCharTok{+}
+        \FunctionTok{geom\_boxplot}\NormalTok{() }\SpecialCharTok{+}
+        \FunctionTok{coord\_flip}\NormalTok{() }\SpecialCharTok{+}
+\NormalTok{        tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-114-1.pdf}
+
+Como existem muitos \emph{outliers}, vamos tentar utilizar o \emph{letter value}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{diamonds }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\FunctionTok{cut\_width}\NormalTok{(price, }\DecValTok{2000}\NormalTok{, }\AttributeTok{boundary =} \DecValTok{0}\NormalTok{), carat)) }\SpecialCharTok{+}
+        \FunctionTok{geom\_lv}\NormalTok{() }\SpecialCharTok{+}
+        \FunctionTok{coord\_flip}\NormalTok{() }\SpecialCharTok{+}
+\NormalTok{        tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-115-1.pdf}
+
+Para melhorar a visualização das classes, vamos também mudar a unidade de \texttt{price} de dolares para milhares de dólares, basta dividirmos os valores por 1000:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{diamonds }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{mutate}\NormalTok{ (}\AttributeTok{price =}\NormalTok{ price }\SpecialCharTok{/} \DecValTok{1000}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\FunctionTok{cut\_width}\NormalTok{(price, }\DecValTok{2}\NormalTok{, }\AttributeTok{boundary =} \DecValTok{0}\NormalTok{), carat)) }\SpecialCharTok{+}
+        \FunctionTok{geom\_lv}\NormalTok{() }\SpecialCharTok{+}
+        \FunctionTok{coord\_flip}\NormalTok{() }\SpecialCharTok{+}
+\NormalTok{        tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-116-1.pdf}
+
+Agora vamos melhorar os títulos do gráfico:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{diamonds }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{mutate}\NormalTok{ (}\AttributeTok{price =}\NormalTok{ price }\SpecialCharTok{/} \DecValTok{1000}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\FunctionTok{cut\_width}\NormalTok{(price, }\DecValTok{2}\NormalTok{, }\AttributeTok{boundary =} \DecValTok{0}\NormalTok{), carat)) }\SpecialCharTok{+}
+        \FunctionTok{geom\_lv}\NormalTok{() }\SpecialCharTok{+}
+        \FunctionTok{coord\_flip}\NormalTok{() }\SpecialCharTok{+}
+        \FunctionTok{labs}\NormalTok{(}
+            \AttributeTok{title =} \StringTok{"Distribuição do quilate das pedras por faixa de preço"}\NormalTok{,}
+            \AttributeTok{y =} \StringTok{"Quilates"}\NormalTok{,}
+            \AttributeTok{x =} \StringTok{"Preço (mil dólares)"}
+\NormalTok{        ) }\SpecialCharTok{+}
+\NormalTok{        tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-117-1.pdf}
+
+O gráfico está pronto.
+
+Note que poderíamos ter utilizado a \texttt{geom\_violin()}, porém, neste caso, não teríamos uma visão muito boa dos outliers.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{diamonds }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{mutate}\NormalTok{ (}\AttributeTok{price =}\NormalTok{ price }\SpecialCharTok{/} \DecValTok{1000}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\FunctionTok{cut\_width}\NormalTok{(price, }\DecValTok{2}\NormalTok{, }\AttributeTok{boundary =} \DecValTok{0}\NormalTok{), carat)) }\SpecialCharTok{+}
+        \FunctionTok{geom\_violin}\NormalTok{() }\SpecialCharTok{+}
+        \FunctionTok{coord\_flip}\NormalTok{() }\SpecialCharTok{+}
+        \FunctionTok{labs}\NormalTok{(}
+            \AttributeTok{title =} \StringTok{"Distribuição do quilate das pedras por faixa de preço"}\NormalTok{,}
+            \AttributeTok{y =} \StringTok{"Quilates"}\NormalTok{,}
+            \AttributeTok{x =} \StringTok{"Preço (mil dólares)"}
+\NormalTok{        ) }\SpecialCharTok{+}
+\NormalTok{        tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-118-1.pdf}
+\end{solution}
+
+\hypertarget{exr5-5-12}{%
+\subsection*{Exercício 5.5.12}\label{exr5-5-12}}
+\addcontentsline{toc}{subsection}{Exercício 5.5.12}
+
+Como a distribuição de preços de diamantes muito grandes se compara à de diamantes pequenos? É como você esperava ou isso lhe surpreende?
+
+\begin{solution}
+???
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{diamonds }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\FunctionTok{cut\_width}\NormalTok{(carat, }\DecValTok{2}\NormalTok{, }\AttributeTok{boundary =} \DecValTok{0}\NormalTok{), price)) }\SpecialCharTok{+}
+        \FunctionTok{geom\_boxplot}\NormalTok{() }\SpecialCharTok{+}
+\NormalTok{        tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-119-1.pdf}
+\end{solution}
+
+\hypertarget{exr5-5-13}{%
+\subsection*{Exercício 5.5.13}\label{exr5-5-13}}
+\addcontentsline{toc}{subsection}{Exercício 5.5.13}
+
+Combine duas técnicas que você aprendeu para visualizar a distribuição combinada de \texttt{cut}, \texttt{carat} e \texttt{price}.
+
+\begin{solution}
+\leavevmode
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{diamonds }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\FunctionTok{cut\_number}\NormalTok{(carat, }\DecValTok{5}\NormalTok{), price, }\AttributeTok{color =}\NormalTok{ cut)) }\SpecialCharTok{+}
+        \FunctionTok{geom\_boxplot}\NormalTok{() }\SpecialCharTok{+}
+\NormalTok{        tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-120-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{diamonds }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(carat, price)) }\SpecialCharTok{+}
+        \FunctionTok{geom\_hex}\NormalTok{() }\SpecialCharTok{+}
+        \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{ cut, }\AttributeTok{ncol =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
+\NormalTok{        tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-121-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{diamonds }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\FunctionTok{cut\_number}\NormalTok{(carat, }\DecValTok{10}\NormalTok{), cut, }\AttributeTok{fill =} \FunctionTok{desc}\NormalTok{(price))) }\SpecialCharTok{+}
+        \FunctionTok{geom\_tile}\NormalTok{() }\SpecialCharTok{+}        
+\NormalTok{        tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-122-1.pdf}
+
+\end{solution}
+
+\hypertarget{exr5-5-14}{%
+\subsection*{Exercício 5.5.14}\label{exr5-5-14}}
+\addcontentsline{toc}{subsection}{Exercício 5.5.14}
+
+Gráficos bidimensionais revelam pontos fora da curva que não são visíveis em gráficos unidimensionais. Por exemplo, alguns pontos no gráfico a seguir tem uma combinação incomum de valores de \texttt{x} e \texttt{y}, que faz pontos ficarem fora da curva, mesmo embora seus valores \texttt{x} e \texttt{y} pareçam normais quando examidanos separadamente.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ diamonds) }\SpecialCharTok{+}
+    \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ x, }\AttributeTok{y =}\NormalTok{ y)) }\SpecialCharTok{+}
+    \FunctionTok{coord\_cartesian}\NormalTok{(}\AttributeTok{xlim =} \FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{, }\DecValTok{11}\NormalTok{), }\AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{, }\DecValTok{11}\NormalTok{)) }\SpecialCharTok{+}
+\NormalTok{    tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-123-1.pdf}
+
+Por que um diagrama de dispersão é uma exibição melhor do que um diagrama de caixa neste caso?
+
+\begin{solution}
+Como os valores de \texttt{x} e \texttt{y} são fortemente relacionados, os outliers não vão aparecer no extremo de ums ou outra coordenada, mas em proporções desigaia dos diamantes.
+\end{solution}
 
 \hypertarget{padruxf5es-e-modelos}{%
 \section{Padrões e modelos}\label{padruxf5es-e-modelos}}
 
-x
+Não temos exercícios nesta seção.
 
 \hypertarget{chamadas-ggplot2}{%
 \section{\texorpdfstring{Chamadas \texttt{ggplot2}}{Chamadas ggplot2}}\label{chamadas-ggplot2}}
 
-x
+Não temos exercícios nesta seção.
 
 \hypertarget{aprendendo-mais}{%
 \section{Aprendendo mais}\label{aprendendo-mais}}
 
-x
+Não temos exercícios nesta seção.
 
 \hypertarget{fluxo-de-trabalho-projetos}{%
 \chapter{Fluxo de trabalho: projetos}\label{fluxo-de-trabalho-projetos}}
@@ -3250,27 +4345,27 @@ x
 \hypertarget{o-que-uxe9-real}{%
 \section{O que é real?}\label{o-que-uxe9-real}}
 
-x
+Não temos exercícios nesta seção.
 
 \hypertarget{onde-sua-anuxe1lise-vive}{%
 \section{Onde sua análise vive?}\label{onde-sua-anuxe1lise-vive}}
 
-x
+Não temos exercícios nesta seção.
 
 \hypertarget{caminhos-e-diretuxf3rios}{%
 \section{Caminhos e diretórios}\label{caminhos-e-diretuxf3rios}}
 
-x
+Não temos exercícios nesta seção.
 
 \hypertarget{projetos-rstudio}{%
 \section{Projetos RStudio}\label{projetos-rstudio}}
 
-x
+Não temos exercícios nesta seção.
 
 \hypertarget{resumo}{%
 \section{Resumo}\label{resumo}}
 
-x
+Não temos exercícios nesta seção.
 
 \hypertarget{part-wrangle}{%
 \part{Wrangle}\label{part-wrangle}}

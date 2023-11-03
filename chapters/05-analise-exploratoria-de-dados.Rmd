@@ -2,32 +2,711 @@
 
 ## Introdução
 
-x
+Não temos exercícios nesta seção.
 
 ## Perguntas
 
-x
+Não temos exercícios nesta seção.
 
-## Valiação
+## Variação
 
-x
+### Exercício 5.3.1 {- #exr5-3-1}
+
+::: {.enunciado}
+Explore a distribuição de cada variável `x`, `y` e `z` em `diamonds`. O que você aprende? Pense em um diamante e como você pode determinar qual dimensão é o comprimento, a largura e a profundidade.
+:::
+
+:::{.solution}
+Por se tratar de variáveis continuas, vamos utilizar um gráfico de densidade (ou histograma) para visualizar os dados.
+
+Como x e y possuem distribuição mais parecisa, acredita-se que tratam-se do comprimento e da largura do diamante, sendo z a profundidade (por ter média menor).
+
+```{r}
+plot <- diamonds %>% 
+          ggplot() + 
+            coord_cartesian(
+              xlim = c(0, 10),
+              ylim = c(0, .85)
+            ) +
+            scale_x_continuous(breaks = seq(0, 10, by = 1)) +
+            labs(
+              y = ""
+            ) +
+            tema
+
+x <- plot + geom_density(aes(x))
+y <- plot + geom_density(aes(y))
+z <- plot + geom_density(aes(z))
+
+grid.arrange(x, y, z, nrow = 3)
+```
+
+```{r}
+diamonds %>% 
+  # Remover os outliers
+  filter(0 < x, x <= 10, 0 < y, y <= 10) %>%
+  ggplot(aes(x, y)) +
+    # Mostrar a densidade de x e y em conjunto
+    geom_density2d() +                      
+    # Mostrar uma linha guia para visualizar se x e Y crescem de forma 
+    # proprocional, isto é, se os diamantes são quadrados/redondos
+    geom_abline(
+      aes(intercept = 0, slope = 1),
+      linetype = "dashed"
+    ) +
+    # Arrumar a proporção do gráfico
+    coord_cartesian(
+      xlim = c(3.5, 8.5),
+      ylim = c(3.5, 8.5)
+    ) +
+    # Aplicar o tema padrão
+    tema
+```
+
+:::
+
+### Exercício 5.3.2 {- #exr5-3-2}
+
+::: {.enunciado}
+Explore a distribuição de `price`. Você identifica algo incomun ou surpreendente? (Dica: pense cuidadosamente sobre `binwidth` e certifique-se de experimentar uma ampla gama de valores).
+:::
+
+:::{.solution}
+```{r}
+summary(diamonds)
+```
+
+```{r}
+diamonds %>%
+    ggplot(aes(x = price)) +
+        geom_histogram(binwidth = 100) +
+        tema
+```
+
+:::
+
+### Exercício 5.3.3 {- #exr5-3-3}
+
+::: {.enunciado}
+Quantos diamantes têm 0,99 quilates? Quantos têm 1 quilate? Qual você acha que é a causa dessa diferença?
+:::
+
+:::{.solution}
+Existem 23 diamantes com 0.99 quilates, contra 1558 diamantes com 1 quilate. Provavelmente a concentração de diamantes de 1 quilate se deve a arredondamento.
+
+```{r}
+diamonds %>%
+    filter(carat >= .99, carat <= 1) %>%
+    count(carat)
+```
+:::
+
+### Exercício 5.3.4 {- #exr5-3-4}
+
+::: {.enunciado}
+Compare e contraste `coord_cartesian` *versus* `xlim()` ou `ylim()` ao dar zoom em um histograma. O que acontece se você não configurar `binwidth`? O que acontece se você tentar dar zoom para que apenas meia barra seja mostrada?
+:::
+
+:::{.solution}
+Ao utilizar `coord_cartesian()` a restrição nos eixos `x` e `y` ocorrem após calculados os valores do gráfico e desenhados os geoms, dessa forma, o cálculo não é afetado pelos limites, apenas é feito o zoom. Já para `xlim` e `ylim`, os filtros são aplicados antes da construção do gráfico e as restrições são levadas em consideração, dessa forma, temos pontos que serão realmente descartados, e o leiaute do gráfico acaba ficando bem diferente.
+
+```{r}
+diamonds %>%
+    ggplot(aes(carat)) +
+        geom_histogram() +
+        xlim(0,1) +
+        tema
+```
+
+```{r}
+diamonds %>%
+    ggplot(aes(carat)) +
+        geom_histogram() +
+        coord_cartesian(xlim = c(0,1)) +
+        tema
+```
+
+:::
 
 ## Valores faltantes
 
-x
+### Exercício 5.4.1 {- #exr5-4-1}
+
+::: {.enunciado}
+O que acontece com valores faltantes em um histograma? O que ocorre com valores faltantes em um gráfico de barras? Por que há uma diferença?
+:::
+
+:::{.solution}
+A construção de um histograma considera valores continuos, dessa forma os valores faltantes são descartados, uma vez que não é possível dispor valores faltantes na ordenação dos valores (`NA > 0` não resulta em um valor lógico). Já para o gráfico de barras, como são considerados valores categóricos, os valores faltantes são exibidos como uma nova categoria.
+
+```{r}
+diamonds2 <- diamonds %>%
+                mutate(y = ifelse(y < 3 | y > 20, NA, y))
+
+diamonds2 %>%
+    ggplot(aes(x = y)) +
+        geom_histogram() +
+        tema
+```
+
+```{r}
+diamonds3 <- diamonds2 %>%
+                mutate(cut = ifelse(is.na(y), NA, as.character(cut)))
+
+diamonds3 %>%    
+    ggplot(aes(x = cut)) +
+        geom_bar() +
+        tema
+```
+
+:::
+
+### Exercício 5.4.2 {- #exr5-4-2}
+
+::: {.enunciado}
+O que `na.rm = TRUE` faz em `mean()` e `sum()`?
+:::
+
+:::{.solution}
+O parâmetro `na.rm` serve para indicar que devem ser excluídos da soma ou da média os valores faltantes.
+
+```{r}
+a <- c(1, 2, 3, 4, NA, 6, 7, 8, 9, 10)
+mean(a)
+mean(a, na.rm = TRUE)
+sum(a)
+sum(a, na.rm = TRUE)
+```
+:::
+
 
 ## Covariação
 
-x
+### Exercício 5.5.1 {- #exr5-5-1}
+
+::: {.enunciado}
+Use o que você aprendeu para melhorar a visualização dos tempos de decolagem dos coos cancelados *versus* não cancelados.
+:::
+
+:::{.solution}
+```{r}
+flights %>%
+    mutate(
+        cancelled = ifelse(is.na(dep_time), "Cancelled", "Not cancelled"),
+        sched_hour = sched_dep_time %/% 100,
+        sched_min = sched_dep_time %% 100,
+        sched_dep_time = sched_hour + (sched_min / 60)
+    ) %>%    
+    ggplot(aes(cancelled, sched_dep_time)) +
+        geom_boxplot() +
+        tema
+    
+
+```
+:::
+
+### Exercício 5.5.2 {- #exr5-5-2}
+
+::: {.enunciado}
+Qual variável no conjunto de dados dos diamantes é mais importante para prever o preço de um diamante? Como essa variável está correlacionada ao corte (`cut`)? Por que a combinação desses dois relacionamentos leva a diamantes de menor qualidade serem mais caros?
+:::
+
+:::{.solution}
+Vamos considerar na análise as seguintes variáveis: `carat`, `cut`, `color` e `clarity`.
+
+Para ãvaliar a correlação entre `carat` e `price` (duas variáveis contínuas), podemos usar `geom_point()`, `geom_boxplot()` com a variável independente discretizada ou `geom_quantile()`. Vamos avaliar o melhor dos cenários:
+
+```{r}
+diamonds %>% 
+    ggplot(aes(carat, price)) +
+        geom_point() +
+        tema
+```
+
+```{r}
+diamonds %>%
+    ggplot(aes(carat, price)) +
+        geom_boxplot(aes(group = cut_width(carat, .1))) +
+        tema
+```
+
+Com base nas imagens acima, podemos ver que existe uma relação positiva entre `carat` e `price`, o que indica que possivelmente essas duas variáveis estão bem correlacionadas. Note ainda que a representação via boxplot ficou um pouco melhor do que a representação por pontos.
+
+Vamos agora avaliar a variável `cut`. Por se tratar de uma variável discreta, podemos utilizar `geom_col()`, `geom_boxplot()`, `geom_dotplot()` ou `geom_violin()`. Vamos avaliar cada um deles.
+
+```{r}
+diamonds %>%
+    ggplot(aes(cut, price)) +
+        geom_col() +
+        tema
+```
+
+```{r}
+diamonds %>%
+    ggplot(aes(cut, y = price)) +
+        geom_boxplot() +
+        tema
+```
+
+```{r}
+diamonds %>%
+    ggplot(aes(cut, price)) +
+        geom_dotplot(binaxis = "y") +
+        tema
+```
+
+```{r}
+diamonds %>%
+    ggplot(aes(cut, price)) +
+        geom_violin(scale = "area") +
+        tema
+```
+
+Notamos que os gráficos gerados por `geom_col()` e `geom_dotplot()` não geraram nenhum resultado interessante. Este devido à poluição visual e aquele devido a mostrar uma contagem dos elementos em cada grupo, e não a associação entre as variáveis.
+
+Tanto com `geom_boxplot()`, quanto com `geom_violin()`, podemos perceber que há uma correlação negativa muito fraca entre as variáveis e, desta forma, podemos considerar que `cut` não é interessante para predizer os preços dos diamantes.
+
+Sigamos para a variável `color`:
+
+```{r}
+diamonds %>% 
+    ggplot(aes(color, price)) +
+        geom_boxplot() +
+        tema
+```
+
+```{r}
+diamonds %>% 
+    ggplot(aes(color, price)) +
+        geom_violin(scale = "area") +
+        tema
+```
+
+Como podemos perceber, a relação entre as variáveis não é significativa, portanto, descartaremos `color`.
+
+Seguindo em frente, precisamos avaliar a variável `clarity`:
+
+```{r}
+diamonds %>% 
+    ggplot(aes(clarity, price)) +
+        geom_boxplot() +
+        tema
+```
+
+```{r}
+diamonds %>% 
+    ggplot(aes(color, price)) +
+        geom_violin(scale = "area") +
+        tema
+```
+
+Notamos também que a variável não tem correação com o preço.
+
+Concluímos, portanto, que a melhor variável para predizer o preço do diamante é `carat`.
+
+Agora, avaliaremos a relação entre `carat` e `cut`.
+
+```{r}
+diamonds %>%
+    ggplot(aes(cut, carat)) +
+        geom_boxplot() +
+        tema
+```
+
+Há uma relação negativa muito leve entre `cut` e `carat`, mas isso não é suficiente para dizer que uma impacta na outra. Há grande variabilidade de `carat` dentro de cada tipo de corte (`cut`) e, nota-se, os diamantes de grande quilate (provavelmente pedras grandes), tem um corte apenas justo. Isso pode se dar ao fato de que, quanto menor o diamante, melhor precisa ser o corte para que se consiga um bom valor. Além disso, é presumível que é mais fácil vender um diamante pequeno do que um grande, por isso talvez o preço não seja tão alto.
+:::
+
+### Exercício 5.5.3 {- #exr5-5-3}
+
+::: {.enunciado}
+Instale o pacote **ggstance** e crie um boxplot horizontal. Como isso se compara a usar `coord_flip()`?
+:::
+
+:::{.solution}
+```{r}
+library(ggstance)
+
+diamonds %>%
+    ggplot(aes(carat, cut)) +
+        geom_boxploth() +
+        tema
+```
+
+```{r}
+diamonds %>%
+    ggplot(aes(cut, carat)) +
+        geom_boxplot() +
+        coord_flip() +
+        tema
+```
+
+A diferença está apenas no mapeamento. 
+:::
+
+### Exercício 5.5.4 {- #exr5-5-4}
+
+::: {.enunciado}
+Um problema com boxplots é que eles foram desenvolvidos em uma era de conjuntos de dados muito menores e tendem a exibir um número proibitivamente grande de "valores fora da curva". Uma abordagem para remediar esse problema é o *letter value plot* . Instale o **lvplot** e tente usar `geom_lv()` para exibir a distribuição de preço *versus* corte. O que você aprendeu? Como você interpreta os gráficos?
+:::
+
+:::{.solution}
+
+???
+
+```{r}
+library(lvplot)
+
+diamonds %>%
+    ggplot(aes(cut, price)) +
+        geom_lv(width.method = "height") +        
+        tema
+```
+
+:::
+
+### Exercício 5.5.5 {- #exr5-5-5}
+
+::: {.enunciado}
+Compare e contraste `geom_violin()` com `geom_histogram()` facetado, ou um `geom_freqpoly()` colorido. Quais são os prós e contras de cada método?
+:::
+
+:::{.solution}
+Com o polígono de frequência é mais fácil comparar os grupos, uma vez que as linhas são sobrepostas, contudo muitas vezes pode se tornar complicado visualizar o comportamento/variação de cada grupo individualmente. O violino e o histograma permitem visualizar a distribuição em cada grupo, contudo fica mais complicado fazer a comparação.
+
+```{r}
+# Violin
+diamonds %>%
+    ggplot(aes(cut, price)) +
+        geom_violin() +
+        coord_flip() +
+        tema
+
+# Histogram
+diamonds %>%
+    ggplot(aes(price)) +
+        geom_histogram() +
+        facet_wrap(~ cut, ncol = 1, scale = "free_y") +
+        tema
+
+#Frequency Polygon
+diamonds %>%
+    ggplot(aes(price, ..density.., color = cut)) +
+    geom_freqpoly(binwidth = 500) +
+    tema
+```
+
+:::
+
+### Exercício 5.5.6 {- #exr5-5-6}
+
+::: {.enunciado}
+Se você tem um conjunto de dados pequeno, às vezes é útil usar `geom_jitter()` para ver a relação entre uma variável contínua e uma categórica. O pacote **ggbeeswarm** fornece alguns métodos similares a `geom_jitter()`. Liste-os e descreva brevemente o que cada um faz.
+:::
+
+:::{.solution}
+O pacote oferece duas geoms. A primeira, `geom_quasirandom()` mistura o *jitter* com a a aparencia do gráfico violino. A segunda, `geom_beeswarm()` produz gráficos parecidos com violinos, mas com alguma sobreposição.
+
+Em comparação ao `geom_jitter()`, o pacote `ggbeeswarm()` permite uma melhor visualização dos clusteres, caso existam. No nosso exemplo, os clusters seriam as próprias classes, ele evita que os pontos de uma classe se aproximem demais da classe ao lado, gerando uma melhor visualização. Também mantém mais ou menos agrupados as "alturas" no eixo y, isto é, o erro é colocado apenas em uma das direções.
+
+```{r}
+library(ggbeeswarm)
+
+mpg %>%
+    ggplot(aes(class, hwy)) +
+        geom_point() +
+        tema
+
+mpg %>%
+    ggplot(aes(class, hwy)) +
+        geom_jitter() +
+        tema
+
+mpg %>%
+    ggplot(aes(class, hwy)) +
+        geom_quasirandom() +
+        tema
+
+mpg %>%
+    ggplot(aes(class, hwy)) +
+        geom_beeswarm() +
+        tema
+```
+:::
+
+### Exercício 5.5.7 {- #exr5-7-7}
+
+::: {.enunciado}
+Como você alteraria a escala do conjunto de dados `diamonds` para mostrar mais claramente a distribuição de corte dentro de cor  ou cor dentro de corte?
+:::
+
+::: {.solution}
+Pode-se melhorar usando a proporção de `cut` dentro de `color`, porém a mudança não foi tão significativa.
+
+```{r}
+diamonds %>%
+    count(color, cut) %>%
+    ggplot(aes(color, cut)) +
+        geom_tile(mapping = aes(fill = n)) + 
+        tema
+
+diamonds %>%
+    count(color, cut) %>%
+    group_by(color) %>%
+    mutate(
+        prop = n / sum(n)
+    ) %>%
+    ggplot(aes(color, cut)) +
+        geom_tile(mapping = aes(fill = prop)) + 
+        tema
+```
+:::
+
+### Exercício 5.5.8 {- #exr5-5-8}
+
+::: {.enunciado}
+Use `geom_tile()` junto de **dplyr** para explorar como os atrasos médios dos voos variam por destino e mês. O que dificulta a leitura do gráfico? Como você poderia melhorá-lo?
+:::
+
+::: {.solution}
+???
+
+```{r}
+flights %>%
+    group_by(month, dest) %>%                           # Agrupar por mês e destino
+    summarise(
+        dep_delay = mean(dep_delay, na.rm = TRUE)       # Calcular o atraso médio
+    ) %>%
+    group_by(dest) %>%                                  # Agrupar pelo destino
+    filter(n() == 12) %>%                               # Selecionar apenas aqueles destinos que tem informação de todos os meses
+    ungroup() %>%                                       # Desagrupa pelo destino
+    ggplot(aes(factor(month), dest, fill = dep_delay)) +
+        geom_tile()
+```
+
+:::
+
+### Exercício 5.5.9 {- #exr5-5-9}
+
+::: {.enunciado}
+Por que é um pouco melhor usar `aes(x = color, y = cut)` em vez de `aes(c = cut, y = color)` no exemplo anterior?
+:::
+
+::: {.solution}
+???
+
+```{r}
+diamonds %>%
+    count(color, cut) %>%    
+    ggplot(aes(color, cut)) +
+        geom_tile(mapping = aes(fill = n)) + 
+        tema
+
+diamonds %>%
+    count(cut, color) %>%    
+    ggplot(aes(cut, color)) +
+        geom_tile(mapping = aes(fill = n)) + 
+        tema
+```
+
+:::
+
+### Exercício 5.5.10 {- #exr5-5-10}
+
+::: {.enunciado}
+Em vez de resumir a distribuição condicional com um boxplot, pode-se usar um polígono de frequência. O que você precisa considerar ao usar `cut_width()` *versus* `cut_number()`? Como isso impacta uma visualização da distribuição 2D de `carat` e `price`?
+:::
+
+::: {.solution}
+Utilizamos `cut_width()` quando queremos determinar o tamanho das classes que serão exibidas e `cut_number()` quando queremos determinar o número de classes. 
+
+Se o número total de classes for muito grande, a visualização fica comprometida. Se for pequeno demais, não captaremos comportamentos importantes.
+
+```{r}
+diamonds %>%
+    ggplot(aes(carat, price)) +
+        geom_boxplot(aes(group = cut_number(carat, 5)))
+
+diamonds %>%
+    ggplot(aes(price)) +
+        geom_freqpoly(aes(color = cut_number(carat, 5))) +
+        tema
+
+diamonds %>%
+    ggplot(aes(price)) +
+        geom_freqpoly(aes(color = cut_width(carat, 1))) +
+        tema
+```
+:::
+
+### Exercício 5.5.11 {- #exr5-5-11}
+
+::: {.enunciado}
+Visualize a distribuição de `carat`, particionada por `price`.
+:::
+
+::: {.solution}
+Inicialmente vamos utilizar boxplot para visualizar a distribuição. Vamos dividir os preços em 10 grupos.
+
+```{r}
+diamonds %>%
+    ggplot(aes(cut_number(price, 10), carat)) +
+        geom_boxplot() +
+        coord_flip() +
+        tema
+```
+
+Note que, `cut_number()` dividiu os grupos de modo a ter a mesma quantidade de registros em cada classe e isso acaba gerando classes de larguras diferentes. É mais fácil comparar classes de mesma largura, por isso vamos refazer a visualização utilizando `cut_width()`:
+
+```{r}
+diamonds %>%
+    ggplot(aes(cut_width(price, 2000), carat)) +
+        geom_boxplot() +
+        coord_flip() +
+        tema
+```
+
+A visualização ficou um pouco melhor, porém temos uma classe que inclui valores negativos. Vamos corrigir isso utilizando o argumento `boundary`:
+
+```{r}
+diamonds %>%
+    ggplot(aes(cut_width(price, 2000, boundary = 0), carat)) +
+        geom_boxplot() +
+        coord_flip() +
+        tema
+```
+
+Como existem muitos *outliers*, vamos tentar utilizar o *letter value*:
+
+```{r}
+diamonds %>%
+    ggplot(aes(cut_width(price, 2000, boundary = 0), carat)) +
+        geom_lv() +
+        coord_flip() +
+        tema
+```
+
+Para melhorar a visualização das classes, vamos também mudar a unidade de `price` de dolares para milhares de dólares, basta dividirmos os valores por 1000:
+
+```{r}
+diamonds %>%
+    mutate (price = price / 1000) %>%
+    ggplot(aes(cut_width(price, 2, boundary = 0), carat)) +
+        geom_lv() +
+        coord_flip() +
+        tema
+```
+
+Agora vamos melhorar os títulos do gráfico:
+
+```{r}
+diamonds %>%
+    mutate (price = price / 1000) %>%
+    ggplot(aes(cut_width(price, 2, boundary = 0), carat)) +
+        geom_lv() +
+        coord_flip() +
+        labs(
+            title = "Distribuição do quilate das pedras por faixa de preço",
+            y = "Quilates",
+            x = "Preço (mil dólares)"
+        ) +
+        tema
+```
+
+O gráfico está pronto.
+
+Note que poderíamos ter utilizado a `geom_violin()`, porém, neste caso, não teríamos uma visão muito boa dos outliers.
+
+```{r}
+diamonds %>%
+    mutate (price = price / 1000) %>%
+    ggplot(aes(cut_width(price, 2, boundary = 0), carat)) +
+        geom_violin() +
+        coord_flip() +
+        labs(
+            title = "Distribuição do quilate das pedras por faixa de preço",
+            y = "Quilates",
+            x = "Preço (mil dólares)"
+        ) +
+        tema
+```
+
+:::
+
+### Exercício 5.5.12 {- #exr5-5-12}
+
+::: {.enunciado}
+Como a distribuição de preços de diamantes muito grandes se compara à de diamantes pequenos? É como você esperava ou isso lhe surpreende?
+:::
+
+::: {.solution}
+???
+
+```{r}
+diamonds %>%
+    ggplot(aes(cut_width(carat, 2, boundary = 0), price)) +
+        geom_boxplot() +
+        tema
+```
+
+:::
+
+### Exercício 5.5.13 {- #exr5-5-13}
+
+::: {.enunciado}
+Combine duas técnicas que você aprendeu para visualizar a distribuição combinada de `cut`, `carat` e `price`.
+:::
+
+::: {.solution}
+```{r}
+diamonds %>%
+    ggplot(aes(cut_number(carat, 5), price, color = cut)) +
+        geom_boxplot() +
+        tema
+```
+
+```{r}
+diamonds %>%
+    ggplot(aes(carat, price)) +
+        geom_hex() +
+        facet_wrap(~ cut, ncol = 1) +
+        tema
+```
+
+```{r}
+diamonds %>%
+    ggplot(aes(cut_number(carat, 10), cut, fill = desc(price))) +
+        geom_tile() +        
+        tema
+```
+:::
+
+### Exercício 5.5.14 {- #exr5-5-14}
+
+::: {.enunciado}
+Gráficos bidimensionais revelam pontos fora da curva que não são visíveis em gráficos unidimensionais. Por exemplo, alguns pontos no gráfico a seguir tem uma combinação incomum de valores de `x` e `y`, que faz pontos ficarem fora da curva, mesmo embora seus valores `x` e `y` pareçam normais quando examidanos separadamente.
+
+```{r}
+ggplot(data = diamonds) +
+    geom_point(mapping = aes(x = x, y = y)) +
+    coord_cartesian(xlim = c(4, 11), ylim = c(4, 11)) +
+    tema
+```
+
+Por que um diagrama de dispersão é uma exibição melhor do que um diagrama de caixa neste caso?
+:::
+
+::: {.solution}
+Como os valores de `x` e `y` são fortemente relacionados, os outliers não vão aparecer no extremo de ums ou outra coordenada, mas em proporções desigaia dos diamantes.
+:::
 
 ## Padrões e modelos
 
-x
+Não temos exercícios nesta seção.
 
 ## Chamadas `ggplot2`
 
-x
+Não temos exercícios nesta seção.
 
 ## Aprendendo mais
 
-x
+Não temos exercícios nesta seção.

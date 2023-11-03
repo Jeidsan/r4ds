@@ -28,7 +28,7 @@ diagnósticos-rstudio
 análise-exploratória-de-dados
 introdução-2
 perguntas
-valiação
+variação
 valores-faltantes
 covariação
 padrões-e-modelos
