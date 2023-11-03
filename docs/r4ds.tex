@@ -311,6 +311,10 @@ Dúvidas ou sugestões de melhoria podem ser encaminhadas para o e-mail \emph{\h
 \item
   \protect\hyperlink{exr5-5-12}{Exercício 5.5.12};
 \item
+  \protect\hyperlink{exr8-2-3}{Exercício 8.2.3};
+\item
+  \protect\hyperlink{exr8-3-6}{Exercício 8.3.6};
+\item
 \end{itemize}
 
 \mainmatter
@@ -4376,14 +4380,495 @@ Não temos exercícios nesta seção.
 \hypertarget{introduuxe7uxe3o-3}{%
 \section{Introdução}\label{introduuxe7uxe3o-3}}
 
+Não temos exercícios nesta seção.
+
 \hypertarget{criando-tibbles}{%
 \section{Criando tibbles}\label{criando-tibbles}}
+
+Não temos exercícios nesta seção.
 
 \hypertarget{tibbles-versus-data.frame}{%
 \section{\texorpdfstring{Tibbles \emph{versus} \texttt{data.frame}}{Tibbles versus data.frame}}\label{tibbles-versus-data.frame}}
 
+Não temos exercícios nesta seção.
+
 \hypertarget{interagindo-com-cuxf3digos-mais-antigos}{%
 \section{Interagindo com códigos mais antigos}\label{interagindo-com-cuxf3digos-mais-antigos}}
+
+\hypertarget{exr7-4-1}{%
+\subsection*{Exercício 7.4.1}\label{exr7-4-1}}
+\addcontentsline{toc}{subsection}{Exercício 7.4.1}
+
+Como você consegue dizer se um objeto é um tibble? (Dica: tente imprimir \texttt{mtcarts}, que é um dat
+
+\begin{solution}
+\leavevmode
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(mtcars)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                      mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+## Mazda RX4           21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
+## Mazda RX4 Wag       21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
+## Datsun 710          22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
+## Hornet 4 Drive      21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
+## Hornet Sportabout   18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
+## Valiant             18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
+## Duster 360          14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
+## Merc 240D           24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
+## Merc 230            22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
+## Merc 280            19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
+## Merc 280C           17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4
+## Merc 450SE          16.4   8 275.8 180 3.07 4.070 17.40  0  0    3    3
+## Merc 450SL          17.3   8 275.8 180 3.07 3.730 17.60  0  0    3    3
+## Merc 450SLC         15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3
+## Cadillac Fleetwood  10.4   8 472.0 205 2.93 5.250 17.98  0  0    3    4
+## Lincoln Continental 10.4   8 460.0 215 3.00 5.424 17.82  0  0    3    4
+## Chrysler Imperial   14.7   8 440.0 230 3.23 5.345 17.42  0  0    3    4
+## Fiat 128            32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
+## Honda Civic         30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2
+## Toyota Corolla      33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1
+## Toyota Corona       21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1
+## Dodge Challenger    15.5   8 318.0 150 2.76 3.520 16.87  0  0    3    2
+## AMC Javelin         15.2   8 304.0 150 3.15 3.435 17.30  0  0    3    2
+## Camaro Z28          13.3   8 350.0 245 3.73 3.840 15.41  0  0    3    4
+## Pontiac Firebird    19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2
+## Fiat X1-9           27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1
+## Porsche 914-2       26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
+## Lotus Europa        30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
+## Ford Pantera L      15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4
+## Ferrari Dino        19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
+## Maserati Bora       15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8
+## Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(}\FunctionTok{as.tibble}\NormalTok{(mtcars))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: `as.tibble()` was deprecated in tibble 2.0.0.
+## i Please use `as_tibble()` instead.
+## i The signature and semantics have changed, see `?as_tibble`.
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+## generated.
+\end{verbatim}
+
+\begin{verbatim}
+## # A tibble: 32 x 11
+##      mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
+##    <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
+##  1  21       6  160    110  3.9   2.62  16.5     0     1     4     4
+##  2  21       6  160    110  3.9   2.88  17.0     0     1     4     4
+##  3  22.8     4  108     93  3.85  2.32  18.6     1     1     4     1
+##  4  21.4     6  258    110  3.08  3.22  19.4     1     0     3     1
+##  5  18.7     8  360    175  3.15  3.44  17.0     0     0     3     2
+##  6  18.1     6  225    105  2.76  3.46  20.2     1     0     3     1
+##  7  14.3     8  360    245  3.21  3.57  15.8     0     0     3     4
+##  8  24.4     4  147.    62  3.69  3.19  20       1     0     4     2
+##  9  22.8     4  141.    95  3.92  3.15  22.9     1     0     4     2
+## 10  19.2     6  168.   123  3.92  3.44  18.3     1     0     4     4
+## # i 22 more rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{str}\NormalTok{(mtcars)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    32 obs. of  11 variables:
+##  $ mpg : num  21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 ...
+##  $ cyl : num  6 6 4 6 8 6 8 4 4 6 ...
+##  $ disp: num  160 160 108 258 360 ...
+##  $ hp  : num  110 110 93 110 175 105 245 62 95 123 ...
+##  $ drat: num  3.9 3.9 3.85 3.08 3.15 2.76 3.21 3.69 3.92 3.92 ...
+##  $ wt  : num  2.62 2.88 2.32 3.21 3.44 ...
+##  $ qsec: num  16.5 17 18.6 19.4 17 ...
+##  $ vs  : num  0 0 1 1 0 1 0 1 1 1 ...
+##  $ am  : num  1 1 1 0 0 0 0 0 0 0 ...
+##  $ gear: num  4 4 4 3 3 3 3 4 4 4 ...
+##  $ carb: num  4 4 1 1 2 1 4 2 2 4 ...
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{str}\NormalTok{(}\FunctionTok{as.tibble}\NormalTok{(mtcars))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## tibble [32 x 11] (S3: tbl_df/tbl/data.frame)
+##  $ mpg : num [1:32] 21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 ...
+##  $ cyl : num [1:32] 6 6 4 6 8 6 8 4 4 6 ...
+##  $ disp: num [1:32] 160 160 108 258 360 ...
+##  $ hp  : num [1:32] 110 110 93 110 175 105 245 62 95 123 ...
+##  $ drat: num [1:32] 3.9 3.9 3.85 3.08 3.15 2.76 3.21 3.69 3.92 3.92 ...
+##  $ wt  : num [1:32] 2.62 2.88 2.32 3.21 3.44 ...
+##  $ qsec: num [1:32] 16.5 17 18.6 19.4 17 ...
+##  $ vs  : num [1:32] 0 0 1 1 0 1 0 1 1 1 ...
+##  $ am  : num [1:32] 1 1 1 0 0 0 0 0 0 0 ...
+##  $ gear: num [1:32] 4 4 4 3 3 3 3 4 4 4 ...
+##  $ carb: num [1:32] 4 4 1 1 2 1 4 2 2 4 ...
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{rownames}\NormalTok{(mtcars)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "Mazda RX4"           "Mazda RX4 Wag"       "Datsun 710"         
+##  [4] "Hornet 4 Drive"      "Hornet Sportabout"   "Valiant"            
+##  [7] "Duster 360"          "Merc 240D"           "Merc 230"           
+## [10] "Merc 280"            "Merc 280C"           "Merc 450SE"         
+## [13] "Merc 450SL"          "Merc 450SLC"         "Cadillac Fleetwood" 
+## [16] "Lincoln Continental" "Chrysler Imperial"   "Fiat 128"           
+## [19] "Honda Civic"         "Toyota Corolla"      "Toyota Corona"      
+## [22] "Dodge Challenger"    "AMC Javelin"         "Camaro Z28"         
+## [25] "Pontiac Firebird"    "Fiat X1-9"           "Porsche 914-2"      
+## [28] "Lotus Europa"        "Ford Pantera L"      "Ferrari Dino"       
+## [31] "Maserati Bora"       "Volvo 142E"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{row.names}\NormalTok{(}\FunctionTok{as.tibble}\NormalTok{(mtcars))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "1"  "2"  "3"  "4"  "5"  "6"  "7"  "8"  "9"  "10" "11" "12" "13" "14" "15"
+## [16] "16" "17" "18" "19" "20" "21" "22" "23" "24" "25" "26" "27" "28" "29" "30"
+## [31] "31" "32"
+\end{verbatim}
+
+Há várias formas que podem nos ajudar a identificar se o conjunto de dados está organizado como um data frame padrão ou como um tibble:
+
+\begin{itemize}
+\tightlist
+\item
+  Ao utilizar o comando \texttt{print()}, um data frame comum imprime todas as observações, enquanto um tibble imprime apenas as 10 primeiras;
+\item
+  Ao utilizar a função \texttt{str()}, o tipo de objeto é impresso;
+\item
+  Ao utilizar a função \texttt{rownames()}, um data frame exibirá os nomes das observações (se houver), enquanto um tibble exibirá sempre um sequ\textasciitilde encia numérica (???).
+\end{itemize}
+
+\end{solution}
+
+\hypertarget{exr7-4-2}{%
+\subsection*{Exercício 7.4.2}\label{exr7-4-2}}
+\addcontentsline{toc}{subsection}{Exercício 7.4.2}
+
+Compare e constraste as seguintes operações em \texttt{data.frame} e tibble equivalente. Qual é a diferença? Por que os comportamentos do data frame padrão podem lhe causar frustração?
+
+\begin{verbatim}
+df <- data.frame(abc = 1, xyz = "a")
+df$x
+df[, "xyz"]
+df[, c("abc", "xyz")]
+\end{verbatim}
+
+\begin{solution}
+
+Inicialmente vamos definir um tibble com o mesmo conteúdo do data frame proposto.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tb }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}\AttributeTok{abc =} \DecValTok{1}\NormalTok{, }\AttributeTok{xyz =} \StringTok{"a"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+A seguir, executaremos os comandos correspondentes para avaliar a saida.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tb}\SpecialCharTok{$}\NormalTok{x}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Unknown or uninitialised column: `x`.
+\end{verbatim}
+
+\begin{verbatim}
+## NULL
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tb[, }\StringTok{"xyz"}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1 x 1
+##   xyz  
+##   <chr>
+## 1 a
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tb[, }\FunctionTok{c}\NormalTok{(}\StringTok{"abc"}\NormalTok{, }\StringTok{"xyz"}\NormalTok{)]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1 x 2
+##     abc xyz  
+##   <dbl> <chr>
+## 1     1 a
+\end{verbatim}
+
+Concluímos que:
+
+\begin{itemize}
+\tightlist
+\item
+  Ao utilizar o operador \texttt{\$}, o data frame busca exibir a primeira (?) coluna que contenha \texttt{x}, enquando num tibble, busca-se a coluna nomeada exatamente como \texttt{x};
+\item
+  Ao utilizar o nome completo de uma única variável com o operador \texttt{{[}}, um data frame imprime um vetor ou um valor singular, enquanto um tibble exibe sempre outro tibble;
+\item
+  ao usar o operador \texttt{{[}} passando um vetor de variáveis, o data frame padrão retorna outro data frame e um tibble retorna outro tibble. Neste caso o comportamento é similar.
+\end{itemize}
+
+\end{solution}
+
+\hypertarget{exr7-4-3}{%
+\subsection*{Exercício 7.4.3}\label{exr7-4-3}}
+\addcontentsline{toc}{subsection}{Exercício 7.4.3}
+
+Se você tem o nome de uma variável armazenada em um objeto, por exemplo \texttt{var\ \textless{}-\ "mpg"}, como você pode extrair a variável de referência para um tibble?
+
+\begin{solution}
+
+Tanto para o data frame quanto para um tibble, é possível utilizar o operador \texttt{{[}{[}}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{var }\OtherTok{\textless{}{-}} \StringTok{"mpg"}
+\NormalTok{mtcars[[var]]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] 21.0 21.0 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 17.8 16.4 17.3 15.2 10.4
+## [16] 10.4 14.7 32.4 30.4 33.9 21.5 15.5 15.2 13.3 19.2 27.3 26.0 30.4 15.8 19.7
+## [31] 15.0 21.4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{as.tibble}\NormalTok{(mtcars)[[var]]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] 21.0 21.0 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 17.8 16.4 17.3 15.2 10.4
+## [16] 10.4 14.7 32.4 30.4 33.9 21.5 15.5 15.2 13.3 19.2 27.3 26.0 30.4 15.8 19.7
+## [31] 15.0 21.4
+\end{verbatim}
+
+\end{solution}
+
+\hypertarget{exr7-4-4}{%
+\subsection*{Exercício 7.4.4}\label{exr7-4-4}}
+\addcontentsline{toc}{subsection}{Exercício 7.4.4}
+
+Pratique referir-se a nomes de variáveis não sintáticos, no data frame a seguir:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{annoyng }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}
+    \StringTok{\textasciigrave{}}\AttributeTok{1}\StringTok{\textasciigrave{}} \OtherTok{=} \DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{,}
+    \StringTok{\textasciigrave{}}\AttributeTok{2}\StringTok{\textasciigrave{}} \OtherTok{=} \StringTok{\textasciigrave{}}\AttributeTok{1}\StringTok{\textasciigrave{}} \SpecialCharTok{*} \DecValTok{2} \SpecialCharTok{+} \FunctionTok{rnorm}\NormalTok{(}\FunctionTok{length}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{1}\StringTok{\textasciigrave{}}\NormalTok{))}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  Extrair a variável chamada 1.
+\item
+  Plotar um diagrama de dispersão de 1 \emph{versus} 2.
+\item
+  Criar uma nova coluna chamada 3 que é 2 dividido por 1.
+\item
+  Renomear as colunas para \texttt{one}, \texttt{two} e \texttt{three}.
+\end{enumerate}
+
+\begin{solution}
+\leavevmode
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  Extrair a variável chamada 1.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{annoyng}\SpecialCharTok{$} \StringTok{\textasciigrave{}}\AttributeTok{1}\StringTok{\textasciigrave{}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1]  1  2  3  4  5  6  7  8  9 10
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Plotar um diagrama de dispersão de 1 \emph{versus} 2.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{annoyng }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{1}\StringTok{\textasciigrave{}}\NormalTok{, }\StringTok{\textasciigrave{}}\AttributeTok{2}\StringTok{\textasciigrave{}}\NormalTok{)) }\SpecialCharTok{+}
+        \FunctionTok{geom\_point}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-130-1.pdf}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Criar uma nova coluna chamada 3 que é 2 dividido por 1.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{annoyng}\SpecialCharTok{$}\StringTok{\textasciigrave{}}\AttributeTok{3}\StringTok{\textasciigrave{}} \OtherTok{\textless{}{-}}\NormalTok{ annoyng}\SpecialCharTok{$}\StringTok{\textasciigrave{}}\AttributeTok{2}\StringTok{\textasciigrave{}} \SpecialCharTok{/}\NormalTok{ annoyng}\SpecialCharTok{$}\StringTok{\textasciigrave{}}\AttributeTok{1}\StringTok{\textasciigrave{}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Renomear as colunas para \texttt{one}, \texttt{two} e \texttt{three}.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{colnames}\NormalTok{(annoyng) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"one"}\NormalTok{, }\StringTok{"two"}\NormalTok{, }\StringTok{"three"}\NormalTok{)}
+\NormalTok{annoyng}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 10 x 3
+##      one   two three
+##    <int> <dbl> <dbl>
+##  1     1  3.17  3.17
+##  2     2  3.98  1.99
+##  3     3  6.83  2.28
+##  4     4  9.88  2.47
+##  5     5  9.14  1.83
+##  6     6 11.8   1.96
+##  7     7 13.7   1.95
+##  8     8 14.7   1.84
+##  9     9 18.1   2.01
+## 10    10 18.8   1.88
+\end{verbatim}
+
+\end{solution}
+
+\hypertarget{exr7-4-5}{%
+\subsection*{Exercício 7.4.5}\label{exr7-4-5}}
+\addcontentsline{toc}{subsection}{Exercício 7.4.5}
+
+O que \texttt{tibble::enframe()} faz? Quando você pode usá-lo?
+
+\begin{solution}
+
+Transforma um vetor de valores atômicos ou lista em um tibble de 2 colunas. É útil quando necessitarmos transformar um vetor em um dicionário ou uma lista de pares (nome, valor), por exemplo.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}}\NormalTok{ letters}
+\FunctionTok{enframe}\NormalTok{(x)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 26 x 2
+##     name value
+##    <int> <chr>
+##  1     1 a    
+##  2     2 b    
+##  3     3 c    
+##  4     4 d    
+##  5     5 e    
+##  6     6 f    
+##  7     7 g    
+##  8     8 h    
+##  9     9 i    
+## 10    10 j    
+## # i 16 more rows
+\end{verbatim}
+
+\end{solution}
+
+\hypertarget{exr7-4-6}{%
+\subsection*{Exercício 7.4.6}\label{exr7-4-6}}
+\addcontentsline{toc}{subsection}{Exercício 7.4.6}
+
+Que opção controla quantos nomes de colunas adicionais são impressos no rodapé de um tibble?
+
+\begin{solution}
+
+Pode-se usar a opção \texttt{tibble.max\_extra\_cols}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{options}\NormalTok{(}\AttributeTok{tibble.width =} \DecValTok{30}\NormalTok{, }\AttributeTok{tibble.max\_extra\_cols =} \DecValTok{4}\NormalTok{)}
+\FunctionTok{print}\NormalTok{(}\FunctionTok{as.tibble}\NormalTok{(mtcars))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 32 x 11
+##      mpg   cyl  disp    hp
+##    <dbl> <dbl> <dbl> <dbl>
+##  1  21       6  160    110
+##  2  21       6  160    110
+##  3  22.8     4  108     93
+##  4  21.4     6  258    110
+##  5  18.7     8  360    175
+##  6  18.1     6  225    105
+##  7  14.3     8  360    245
+##  8  24.4     4  147.    62
+##  9  22.8     4  141.    95
+## 10  19.2     6  168.   123
+## # i 22 more rows
+## # i 7 more variables:
+## #   drat <dbl>, wt <dbl>,
+## #   qsec <dbl>, vs <dbl>, ...
+\end{verbatim}
+
+\end{solution}
 
 \hypertarget{importando-dados-com-readr}{%
 \chapter{\texorpdfstring{Importando dados com \texttt{readr}}{Importando dados com readr}}\label{importando-dados-com-readr}}
@@ -4391,20 +4876,479 @@ Não temos exercícios nesta seção.
 \hypertarget{introduuxe7uxe3o-4}{%
 \section{Introdução}\label{introduuxe7uxe3o-4}}
 
+Não temos exercícios nesta seção.
+
 \hypertarget{comeuxe7ando}{%
 \section{Começando}\label{comeuxe7ando}}
+
+\hypertarget{exr8-2-1}{%
+\subsection*{Exercício 8.2.1}\label{exr8-2-1}}
+\addcontentsline{toc}{subsection}{Exercício 8.2.1}
+
+Qual função você usaria para ler um arquivo em que os campos são separados por ``\textbar{}''?
+
+\begin{solution}
+
+A melhor opção é utilizar a função \texttt{read\_delim()} indicando o \texttt{\textbar{}} para o argumento \texttt{delim}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{read\_delim}\NormalTok{(}\StringTok{"a | b | c}\SpecialCharTok{\textbackslash{}n}\StringTok{1 | 2 | 3"}\NormalTok{, }\AttributeTok{delim =} \StringTok{" | "}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Rows: 1 Columns: 3
+## -- Column specification --------------------------------------------------------
+## Delimiter: " | "
+## dbl (3): a, b, c
+## 
+## i Use `spec()` to retrieve the full column specification for this data.
+## i Specify the column types or set `show_col_types = FALSE` to quiet this message.
+\end{verbatim}
+
+\begin{verbatim}
+## # A tibble: 1 x 3
+##       a     b     c
+##   <dbl> <dbl> <dbl>
+## 1     1     2     3
+\end{verbatim}
+
+\end{solution}
+
+\hypertarget{exr8-2-2}{%
+\subsection*{Exercício 8.2.2}\label{exr8-2-2}}
+\addcontentsline{toc}{subsection}{Exercício 8.2.2}
+
+Além de \texttt{file}, \texttt{skip} e \texttt{comment}, quais outros argumentos \texttt{read\_csv()} e \texttt{read\_tsv()} têm em comum?
+
+\begin{solution}
+Também são comuns os argumentos: \texttt{col\_names}, \texttt{col\_types}, \texttt{col\_select}, \texttt{id}, \texttt{locale}, \texttt{na}, \texttt{quote}, \texttt{n\_max}, \texttt{guess\_max}, \texttt{progress}, \texttt{name\_repair}, \texttt{num\_threads}, \texttt{show\_col\_types}, \texttt{skip\_empty\_rows} e \texttt{lazy}.
+\end{solution}
+
+\hypertarget{exr8-2-3}{%
+\subsection*{Exercício 8.2.3}\label{exr8-2-3}}
+\addcontentsline{toc}{subsection}{Exercício 8.2.3}
+
+Quais são os argumentos importantes de \texttt{read\_fwf()}?
+
+\begin{solution}
+???
+
+Eu chutaria \texttt{n}, \texttt{widths}, \texttt{start} e \texttt{end}.
+\end{solution}
+
+\hypertarget{exr8-2-4}{%
+\subsection*{Exercício 8.2.4}\label{exr8-2-4}}
+\addcontentsline{toc}{subsection}{Exercício 8.2.4}
+
+Às vezes, strings em um arquivo CSV contém vírgulas. Para evitar que causem problemas, elas precisam ser cercadas por um caractere de aspas, como '' ou '. Por convenção, \texttt{read\_csv()} supõe que as aspas serão ``, e se você quiser mudá-las, precisará usar \texttt{read\_delim()}. Quais argumentos você precisa especificar para ler o texto a seguir em um data frame?
+
+\textbf{``x,y\textbackslash n1, 1, `a, b'\,''}
+
+\begin{solution}
+
+É possível utilizar o argumento \texttt{quote} para indicar caractere de citação.
+
+\begin{verbatim}
+read_csv("x, y/n1, 'a, b'", quote = "/'")
+\end{verbatim}
+
+\end{solution}
+
+\hypertarget{exr8-2-5}{%
+\subsection*{Exercício 8.2.5}\label{exr8-2-5}}
+\addcontentsline{toc}{subsection}{Exercício 8.2.5}
+
+Identifique o que há de errado com cada um dos seguintes arquivos CSV em linha. O que acontece quando você executa o código?
+
+\begin{verbatim}
+read_csv("a, b\n1, 2, 3\n4, 5, 6")
+read_csv("a, b, c\n1, 2\n1, 2, 3, 4")
+read_csv("a, b\n\"1")
+read_csv("a, b\n1, 2\na, b")
+read_csv("a;b\n1; 3")
+\end{verbatim}
+
+\begin{solution}
+
+Para o primeiro caso, \texttt{read\_csv("a,\ b\textbackslash{}n1,\ 2,\ 3\textbackslash{}n4,\ 5,\ 6")} o problema é que a linha de cabeçalhos tem apenas 2 colunas, enquanto as demais tem 3. O correto seria usar:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{read\_csv}\NormalTok{(}\StringTok{"a, b, c}\SpecialCharTok{\textbackslash{}n}\StringTok{1, 2, 3}\SpecialCharTok{\textbackslash{}n}\StringTok{4, 5, 6"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Rows: 2 Columns: 3
+## -- Column specification --------------------------------------------------------
+## Delimiter: ","
+## dbl (3): a, b, c
+## 
+## i Use `spec()` to retrieve the full column specification for this data.
+## i Specify the column types or set `show_col_types = FALSE` to quiet this message.
+\end{verbatim}
+
+\begin{verbatim}
+## # A tibble: 2 x 3
+##       a     b     c
+##   <dbl> <dbl> <dbl>
+## 1     1     2     3
+## 2     4     5     6
+\end{verbatim}
+
+Para o segundo item, \texttt{read\_csv("a,\ b,\ c\textbackslash{}n1,\ 2\textbackslash{}n1,\ 2,\ 3,\ 4")}, o problema é que há 4 colunas na segunda linha, 2 colunas na segunda e três na linha de cabeçalho. Uma correção possível seria:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{read\_csv}\NormalTok{(}\StringTok{"a, b, c, d}\SpecialCharTok{\textbackslash{}n}\StringTok{1, 2, . , .}\SpecialCharTok{\textbackslash{}n}\StringTok{1, 2, 3, 4"}\NormalTok{, }\AttributeTok{na =} \FunctionTok{c}\NormalTok{(}\StringTok{"."}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Rows: 2 Columns: 4
+## -- Column specification --------------------------------------------------------
+## Delimiter: ","
+## dbl (4): a, b, c, d
+## 
+## i Use `spec()` to retrieve the full column specification for this data.
+## i Specify the column types or set `show_col_types = FALSE` to quiet this message.
+\end{verbatim}
+
+\begin{verbatim}
+## # A tibble: 2 x 4
+##       a     b     c     d
+##   <dbl> <dbl> <dbl> <dbl>
+## 1     1     2    NA    NA
+## 2     1     2     3     4
+\end{verbatim}
+
+No terceiro exemplo, \texttt{read\_csv("a,\ b\textbackslash{}n\textbackslash{}"1")}, há dois problemas: não há indicação do valor da variável \texttt{b} na segunda linha e há um caracter \texttt{\textbackslash{}} que parece estar perdido na linha. Uma solução possível é:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{read\_csv}\NormalTok{(}\StringTok{"a, b}\SpecialCharTok{\textbackslash{}n\textbackslash{}"}\StringTok{1}\SpecialCharTok{\textbackslash{}"}\StringTok{, NA"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Rows: 1 Columns: 2
+## -- Column specification --------------------------------------------------------
+## Delimiter: ","
+## dbl (1): a
+## lgl (1): b
+## 
+## i Use `spec()` to retrieve the full column specification for this data.
+## i Specify the column types or set `show_col_types = FALSE` to quiet this message.
+\end{verbatim}
+
+\begin{verbatim}
+## # A tibble: 1 x 2
+##       a b    
+##   <dbl> <lgl>
+## 1     1 NA
+\end{verbatim}
+
+No caso de \texttt{read\_csv("a,\ b\textbackslash{}n1,\ 2\textbackslash{}na,\ b")}, não parece haver problemas. A menos que a última linha seja uma repetição do cabeçalho.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{read\_csv}\NormalTok{(}\StringTok{"a, b}\SpecialCharTok{\textbackslash{}n}\StringTok{1, 2}\SpecialCharTok{\textbackslash{}n}\StringTok{a, b"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Rows: 2 Columns: 2
+## -- Column specification --------------------------------------------------------
+## Delimiter: ","
+## chr (2): a, b
+## 
+## i Use `spec()` to retrieve the full column specification for this data.
+## i Specify the column types or set `show_col_types = FALSE` to quiet this message.
+\end{verbatim}
+
+\begin{verbatim}
+## # A tibble: 2 x 2
+##   a     b    
+##   <chr> <chr>
+## 1 1     2    
+## 2 a     b
+\end{verbatim}
+
+Para o último exemplo, \texttt{read\_csv("a;b\textbackslash{}n1;\ 3")}, o erro é que o separador é \texttt{;} e não \texttt{,}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{read\_csv2}\NormalTok{(}\StringTok{"a;b}\SpecialCharTok{\textbackslash{}n}\StringTok{1; 3"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## i Using "','" as decimal and "'.'" as grouping mark. Use `read_delim()` for more control.
+\end{verbatim}
+
+\begin{verbatim}
+## Rows: 1 Columns: 2
+## -- Column specification --------------------------------------------------------
+## Delimiter: ";"
+## dbl (2): a, b
+## 
+## i Use `spec()` to retrieve the full column specification for this data.
+## i Specify the column types or set `show_col_types = FALSE` to quiet this message.
+\end{verbatim}
+
+\begin{verbatim}
+## # A tibble: 1 x 2
+##       a     b
+##   <dbl> <dbl>
+## 1     1     3
+\end{verbatim}
+
+\end{solution}
 
 \hypertarget{analisando-um-vetor}{%
 \section{Analisando um vetor}\label{analisando-um-vetor}}
 
+\hypertarget{exr8-3-1}{%
+\subsection*{Exercício 8.3.1}\label{exr8-3-1}}
+\addcontentsline{toc}{subsection}{Exercício 8.3.1}
+
+Quais são os argumentos mais importantes de \texttt{locale()}?
+
+\begin{solution}
+Os argumentos mais importantes são \texttt{encoding}, \texttt{decimal\_mark}, \texttt{grouping\_mark}.
+\end{solution}
+
+\hypertarget{exr8-3-2}{%
+\subsection*{Exercício 8.3.2}\label{exr8-3-2}}
+\addcontentsline{toc}{subsection}{Exercício 8.3.2}
+
+O que acontece se você tentar configurar \texttt{decimal\_mark} e \texttt{grouping\_mark} com o mesmo caractere? O que acontece com o valor padrão de \texttt{grouping\_mark} quando você configura \texttt{decimal\_mark} como ``,''? O que acontece com o valor padrão de \texttt{decimal\_mark} quando você configura \texttt{grouping\_mark} como ``.''?
+
+\begin{solution}
+\leavevmode
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{locale}\NormalTok{(}\AttributeTok{grouping\_mark =} \StringTok{"."}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## <locale>
+## Numbers:  123.456,78
+## Formats:  %AD / %AT
+## Timezone: UTC
+## Encoding: UTF-8
+## <date_names>
+## Days:   Sunday (Sun), Monday (Mon), Tuesday (Tue), Wednesday (Wed), Thursday
+##         (Thu), Friday (Fri), Saturday (Sat)
+## Months: January (Jan), February (Feb), March (Mar), April (Apr), May (May),
+##         June (Jun), July (Jul), August (Aug), September (Sep), October
+##         (Oct), November (Nov), December (Dec)
+## AM/PM:  AM/PM
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  Não é possível configurar \texttt{decimal\_mark} e \texttt{grouping\_mark} com o mesmo caractere. Se isto ocorrer, teremos um erro.
+\item
+  Se usarmos \texttt{decimal\_mark} como ``,'', o valor de \texttt{grouping\_mark} é automaticamente alterado para ``.'';
+\item
+  Se usarmos ``.'' para \texttt{grouping\_mark}, o valor default de \texttt{decimal\_mark} é alterado automaticamente para ``,'';
+\end{itemize}
+
+\end{solution}
+
+\hypertarget{exr8-3-3}{%
+\subsection*{Exercício 8.3.3}\label{exr8-3-3}}
+\addcontentsline{toc}{subsection}{Exercício 8.3.3}
+
+Eu não discuti as opções \texttt{date\_format} e \texttt{time\_format} para \texttt{locale()}. O que elas fazem? Construa um exemplo que mostre quando elas podem ser úteis.
+
+\begin{solution}
+
+Servem para indicar o formato padrão de data e hora, respectivamente.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{parse\_date}\NormalTok{(}\StringTok{"20{-}10{-}01"}\NormalTok{, }\AttributeTok{locale =} \FunctionTok{locale}\NormalTok{(}\AttributeTok{date\_format =} \StringTok{"\%y{-}\%m{-}\%d"}\NormalTok{, }\AttributeTok{time\_format =} \StringTok{"\%h:\%M:\%S"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "2020-10-01"
+\end{verbatim}
+
+\end{solution}
+
+\hypertarget{exr8-3-4}{%
+\subsection*{Exercício 8.3.4}\label{exr8-3-4}}
+\addcontentsline{toc}{subsection}{Exercício 8.3.4}
+
+Se você mora fora dos Estados Unidos, crie um novo objeto de localização que englobe as configurações para os tipos de arquivo que você mais comumente lê.
+
+\begin{solution}
+\leavevmode
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{locale}\NormalTok{(}
+    \AttributeTok{decimal\_mark =} \StringTok{","}\NormalTok{,}
+    \AttributeTok{grouping\_mark =} \StringTok{"."}\NormalTok{,}
+    \AttributeTok{date\_format =} \StringTok{"\%d/\%m/\%Y"}\NormalTok{,}
+    \AttributeTok{time\_format =} \StringTok{"\%H:\%M:\%S"}\NormalTok{,}
+    \AttributeTok{date\_names =} \StringTok{"pt"}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## <locale>
+## Numbers:  123.456,78
+## Formats:  %d/%m/%Y / %H:%M:%S
+## Timezone: UTC
+## Encoding: UTF-8
+## <date_names>
+## Days:   domingo (dom), segunda-feira (seg), terça-feira (ter), quarta-feira
+##         (qua), quinta-feira (qui), sexta-feira (sex), sábado (sáb)
+## Months: janeiro (jan), fevereiro (fev), março (mar), abril (abr), maio (mai),
+##         junho (jun), julho (jul), agosto (ago), setembro (set), outubro
+##         (out), novembro (nov), dezembro (dez)
+## AM/PM:  AM/PM
+\end{verbatim}
+
+\end{solution}
+
+\hypertarget{exr8-3-5}{%
+\subsection*{Exercício 8.3.5}\label{exr8-3-5}}
+\addcontentsline{toc}{subsection}{Exercício 8.3.5}
+
+Qual a diferença entre \texttt{read\_csv()} e \texttt{read\_csv2()}?
+
+\begin{solution}
+Enquanto \texttt{read\_csv()} utiliza a vírgula como delimitador, o \texttt{read\_csv2()} utiliza o ponto-e-vírgula.
+\end{solution}
+
+\hypertarget{exr8-3-6}{%
+\subsection*{Exercício 8.3.6}\label{exr8-3-6}}
+\addcontentsline{toc}{subsection}{Exercício 8.3.6}
+
+Quais são as codificações mais usadas na Europa? Quais as codificações mais usadas na Ásia? Procure no Google para descobrir.
+
+\begin{solution}
+???
+\end{solution}
+
+\hypertarget{exr8-3-7}{%
+\subsection*{Exercício 8.3.7}\label{exr8-3-7}}
+\addcontentsline{toc}{subsection}{Exercício 8.3.7}
+
+Gere uma string de formatação correta para analisar cada uma das datas e horas a seguir:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{d1 }\OtherTok{\textless{}{-}} \StringTok{"January 1, 2010"}
+\NormalTok{d2 }\OtherTok{\textless{}{-}} \StringTok{"2015{-}Mar{-}07"}
+\NormalTok{d3 }\OtherTok{\textless{}{-}} \StringTok{"06{-}Jun{-}2016"}
+\NormalTok{d4 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"August 19 (2015)"}\NormalTok{, }\StringTok{"July 1 (2015)"}\NormalTok{)}
+\NormalTok{d5 }\OtherTok{\textless{}{-}} \StringTok{"12/30/14"} \CommentTok{\# Dec 30, 2014}
+\NormalTok{t1 }\OtherTok{\textless{}{-}} \StringTok{"1705"}
+\NormalTok{t2 }\OtherTok{\textless{}{-}} \StringTok{"11:15:10.12 PM"}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{solution}
+\leavevmode
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{parse\_date}\NormalTok{(d1, }\StringTok{"\%B \%d, \%Y"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "2010-01-01"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{parse\_date}\NormalTok{(d2, }\StringTok{"\%Y{-}\%b{-}\%d"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "2015-03-07"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{parse\_date}\NormalTok{(d3, }\StringTok{"\%d{-}\%b{-}\%Y"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "2016-06-06"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{parse\_date}\NormalTok{(d4, }\StringTok{"\%B \%d (\%Y)"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "2015-08-19" "2015-07-01"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{parse\_date}\NormalTok{(d5, }\StringTok{"\%m/\%d/\%y"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "2014-12-30"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{parse\_time}\NormalTok{(t1, }\StringTok{"\%H\%M"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 17:05:00
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{parse\_time}\NormalTok{(t2, }\StringTok{"\%I:\%M:\%OS \%p"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 23:15:10.12
+\end{verbatim}
+
+\end{solution}
+
 \hypertarget{analisando-um-arquivo}{%
 \section{Analisando um arquivo}\label{analisando-um-arquivo}}
+
+Não temos exercícios nesta seção.
 
 \hypertarget{escrevendo-em-um-arquivo}{%
 \section{Escrevendo em um arquivo}\label{escrevendo-em-um-arquivo}}
 
+Não temos exercícios nesta seção.
+
 \hypertarget{outros-tipos-de-dados}{%
 \section{Outros tipos de dados}\label{outros-tipos-de-dados}}
+
+Não temos exercícios nesta seção.
 
 \hypertarget{arrumando-dados-com-tidyr}{%
 \chapter{\texorpdfstring{Arrumando dados com \texttt{tidyr}}{Arrumando dados com tidyr}}\label{arrumando-dados-com-tidyr}}

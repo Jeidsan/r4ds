@@ -59,4 +59,6 @@ Dúvidas ou sugestões de melhoria podem ser encaminhadas para o e-mail *jeidsan
 - [Exercício 5.5.8](#exr5-5-8);
 - [Exercício 5.5.9](#exr5-5-9);
 - [Exercício 5.5.12](#exr5-5-12);
+- [Exercício 8.2.3](#exr8-2-3);
+- [Exercício 8.3.6](#exr8-3-6);
 - 

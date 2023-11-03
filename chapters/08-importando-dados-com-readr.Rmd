@@ -2,12 +2,231 @@
 
 ## Introdução
 
+Não temos exercícios nesta seção.
+
 ## Começando
+
+### Exercício 8.2.1 {- #exr8-2-1}
+
+::: {.enunciado}
+Qual função você usaria para ler um arquivo em que os campos são separados por "|"?
+:::
+
+::: {.solution}
+A melhor opção é utilizar a função `read_delim()` indicando o `|` para o argumento `delim`.
+
+```{r}
+read_delim("a | b | c\n1 | 2 | 3", delim = " | ")
+```
+
+:::
+
+### Exercício 8.2.2 {- #exr8-2-2}
+
+::: {.enunciado}
+Além de `file`, `skip` e `comment`, quais outros argumentos `read_csv()` e `read_tsv()` têm em comum?
+:::
+
+::: {.solution}
+Também são comuns os argumentos: `col_names`, `col_types`, `col_select`, `id`, `locale`, `na`, `quote`, `n_max`, `guess_max`, `progress`, `name_repair`, `num_threads`, `show_col_types`, `skip_empty_rows` e `lazy`.
+:::
+
+### Exercício 8.2.3 {- #exr8-2-3}
+
+::: {.enunciado}
+Quais são os argumentos importantes de `read_fwf()`?
+:::
+
+::: {.solution}
+???
+
+Eu chutaria `n`, `widths`, `start` e `end`.
+:::
+
+### Exercício 8.2.4 {- #exr8-2-4}
+
+::: {.enunciado}
+Às vezes, strings em um arquivo CSV contém vírgulas. Para evitar que causem problemas, elas precisam ser cercadas por um caractere de aspas, como " ou '. Por convenção, `read_csv()` supõe que as aspas serão ", e se você quiser mudá-las, precisará usar `read_delim()`. Quais argumentos você precisa especificar para ler o texto a seguir em um data frame?
+
+**"x,y\\n1, 1, 'a, b'"**
+
+:::
+
+::: {.solution}
+É possível utilizar o argumento `quote` para indicar caractere de citação.
+
+```
+read_csv("x, y/n1, 'a, b'", quote = "/'")
+```
+
+:::
+
+### Exercício 8.2.5 {- #exr8-2-5}
+
+::: {.enunciado}
+Identifique o que há de errado com cada um dos seguintes arquivos CSV em linha. O que acontece quando você executa o código?
+
+```
+read_csv("a, b\n1, 2, 3\n4, 5, 6")
+read_csv("a, b, c\n1, 2\n1, 2, 3, 4")
+read_csv("a, b\n\"1")
+read_csv("a, b\n1, 2\na, b")
+read_csv("a;b\n1; 3")
+```
+:::
+
+::: {.solution}
+Para o primeiro caso, `read_csv("a, b\n1, 2, 3\n4, 5, 6")` o problema é que a linha de cabeçalhos tem apenas 2 colunas, enquanto as demais tem 3. O correto seria usar:
+
+```{r}
+read_csv("a, b, c\n1, 2, 3\n4, 5, 6")
+```
+
+Para o segundo item, `read_csv("a, b, c\n1, 2\n1, 2, 3, 4")`, o problema é que há 4 colunas na segunda linha, 2 colunas na segunda e três na linha de cabeçalho. Uma correção possível seria:
+
+```{r}
+read_csv("a, b, c, d\n1, 2, . , .\n1, 2, 3, 4", na = c("."))
+```
+
+No terceiro exemplo, `read_csv("a, b\n\"1")`, há dois problemas: não há indicação do valor da variável `b` na segunda linha e há um caracter `\` que parece estar perdido na linha. Uma solução possível é:
+
+```{r}
+read_csv("a, b\n\"1\", NA")
+```
+
+No caso de `read_csv("a, b\n1, 2\na, b")`, não parece haver problemas. A menos que a última linha seja uma repetição do cabeçalho.
+
+```{r}
+read_csv("a, b\n1, 2\na, b")
+```
+
+Para o último exemplo, `read_csv("a;b\n1; 3")`, o erro é que o separador é `;` e não `,`.
+
+```{r}
+read_csv2("a;b\n1; 3")
+```
+
+:::
 
 ## Analisando um vetor
 
+### Exercício 8.3.1 {- #exr8-3-1}
+
+::: {.enunciado}
+Quais são os argumentos mais importantes de `locale()`?
+:::
+
+::: {.solution}
+Os argumentos mais importantes são `encoding`, `decimal_mark`, `grouping_mark`.
+:::
+
+### Exercício 8.3.2 {- #exr8-3-2}
+
+::: {.enunciado}
+O que acontece se você tentar configurar `decimal_mark` e `grouping_mark` com o mesmo caractere? O que acontece com o valor padrão de `grouping_mark` quando você configura `decimal_mark` como ","? O que acontece com o valor padrão de `decimal_mark` quando você configura `grouping_mark` como "."?
+:::
+
+::: {.solution}
+```{r}
+locale(grouping_mark = ".")
+```
+
+- Não é possível configurar `decimal_mark` e `grouping_mark` com o mesmo caractere. Se isto ocorrer, teremos um erro.
+- Se usarmos `decimal_mark` como ",", o valor de `grouping_mark` é automaticamente alterado para ".";
+- Se usarmos "." para `grouping_mark`, o valor default de `decimal_mark` é alterado automaticamente para ",";
+:::
+
+### Exercício 8.3.3 {- #exr8-3-3}
+
+::: {.enunciado}
+Eu não discuti as opções `date_format` e `time_format` para `locale()`. O que elas fazem? Construa um exemplo que mostre quando elas podem ser úteis.
+:::
+
+::: {.solution}
+Servem para indicar o formato padrão de data e hora, respectivamente.
+
+```{r}
+parse_date("20-10-01", locale = locale(date_format = "%y-%m-%d", time_format = "%h:%M:%S"))
+```
+
+:::
+
+### Exercício 8.3.4 {- #exr8-3-4}
+
+::: {.enunciado}
+Se você mora fora dos Estados Unidos, crie um novo objeto de localização que englobe as configurações para os tipos de arquivo que você mais comumente lê.
+:::
+
+::: {.solution}
+```{r}
+locale(
+    decimal_mark = ",",
+    grouping_mark = ".",
+    date_format = "%d/%m/%Y",
+    time_format = "%H:%M:%S",
+    date_names = "pt"
+)
+```
+
+:::
+
+### Exercício 8.3.5 {- #exr8-3-5}
+
+::: {.enunciado}
+Qual a diferença entre `read_csv()` e `read_csv2()`?
+:::
+
+::: {.solution}
+Enquanto `read_csv()` utiliza a vírgula como delimitador, o `read_csv2()` utiliza o ponto-e-vírgula.
+:::
+
+### Exercício 8.3.6 {- #exr8-3-6}
+
+::: {.enunciado}
+Quais são as codificações mais usadas na Europa? Quais as codificações mais usadas na Ásia? Procure no Google para descobrir.
+:::
+
+::: {.solution}
+???
+:::
+
+### Exercício 8.3.7 {- #exr8-3-7}
+
+::: {.enunciado}
+Gere uma string de formatação correta para analisar cada uma das datas e horas a seguir:
+
+```{r}
+d1 <- "January 1, 2010"
+d2 <- "2015-Mar-07"
+d3 <- "06-Jun-2016"
+d4 <- c("August 19 (2015)", "July 1 (2015)")
+d5 <- "12/30/14" # Dec 30, 2014
+t1 <- "1705"
+t2 <- "11:15:10.12 PM"
+```
+:::
+
+::: {.solution}
+```{r}
+parse_date(d1, "%B %d, %Y")
+parse_date(d2, "%Y-%b-%d")
+parse_date(d3, "%d-%b-%Y")
+parse_date(d4, "%B %d (%Y)")
+parse_date(d5, "%m/%d/%y")
+
+parse_time(t1, "%H%M")
+parse_time(t2, "%I:%M:%OS %p")
+```
+:::
+
 ## Analisando um arquivo
+
+Não temos exercícios nesta seção.
 
 ## Escrevendo em um arquivo
 
+Não temos exercícios nesta seção.
+
 ## Outros tipos de dados
+
+Não temos exercícios nesta seção.
