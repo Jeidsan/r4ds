@@ -2,14 +2,146 @@
 
 ## Introdução
 
+Não temos exercícios nesta seção.
+
 ## Dados arrumados (Tidy Data)
+
+### Exercício 9.2.1 {- #exr9-2-1}
+
+::: {.enunciado}
+:::
+
+::: {.solution}
+:::
+
+### Exercício 9.2.2 {- #exr9-2-2}
+
+::: {.enunciado}
+:::
+
+::: {.solution}
+:::
+
+### Exercício 9.2.3 {- #exr9-2-3}
+
+::: {.enunciado}
+:::
+
+::: {.solution}
+:::
 
 ## Espalhando e reunindo
 
+### Exercício 9.3.1 {- #exr9-3-1}
+
+::: {.enunciado}
+:::
+
+::: {.solution}
+:::
+
+### Exercício 9.3.2 {- #exr9-3-2}
+
+::: {.enunciado}
+:::
+
+::: {.solution}
+:::
+
+### Exercício 9.3.3 {- #exr9-3-3}
+
+::: {.enunciado}
+:::
+
+::: {.solution}
+:::
+
+### Exercício 9.3.4 {- #exr9-3-4}
+
+::: {.enunciado}
+:::
+
+::: {.solution}
+:::
+
 ## Separando e unindo
+
+### Exercício 9.4.1 {- #exr9-4-1}
+
+::: {.enunciado}
+:::
+
+::: {.solution}
+:::
+
+### Exercício 9.4.2 {- #exr9-4-2}
+
+::: {.enunciado}
+:::
+
+::: {.solution}
+:::
+
+### Exercício 9.4.3 {- #exr9-4-3}
+
+::: {.enunciado}
+:::
+
+::: {.solution}
+:::
 
 ## Valores faltantes
 
+### Exercício 9.5.1 {- #exr9-5-1}
+
+::: {.enunciado}
+:::
+
+::: {.solution}
+:::
+
+### Exercício 9.5.2 {- #exr9-5-2}
+
+::: {.enunciado}
+:::
+
+::: {.solution}
+:::
+
 ## Estudo de caso
 
+### Exercício 9.6.1 {- #exr9-6-1}
+
+::: {.enunciado}
+:::
+
+::: {.solution}
+:::
+
+### Exercício 9.6.2 {- #exr9-6-2}
+
+::: {.enunciado}
+:::
+
+::: {.solution}
+:::
+
+### Exercício 9.6.3 {- #exr9-6-3}
+
+::: {.enunciado}
+:::
+
+::: {.solution}
+:::
+
+### Exercício 9.6.4 {- #exr9-6-4}
+
+::: {.enunciado}
+:::
+
+::: {.solution}
+:::
+
 ## Dados desarrumados (não tidy)
+
+Não temos exercícios nesta seção.
