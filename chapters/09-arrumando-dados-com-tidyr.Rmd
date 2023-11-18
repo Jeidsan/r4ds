@@ -9,25 +9,122 @@ Não temos exercícios nesta seção.
 ### Exercício 9.2.1 {- #exr9-2-1}
 
 ::: {.enunciado}
+Usando a prosa, descreva como as variáveis e as observações estão organizadas em cada uma das tabelas de exemplo.
 :::
 
 ::: {.solution}
+Antes de iniciarmos a discussão, vale ressaltar que as variáveis de interesse são o nome do país, o ano do registro, o total de casos de tuberculose registrados e a população estimada para o ano de registro. Dito isso, vamos analisar cada uma das tabelas.
+
+```{r}
+table1
+```
+
+Em `table1`, as variáveis estão dispostas nas colunas, as informações nas linhas e os dados nas células da tabela. Este é o formato *tidy*, com os dados organizados de forma clara e consistente com o *tidyverse*.
+
+```{r}
+table2
+```
+Já em `table2`, as coisas são um pouco diferentes. As variáveis `country` e `year` estão organizadas nas colunas, porém o número de casos e o tamanh da população se encontram distribuídos em mais de uma linha. Em outras palavras, para encontrar uma única obsevação nesta tabela, é preciso analisar duas linhas: numa delas se encontrará o número total de casos de tuberculose naquele país e ano e, na outra, se encontrará o tamanho da população.
+
+Vamos à `table3`:
+
+```{r}
+table3
+```
+
+Nesta tabela, dois valores estão combinados na coluna `rate`. Apesar de cada linha ter a observação completa, é necessário realizar uma operação para extrair o número de casos e o tamanhpo da população.
+
+Por fim, analisaremos a tabela 4, que é composta por duas tabelas, na verdade:
+
+```{r}
+table4a
+```
+
+Em `table4a` temos o número de casos, sendo que a variável `year` está representada em colunas.
+
+```{r}
+table4b
+```
+
+Na `table4b`, temos o mesmo problema de distribuição da variável `year`, porém nela encontramos o tamanhpo da população distribuida entre as células.
 :::
 
 ### Exercício 9.2.2 {- #exr9-2-2}
 
 ::: {.enunciado}
+Calcule o `rate` para `table2` e `table4a + table 4b`. Você precisará realizar quatro operações:
+
+a. Extraia o número de casos de TB por país por ano.
+b. Extraia a população correspondente por país por ano.
+c. Divida os casos por população e multiplique por 10.000.
+d. Armazene no local adequado.
+
+Com qual representação é mais fácil trabalhar? Com qual é mais difícil? Por quê?
 :::
 
 ::: {.solution}
+Iniciaremos com a tabela `table2`.
+
+```{r}
+header <- table2 %>% 
+  distinct(country, year)
+
+cases <- table2 %>%
+  filter(type == "cases") %>%
+  select(count)
+
+population <- table2 %>%
+  filter(type == "population") %>%
+  select(count)
+
+rates <- (cases$count * 10000) / population$count
+
+new_table2 <- tibble(
+  header,
+  cases = cases$count,
+  population = population$count,
+  rate = rates
+)
+
+new_table2
+
+```
+
+Para as tabelas `table4a` e `table4b`, temos o seguinte:
+
+```{r}
+(rates <- tibble(
+  country = table4a$country,
+  `1999` = table4a$`1999` * 10000 / table4b$`1999`,
+  `2000` = table4a$`2000` * 10000 / table4b$`2000`
+))
+```
+
 :::
 
 ### Exercício 9.2.3 {- #exr9-2-3}
 
 ::: {.enunciado}
+Recrie o gráfico mostrando a mudança nos casos com o passar do tempo usando `table2`, em vez de `table1`. O que você precsa fazer primeiro?
 :::
 
 ::: {.solution}
+```{r}
+table2 %>%
+  group_by(country, year) %>%
+  filter(type == "cases") %>%
+  select(count) %>%
+  ggplot(aes(year, count)) +
+    geom_line(aes(group = country), color = "gray50") +
+    geom_point(aes(color = country)) +
+    labs(
+      y = "casos",
+      x = "anos",
+      color = "país"
+    )
+    
+```
+
 :::
 
 ## Espalhando e reunindo
@@ -35,6 +132,23 @@ Não temos exercícios nesta seção.
 ### Exercício 9.3.1 {- #exr9-3-1}
 
 ::: {.enunciado}
+Por que `gather()` e `spread()` não são perfeitamente simétricos? Considere cuidadosamente o exemplo a seguir:
+
+```
+stocks <- tibble(
+  year   = c(2015, 2012, 2016, 2016),
+  half   = c(   1,    2,    1,    2),
+  return = c(1.88, 0.59, 0.92, 0.17)
+)
+
+stocks %>%
+  spread(year, return) %>%
+  gather("year", "return", `2015`:`2016`)
+```
+
+(Dica: observe os tipos de variáveis e pense sobre *nomes* de colunas.)
+
+Ambos `spread()` e `gather()` tês um argumento `convert`. O que ele faz?
 :::
 
 ::: {.solution}
@@ -43,6 +157,12 @@ Não temos exercícios nesta seção.
 ### Exercício 9.3.2 {- #exr9-3-2}
 
 ::: {.enunciado}
+Por que este código falha?
+
+```
+table4a %>%
+  gather(199, 2000, key = "year", value = "cases")
+```
 :::
 
 ::: {.solution}
@@ -51,6 +171,19 @@ Não temos exercícios nesta seção.
 ### Exercício 9.3.3 {- #exr9-3-3}
 
 ::: {.enunciado}
+Por que espalhar esse tibble falha? Como você poderia adicionar uma nova coluna para corrigir o problema?
+
+```
+people <- tribble(
+  ~name,               ~key,    ~value,
+  #------------------/---------/-------
+  "Phillip Woods",    "age",    45,
+  "Phillip Woods",    "height", 186,
+  "Phillip Woods",    "age",    50,
+  "Jessica Cordero",  "age",    37,
+  "Jessica Cordero",  "height", 156
+)
+```
 :::
 
 ::: {.solution}
@@ -59,6 +192,15 @@ Não temos exercícios nesta seção.
 ### Exercício 9.3.4 {- #exr9-3-4}
 
 ::: {.enunciado}
+Arrume este tibble simples. Você precisará espalhá-lo ou reuní-lo? Quais são as variáveis?
+
+```{r}
+preg <- tribble(
+  ~pregnant,    ~male,    ~female,
+  "yes",        NA,       10,
+  "no",         20,       12
+)
+```
 :::
 
 ::: {.solution}
@@ -69,6 +211,15 @@ Não temos exercícios nesta seção.
 ### Exercício 9.4.1 {- #exr9-4-1}
 
 ::: {.enunciado}
+O que os argumentos `extra` e `fill` fazem em `separate()`? Experimente as várias opções para os dois conjuntos de dados de brinquedos a seguir:
+
+```
+tibble(x = c("a,b,c", "d,e,f,g", "h,i,j")) %>%
+  separate(x,c("one", "two", "three"))
+  
+tibble(x = c("a,b,c", "d,e", "f,g,i")) %>%
+  separate(x,c("one", "two", "three"))
+```
 :::
 
 ::: {.solution}
@@ -77,6 +228,7 @@ Não temos exercícios nesta seção.
 ### Exercício 9.4.2 {- #exr9-4-2}
 
 ::: {.enunciado}
+`unite()` e `separate()` têm um argumento `remove`. O que ele faz? Por que você o configuraria como `FALSE`?
 :::
 
 ::: {.solution}
@@ -85,6 +237,7 @@ Não temos exercícios nesta seção.
 ### Exercício 9.4.3 {- #exr9-4-3}
 
 ::: {.enunciado}
+Compare e contranste `separate()` e `extract()`. Por que há três variações de separação (por posição, por separador e com grupos), mas apenas uma para união?
 :::
 
 ::: {.solution}
@@ -95,6 +248,7 @@ Não temos exercícios nesta seção.
 ### Exercício 9.5.1 {- #exr9-5-1}
 
 ::: {.enunciado}
+Compare e contraste os argumentos `fill` de `spread()` e `complete()`.
 :::
 
 ::: {.solution}
@@ -103,6 +257,7 @@ Não temos exercícios nesta seção.
 ### Exercício 9.5.2 {- #exr9-5-2}
 
 ::: {.enunciado}
+O que o argumento de direção de `fill()` faz?
 :::
 
 ::: {.solution}
@@ -113,6 +268,7 @@ Não temos exercícios nesta seção.
 ### Exercício 9.6.1 {- #exr9-6-1}
 
 ::: {.enunciado}
+Neste estudo de caso eu configuro `na.rm = TRUE` só para facilitar a verificação de que tínhamos os valores corretos. Isso é razoável? Pense sobre como os valores faltantes são representados nesse conjunto de dados. Há valores faltantes implícitos? qual é a diferença entre um `NA`e zero?
 :::
 
 ::: {.solution}
@@ -121,6 +277,7 @@ Não temos exercícios nesta seção.
 ### Exercício 9.6.2 {- #exr9-6-2}
 
 ::: {.enunciado}
+O que acontece se você negligenciar o passo `mutate()`? (`mutate(key = stringr::str_replace(key, "newrel", "new_rel"))`)?
 :::
 
 ::: {.solution}
@@ -129,6 +286,7 @@ Não temos exercícios nesta seção.
 ### Exercício 9.6.3 {- #exr9-6-3}
 
 ::: {.enunciado}
+Afirmei que `iso2` e `iso3` eram redundantes com `country`. Confirme essa afirmação.
 :::
 
 ::: {.solution}
@@ -137,6 +295,7 @@ Não temos exercícios nesta seção.
 ### Exercício 9.6.4 {- #exr9-6-4}
 
 ::: {.enunciado}
+Para cada país, ano e gênero, calcule o número total de casos de TB. Faça uma visualização informativa dos dados.
 :::
 
 ::: {.solution}
