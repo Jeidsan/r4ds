@@ -51,7 +51,41 @@ Haveria um novo conjunto de dados chamado, digamos, `special_dates`, e a chave s
 ### Exercício 10.3.1 {- #exr10-3-1}
 
 ::: {.enunciado}
+Adicione uma surrogate key para `flights`.
+:::
+
+::: {.solution}
+```{r}
+flights1 <- flights %>%
+  mutate(id = row_number())
+```
+
+:::
+
+### Exercício 10.3.2 {- #exr10-3-2}
+
+::: {.enunciado}
+Identifique as keys nos seguintes conjuntos de dados:
+
+a. `Lahman::Batting`
+b. `babynames::babynames`
+c. `nasaweather::atmos`
+d. `fueleconomy::vehicles`
+e. `ggplot2::diamonds`
+
+(Você precisará instalar alguns pacotes e ler algumas documentações.)
+:::
+
+::: {.solution}
 x
+:::
+
+### Exercício 10.3.3 {- #exr10-3-3}
+
+::: {.enunciado}
+Desenhe um diagrama ilustrando as conexões entre as tabelas `Batting`, `Master` e `Salaries` no pacote **Lahman**. Desenhe outro diagrama que mostre o relacionamento entre `Master`, `Managers` e `AwardsManagers`.
+
+Como você caracteriza o relacionamento entre as tabelas `Batting`, `Pitching` e `Fielding`?
 :::
 
 ::: {.solution}
