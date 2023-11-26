@@ -160,7 +160,7 @@ Ao espalhar e, depois, reunir os dados de um mesmo tibble, os tipos podem não s
 ::: {.enunciado}
 Por que este código falha?
 
-```{r}
+```
 table4a %>%
   gather(1999, 2000, key = "year", value = "cases")
 ```
@@ -173,7 +173,7 @@ A solução para o problema é a seguinte:
 
 ```{r}
 table4a %>%
-  gather(1999, 2000, key = "year", value = "cases")
+  gather(`1999`, `2000`, key = "year", value = "cases")
 ```
 :::
 

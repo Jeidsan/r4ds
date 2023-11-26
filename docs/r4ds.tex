@@ -233,7 +233,7 @@
 \makeatother
 \subtitle{Solução dos exercícios}
 \author{Jeidsan A. da C. Pereira}
-\date{2023-11-03}
+\date{2023-11-26}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Teorema}[chapter]
@@ -314,6 +314,8 @@ Dúvidas ou sugestões de melhoria podem ser encaminhadas para o e-mail \emph{\h
   \protect\hyperlink{exr8-2-3}{Exercício 8.2.3};
 \item
   \protect\hyperlink{exr8-3-6}{Exercício 8.3.6};
+\item
+  \protect\hyperlink{exr9-5-2}{Exercício 9.5.2};
 \item
 \end{itemize}
 
@@ -4781,16 +4783,16 @@ Pratique referir-se a nomes de variáveis não sintáticos, no data frame a segu
 ## # A tibble: 10 x 3
 ##      one   two three
 ##    <int> <dbl> <dbl>
-##  1     1  3.17  3.17
-##  2     2  3.98  1.99
-##  3     3  6.83  2.28
-##  4     4  9.88  2.47
-##  5     5  9.14  1.83
-##  6     6 11.8   1.96
-##  7     7 13.7   1.95
-##  8     8 14.7   1.84
-##  9     9 18.1   2.01
-## 10    10 18.8   1.88
+##  1     1  2.17  2.17
+##  2     2  4.71  2.35
+##  3     3  7.02  2.34
+##  4     4  7.80  1.95
+##  5     5  9.49  1.90
+##  6     6 11.4   1.91
+##  7     7 14.7   2.11
+##  8     8 14.4   1.81
+##  9     9 18.5   2.05
+## 10    10 19.9   1.99
 \end{verbatim}
 
 \end{solution}
@@ -5356,23 +5358,751 @@ Não temos exercícios nesta seção.
 \hypertarget{introduuxe7uxe3o-5}{%
 \section{Introdução}\label{introduuxe7uxe3o-5}}
 
+Não temos exercícios nesta seção.
+
 \hypertarget{dados-arrumados-tidy-data}{%
 \section{Dados arrumados (Tidy Data)}\label{dados-arrumados-tidy-data}}
+
+\hypertarget{exr9-2-1}{%
+\subsection*{Exercício 9.2.1}\label{exr9-2-1}}
+\addcontentsline{toc}{subsection}{Exercício 9.2.1}
+
+Usando a prosa, descreva como as variáveis e as observações estão organizadas em cada uma das tabelas de exemplo.
+
+\begin{solution}
+Antes de iniciarmos a discussão, vale ressaltar que as variáveis de interesse são o nome do país, o ano do registro, o total de casos de tuberculose registrados e a população estimada para o ano de registro. Dito isso, vamos analisar cada uma das tabelas.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{table1}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 4
+##   country      year  cases
+##   <chr>       <dbl>  <dbl>
+## 1 Afghanistan  1999    745
+## 2 Afghanistan  2000   2666
+## 3 Brazil       1999  37737
+## 4 Brazil       2000  80488
+## 5 China        1999 212258
+## 6 China        2000 213766
+## # i 1 more variable:
+## #   population <dbl>
+\end{verbatim}
+
+Em \texttt{table1}, as variáveis estão dispostas nas colunas, as informações nas linhas e os dados nas células da tabela. Este é o formato \emph{tidy}, com os dados organizados de forma clara e consistente com o \emph{tidyverse}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{table2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 12 x 4
+##    country   year type   count
+##    <chr>    <dbl> <chr>  <dbl>
+##  1 Afghani~  1999 cases 7.45e2
+##  2 Afghani~  1999 popu~ 2.00e7
+##  3 Afghani~  2000 cases 2.67e3
+##  4 Afghani~  2000 popu~ 2.06e7
+##  5 Brazil    1999 cases 3.77e4
+##  6 Brazil    1999 popu~ 1.72e8
+##  7 Brazil    2000 cases 8.05e4
+##  8 Brazil    2000 popu~ 1.75e8
+##  9 China     1999 cases 2.12e5
+## 10 China     1999 popu~ 1.27e9
+## 11 China     2000 cases 2.14e5
+## 12 China     2000 popu~ 1.28e9
+\end{verbatim}
+
+Já em \texttt{table2}, as coisas são um pouco diferentes. As variáveis \texttt{country} e \texttt{year} estão organizadas nas colunas, porém o número de casos e o tamanh da população se encontram distribuídos em mais de uma linha. Em outras palavras, para encontrar uma única obsevação nesta tabela, é preciso analisar duas linhas: numa delas se encontrará o número total de casos de tuberculose naquele país e ano e, na outra, se encontrará o tamanho da população.
+
+Vamos à \texttt{table3}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{table3}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 3
+##   country      year rate      
+##   <chr>       <dbl> <chr>     
+## 1 Afghanistan  1999 745/19987~
+## 2 Afghanistan  2000 2666/2059~
+## 3 Brazil       1999 37737/172~
+## 4 Brazil       2000 80488/174~
+## 5 China        1999 212258/12~
+## 6 China        2000 213766/12~
+\end{verbatim}
+
+Nesta tabela, dois valores estão combinados na coluna \texttt{rate}. Apesar de cada linha ter a observação completa, é necessário realizar uma operação para extrair o número de casos e o tamanhpo da população.
+
+Por fim, analisaremos a tabela 4, que é composta por duas tabelas, na verdade:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{table4a}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 3 x 3
+##   country     `1999` `2000`
+##   <chr>        <dbl>  <dbl>
+## 1 Afghanistan    745   2666
+## 2 Brazil       37737  80488
+## 3 China       212258 213766
+\end{verbatim}
+
+Em \texttt{table4a} temos o número de casos, sendo que a variável \texttt{year} está representada em colunas.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{table4b}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 3 x 3
+##   country        `1999` `2000`
+##   <chr>           <dbl>  <dbl>
+## 1 Afghanistan    2.00e7 2.06e7
+## 2 Brazil         1.72e8 1.75e8
+## 3 China          1.27e9 1.28e9
+\end{verbatim}
+
+Na \texttt{table4b}, temos o mesmo problema de distribuição da variável \texttt{year}, porém nela encontramos o tamanhpo da população distribuida entre as células.
+\end{solution}
+
+\hypertarget{exr9-2-2}{%
+\subsection*{Exercício 9.2.2}\label{exr9-2-2}}
+\addcontentsline{toc}{subsection}{Exercício 9.2.2}
+
+Calcule o \texttt{rate} para \texttt{table2} e \texttt{table4a\ +\ table\ 4b}. Você precisará realizar quatro operações:
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  Extraia o número de casos de TB por país por ano.
+\item
+  Extraia a população correspondente por país por ano.
+\item
+  Divida os casos por população e multiplique por 10.000.
+\item
+  Armazene no local adequado.
+\end{enumerate}
+
+Com qual representação é mais fácil trabalhar? Com qual é mais difícil? Por quê?
+
+\begin{solution}
+
+Iniciaremos com a tabela \texttt{table2}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{header }\OtherTok{\textless{}{-}}\NormalTok{ table2 }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{distinct}\NormalTok{(country, year)}
+
+\NormalTok{cases }\OtherTok{\textless{}{-}}\NormalTok{ table2 }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(type }\SpecialCharTok{==} \StringTok{"cases"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(count)}
+
+\NormalTok{population }\OtherTok{\textless{}{-}}\NormalTok{ table2 }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(type }\SpecialCharTok{==} \StringTok{"population"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(count)}
+
+\NormalTok{rates }\OtherTok{\textless{}{-}}\NormalTok{ (cases}\SpecialCharTok{$}\NormalTok{count }\SpecialCharTok{*} \DecValTok{10000}\NormalTok{) }\SpecialCharTok{/}\NormalTok{ population}\SpecialCharTok{$}\NormalTok{count}
+
+\NormalTok{new\_table2 }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}
+\NormalTok{  header,}
+  \AttributeTok{cases =}\NormalTok{ cases}\SpecialCharTok{$}\NormalTok{count,}
+  \AttributeTok{population =}\NormalTok{ population}\SpecialCharTok{$}\NormalTok{count,}
+  \AttributeTok{rate =}\NormalTok{ rates}
+\NormalTok{)}
+
+\NormalTok{new\_table2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 5
+##   country      year  cases
+##   <chr>       <dbl>  <dbl>
+## 1 Afghanistan  1999    745
+## 2 Afghanistan  2000   2666
+## 3 Brazil       1999  37737
+## 4 Brazil       2000  80488
+## 5 China        1999 212258
+## 6 China        2000 213766
+## # i 2 more variables:
+## #   population <dbl>,
+## #   rate <dbl>
+\end{verbatim}
+
+Para as tabelas \texttt{table4a} e \texttt{table4b}, temos o seguinte:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(rates }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}
+  \AttributeTok{country =}\NormalTok{ table4a}\SpecialCharTok{$}\NormalTok{country,}
+  \StringTok{\textasciigrave{}}\AttributeTok{1999}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ table4a}\SpecialCharTok{$}\StringTok{\textasciigrave{}}\AttributeTok{1999}\StringTok{\textasciigrave{}} \SpecialCharTok{*} \DecValTok{10000} \SpecialCharTok{/}\NormalTok{ table4b}\SpecialCharTok{$}\StringTok{\textasciigrave{}}\AttributeTok{1999}\StringTok{\textasciigrave{}}\NormalTok{,}
+  \StringTok{\textasciigrave{}}\AttributeTok{2000}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ table4a}\SpecialCharTok{$}\StringTok{\textasciigrave{}}\AttributeTok{2000}\StringTok{\textasciigrave{}} \SpecialCharTok{*} \DecValTok{10000} \SpecialCharTok{/}\NormalTok{ table4b}\SpecialCharTok{$}\StringTok{\textasciigrave{}}\AttributeTok{2000}\StringTok{\textasciigrave{}}
+\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 3 x 3
+##   country     `1999` `2000`
+##   <chr>        <dbl>  <dbl>
+## 1 Afghanistan  0.373   1.29
+## 2 Brazil       2.19    4.61
+## 3 China        1.67    1.67
+\end{verbatim}
+
+\end{solution}
+
+\hypertarget{exr9-2-3}{%
+\subsection*{Exercício 9.2.3}\label{exr9-2-3}}
+\addcontentsline{toc}{subsection}{Exercício 9.2.3}
+
+Recrie o gráfico mostrando a mudança nos casos com o passar do tempo usando \texttt{table2}, em vez de \texttt{table1}. O que você precsa fazer primeiro?
+
+\begin{solution}
+\leavevmode
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{table2 }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(country, year) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(type }\SpecialCharTok{==} \StringTok{"cases"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(count) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(year, count)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_line}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{group =}\NormalTok{ country), }\AttributeTok{color =} \StringTok{"gray50"}\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{color =}\NormalTok{ country)) }\SpecialCharTok{+}
+    \FunctionTok{labs}\NormalTok{(}
+      \AttributeTok{y =} \StringTok{"casos"}\NormalTok{,}
+      \AttributeTok{x =} \StringTok{"anos"}\NormalTok{,}
+      \AttributeTok{color =} \StringTok{"país"}
+\NormalTok{    )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Adding missing grouping variables: `country`, `year`
+\end{verbatim}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-153-1.pdf}
+
+\end{solution}
 
 \hypertarget{espalhando-e-reunindo}{%
 \section{Espalhando e reunindo}\label{espalhando-e-reunindo}}
 
+\hypertarget{exr9-3-1}{%
+\subsection*{Exercício 9.3.1}\label{exr9-3-1}}
+\addcontentsline{toc}{subsection}{Exercício 9.3.1}
+
+Por que \texttt{gather()} e \texttt{spread()} não são perfeitamente simétricos? Considere cuidadosamente o exemplo a seguir:
+
+\begin{verbatim}
+stocks <- tibble(
+  year   = c(2015, 2015, 2016, 2016),
+  half   = c(   1,    2,    1,    2),
+  return = c(1.88, 0.59, 0.92, 0.17)
+)
+
+stocks %>%
+  spread(year, return) %>%
+  gather("year", "return", `2015`:`2016`)
+\end{verbatim}
+
+(Dica: observe os tipos de variáveis e pense sobre \emph{nomes} de colunas.)
+
+Ambos \texttt{spread()} e \texttt{gather()} tês um argumento \texttt{convert}. O que ele faz?
+
+\begin{solution}
+Ao espalhar e, depois, reunir os dados de um mesmo tibble, os tipos podem não ser conservados. No exemplo dado, os valores da variável ano acabam sendo convertidas para string. É possível efetuar uma conversão desses valores usando o parâmetro \texttt{convert}. Neste caso, o R buscará inferir o tipo de dado, ainda assim, os tipos podem não coincidir com o original.
+\end{solution}
+
+\hypertarget{exr9-3-2}{%
+\subsection*{Exercício 9.3.2}\label{exr9-3-2}}
+\addcontentsline{toc}{subsection}{Exercício 9.3.2}
+
+Por que este código falha?
+
+\begin{verbatim}
+table4a %>%
+  gather(1999, 2000, key = "year", value = "cases")
+\end{verbatim}
+
+\begin{solution}
+
+O método \texttt{gather} espera receber uma lista com os nomes das colunas que se deseja juntar. Para tal, é necessário informar ou o nome das colunas ou os seus índices. Como, no caso acima, foram informados números inteiros, a rotina os interpretará como índices das colunas, contudo o tibble não tem essa quantidade de colunas.
+
+A solução para o problema é a seguinte:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{table4a }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{gather}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{1999}\StringTok{\textasciigrave{}}\NormalTok{, }\StringTok{\textasciigrave{}}\AttributeTok{2000}\StringTok{\textasciigrave{}}\NormalTok{, }\AttributeTok{key =} \StringTok{"year"}\NormalTok{, }\AttributeTok{value =} \StringTok{"cases"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 3
+##   country     year   cases
+##   <chr>       <chr>  <dbl>
+## 1 Afghanistan 1999     745
+## 2 Brazil      1999   37737
+## 3 China       1999  212258
+## 4 Afghanistan 2000    2666
+## 5 Brazil      2000   80488
+## 6 China       2000  213766
+\end{verbatim}
+
+\end{solution}
+
+\hypertarget{exr9-3-3}{%
+\subsection*{Exercício 9.3.3}\label{exr9-3-3}}
+\addcontentsline{toc}{subsection}{Exercício 9.3.3}
+
+Por que espalhar esse tibble falha? Como você poderia adicionar uma nova coluna para corrigir o problema?
+
+\begin{verbatim}
+people <- tribble(
+  ~name,               ~key,    ~value,
+  #------------------/---------/-------
+  "Phillip Woods",    "age",    45,
+  "Phillip Woods",    "height", 186,
+  "Phillip Woods",    "age",    50,
+  "Jessica Cordero",  "age",    37,
+  "Jessica Cordero",  "height", 156
+)
+\end{verbatim}
+
+\begin{solution}
+Como existem dois valores de \texttt{age} para o registro em nome de Phillip Woods, a função \texttt{spread} não pode decidir qual delas utilizar. Para corrigir o problema, séria necessário verificar qual dos dois registros de idade de Phillip é o correto e excluir o outro.
+\end{solution}
+
+\hypertarget{exr9-3-4}{%
+\subsection*{Exercício 9.3.4}\label{exr9-3-4}}
+\addcontentsline{toc}{subsection}{Exercício 9.3.4}
+
+Arrume este tibble simples. Você precisará espalhá-lo ou reuní-lo? Quais são as variáveis?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{preg }\OtherTok{\textless{}{-}} \FunctionTok{tribble}\NormalTok{(}
+  \SpecialCharTok{\textasciitilde{}}\NormalTok{pregnant,    }\SpecialCharTok{\textasciitilde{}}\NormalTok{male,    }\SpecialCharTok{\textasciitilde{}}\NormalTok{female,}
+  \StringTok{"yes"}\NormalTok{,        }\ConstantTok{NA}\NormalTok{,       }\DecValTok{10}\NormalTok{,}
+  \StringTok{"no"}\NormalTok{,         }\DecValTok{20}\NormalTok{,       }\DecValTok{12}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{solution}
+\leavevmode
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{preg }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{gather}\NormalTok{(male, female, }\AttributeTok{key =} \StringTok{"sex"}\NormalTok{, }\AttributeTok{value =} \StringTok{"count"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 4 x 3
+##   pregnant sex    count
+##   <chr>    <chr>  <dbl>
+## 1 yes      male      NA
+## 2 no       male      20
+## 3 yes      female    10
+## 4 no       female    12
+\end{verbatim}
+
+\end{solution}
+
 \hypertarget{separando-e-unindo}{%
 \section{Separando e unindo}\label{separando-e-unindo}}
+
+\hypertarget{exr9-4-1}{%
+\subsection*{Exercício 9.4.1}\label{exr9-4-1}}
+\addcontentsline{toc}{subsection}{Exercício 9.4.1}
+
+O que os argumentos \texttt{extra} e \texttt{fill} fazem em \texttt{separate()}? Experimente as várias opções para os dois conjuntos de dados de brinquedos a seguir:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{tibble}\NormalTok{(}\AttributeTok{x =} \FunctionTok{c}\NormalTok{(}\StringTok{"a,b,c"}\NormalTok{, }\StringTok{"d,e,f,g"}\NormalTok{, }\StringTok{"h,i,j"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{separate}\NormalTok{(x,}\FunctionTok{c}\NormalTok{(}\StringTok{"one"}\NormalTok{, }\StringTok{"two"}\NormalTok{, }\StringTok{"three"}\NormalTok{), }\AttributeTok{extra =} \StringTok{"merge"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 3 x 3
+##   one   two   three
+##   <chr> <chr> <chr>
+## 1 a     b     c    
+## 2 d     e     f,g  
+## 3 h     i     j
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{tibble}\NormalTok{(}\AttributeTok{x =} \FunctionTok{c}\NormalTok{(}\StringTok{"a,b,c"}\NormalTok{, }\StringTok{"d,e"}\NormalTok{, }\StringTok{"f,g,i"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{separate}\NormalTok{(x,}\FunctionTok{c}\NormalTok{(}\StringTok{"one"}\NormalTok{, }\StringTok{"two"}\NormalTok{, }\StringTok{"three"}\NormalTok{), }\AttributeTok{remove =} \ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Expected 3 pieces. Missing pieces filled with `NA` in 1 rows [2].
+\end{verbatim}
+
+\begin{verbatim}
+## # A tibble: 3 x 4
+##   x     one   two   three
+##   <chr> <chr> <chr> <chr>
+## 1 a,b,c a     b     c    
+## 2 d,e   d     e     <NA> 
+## 3 f,g,i f     g     i
+\end{verbatim}
+
+\begin{solution}
+Durante a separação de um data frame, o parâmetro \texttt{extra} indica o que fazer quando houver mais valores excedendo a quantidade de colunas parametrizada. Da mesma forma o argumento \texttt{fill} indica o que fazer quando há menos argumentos do que a quantidade de colunas solicitada.
+\end{solution}
+
+\hypertarget{exr9-4-2}{%
+\subsection*{Exercício 9.4.2}\label{exr9-4-2}}
+\addcontentsline{toc}{subsection}{Exercício 9.4.2}
+
+\texttt{unite()} e \texttt{separate()} têm um argumento \texttt{remove}. O que ele faz? Por que você o configuraria como \texttt{FALSE}?
+
+\begin{solution}
+O argumento \texttt{remove} é utilizado para determinar se os valore originais serão mantidos numa coluna do data set resultante. Podemos usar \texttt{remove\ =\ FALSE} quando desejarmos manter a configuração original para efeito de comparação e controle.
+\end{solution}
+
+\hypertarget{exr9-4-3}{%
+\subsection*{Exercício 9.4.3}\label{exr9-4-3}}
+\addcontentsline{toc}{subsection}{Exercício 9.4.3}
+
+Compare e contraste \texttt{separate()} e \texttt{extract()}. Por que há três variações de separação (por posição, por separador e com grupos), mas apenas uma para união?
+
+\begin{solution}
+Enquanto \texttt{separate()} usa um separador ou posição de caracter numa string para realizar a separação, \texttt{extract()} usa uma expressão regular, o que torna o processo mais dinâmico. Com \texttt{extract()} pode-se, por eexemplo, tratar variáveis cujos valores tem diferentes tipos de separador.
+
+O objetivo de \texttt{separate()} e \texttt{extract()} é separar uam coluna em várias. Existem diversas formas pelas quais a coluna a ser separada estará disposta, por isso existem várias formas de realizar a separação. Já no caso de \texttt{unite()}, o objetivo é juntar colunas em uma única e, assim, não há muitas opções a serem expressas, não sendo necessárias outras sobreposições.
+\end{solution}
 
 \hypertarget{valores-faltantes-1}{%
 \section{Valores faltantes}\label{valores-faltantes-1}}
 
+\hypertarget{exr9-5-1}{%
+\subsection*{Exercício 9.5.1}\label{exr9-5-1}}
+\addcontentsline{toc}{subsection}{Exercício 9.5.1}
+
+Compare e contraste os argumentos \texttt{fill} de \texttt{spread()} e \texttt{complete()}.
+
+\begin{solution}
+Em \texttt{spread()}, o argumento \texttt{fill} é um caractere a ser utilizado quando um valor faltante for encontrado. Já em \texttt{complete()}, é possível informar uma lista nomeada indicando qual valor será atibuidos aos valores faltantes em cada uma das colunas.
+\end{solution}
+
+\hypertarget{exr9-5-2}{%
+\subsection*{Exercício 9.5.2}\label{exr9-5-2}}
+\addcontentsline{toc}{subsection}{Exercício 9.5.2}
+
+O que o argumento de direção de \texttt{fill()} faz?
+
+\begin{solution}
+
+O argumento é utilizado para controlar a forma como serão preenchidos os valores valtantes.
+
+A opção padrão é \texttt{down}, que preenche os valores faltantes de uma coluna com o valor da linha imediatamente acima. \texttt{up} preenche com o valor imediatamente abaixo. \texttt{updown} e \texttt{downup} parecem ser redundantes. Verificar.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{treatment }\OtherTok{\textless{}{-}} \FunctionTok{tribble}\NormalTok{(}
+  \SpecialCharTok{\textasciitilde{}}\NormalTok{person, }\SpecialCharTok{\textasciitilde{}}\NormalTok{treatment, }\SpecialCharTok{\textasciitilde{}}\NormalTok{response,}
+  \StringTok{"Derrick"}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{7}\NormalTok{,}
+  \ConstantTok{NA}\NormalTok{, }\DecValTok{2}\NormalTok{,}\DecValTok{10}\NormalTok{,}
+  \ConstantTok{NA}\NormalTok{, }\DecValTok{3}\NormalTok{,}\DecValTok{9}\NormalTok{,}
+  \StringTok{"Kath"}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{4}\NormalTok{,}
+  \ConstantTok{NA}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{6}\NormalTok{,}
+  \StringTok{"TESTE"}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{4}\NormalTok{,}
+\NormalTok{)}
+
+\NormalTok{treatment }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{fill}\NormalTok{(person, }\AttributeTok{.direction =} \StringTok{"up"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 3
+##   person  treatment response
+##   <chr>       <dbl>    <dbl>
+## 1 Derrick         1        7
+## 2 Kath            2       10
+## 3 Kath            3        9
+## 4 Kath            1        4
+## 5 TESTE           2        6
+## 6 TESTE           1        4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{treatment }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{fill}\NormalTok{(person, }\AttributeTok{.direction =} \StringTok{"down"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 3
+##   person  treatment response
+##   <chr>       <dbl>    <dbl>
+## 1 Derrick         1        7
+## 2 Derrick         2       10
+## 3 Derrick         3        9
+## 4 Kath            1        4
+## 5 Kath            2        6
+## 6 TESTE           1        4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{treatment }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{fill}\NormalTok{(person, }\AttributeTok{.direction =} \StringTok{"downup"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 3
+##   person  treatment response
+##   <chr>       <dbl>    <dbl>
+## 1 Derrick         1        7
+## 2 Derrick         2       10
+## 3 Derrick         3        9
+## 4 Kath            1        4
+## 5 Kath            2        6
+## 6 TESTE           1        4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{treatment }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{fill}\NormalTok{(person, }\AttributeTok{.direction =} \StringTok{"updown"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 3
+##   person  treatment response
+##   <chr>       <dbl>    <dbl>
+## 1 Derrick         1        7
+## 2 Kath            2       10
+## 3 Kath            3        9
+## 4 Kath            1        4
+## 5 TESTE           2        6
+## 6 TESTE           1        4
+\end{verbatim}
+
+\end{solution}
+
 \hypertarget{estudo-de-caso}{%
 \section{Estudo de caso}\label{estudo-de-caso}}
 
+\hypertarget{exr9-6-1}{%
+\subsection*{Exercício 9.6.1}\label{exr9-6-1}}
+\addcontentsline{toc}{subsection}{Exercício 9.6.1}
+
+Neste estudo de caso eu configuro \texttt{na.rm\ =\ TRUE} só para facilitar a verificação de que tínhamos os valores corretos. Isso é razoável? Pense sobre como os valores faltantes são representados nesse conjunto de dados. Há valores faltantes implícitos? qual é a diferença entre um \texttt{NA}e zero?
+
+\begin{solution}
+\leavevmode
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{who }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{gather}\NormalTok{(}
+\NormalTok{    new\_sp\_m014}\SpecialCharTok{:}\NormalTok{newrel\_f65, }
+    \AttributeTok{key =} \StringTok{"code"}\NormalTok{,}
+    \AttributeTok{value =} \StringTok{"cases"}
+\NormalTok{  ) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{code =}\NormalTok{ stringr}\SpecialCharTok{::}\FunctionTok{str\_replace}\NormalTok{(code, }\StringTok{"newrel"}\NormalTok{, }\StringTok{"new\_rel"}\NormalTok{)}
+\NormalTok{  ) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{separate}\NormalTok{(code, }\FunctionTok{c}\NormalTok{(}\StringTok{"new"}\NormalTok{, }\StringTok{"type"}\NormalTok{, }\StringTok{"sexage"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{new, }\SpecialCharTok{{-}}\NormalTok{iso2, }\SpecialCharTok{{-}}\NormalTok{iso3) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{separate}\NormalTok{(sexage, }\FunctionTok{c}\NormalTok{(}\StringTok{"sex"}\NormalTok{, }\StringTok{"age"}\NormalTok{), }\AttributeTok{sep =} \DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 405,440 x 6
+##    country    year type  sex  
+##    <chr>     <dbl> <chr> <chr>
+##  1 Afghanis~  1980 sp    m    
+##  2 Afghanis~  1981 sp    m    
+##  3 Afghanis~  1982 sp    m    
+##  4 Afghanis~  1983 sp    m    
+##  5 Afghanis~  1984 sp    m    
+##  6 Afghanis~  1985 sp    m    
+##  7 Afghanis~  1986 sp    m    
+##  8 Afghanis~  1987 sp    m    
+##  9 Afghanis~  1988 sp    m    
+## 10 Afghanis~  1989 sp    m    
+## # i 405,430 more rows
+## # i 2 more variables:
+## #   age <chr>, cases <dbl>
+\end{verbatim}
+
+Acima, repetimos o estudo de caso mantendo os valores faltantes explícitos. Para este exemplo, não faria muita diferença prática removê-los ou não, porém em outros cenários pode ser importante manter explícitos os valores faltantes, sobretudo no momento da comunicação dos resultados.
+
+No exemplo utilizado, caso uma observação possua o valor \texttt{NA} para a variável \texttt{casos}, significa que não estão disponíveis dados sobre TB neste país e ano específico, ou seja, não se sabe se houveram ou não casos de TB. Já o valor zero representa que os dados estavam disponíveis para coleta e é certo que não houve nenhum novo caso de TB naquele ano.
+
+\end{solution}
+
+\hypertarget{exr9-6-2}{%
+\subsection*{Exercício 9.6.2}\label{exr9-6-2}}
+\addcontentsline{toc}{subsection}{Exercício 9.6.2}
+
+O que acontece se você negligenciar o passo \texttt{mutate()}? (\texttt{mutate(key\ =\ stringr::str\_replace(key,\ "newrel",\ "new\_rel"))})?
+
+\begin{solution}
+
+A operação é importante para o sucesso da análise, pois sem ela ocorre erro durante o passo de separação: é pedido para separar os valores em três colunas (\texttt{new}, \texttt{type} e \texttt{sexage}), porém só é encontrada uma divisão em alguns dos registros, gerando apenas as duas primeiras colunas (a terceira será preenchida com \texttt{NA}).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{who }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{gather}\NormalTok{(}
+\NormalTok{    new\_sp\_m014}\SpecialCharTok{:}\NormalTok{newrel\_f65, }
+    \AttributeTok{key =} \StringTok{"code"}\NormalTok{,}
+    \AttributeTok{value =} \StringTok{"cases"}\NormalTok{,}
+    \AttributeTok{na.rm =} \ConstantTok{TRUE}
+\NormalTok{  ) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{separate}\NormalTok{(code, }\FunctionTok{c}\NormalTok{(}\StringTok{"new"}\NormalTok{, }\StringTok{"type"}\NormalTok{, }\StringTok{"sexage"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{new, }\SpecialCharTok{{-}}\NormalTok{iso2, }\SpecialCharTok{{-}}\NormalTok{iso3) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{separate}\NormalTok{(sexage, }\FunctionTok{c}\NormalTok{(}\StringTok{"sex"}\NormalTok{, }\StringTok{"age"}\NormalTok{), }\AttributeTok{sep =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{count}\NormalTok{(type)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Expected 3 pieces. Missing pieces filled with `NA` in 2580 rows [73467, 73468,
+## 73469, 73470, 73471, 73472, 73473, 73474, 73475, 73476, 73477, 73478, 73479,
+## 73480, 73481, 73482, 73483, 73484, 73485, 73486, ...].
+\end{verbatim}
+
+\begin{verbatim}
+## # A tibble: 17 x 2
+##    type      n
+##    <chr> <int>
+##  1 ep    14304
+##  2 f014    190
+##  3 f1524   184
+##  4 f2534   182
+##  5 f3544   183
+##  6 f4554   183
+##  7 f5564   183
+##  8 f65     185
+##  9 m014    190
+## 10 m1524   182
+## 11 m2534   183
+## 12 m3544   184
+## 13 m4554   184
+## 14 m5564   185
+## 15 m65     182
+## 16 sn    14342
+## 17 sp    44820
+\end{verbatim}
+
+\end{solution}
+
+\hypertarget{exr9-6-3}{%
+\subsection*{Exercício 9.6.3}\label{exr9-6-3}}
+\addcontentsline{toc}{subsection}{Exercício 9.6.3}
+
+Afirmei que \texttt{iso2} e \texttt{iso3} eram redundantes com \texttt{country}. Confirme essa afirmação.
+
+\begin{solution}
+
+Para encontrar a resposta, podemos contar os elementos distintos da tripla formada por \texttt{country}, \texttt{iso2} e \texttt{iso3}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{who }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(country, iso2, iso3) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{distinct}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(country) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(}\FunctionTok{n}\NormalTok{() }\SpecialCharTok{\textgreater{}} \DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 0 x 3
+## # Groups:   country [0]
+## # i 3 variables:
+## #   country <chr>,
+## #   iso2 <chr>, iso3 <chr>
+\end{verbatim}
+
+\end{solution}
+
+\hypertarget{exr9-6-4}{%
+\subsection*{Exercício 9.6.4}\label{exr9-6-4}}
+\addcontentsline{toc}{subsection}{Exercício 9.6.4}
+
+Para cada país, ano e gênero, calcule o número total de casos de TB. Faça uma visualização informativa dos dados.
+
+\begin{solution}
+\leavevmode
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{who }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{( year }\SpecialCharTok{\textgreater{}} \DecValTok{1995}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{gather}\NormalTok{(}
+\NormalTok{    new\_sp\_m014}\SpecialCharTok{:}\NormalTok{newrel\_f65, }
+    \AttributeTok{key =} \StringTok{"code"}\NormalTok{,}
+    \AttributeTok{value =} \StringTok{"cases"}\NormalTok{,}
+    \AttributeTok{na.rm =}\NormalTok{ T}
+\NormalTok{  ) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{code =}\NormalTok{ stringr}\SpecialCharTok{::}\FunctionTok{str\_replace}\NormalTok{(code, }\StringTok{"newrel"}\NormalTok{, }\StringTok{"new\_rel"}\NormalTok{)}
+\NormalTok{  ) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{separate}\NormalTok{(code, }\FunctionTok{c}\NormalTok{(}\StringTok{"new"}\NormalTok{, }\StringTok{"type"}\NormalTok{, }\StringTok{"sexage"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{new, }\SpecialCharTok{{-}}\NormalTok{iso2, }\SpecialCharTok{{-}}\NormalTok{iso3) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{separate}\NormalTok{(sexage, }\FunctionTok{c}\NormalTok{(}\StringTok{"sex"}\NormalTok{, }\StringTok{"age"}\NormalTok{), }\AttributeTok{sep =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(country, year, sex) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}
+    \AttributeTok{cases =} \FunctionTok{sum}\NormalTok{(cases)}
+\NormalTok{  ) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{unite}\NormalTok{(country\_sex, country, sex, }\AttributeTok{remove =}\NormalTok{ F) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}
+    \AttributeTok{x =}\NormalTok{ year, }
+    \AttributeTok{y =}\NormalTok{ cases, }
+    \AttributeTok{group =}\NormalTok{ country\_sex,}
+    \AttributeTok{color =}\NormalTok{ sex)}
+\NormalTok{  ) }\SpecialCharTok{+}
+    \FunctionTok{geom\_line}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `summarise()` has grouped output by 'country', 'year'. You can override using
+## the `.groups` argument.
+\end{verbatim}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-165-1.pdf}
+
+\end{solution}
+
 \hypertarget{dados-desarrumados-nuxe3o-tidy}{%
 \section{Dados desarrumados (não tidy)}\label{dados-desarrumados-nuxe3o-tidy}}
+
+Não temos exercícios nesta seção.
 
 \hypertarget{dados-relacionais-com-dplyr}{%
 \chapter{\texorpdfstring{Dados relacionais com \texttt{dplyr}}{Dados relacionais com dplyr}}\label{dados-relacionais-com-dplyr}}
@@ -5700,6 +6430,349 @@ Não temos exercícios nesta seção.
 
 \hypertarget{fluxo-de-trabalho-de-r-markdown}{%
 \chapter{Fluxo de trabalho de R Markdown}\label{fluxo-de-trabalho-de-r-markdown}}
+
+\hypertarget{appendix-apuxe9ndices}{%
+\appendix \addcontentsline{toc}{chapter}{\appendixname}}
+
+
+\hypertarget{apendice-a---estudo-de-caso-sobre-a-arrumauxe7uxe3o-de-dados-com-tidyr}{%
+\chapter{\texorpdfstring{Apendice A - Estudo de caso sobre a arrumação de dados com \texttt{tidyr}}{Apendice A - Estudo de caso sobre a arrumação de dados com tidyr}}\label{apendice-a---estudo-de-caso-sobre-a-arrumauxe7uxe3o-de-dados-com-tidyr}}
+
+\hypertarget{introduuxe7uxe3o-20}{%
+\section*{Introdução}\label{introduuxe7uxe3o-20}}
+\addcontentsline{toc}{section}{Introdução}
+
+Neste apêndice, reproduzimos o estudo de caso conduzido pelos autores para exemplificar o uso do \texttt{tidyr} na arrumação de dados no capítulo 9 do livro.
+
+Para este estudo de caso, foi utilizado o conjunto de dados \texttt{tidyr::who}, que contém casos de tuberculose (TB) separados por ano, país, gênero e método e diagnose. Os dados são oriundos do \emph{2014 World Health Organization Global Tuberculosis Report} disponível em: \emph{\url{http://www.who.int/tb/country/data/download/en/}}.
+
+\hypertarget{estudo-de-caso-1}{%
+\section*{Estudo de caso}\label{estudo-de-caso-1}}
+\addcontentsline{toc}{section}{Estudo de caso}
+
+Como dito na introdução, o conjunto de dados contém informações sobre os casos de tuberculose no mundo. As informações epidemiológicas contidas nesta base dados são riquíssimas, porém é desafiador trabalhar com os dados na forma em que são fornecidos:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{who}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 7,240 x 60
+##    country   iso2  iso3   year
+##    <chr>     <chr> <chr> <dbl>
+##  1 Afghanis~ AF    AFG    1980
+##  2 Afghanis~ AF    AFG    1981
+##  3 Afghanis~ AF    AFG    1982
+##  4 Afghanis~ AF    AFG    1983
+##  5 Afghanis~ AF    AFG    1984
+##  6 Afghanis~ AF    AFG    1985
+##  7 Afghanis~ AF    AFG    1986
+##  8 Afghanis~ AF    AFG    1987
+##  9 Afghanis~ AF    AFG    1988
+## 10 Afghanis~ AF    AFG    1989
+## # i 7,230 more rows
+## # i 56 more variables:
+## #   new_sp_m014 <dbl>,
+## #   new_sp_m1524 <dbl>,
+## #   new_sp_m2534 <dbl>,
+## #   new_sp_m3544 <dbl>, ...
+\end{verbatim}
+
+Esse é um conjunto de dados real bem típico. Ele contém colunas redundantes, códigos estranhos de variáveis e muitos valores faltantes. Resumindo, \texttt{who} é bagunçado, e precisaremos de vários passos para arrumá-lo. Como \texttt{dplyr}, o \texttt{tidyr} é projetado para que cada função faça uma única coisa muito bem. Em situações reais, isso significa que você normalmente precisa juntar vários verbos em um pipeline.
+
+O melhor lugar para começar é quase sempre reunindo as colunas que não são variáveis. Vamos dar uma olhada no que temos:
+
+\begin{itemize}
+\tightlist
+\item
+  Parece que \texttt{country}, \texttt{iso2} e \texttt{iso3} são três variáveis que redundantemente especificam o país.
+\item
+  \texttt{year} também é claramente uma variável.
+\item
+  Nós ainda não sabemos o que são todas as outras colunas, mas dada a estrutura dos comes das variáveis, provavelmente são valores, não variáveis.
+\end{itemize}
+
+Então precisamos reunir todas as colunas de \texttt{new\_sp\_m014} até \texttt{newrel\_f65}. Não sabemos, contudo, o que esses valores representam, então lhe daremos o nome genérico de ``key''. Nós sabemos que as células representam a contagem de casos, então usaremos a variável \texttt{cases}. Há vários valores faltantes na representação atual, então, por enquanto, usaremos \texttt{na.rm} só para podermos focar nos valores que são apresentados.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(who1 }\OtherTok{\textless{}{-}}\NormalTok{ who }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{gather}\NormalTok{(}
+\NormalTok{    new\_sp\_m014}\SpecialCharTok{:}\NormalTok{newrel\_f65,}
+    \AttributeTok{key =} \StringTok{"key"}\NormalTok{,}
+    \AttributeTok{value =} \StringTok{"cases"}\NormalTok{,}
+    \AttributeTok{na.rm =} \ConstantTok{TRUE}
+\NormalTok{  ))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 76,046 x 6
+##    country   iso2  iso3   year
+##    <chr>     <chr> <chr> <dbl>
+##  1 Afghanis~ AF    AFG    1997
+##  2 Afghanis~ AF    AFG    1998
+##  3 Afghanis~ AF    AFG    1999
+##  4 Afghanis~ AF    AFG    2000
+##  5 Afghanis~ AF    AFG    2001
+##  6 Afghanis~ AF    AFG    2002
+##  7 Afghanis~ AF    AFG    2003
+##  8 Afghanis~ AF    AFG    2004
+##  9 Afghanis~ AF    AFG    2005
+## 10 Afghanis~ AF    AFG    2006
+## # i 76,036 more rows
+## # i 2 more variables:
+## #   key <chr>, cases <dbl>
+\end{verbatim}
+
+Podemos conseguir algumas dicas da estrutura dos valores na nova coluna \texttt{key} ao contá-los:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{who1 }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{count}\NormalTok{(key)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 56 x 2
+##    key              n
+##    <chr>        <int>
+##  1 new_ep_f014   1032
+##  2 new_ep_f1524  1021
+##  3 new_ep_f2534  1021
+##  4 new_ep_f3544  1021
+##  5 new_ep_f4554  1017
+##  6 new_ep_f5564  1017
+##  7 new_ep_f65    1014
+##  8 new_ep_m014   1038
+##  9 new_ep_m1524  1026
+## 10 new_ep_m2534  1020
+## # i 46 more rows
+\end{verbatim}
+
+Você pode até ser capaz de analisar isso sozinho com um pouco de raciocínio e experimentação, mas felizmente nós temos o dicionário de dados por perto. Ele nos diz:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  As primeiras três letras de cada coluna denotam se a coluna contém casos novos ou antigos de TB. Nesse conjunto de dados, cada uma delas contém novos casos.
+\item
+  As das letras seguintes descrevem o tipo de TB:
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{rel} é para casos de relapsidade.
+\item
+  \texttt{ep} é para casos de TB extrapulmonar.
+\item
+  \texttt{sn} é para casos de TB pulmonar que não poderiam ser diagnosticados por uma amostra pulmonar (amostra negativa).
+\item
+  \texttt{sp} é para casos de TB pulmonar que poderiam ser diagnosticadas por amostra pulmonar (amostra positiva).
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  A sexta letra dá o gênero dos pacientes de TB. O conjunto de dados agrupa casos de homens (\texttt{m}) e mulheres (\texttt{f}).
+\item
+  O restante dos números dá a faixa etária. o conjunto de dados agrupa os casos em sete faixas etárias:
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  014 = 0 a 14 anos
+\item
+  1524 = 15 a 34 anos
+\item
+  2534 = 25 a 34 anos
+\item
+  3544 = 35 a 44 anos
+\item
+  4554 = 45 a 54 anos
+\item
+  5564 = 55 a 64 anos
+\item
+  65 = 65 ou mais
+\end{itemize}
+
+Precisamos fazer uma pequena correção no formato dos nomes e colunas: infelismente os nomes são levemente inconsistentes porque, em vez de \texttt{new\_rel}, temos \texttt{newrel} (é difícil identificar isso aqui, mas se você não fizer a correção, teremos erros nos passos subsequentes).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(who2 }\OtherTok{\textless{}{-}}\NormalTok{ who1 }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{key =}\NormalTok{ stringr}\SpecialCharTok{::}\FunctionTok{str\_replace}\NormalTok{(key, }\StringTok{"newrel"}\NormalTok{, }\StringTok{"new\_rel"}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 76,046 x 6
+##    country   iso2  iso3   year
+##    <chr>     <chr> <chr> <dbl>
+##  1 Afghanis~ AF    AFG    1997
+##  2 Afghanis~ AF    AFG    1998
+##  3 Afghanis~ AF    AFG    1999
+##  4 Afghanis~ AF    AFG    2000
+##  5 Afghanis~ AF    AFG    2001
+##  6 Afghanis~ AF    AFG    2002
+##  7 Afghanis~ AF    AFG    2003
+##  8 Afghanis~ AF    AFG    2004
+##  9 Afghanis~ AF    AFG    2005
+## 10 Afghanis~ AF    AFG    2006
+## # i 76,036 more rows
+## # i 2 more variables:
+## #   key <chr>, cases <dbl>
+\end{verbatim}
+
+Podemos agora separar os valores em cada código com duas passagens de \texttt{separate()}. A primeira passagem separará os códigos em cada underscore:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(who3 }\OtherTok{\textless{}{-}}\NormalTok{ who2 }\SpecialCharTok{\%\textgreater{}\%}
+   \FunctionTok{separate}\NormalTok{(key, }\FunctionTok{c}\NormalTok{(}\StringTok{"new"}\NormalTok{, }\StringTok{"type"}\NormalTok{, }\StringTok{"sexage"}\NormalTok{), }\AttributeTok{sep =} \StringTok{"\_"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 76,046 x 8
+##    country   iso2  iso3   year
+##    <chr>     <chr> <chr> <dbl>
+##  1 Afghanis~ AF    AFG    1997
+##  2 Afghanis~ AF    AFG    1998
+##  3 Afghanis~ AF    AFG    1999
+##  4 Afghanis~ AF    AFG    2000
+##  5 Afghanis~ AF    AFG    2001
+##  6 Afghanis~ AF    AFG    2002
+##  7 Afghanis~ AF    AFG    2003
+##  8 Afghanis~ AF    AFG    2004
+##  9 Afghanis~ AF    AFG    2005
+## 10 Afghanis~ AF    AFG    2006
+## # i 76,036 more rows
+## # i 4 more variables:
+## #   new <chr>, type <chr>,
+## #   sexage <chr>, cases <dbl>
+\end{verbatim}
+
+Depois podemos deixar de lado a coluna \texttt{new}, porque ela é constante neste conjunto de dados. Enquanto estamos deixando colunas de lado, vamos deixar de lado também \texttt{iso2}e \texttt{iso3}, já que são redundantes.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{who3 }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{count}\NormalTok{(new)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1 x 2
+##   new       n
+##   <chr> <int>
+## 1 new   76046
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(who4 }\OtherTok{\textless{}{-}}\NormalTok{ who3 }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{new, }\SpecialCharTok{{-}}\NormalTok{iso2, }\SpecialCharTok{{-}}\NormalTok{iso3))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 76,046 x 5
+##    country   year type  sexage
+##    <chr>    <dbl> <chr> <chr> 
+##  1 Afghani~  1997 sp    m014  
+##  2 Afghani~  1998 sp    m014  
+##  3 Afghani~  1999 sp    m014  
+##  4 Afghani~  2000 sp    m014  
+##  5 Afghani~  2001 sp    m014  
+##  6 Afghani~  2002 sp    m014  
+##  7 Afghani~  2003 sp    m014  
+##  8 Afghani~  2004 sp    m014  
+##  9 Afghani~  2005 sp    m014  
+## 10 Afghani~  2006 sp    m014  
+## # i 76,036 more rows
+## # i 1 more variable:
+## #   cases <dbl>
+\end{verbatim}
+
+Em seguida vamos separar \texttt{sexage} em \texttt{sex} e \texttt{age} ao separar depois do primeiro caractere:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(who5 }\OtherTok{\textless{}{-}}\NormalTok{ who4 }\SpecialCharTok{\%\textgreater{}\%}
+   \FunctionTok{separate}\NormalTok{(sexage, }\FunctionTok{c}\NormalTok{(}\StringTok{"sex"}\NormalTok{, }\StringTok{"age"}\NormalTok{), }\AttributeTok{sep =} \DecValTok{1}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 76,046 x 6
+##    country    year type  sex  
+##    <chr>     <dbl> <chr> <chr>
+##  1 Afghanis~  1997 sp    m    
+##  2 Afghanis~  1998 sp    m    
+##  3 Afghanis~  1999 sp    m    
+##  4 Afghanis~  2000 sp    m    
+##  5 Afghanis~  2001 sp    m    
+##  6 Afghanis~  2002 sp    m    
+##  7 Afghanis~  2003 sp    m    
+##  8 Afghanis~  2004 sp    m    
+##  9 Afghanis~  2005 sp    m    
+## 10 Afghanis~  2006 sp    m    
+## # i 76,036 more rows
+## # i 2 more variables:
+## #   age <chr>, cases <dbl>
+\end{verbatim}
+
+O conjunto de dados who agora está arrumado!
+
+Mostrei um pedaço de código de cada vez, atribuindo cada resultado provisório a uma nova variável. Normalmente não é assim que você trabalha interativamente. Em vez disso, você construitira gradualmente um pipe complexo:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{who }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{gather}\NormalTok{(}
+\NormalTok{    new\_sp\_m014}\SpecialCharTok{:}\NormalTok{newrel\_f65, }
+    \AttributeTok{key =} \StringTok{"code"}\NormalTok{,}
+    \AttributeTok{value =} \StringTok{"cases"}\NormalTok{,}
+    \AttributeTok{na.rm =} \ConstantTok{TRUE}
+\NormalTok{  ) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{code =}\NormalTok{ stringr}\SpecialCharTok{::}\FunctionTok{str\_replace}\NormalTok{(code, }\StringTok{"newrel"}\NormalTok{, }\StringTok{"new\_rel"}\NormalTok{)}
+\NormalTok{  ) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{separate}\NormalTok{(code, }\FunctionTok{c}\NormalTok{(}\StringTok{"new"}\NormalTok{, }\StringTok{"type"}\NormalTok{, }\StringTok{"sexage"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{new, }\SpecialCharTok{{-}}\NormalTok{iso2, }\SpecialCharTok{{-}}\NormalTok{iso3) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{separate}\NormalTok{(sexage, }\FunctionTok{c}\NormalTok{(}\StringTok{"sex"}\NormalTok{, }\StringTok{"age"}\NormalTok{), }\AttributeTok{sep =} \DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 76,046 x 6
+##    country    year type  sex  
+##    <chr>     <dbl> <chr> <chr>
+##  1 Afghanis~  1997 sp    m    
+##  2 Afghanis~  1998 sp    m    
+##  3 Afghanis~  1999 sp    m    
+##  4 Afghanis~  2000 sp    m    
+##  5 Afghanis~  2001 sp    m    
+##  6 Afghanis~  2002 sp    m    
+##  7 Afghanis~  2003 sp    m    
+##  8 Afghanis~  2004 sp    m    
+##  9 Afghanis~  2005 sp    m    
+## 10 Afghanis~  2006 sp    m    
+## # i 76,036 more rows
+## # i 2 more variables:
+## #   age <chr>, cases <dbl>
+\end{verbatim}
+
+\backmatter
 
   \bibliography{latex/book.bib,latex/packages.bib}
 

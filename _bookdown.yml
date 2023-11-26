@@ -47,5 +47,5 @@ rmd_files:
   - 'chapters/22-graficos-para-comunicacao-com-ggplot2.Rmd'
   - 'chapters/23-formatos-r-markdown.Rmd'
   - 'chapters/24-fluxo-de-trabalho-de-r-markdown.Rmd'
-  - 'chapters/25-referencias.Rmd'
-  - 'chapters/26-arrumando-dados-com tidyr-estudo-de-caso.Rmd'
+  - 'chapters/25-estudo-de-caso-tidyr.Rmd'
+  - 'chapters/30-referencias.Rmd'

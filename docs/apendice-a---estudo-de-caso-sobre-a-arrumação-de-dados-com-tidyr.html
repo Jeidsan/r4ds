@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Apêndice A Apendice A - Estudo de caso sobre a arrumação de dados com tidyr | R para Data Science</title>
+  <meta name="description" content="Esta página contém a solução encontrada por mim para os exercícios propostos no livro R para Data Sciente, de Hadley Wickham e Garret Grolemund, publicado no Brasil em 2019 pela Alta Books Editora." />
+  <meta name="generator" content="bookdown 0.36 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Apêndice A Apendice A - Estudo de caso sobre a arrumação de dados com tidyr | R para Data Science" />
+  <meta property="og:type" content="book" />
+  <meta property="og:image" content="https://www.jeidsan.com.br/r4ds/images/cover.png" />
+  <meta property="og:description" content="Esta página contém a solução encontrada por mim para os exercícios propostos no livro R para Data Sciente, de Hadley Wickham e Garret Grolemund, publicado no Brasil em 2019 pela Alta Books Editora." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Apêndice A Apendice A - Estudo de caso sobre a arrumação de dados com tidyr | R para Data Science" />
+  
+  <meta name="twitter:description" content="Esta página contém a solução encontrada por mim para os exercícios propostos no livro R para Data Sciente, de Hadley Wickham e Garret Grolemund, publicado no Brasil em 2019 pela Alta Books Editora." />
+  <meta name="twitter:image" content="https://www.jeidsan.com.br/r4ds/images/cover.png" />
+
+<meta name="author" content="Jeidsan A. da C. Pereira" />
+
+
+<meta name="date" content="2023-11-26" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="fluxo-de-trabalho-de-r-markdown.html"/>
+<link rel="next" href="references.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 1em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="https://www.jeidsan.com.br/r4ds">R para Data Science: Solução dos Exercícios</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Prefácio</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#pendências"><i class="fa fa-check"></i>Pendências</a></li>
+</ul></li>
+<li class="part"><span><b>I Explorar</b></span></li>
+<li class="chapter" data-level="1" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html"><i class="fa fa-check"></i><b>1</b> Visualização de dados com <code>ggplot2</code></a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#introdução"><i class="fa fa-check"></i><b>1.1</b> Introdução</a></li>
+<li class="chapter" data-level="1.2" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#primeiros-passos"><i class="fa fa-check"></i><b>1.2</b> Primeiros passos</a>
+<ul>
+<li class="chapter" data-level="" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#exr1-2-1"><i class="fa fa-check"></i>Exercício 1.2.1</a></li>
+<li class="chapter" data-level="" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#exr1-2-2"><i class="fa fa-check"></i>Exercício 1.2.2</a></li>
+<li class="chapter" data-level="" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#exr1-2-3"><i class="fa fa-check"></i>Exercício 1.2.3</a></li>
+<li class="chapter" data-level="" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#ex1-2-4"><i class="fa fa-check"></i>Exercício 1.2.4</a></li>
+<li class="chapter" data-level="" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#exr1-2-5"><i class="fa fa-check"></i>Exercício 1.2.5</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#mapeamentos-estéticos"><i class="fa fa-check"></i><b>1.3</b> Mapeamentos estéticos</a>
+<ul>
+<li class="chapter" data-level="" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#exr1-3-1"><i class="fa fa-check"></i>Exercício 1.3.1</a></li>
+<li class="chapter" data-level="" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#exr1-3-2"><i class="fa fa-check"></i>Exercício 1.3.2</a></li>
+<li class="chapter" data-level="" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#exr1-3-3"><i class="fa fa-check"></i>Exercício 1.3.3</a></li>
+<li class="chapter" data-level="" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#exr1-3-4"><i class="fa fa-check"></i>Exercício 1.3.4</a></li>
+<li class="chapter" data-level="" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#exr1-3-5"><i class="fa fa-check"></i>Exercício 1.3.5</a></li>
+<li class="chapter" data-level="" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#exr1-3-6"><i class="fa fa-check"></i>Exercício 1.3.6</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#problemas-comuns"><i class="fa fa-check"></i><b>1.4</b> Problemas comuns</a></li>
+<li class="chapter" data-level="1.5" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#facetas"><i class="fa fa-check"></i><b>1.5</b> Facetas</a>
+<ul>
+<li class="chapter" data-level="" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#exr1-5-1"><i class="fa fa-check"></i>Exercício 1.5.1</a></li>
+<li class="chapter" data-level="" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#exr1-5-2"><i class="fa fa-check"></i>Exercício 1.5.2</a></li>
+<li class="chapter" data-level="" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#exr1-5-3"><i class="fa fa-check"></i>Exercício 1.5.3</a></li>
+<li class="chapter" data-level="" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#exr1-5-4"><i class="fa fa-check"></i>Exercício 1.5.4</a></li>
+<li class="chapter" data-level="" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#exr1-5-5"><i class="fa fa-check"></i>Exercício 1.5.5</a></li>
+<li class="chapter" data-level="" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#exr1-5-6"><i class="fa fa-check"></i>Exercício 1.5.6</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#objetos-geométricos"><i class="fa fa-check"></i><b>1.6</b> Objetos geométricos</a>
+<ul>
+<li class="chapter" data-level="" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#exr1-6-1"><i class="fa fa-check"></i>Exercício 1.6.1</a></li>
+<li class="chapter" data-level="" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#exr1-6-2"><i class="fa fa-check"></i>Exercício 1.6.2</a></li>
+<li class="chapter" data-level="" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#exr1-6-3"><i class="fa fa-check"></i>Exercício 1.6.3</a></li>
+<li class="chapter" data-level="" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#exr1-6-4"><i class="fa fa-check"></i>Exercício 1.6.4</a></li>
+<li class="chapter" data-level="" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#exr1-6-5"><i class="fa fa-check"></i>Exercício 1.6.5</a></li>
+<li class="chapter" data-level="" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#exr1-6-6"><i class="fa fa-check"></i>Exercício 1.6.6</a></li>
+</ul></li>
+<li class="chapter" data-level="1.7" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#transformações-estatísticas"><i class="fa fa-check"></i><b>1.7</b> Transformações estatísticas</a>
+<ul>
+<li class="chapter" data-level="" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#exr1-7-1"><i class="fa fa-check"></i>Exercício 1.7.1</a></li>
+<li class="chapter" data-level="" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#exr1-7-2"><i class="fa fa-check"></i>Exercício 1.7.2</a></li>
+<li class="chapter" data-level="" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#exr1-7-3"><i class="fa fa-check"></i>Exercício 1.7.3</a></li>
+<li class="chapter" data-level="" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#exr1-7-4"><i class="fa fa-check"></i>Exercício 1.7.4</a></li>
+<li class="chapter" data-level="" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#exr1-7-5"><i class="fa fa-check"></i>Exercício 1.7.5</a></li>
+</ul></li>
+<li class="chapter" data-level="1.8" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#ajustes-de-posição"><i class="fa fa-check"></i><b>1.8</b> Ajustes de posição</a>
+<ul>
+<li class="chapter" data-level="" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#exr1-8-1"><i class="fa fa-check"></i>Exercício 1.8.1</a></li>
+<li class="chapter" data-level="" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#exr1-8-2"><i class="fa fa-check"></i>Exercício 1.8.2</a></li>
+<li class="chapter" data-level="" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#exr1-8-3"><i class="fa fa-check"></i>Exercício 1.8.3</a></li>
+<li class="chapter" data-level="" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#exr1-8-4"><i class="fa fa-check"></i>Exercício 1.8.4</a></li>
+</ul></li>
+<li class="chapter" data-level="1.9" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#sistemas-de-coordenadas"><i class="fa fa-check"></i><b>1.9</b> Sistemas de coordenadas</a>
+<ul>
+<li class="chapter" data-level="" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#exr1-9-1"><i class="fa fa-check"></i>Exercício 1.9.1</a></li>
+<li class="chapter" data-level="" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#exr1-9-2"><i class="fa fa-check"></i>Exercício 1.9.2</a></li>
+<li class="chapter" data-level="" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#exr1-9-3"><i class="fa fa-check"></i>Exercício 1.9.3</a></li>
+<li class="chapter" data-level="" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#exr1-9-4"><i class="fa fa-check"></i>Exercício 1.9.4</a></li>
+</ul></li>
+<li class="chapter" data-level="1.10" data-path="visualização-de-dados-com-ggplot2.html"><a href="visualização-de-dados-com-ggplot2.html#a-gramática-em-camadas-de-gráficos"><i class="fa fa-check"></i><b>1.10</b> A gramática em camadas de gráficos</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="fluxo-de-trabalho-o-básico.html"><a href="fluxo-de-trabalho-o-básico.html"><i class="fa fa-check"></i><b>2</b> Fluxo de trabalho: o básico</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="fluxo-de-trabalho-o-básico.html"><a href="fluxo-de-trabalho-o-básico.html#o-básico-de-programação"><i class="fa fa-check"></i><b>2.1</b> O básico de programação</a></li>
+<li class="chapter" data-level="2.2" data-path="fluxo-de-trabalho-o-básico.html"><a href="fluxo-de-trabalho-o-básico.html#o-que-há-em-um-nome"><i class="fa fa-check"></i><b>2.2</b> O que há em um nome?</a></li>
+<li class="chapter" data-level="2.3" data-path="fluxo-de-trabalho-o-básico.html"><a href="fluxo-de-trabalho-o-básico.html#chamando-funções"><i class="fa fa-check"></i><b>2.3</b> Chamando funções</a>
+<ul>
+<li class="chapter" data-level="" data-path="fluxo-de-trabalho-o-básico.html"><a href="fluxo-de-trabalho-o-básico.html#exr2-3-1"><i class="fa fa-check"></i>Exercício 2.3.1</a></li>
+<li class="chapter" data-level="" data-path="fluxo-de-trabalho-o-básico.html"><a href="fluxo-de-trabalho-o-básico.html#exr2-3-2"><i class="fa fa-check"></i>Exercício 2.3.2</a></li>
+<li class="chapter" data-level="" data-path="fluxo-de-trabalho-o-básico.html"><a href="fluxo-de-trabalho-o-básico.html#exr2-3-3"><i class="fa fa-check"></i>Exercício 2.3.3</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="transformação-de-dados-com-dplyr.html"><a href="transformação-de-dados-com-dplyr.html"><i class="fa fa-check"></i><b>3</b> Transformação de dados com <code>dplyr</code></a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="transformação-de-dados-com-dplyr.html"><a href="transformação-de-dados-com-dplyr.html#introdução-1"><i class="fa fa-check"></i><b>3.1</b> Introdução</a></li>
+<li class="chapter" data-level="3.2" data-path="transformação-de-dados-com-dplyr.html"><a href="transformação-de-dados-com-dplyr.html#filtrar-linhas-com-filter"><i class="fa fa-check"></i><b>3.2</b> Filtrar linhas com <code>filter()</code></a></li>
+<li class="chapter" data-level="3.3" data-path="transformação-de-dados-com-dplyr.html"><a href="transformação-de-dados-com-dplyr.html#comparações"><i class="fa fa-check"></i><b>3.3</b> Comparações</a>
+<ul>
+<li class="chapter" data-level="" data-path="transformação-de-dados-com-dplyr.html"><a href="transformação-de-dados-com-dplyr.html#exr3-3-1"><i class="fa fa-check"></i>Exercício 3.3.1</a></li>
+<li class="chapter" data-level="" data-path="transformação-de-dados-com-dplyr.html"><a href="transformação-de-dados-com-dplyr.html#exr3-3-2"><i class="fa fa-check"></i>Exercício 3.3.2</a></li>
+<li class="chapter" data-level="" data-path="transformação-de-dados-com-dplyr.html"><a href="transformação-de-dados-com-dplyr.html#exr3-3-3"><i class="fa fa-check"></i>Exercício 3.3.3</a></li>
+<li class="chapter" data-level="" data-path="transformação-de-dados-com-dplyr.html"><a href="transformação-de-dados-com-dplyr.html#exr3-3-4"><i class="fa fa-check"></i>Exercício 3.3.4</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="transformação-de-dados-com-dplyr.html"><a href="transformação-de-dados-com-dplyr.html#ordenar-linhas-com-arrange"><i class="fa fa-check"></i><b>3.4</b> Ordenar linhas com <code>arrange()</code></a>
+<ul>
+<li class="chapter" data-level="" data-path="transformação-de-dados-com-dplyr.html"><a href="transformação-de-dados-com-dplyr.html#exr3-4-1"><i class="fa fa-check"></i>Exercício 3.4.1</a></li>
+<li class="chapter" data-level="" data-path="transformação-de-dados-com-dplyr.html"><a href="transformação-de-dados-com-dplyr.html#exr3-4-2"><i class="fa fa-check"></i>Exercício 3.4.2</a></li>
+<li class="chapter" data-level="" data-path="transformação-de-dados-com-dplyr.html"><a href="transformação-de-dados-com-dplyr.html#exr3-4-3"><i class="fa fa-check"></i>Exercício 3.4.3</a></li>
+<li class="chapter" data-level="" data-path="transformação-de-dados-com-dplyr.html"><a href="transformação-de-dados-com-dplyr.html#exr3-4-4"><i class="fa fa-check"></i>Exercício 3.4.4</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="transformação-de-dados-com-dplyr.html"><a href="transformação-de-dados-com-dplyr.html#selecionar-colunas-com-select"><i class="fa fa-check"></i><b>3.5</b> Selecionar colunas com <code>select()</code></a>
+<ul>
+<li class="chapter" data-level="" data-path="transformação-de-dados-com-dplyr.html"><a href="transformação-de-dados-com-dplyr.html#exr3-5-1"><i class="fa fa-check"></i>Exercício 3.5.1</a></li>
+<li class="chapter" data-level="" data-path="transformação-de-dados-com-dplyr.html"><a href="transformação-de-dados-com-dplyr.html#exr3-5-2"><i class="fa fa-check"></i>Exercício 3.5.2</a></li>
+<li class="chapter" data-level="" data-path="transformação-de-dados-com-dplyr.html"><a href="transformação-de-dados-com-dplyr.html#exr3-5-3"><i class="fa fa-check"></i>Exercício 3.5.3</a></li>
+<li class="chapter" data-level="" data-path="transformação-de-dados-com-dplyr.html"><a href="transformação-de-dados-com-dplyr.html#exr3-5-4"><i class="fa fa-check"></i>Exercício 3.5.4</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="transformação-de-dados-com-dplyr.html"><a href="transformação-de-dados-com-dplyr.html#adicionar-novas-variáveis-com-mutate"><i class="fa fa-check"></i><b>3.6</b> Adicionar novas variáveis com <code>mutate()</code></a>
+<ul>
+<li class="chapter" data-level="" data-path="transformação-de-dados-com-dplyr.html"><a href="transformação-de-dados-com-dplyr.html#exr3-6-1"><i class="fa fa-check"></i>Exercício 3.6.1</a></li>
+<li class="chapter" data-level="" data-path="transformação-de-dados-com-dplyr.html"><a href="transformação-de-dados-com-dplyr.html#exr3-6-2"><i class="fa fa-check"></i>Exercício 3.6.2</a></li>
+<li class="chapter" data-level="" data-path="transformação-de-dados-com-dplyr.html"><a href="transformação-de-dados-com-dplyr.html#exr3-6-3"><i class="fa fa-check"></i>Exercício 3.6.3</a></li>
+<li class="chapter" data-level="" data-path="transformação-de-dados-com-dplyr.html"><a href="transformação-de-dados-com-dplyr.html#exr3-6-4"><i class="fa fa-check"></i>Exercício 3.6.4</a></li>
+<li class="chapter" data-level="" data-path="transformação-de-dados-com-dplyr.html"><a href="transformação-de-dados-com-dplyr.html#exr3-6-5"><i class="fa fa-check"></i>Exercício 3.6.5</a></li>
+<li class="chapter" data-level="" data-path="transformação-de-dados-com-dplyr.html"><a href="transformação-de-dados-com-dplyr.html#exr3-6-6"><i class="fa fa-check"></i>Exercício 3.6.6</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="transformação-de-dados-com-dplyr.html"><a href="transformação-de-dados-com-dplyr.html#resumos-agrupados-com-summarize"><i class="fa fa-check"></i><b>3.7</b> Resumos agrupados com <code>summarize()</code></a>
+<ul>
+<li class="chapter" data-level="" data-path="transformação-de-dados-com-dplyr.html"><a href="transformação-de-dados-com-dplyr.html#exr3-7-1"><i class="fa fa-check"></i>Exercício 3.7.1</a></li>
+<li class="chapter" data-level="" data-path="transformação-de-dados-com-dplyr.html"><a href="transformação-de-dados-com-dplyr.html#exr3-7-2"><i class="fa fa-check"></i>Exercício 3.7.2</a></li>
+<li class="chapter" data-level="" data-path="transformação-de-dados-com-dplyr.html"><a href="transformação-de-dados-com-dplyr.html#exr3-7-3"><i class="fa fa-check"></i>Exercício 3.7.3</a></li>
+<li class="chapter" data-level="" data-path="transformação-de-dados-com-dplyr.html"><a href="transformação-de-dados-com-dplyr.html#exr3-7-4"><i class="fa fa-check"></i>Exercício 3.7.4</a></li>
+<li class="chapter" data-level="" data-path="transformação-de-dados-com-dplyr.html"><a href="transformação-de-dados-com-dplyr.html#exr3-7-5"><i class="fa fa-check"></i>Exercício 3.7.5</a></li>
+<li class="chapter" data-level="" data-path="transformação-de-dados-com-dplyr.html"><a href="transformação-de-dados-com-dplyr.html#exr3-7-6"><i class="fa fa-check"></i>Exercício 3.7.6</a></li>
+<li class="chapter" data-level="" data-path="transformação-de-dados-com-dplyr.html"><a href="transformação-de-dados-com-dplyr.html#exr3-7-7"><i class="fa fa-check"></i>Exercício 3.7.7</a></li>
+</ul></li>
+<li class="chapter" data-level="3.8" data-path="transformação-de-dados-com-dplyr.html"><a href="transformação-de-dados-com-dplyr.html#mudanças-agrupadas-e-filtros"><i class="fa fa-check"></i><b>3.8</b> Mudanças agrupadas (e filtros)</a>
+<ul>
+<li class="chapter" data-level="" data-path="transformação-de-dados-com-dplyr.html"><a href="transformação-de-dados-com-dplyr.html#exr3-8-1"><i class="fa fa-check"></i>Exercício 3.8.1</a></li>
+<li class="chapter" data-level="" data-path="transformação-de-dados-com-dplyr.html"><a href="transformação-de-dados-com-dplyr.html#exr3-8-2"><i class="fa fa-check"></i>Exercício 3.8.2</a></li>
+<li class="chapter" data-level="" data-path="transformação-de-dados-com-dplyr.html"><a href="transformação-de-dados-com-dplyr.html#exr3-8-3"><i class="fa fa-check"></i>Exercício 3.8.3</a></li>
+<li class="chapter" data-level="" data-path="transformação-de-dados-com-dplyr.html"><a href="transformação-de-dados-com-dplyr.html#exr3-8-4"><i class="fa fa-check"></i>Exercício 3.8.4</a></li>
+<li class="chapter" data-level="" data-path="transformação-de-dados-com-dplyr.html"><a href="transformação-de-dados-com-dplyr.html#exr3-8-5"><i class="fa fa-check"></i>Exercício 3.8.5</a></li>
+<li class="chapter" data-level="" data-path="transformação-de-dados-com-dplyr.html"><a href="transformação-de-dados-com-dplyr.html#exr3-8-6"><i class="fa fa-check"></i>Exercício 3.8.6</a></li>
+<li class="chapter" data-level="" data-path="transformação-de-dados-com-dplyr.html"><a href="transformação-de-dados-com-dplyr.html#exr3-8-7"><i class="fa fa-check"></i>Exercício 3.8.7</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="fluxo-de-trabalho-scripts.html"><a href="fluxo-de-trabalho-scripts.html"><i class="fa fa-check"></i><b>4</b> Fluxo de trabalho: scripts</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="fluxo-de-trabalho-scripts.html"><a href="fluxo-de-trabalho-scripts.html#executando-códigos"><i class="fa fa-check"></i><b>4.1</b> Executando códigos</a></li>
+<li class="chapter" data-level="4.2" data-path="fluxo-de-trabalho-scripts.html"><a href="fluxo-de-trabalho-scripts.html#diagnósticos-rstudio"><i class="fa fa-check"></i><b>4.2</b> Diagnósticos Rstudio</a>
+<ul>
+<li class="chapter" data-level="" data-path="fluxo-de-trabalho-scripts.html"><a href="fluxo-de-trabalho-scripts.html#exr4-2-1"><i class="fa fa-check"></i>Exercício 4.2.1</a></li>
+<li class="chapter" data-level="" data-path="fluxo-de-trabalho-scripts.html"><a href="fluxo-de-trabalho-scripts.html#exr4-2-2"><i class="fa fa-check"></i>Exercício 4.2.2</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="análise-exploratória-de-dados.html"><a href="análise-exploratória-de-dados.html"><i class="fa fa-check"></i><b>5</b> Análise exploratória de dados</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="análise-exploratória-de-dados.html"><a href="análise-exploratória-de-dados.html#introdução-2"><i class="fa fa-check"></i><b>5.1</b> Introdução</a></li>
+<li class="chapter" data-level="5.2" data-path="análise-exploratória-de-dados.html"><a href="análise-exploratória-de-dados.html#perguntas"><i class="fa fa-check"></i><b>5.2</b> Perguntas</a></li>
+<li class="chapter" data-level="5.3" data-path="análise-exploratória-de-dados.html"><a href="análise-exploratória-de-dados.html#variação"><i class="fa fa-check"></i><b>5.3</b> Variação</a>
+<ul>
+<li class="chapter" data-level="" data-path="análise-exploratória-de-dados.html"><a href="análise-exploratória-de-dados.html#exr5-3-1"><i class="fa fa-check"></i>Exercício 5.3.1</a></li>
+<li class="chapter" data-level="" data-path="análise-exploratória-de-dados.html"><a href="análise-exploratória-de-dados.html#exr5-3-2"><i class="fa fa-check"></i>Exercício 5.3.2</a></li>
+<li class="chapter" data-level="" data-path="análise-exploratória-de-dados.html"><a href="análise-exploratória-de-dados.html#exr5-3-3"><i class="fa fa-check"></i>Exercício 5.3.3</a></li>
+<li class="chapter" data-level="" data-path="análise-exploratória-de-dados.html"><a href="análise-exploratória-de-dados.html#exr5-3-4"><i class="fa fa-check"></i>Exercício 5.3.4</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="análise-exploratória-de-dados.html"><a href="análise-exploratória-de-dados.html#valores-faltantes"><i class="fa fa-check"></i><b>5.4</b> Valores faltantes</a>
+<ul>
+<li class="chapter" data-level="" data-path="análise-exploratória-de-dados.html"><a href="análise-exploratória-de-dados.html#exr5-4-1"><i class="fa fa-check"></i>Exercício 5.4.1</a></li>
+<li class="chapter" data-level="" data-path="análise-exploratória-de-dados.html"><a href="análise-exploratória-de-dados.html#exr5-4-2"><i class="fa fa-check"></i>Exercício 5.4.2</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="análise-exploratória-de-dados.html"><a href="análise-exploratória-de-dados.html#covariação"><i class="fa fa-check"></i><b>5.5</b> Covariação</a>
+<ul>
+<li class="chapter" data-level="" data-path="análise-exploratória-de-dados.html"><a href="análise-exploratória-de-dados.html#exr5-5-1"><i class="fa fa-check"></i>Exercício 5.5.1</a></li>
+<li class="chapter" data-level="" data-path="análise-exploratória-de-dados.html"><a href="análise-exploratória-de-dados.html#exr5-5-2"><i class="fa fa-check"></i>Exercício 5.5.2</a></li>
+<li class="chapter" data-level="" data-path="análise-exploratória-de-dados.html"><a href="análise-exploratória-de-dados.html#exr5-5-3"><i class="fa fa-check"></i>Exercício 5.5.3</a></li>
+<li class="chapter" data-level="" data-path="análise-exploratória-de-dados.html"><a href="análise-exploratória-de-dados.html#exr5-5-4"><i class="fa fa-check"></i>Exercício 5.5.4</a></li>
+<li class="chapter" data-level="" data-path="análise-exploratória-de-dados.html"><a href="análise-exploratória-de-dados.html#exr5-5-5"><i class="fa fa-check"></i>Exercício 5.5.5</a></li>
+<li class="chapter" data-level="" data-path="análise-exploratória-de-dados.html"><a href="análise-exploratória-de-dados.html#exr5-5-6"><i class="fa fa-check"></i>Exercício 5.5.6</a></li>
+<li class="chapter" data-level="" data-path="análise-exploratória-de-dados.html"><a href="análise-exploratória-de-dados.html#exr5-7-7"><i class="fa fa-check"></i>Exercício 5.5.7</a></li>
+<li class="chapter" data-level="" data-path="análise-exploratória-de-dados.html"><a href="análise-exploratória-de-dados.html#exr5-5-8"><i class="fa fa-check"></i>Exercício 5.5.8</a></li>
+<li class="chapter" data-level="" data-path="análise-exploratória-de-dados.html"><a href="análise-exploratória-de-dados.html#exr5-5-9"><i class="fa fa-check"></i>Exercício 5.5.9</a></li>
+<li class="chapter" data-level="" data-path="análise-exploratória-de-dados.html"><a href="análise-exploratória-de-dados.html#exr5-5-10"><i class="fa fa-check"></i>Exercício 5.5.10</a></li>
+<li class="chapter" data-level="" data-path="análise-exploratória-de-dados.html"><a href="análise-exploratória-de-dados.html#exr5-5-11"><i class="fa fa-check"></i>Exercício 5.5.11</a></li>
+<li class="chapter" data-level="" data-path="análise-exploratória-de-dados.html"><a href="análise-exploratória-de-dados.html#exr5-5-12"><i class="fa fa-check"></i>Exercício 5.5.12</a></li>
+<li class="chapter" data-level="" data-path="análise-exploratória-de-dados.html"><a href="análise-exploratória-de-dados.html#exr5-5-13"><i class="fa fa-check"></i>Exercício 5.5.13</a></li>
+<li class="chapter" data-level="" data-path="análise-exploratória-de-dados.html"><a href="análise-exploratória-de-dados.html#exr5-5-14"><i class="fa fa-check"></i>Exercício 5.5.14</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="análise-exploratória-de-dados.html"><a href="análise-exploratória-de-dados.html#padrões-e-modelos"><i class="fa fa-check"></i><b>5.6</b> Padrões e modelos</a></li>
+<li class="chapter" data-level="5.7" data-path="análise-exploratória-de-dados.html"><a href="análise-exploratória-de-dados.html#chamadas-ggplot2"><i class="fa fa-check"></i><b>5.7</b> Chamadas <code>ggplot2</code></a></li>
+<li class="chapter" data-level="5.8" data-path="análise-exploratória-de-dados.html"><a href="análise-exploratória-de-dados.html#aprendendo-mais"><i class="fa fa-check"></i><b>5.8</b> Aprendendo mais</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="fluxo-de-trabalho-projetos.html"><a href="fluxo-de-trabalho-projetos.html"><i class="fa fa-check"></i><b>6</b> Fluxo de trabalho: projetos</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="fluxo-de-trabalho-projetos.html"><a href="fluxo-de-trabalho-projetos.html#o-que-é-real"><i class="fa fa-check"></i><b>6.1</b> O que é real?</a></li>
+<li class="chapter" data-level="6.2" data-path="fluxo-de-trabalho-projetos.html"><a href="fluxo-de-trabalho-projetos.html#onde-sua-análise-vive"><i class="fa fa-check"></i><b>6.2</b> Onde sua análise vive?</a></li>
+<li class="chapter" data-level="6.3" data-path="fluxo-de-trabalho-projetos.html"><a href="fluxo-de-trabalho-projetos.html#caminhos-e-diretórios"><i class="fa fa-check"></i><b>6.3</b> Caminhos e diretórios</a></li>
+<li class="chapter" data-level="6.4" data-path="fluxo-de-trabalho-projetos.html"><a href="fluxo-de-trabalho-projetos.html#projetos-rstudio"><i class="fa fa-check"></i><b>6.4</b> Projetos RStudio</a></li>
+<li class="chapter" data-level="6.5" data-path="fluxo-de-trabalho-projetos.html"><a href="fluxo-de-trabalho-projetos.html#resumo"><i class="fa fa-check"></i><b>6.5</b> Resumo</a></li>
+</ul></li>
+<li class="part"><span><b>II Wrangle</b></span></li>
+<li class="chapter" data-level="7" data-path="tibbles-com-tibble.html"><a href="tibbles-com-tibble.html"><i class="fa fa-check"></i><b>7</b> Tibbles com <code>tibble</code></a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="tibbles-com-tibble.html"><a href="tibbles-com-tibble.html#introdução-3"><i class="fa fa-check"></i><b>7.1</b> Introdução</a></li>
+<li class="chapter" data-level="7.2" data-path="tibbles-com-tibble.html"><a href="tibbles-com-tibble.html#criando-tibbles"><i class="fa fa-check"></i><b>7.2</b> Criando tibbles</a></li>
+<li class="chapter" data-level="7.3" data-path="tibbles-com-tibble.html"><a href="tibbles-com-tibble.html#tibbles-versus-data.frame"><i class="fa fa-check"></i><b>7.3</b> Tibbles <em>versus</em> <code>data.frame</code></a></li>
+<li class="chapter" data-level="7.4" data-path="tibbles-com-tibble.html"><a href="tibbles-com-tibble.html#interagindo-com-códigos-mais-antigos"><i class="fa fa-check"></i><b>7.4</b> Interagindo com códigos mais antigos</a>
+<ul>
+<li class="chapter" data-level="" data-path="tibbles-com-tibble.html"><a href="tibbles-com-tibble.html#exr7-4-1"><i class="fa fa-check"></i>Exercício 7.4.1</a></li>
+<li class="chapter" data-level="" data-path="tibbles-com-tibble.html"><a href="tibbles-com-tibble.html#exr7-4-2"><i class="fa fa-check"></i>Exercício 7.4.2</a></li>
+<li class="chapter" data-level="" data-path="tibbles-com-tibble.html"><a href="tibbles-com-tibble.html#exr7-4-3"><i class="fa fa-check"></i>Exercício 7.4.3</a></li>
+<li class="chapter" data-level="" data-path="tibbles-com-tibble.html"><a href="tibbles-com-tibble.html#exr7-4-4"><i class="fa fa-check"></i>Exercício 7.4.4</a></li>
+<li class="chapter" data-level="" data-path="tibbles-com-tibble.html"><a href="tibbles-com-tibble.html#exr7-4-5"><i class="fa fa-check"></i>Exercício 7.4.5</a></li>
+<li class="chapter" data-level="" data-path="tibbles-com-tibble.html"><a href="tibbles-com-tibble.html#exr7-4-6"><i class="fa fa-check"></i>Exercício 7.4.6</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="importando-dados-com-readr.html"><a href="importando-dados-com-readr.html"><i class="fa fa-check"></i><b>8</b> Importando dados com <code>readr</code></a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="importando-dados-com-readr.html"><a href="importando-dados-com-readr.html#introdução-4"><i class="fa fa-check"></i><b>8.1</b> Introdução</a></li>
+<li class="chapter" data-level="8.2" data-path="importando-dados-com-readr.html"><a href="importando-dados-com-readr.html#começando"><i class="fa fa-check"></i><b>8.2</b> Começando</a>
+<ul>
+<li class="chapter" data-level="" data-path="importando-dados-com-readr.html"><a href="importando-dados-com-readr.html#exr8-2-1"><i class="fa fa-check"></i>Exercício 8.2.1</a></li>
+<li class="chapter" data-level="" data-path="importando-dados-com-readr.html"><a href="importando-dados-com-readr.html#exr8-2-2"><i class="fa fa-check"></i>Exercício 8.2.2</a></li>
+<li class="chapter" data-level="" data-path="importando-dados-com-readr.html"><a href="importando-dados-com-readr.html#exr8-2-3"><i class="fa fa-check"></i>Exercício 8.2.3</a></li>
+<li class="chapter" data-level="" data-path="importando-dados-com-readr.html"><a href="importando-dados-com-readr.html#exr8-2-4"><i class="fa fa-check"></i>Exercício 8.2.4</a></li>
+<li class="chapter" data-level="" data-path="importando-dados-com-readr.html"><a href="importando-dados-com-readr.html#exr8-2-5"><i class="fa fa-check"></i>Exercício 8.2.5</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="importando-dados-com-readr.html"><a href="importando-dados-com-readr.html#analisando-um-vetor"><i class="fa fa-check"></i><b>8.3</b> Analisando um vetor</a>
+<ul>
+<li class="chapter" data-level="" data-path="importando-dados-com-readr.html"><a href="importando-dados-com-readr.html#exr8-3-1"><i class="fa fa-check"></i>Exercício 8.3.1</a></li>
+<li class="chapter" data-level="" data-path="importando-dados-com-readr.html"><a href="importando-dados-com-readr.html#exr8-3-2"><i class="fa fa-check"></i>Exercício 8.3.2</a></li>
+<li class="chapter" data-level="" data-path="importando-dados-com-readr.html"><a href="importando-dados-com-readr.html#exr8-3-3"><i class="fa fa-check"></i>Exercício 8.3.3</a></li>
+<li class="chapter" data-level="" data-path="importando-dados-com-readr.html"><a href="importando-dados-com-readr.html#exr8-3-4"><i class="fa fa-check"></i>Exercício 8.3.4</a></li>
+<li class="chapter" data-level="" data-path="importando-dados-com-readr.html"><a href="importando-dados-com-readr.html#exr8-3-5"><i class="fa fa-check"></i>Exercício 8.3.5</a></li>
+<li class="chapter" data-level="" data-path="importando-dados-com-readr.html"><a href="importando-dados-com-readr.html#exr8-3-6"><i class="fa fa-check"></i>Exercício 8.3.6</a></li>
+<li class="chapter" data-level="" data-path="importando-dados-com-readr.html"><a href="importando-dados-com-readr.html#exr8-3-7"><i class="fa fa-check"></i>Exercício 8.3.7</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="importando-dados-com-readr.html"><a href="importando-dados-com-readr.html#analisando-um-arquivo"><i class="fa fa-check"></i><b>8.4</b> Analisando um arquivo</a></li>
+<li class="chapter" data-level="8.5" data-path="importando-dados-com-readr.html"><a href="importando-dados-com-readr.html#escrevendo-em-um-arquivo"><i class="fa fa-check"></i><b>8.5</b> Escrevendo em um arquivo</a></li>
+<li class="chapter" data-level="8.6" data-path="importando-dados-com-readr.html"><a href="importando-dados-com-readr.html#outros-tipos-de-dados"><i class="fa fa-check"></i><b>8.6</b> Outros tipos de dados</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="arrumando-dados-com-tidyr.html"><a href="arrumando-dados-com-tidyr.html"><i class="fa fa-check"></i><b>9</b> Arrumando dados com <code>tidyr</code></a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="arrumando-dados-com-tidyr.html"><a href="arrumando-dados-com-tidyr.html#introdução-5"><i class="fa fa-check"></i><b>9.1</b> Introdução</a></li>
+<li class="chapter" data-level="9.2" data-path="arrumando-dados-com-tidyr.html"><a href="arrumando-dados-com-tidyr.html#dados-arrumados-tidy-data"><i class="fa fa-check"></i><b>9.2</b> Dados arrumados (Tidy Data)</a>
+<ul>
+<li class="chapter" data-level="" data-path="arrumando-dados-com-tidyr.html"><a href="arrumando-dados-com-tidyr.html#exr9-2-1"><i class="fa fa-check"></i>Exercício 9.2.1</a></li>
+<li class="chapter" data-level="" data-path="arrumando-dados-com-tidyr.html"><a href="arrumando-dados-com-tidyr.html#exr9-2-2"><i class="fa fa-check"></i>Exercício 9.2.2</a></li>
+<li class="chapter" data-level="" data-path="arrumando-dados-com-tidyr.html"><a href="arrumando-dados-com-tidyr.html#exr9-2-3"><i class="fa fa-check"></i>Exercício 9.2.3</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="arrumando-dados-com-tidyr.html"><a href="arrumando-dados-com-tidyr.html#espalhando-e-reunindo"><i class="fa fa-check"></i><b>9.3</b> Espalhando e reunindo</a>
+<ul>
+<li class="chapter" data-level="" data-path="arrumando-dados-com-tidyr.html"><a href="arrumando-dados-com-tidyr.html#exr9-3-1"><i class="fa fa-check"></i>Exercício 9.3.1</a></li>
+<li class="chapter" data-level="" data-path="arrumando-dados-com-tidyr.html"><a href="arrumando-dados-com-tidyr.html#exr9-3-2"><i class="fa fa-check"></i>Exercício 9.3.2</a></li>
+<li class="chapter" data-level="" data-path="arrumando-dados-com-tidyr.html"><a href="arrumando-dados-com-tidyr.html#exr9-3-3"><i class="fa fa-check"></i>Exercício 9.3.3</a></li>
+<li class="chapter" data-level="" data-path="arrumando-dados-com-tidyr.html"><a href="arrumando-dados-com-tidyr.html#exr9-3-4"><i class="fa fa-check"></i>Exercício 9.3.4</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="arrumando-dados-com-tidyr.html"><a href="arrumando-dados-com-tidyr.html#separando-e-unindo"><i class="fa fa-check"></i><b>9.4</b> Separando e unindo</a>
+<ul>
+<li class="chapter" data-level="" data-path="arrumando-dados-com-tidyr.html"><a href="arrumando-dados-com-tidyr.html#exr9-4-1"><i class="fa fa-check"></i>Exercício 9.4.1</a></li>
+<li class="chapter" data-level="" data-path="arrumando-dados-com-tidyr.html"><a href="arrumando-dados-com-tidyr.html#exr9-4-2"><i class="fa fa-check"></i>Exercício 9.4.2</a></li>
+<li class="chapter" data-level="" data-path="arrumando-dados-com-tidyr.html"><a href="arrumando-dados-com-tidyr.html#exr9-4-3"><i class="fa fa-check"></i>Exercício 9.4.3</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="arrumando-dados-com-tidyr.html"><a href="arrumando-dados-com-tidyr.html#valores-faltantes-1"><i class="fa fa-check"></i><b>9.5</b> Valores faltantes</a>
+<ul>
+<li class="chapter" data-level="" data-path="arrumando-dados-com-tidyr.html"><a href="arrumando-dados-com-tidyr.html#exr9-5-1"><i class="fa fa-check"></i>Exercício 9.5.1</a></li>
+<li class="chapter" data-level="" data-path="arrumando-dados-com-tidyr.html"><a href="arrumando-dados-com-tidyr.html#exr9-5-2"><i class="fa fa-check"></i>Exercício 9.5.2</a></li>
+</ul></li>
+<li class="chapter" data-level="9.6" data-path="arrumando-dados-com-tidyr.html"><a href="arrumando-dados-com-tidyr.html#estudo-de-caso"><i class="fa fa-check"></i><b>9.6</b> Estudo de caso</a>
+<ul>
+<li class="chapter" data-level="" data-path="arrumando-dados-com-tidyr.html"><a href="arrumando-dados-com-tidyr.html#exr9-6-1"><i class="fa fa-check"></i>Exercício 9.6.1</a></li>
+<li class="chapter" data-level="" data-path="arrumando-dados-com-tidyr.html"><a href="arrumando-dados-com-tidyr.html#exr9-6-2"><i class="fa fa-check"></i>Exercício 9.6.2</a></li>
+<li class="chapter" data-level="" data-path="arrumando-dados-com-tidyr.html"><a href="arrumando-dados-com-tidyr.html#exr9-6-3"><i class="fa fa-check"></i>Exercício 9.6.3</a></li>
+<li class="chapter" data-level="" data-path="arrumando-dados-com-tidyr.html"><a href="arrumando-dados-com-tidyr.html#exr9-6-4"><i class="fa fa-check"></i>Exercício 9.6.4</a></li>
+</ul></li>
+<li class="chapter" data-level="9.7" data-path="arrumando-dados-com-tidyr.html"><a href="arrumando-dados-com-tidyr.html#dados-desarrumados-não-tidy"><i class="fa fa-check"></i><b>9.7</b> Dados desarrumados (não tidy)</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="dados-relacionais-com-dplyr.html"><a href="dados-relacionais-com-dplyr.html"><i class="fa fa-check"></i><b>10</b> Dados relacionais com <code>dplyr</code></a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="dados-relacionais-com-dplyr.html"><a href="dados-relacionais-com-dplyr.html#introdução-6"><i class="fa fa-check"></i><b>10.1</b> Introdução</a></li>
+<li class="chapter" data-level="10.2" data-path="dados-relacionais-com-dplyr.html"><a href="dados-relacionais-com-dplyr.html#nycflights13"><i class="fa fa-check"></i><b>10.2</b> <code>nycflights13</code></a></li>
+<li class="chapter" data-level="10.3" data-path="dados-relacionais-com-dplyr.html"><a href="dados-relacionais-com-dplyr.html#chaves-keys"><i class="fa fa-check"></i><b>10.3</b> Chaves (keys)</a></li>
+<li class="chapter" data-level="10.4" data-path="dados-relacionais-com-dplyr.html"><a href="dados-relacionais-com-dplyr.html#mutating-joins"><i class="fa fa-check"></i><b>10.4</b> Mutating joins</a></li>
+<li class="chapter" data-level="10.5" data-path="dados-relacionais-com-dplyr.html"><a href="dados-relacionais-com-dplyr.html#filtering-joins"><i class="fa fa-check"></i><b>10.5</b> Filtering joins</a></li>
+<li class="chapter" data-level="10.6" data-path="dados-relacionais-com-dplyr.html"><a href="dados-relacionais-com-dplyr.html#problemas-de-joins"><i class="fa fa-check"></i><b>10.6</b> Problemas de joins</a></li>
+<li class="chapter" data-level="10.7" data-path="dados-relacionais-com-dplyr.html"><a href="dados-relacionais-com-dplyr.html#operações-de-conjuntos"><i class="fa fa-check"></i><b>10.7</b> Operações de conjuntos</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="strings-com-stringr.html"><a href="strings-com-stringr.html"><i class="fa fa-check"></i><b>11</b> Strings com <code>stringr</code></a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="strings-com-stringr.html"><a href="strings-com-stringr.html#introdução-7"><i class="fa fa-check"></i><b>11.1</b> Introdução</a></li>
+<li class="chapter" data-level="11.2" data-path="strings-com-stringr.html"><a href="strings-com-stringr.html#o-básico-de-string"><i class="fa fa-check"></i><b>11.2</b> O básico de string</a></li>
+<li class="chapter" data-level="11.3" data-path="strings-com-stringr.html"><a href="strings-com-stringr.html#combinando-padrões-com-expressões-regulares"><i class="fa fa-check"></i><b>11.3</b> Combinando padrões com expressões regulares</a></li>
+<li class="chapter" data-level="11.4" data-path="strings-com-stringr.html"><a href="strings-com-stringr.html#ferramentas"><i class="fa fa-check"></i><b>11.4</b> Ferramentas</a></li>
+<li class="chapter" data-level="11.5" data-path="strings-com-stringr.html"><a href="strings-com-stringr.html#outros-tipos-de-padrões"><i class="fa fa-check"></i><b>11.5</b> Outros tipos de padrões</a></li>
+<li class="chapter" data-level="11.6" data-path="strings-com-stringr.html"><a href="strings-com-stringr.html#outros-usos-para-expressões-regulares"><i class="fa fa-check"></i><b>11.6</b> Outros usos para expressões regulares</a></li>
+<li class="chapter" data-level="11.7" data-path="strings-com-stringr.html"><a href="strings-com-stringr.html#string"><i class="fa fa-check"></i><b>11.7</b> <code>string</code></a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="fatores-com-forcats.html"><a href="fatores-com-forcats.html"><i class="fa fa-check"></i><b>12</b> Fatores com <code>forcats</code></a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="fatores-com-forcats.html"><a href="fatores-com-forcats.html#introdução-8"><i class="fa fa-check"></i><b>12.1</b> Introdução</a></li>
+<li class="chapter" data-level="12.2" data-path="fatores-com-forcats.html"><a href="fatores-com-forcats.html#criando-fatores"><i class="fa fa-check"></i><b>12.2</b> Criando fatores</a></li>
+<li class="chapter" data-level="12.3" data-path="fatores-com-forcats.html"><a href="fatores-com-forcats.html#general-social-survey"><i class="fa fa-check"></i><b>12.3</b> General Social Survey</a></li>
+<li class="chapter" data-level="12.4" data-path="fatores-com-forcats.html"><a href="fatores-com-forcats.html#modificando-a-ordem-dos-fatores"><i class="fa fa-check"></i><b>12.4</b> Modificando a ordem dos fatores</a></li>
+<li class="chapter" data-level="12.5" data-path="fatores-com-forcats.html"><a href="fatores-com-forcats.html#modificando-níveis-de-fatores"><i class="fa fa-check"></i><b>12.5</b> Modificando níveis de fatores</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="datas-e-horas-com-lubridate.html"><a href="datas-e-horas-com-lubridate.html"><i class="fa fa-check"></i><b>13</b> Datas e horas com <code>lubridate</code></a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="datas-e-horas-com-lubridate.html"><a href="datas-e-horas-com-lubridate.html#introdução-9"><i class="fa fa-check"></i><b>13.1</b> Introdução</a></li>
+<li class="chapter" data-level="13.2" data-path="datas-e-horas-com-lubridate.html"><a href="datas-e-horas-com-lubridate.html#criando-datahoras"><i class="fa fa-check"></i><b>13.2</b> Criando data/horas</a></li>
+<li class="chapter" data-level="13.3" data-path="datas-e-horas-com-lubridate.html"><a href="datas-e-horas-com-lubridate.html#componentes-de-data-hora"><i class="fa fa-check"></i><b>13.3</b> Componentes de data-hora</a></li>
+<li class="chapter" data-level="13.4" data-path="datas-e-horas-com-lubridate.html"><a href="datas-e-horas-com-lubridate.html#intervalos-de-tempo"><i class="fa fa-check"></i><b>13.4</b> Intervalos de tempo</a></li>
+<li class="chapter" data-level="13.5" data-path="datas-e-horas-com-lubridate.html"><a href="datas-e-horas-com-lubridate.html#fusos-horários"><i class="fa fa-check"></i><b>13.5</b> Fusos horários</a></li>
+</ul></li>
+<li class="part"><span><b>III Programar</b></span></li>
+<li class="chapter" data-level="14" data-path="pipes-com-magrittr.html"><a href="pipes-com-magrittr.html"><i class="fa fa-check"></i><b>14</b> Pipes com <code>magrittr</code></a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="pipes-com-magrittr.html"><a href="pipes-com-magrittr.html#introdução-10"><i class="fa fa-check"></i><b>14.1</b> Introdução</a></li>
+<li class="chapter" data-level="14.2" data-path="pipes-com-magrittr.html"><a href="pipes-com-magrittr.html#alternativas-ao-piping"><i class="fa fa-check"></i><b>14.2</b> Alternativas ao piping</a></li>
+<li class="chapter" data-level="14.3" data-path="pipes-com-magrittr.html"><a href="pipes-com-magrittr.html#quando-não-usar-o-pipe"><i class="fa fa-check"></i><b>14.3</b> Quando não usar o pipe</a></li>
+<li class="chapter" data-level="14.4" data-path="pipes-com-magrittr.html"><a href="pipes-com-magrittr.html#outras-ferramentas-do-magrittr"><i class="fa fa-check"></i><b>14.4</b> Outras ferramentas do <code>magrittr</code></a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="funções.html"><a href="funções.html"><i class="fa fa-check"></i><b>15</b> Funções</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="funções.html"><a href="funções.html#introdução-11"><i class="fa fa-check"></i><b>15.1</b> Introdução</a></li>
+<li class="chapter" data-level="15.2" data-path="funções.html"><a href="funções.html#quando-você-deveria-escrever-uma-função"><i class="fa fa-check"></i><b>15.2</b> Quando você deveria escrever uma função?</a></li>
+<li class="chapter" data-level="15.3" data-path="funções.html"><a href="funções.html#funções-são-para-humanos-e-computadores"><i class="fa fa-check"></i><b>15.3</b> Funções são para humanos e computadores</a></li>
+<li class="chapter" data-level="15.4" data-path="funções.html"><a href="funções.html#execução-condicional"><i class="fa fa-check"></i><b>15.4</b> Execução condicional</a></li>
+<li class="chapter" data-level="15.5" data-path="funções.html"><a href="funções.html#argumentos-de-funções"><i class="fa fa-check"></i><b>15.5</b> Argumentos de funções</a></li>
+<li class="chapter" data-level="15.6" data-path="funções.html"><a href="funções.html#retorno-de-valores"><i class="fa fa-check"></i><b>15.6</b> Retorno de valores</a></li>
+<li class="chapter" data-level="15.7" data-path="funções.html"><a href="funções.html#ambiente"><i class="fa fa-check"></i><b>15.7</b> Ambiente</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="vetores.html"><a href="vetores.html"><i class="fa fa-check"></i><b>16</b> Vetores</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="vetores.html"><a href="vetores.html#introdução-12"><i class="fa fa-check"></i><b>16.1</b> Introdução</a></li>
+<li class="chapter" data-level="16.2" data-path="vetores.html"><a href="vetores.html#o-básico-de-vetores"><i class="fa fa-check"></i><b>16.2</b> O Básico de vetores</a></li>
+<li class="chapter" data-level="16.3" data-path="vetores.html"><a href="vetores.html#tipos-importantes-de-vetores-atômicos"><i class="fa fa-check"></i><b>16.3</b> Tipos importantes de vetores atômicos</a></li>
+<li class="chapter" data-level="16.4" data-path="vetores.html"><a href="vetores.html#usando-vetores-atómicos"><i class="fa fa-check"></i><b>16.4</b> Usando vetores atómicos</a></li>
+<li class="chapter" data-level="16.5" data-path="vetores.html"><a href="vetores.html#vetores-recursivos-listas"><i class="fa fa-check"></i><b>16.5</b> Vetores recursivos (listas)</a></li>
+<li class="chapter" data-level="16.6" data-path="vetores.html"><a href="vetores.html#atributos"><i class="fa fa-check"></i><b>16.6</b> Atributos</a></li>
+<li class="chapter" data-level="16.7" data-path="vetores.html"><a href="vetores.html#vetores-aumentados"><i class="fa fa-check"></i><b>16.7</b> Vetores aumentados</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="iteração-com-purrr.html"><a href="iteração-com-purrr.html"><i class="fa fa-check"></i><b>17</b> Iteração com <code>purrr</code></a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="iteração-com-purrr.html"><a href="iteração-com-purrr.html#introdução-13"><i class="fa fa-check"></i><b>17.1</b> Introdução</a></li>
+<li class="chapter" data-level="17.2" data-path="iteração-com-purrr.html"><a href="iteração-com-purrr.html#loops-for"><i class="fa fa-check"></i><b>17.2</b> Loops <code>for</code></a></li>
+<li class="chapter" data-level="17.3" data-path="iteração-com-purrr.html"><a href="iteração-com-purrr.html#variações-do-loop-for"><i class="fa fa-check"></i><b>17.3</b> Variações do loop <code>for</code></a></li>
+<li class="chapter" data-level="17.4" data-path="iteração-com-purrr.html"><a href="iteração-com-purrr.html#loops-for-versus-funcionais"><i class="fa fa-check"></i><b>17.4</b> Loops <code>for</code> <em>versus</em> funcionais</a></li>
+<li class="chapter" data-level="17.5" data-path="iteração-com-purrr.html"><a href="iteração-com-purrr.html#as-funções-map"><i class="fa fa-check"></i><b>17.5</b> As funções <code>map</code></a></li>
+<li class="chapter" data-level="17.6" data-path="iteração-com-purrr.html"><a href="iteração-com-purrr.html#lidando-com-falhas"><i class="fa fa-check"></i><b>17.6</b> Lidando com falhas</a></li>
+<li class="chapter" data-level="17.7" data-path="iteração-com-purrr.html"><a href="iteração-com-purrr.html#fazendo-map-com-vários-argumentos"><i class="fa fa-check"></i><b>17.7</b> Fazendo <code>map</code> com vários argumentos</a></li>
+<li class="chapter" data-level="17.8" data-path="iteração-com-purrr.html"><a href="iteração-com-purrr.html#walk"><i class="fa fa-check"></i><b>17.8</b> Walk</a></li>
+<li class="chapter" data-level="17.9" data-path="iteração-com-purrr.html"><a href="iteração-com-purrr.html#outros-padrões-para-loops-for"><i class="fa fa-check"></i><b>17.9</b> Outros padrões para loops <code>for</code></a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="part-modelar.html"><a href="part-modelar.html"><i class="fa fa-check"></i><b>18</b> (PART) Modelar</a></li>
+<li class="chapter" data-level="19" data-path="o-básico-de-modelos-com-modelr.html"><a href="o-básico-de-modelos-com-modelr.html"><i class="fa fa-check"></i><b>19</b> O básico de modelos com <code>modelr</code></a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="o-básico-de-modelos-com-modelr.html"><a href="o-básico-de-modelos-com-modelr.html#introdução-14"><i class="fa fa-check"></i><b>19.1</b> Introdução</a></li>
+<li class="chapter" data-level="19.2" data-path="o-básico-de-modelos-com-modelr.html"><a href="o-básico-de-modelos-com-modelr.html#um-modelo-simples"><i class="fa fa-check"></i><b>19.2</b> Um modelo simples</a></li>
+<li class="chapter" data-level="19.3" data-path="o-básico-de-modelos-com-modelr.html"><a href="o-básico-de-modelos-com-modelr.html#visualizando-modelos-fórmulas-e-famílias-de-modelos"><i class="fa fa-check"></i><b>19.3</b> Visualizando modelos fórmulas e famílias de modelos</a></li>
+<li class="chapter" data-level="19.4" data-path="o-básico-de-modelos-com-modelr.html"><a href="o-básico-de-modelos-com-modelr.html#valores-faltantes-2"><i class="fa fa-check"></i><b>19.4</b> Valores faltantes</a></li>
+<li class="chapter" data-level="19.5" data-path="o-básico-de-modelos-com-modelr.html"><a href="o-básico-de-modelos-com-modelr.html#outras-famílias-de-modelos"><i class="fa fa-check"></i><b>19.5</b> Outras famílias de modelos</a></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="construção-de-modelos.html"><a href="construção-de-modelos.html"><i class="fa fa-check"></i><b>20</b> Construção de modelos</a>
+<ul>
+<li class="chapter" data-level="20.1" data-path="construção-de-modelos.html"><a href="construção-de-modelos.html#introdução-15"><i class="fa fa-check"></i><b>20.1</b> Introdução</a></li>
+<li class="chapter" data-level="20.2" data-path="construção-de-modelos.html"><a href="construção-de-modelos.html#por-que-diamantes-de-baixa-qualidade-são-mais-caros"><i class="fa fa-check"></i><b>20.2</b> Por que diamantes de baixa qualidade são mais caros?</a></li>
+<li class="chapter" data-level="20.3" data-path="construção-de-modelos.html"><a href="construção-de-modelos.html#o-que-afeta-o-número-de-voos-diários"><i class="fa fa-check"></i><b>20.3</b> O que afeta o número de voos diários?</a></li>
+<li class="chapter" data-level="20.4" data-path="construção-de-modelos.html"><a href="construção-de-modelos.html#aprendendo-mais-sobre-modelos"><i class="fa fa-check"></i><b>20.4</b> Aprendendo mais sobre modelos</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="muitos-modelos-com-purrr-e-broom.html"><a href="muitos-modelos-com-purrr-e-broom.html"><i class="fa fa-check"></i><b>21</b> Muitos modelos com <code>purrr</code> e <code>broom</code></a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="muitos-modelos-com-purrr-e-broom.html"><a href="muitos-modelos-com-purrr-e-broom.html#introdução-16"><i class="fa fa-check"></i><b>21.1</b> Introdução</a></li>
+<li class="chapter" data-level="21.2" data-path="muitos-modelos-com-purrr-e-broom.html"><a href="muitos-modelos-com-purrr-e-broom.html#gapminder"><i class="fa fa-check"></i><b>21.2</b> <code>gapminder</code></a></li>
+<li class="chapter" data-level="21.3" data-path="muitos-modelos-com-purrr-e-broom.html"><a href="muitos-modelos-com-purrr-e-broom.html#list-columns"><i class="fa fa-check"></i><b>21.3</b> List-columns</a></li>
+<li class="chapter" data-level="21.4" data-path="muitos-modelos-com-purrr-e-broom.html"><a href="muitos-modelos-com-purrr-e-broom.html#criando-list-columns"><i class="fa fa-check"></i><b>21.4</b> Criando list-columns</a></li>
+<li class="chapter" data-level="21.5" data-path="muitos-modelos-com-purrr-e-broom.html"><a href="muitos-modelos-com-purrr-e-broom.html#simplificando-list-columns"><i class="fa fa-check"></i><b>21.5</b> Simplificando list-columns</a></li>
+<li class="chapter" data-level="21.6" data-path="muitos-modelos-com-purrr-e-broom.html"><a href="muitos-modelos-com-purrr-e-broom.html#criando-dados-tidy-com-broom"><i class="fa fa-check"></i><b>21.6</b> Criando dados tidy com <code>broom</code></a></li>
+</ul></li>
+<li class="part"><span><b>IV Comunicar</b></span></li>
+<li class="chapter" data-level="22" data-path="r-markdown.html"><a href="r-markdown.html"><i class="fa fa-check"></i><b>22</b> R Markdown</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="r-markdown.html"><a href="r-markdown.html#introdução-17"><i class="fa fa-check"></i><b>22.1</b> Introdução</a></li>
+<li class="chapter" data-level="22.2" data-path="r-markdown.html"><a href="r-markdown.html#o-básico-de-r-markdown"><i class="fa fa-check"></i><b>22.2</b> O Básico de R Markdown</a></li>
+<li class="chapter" data-level="22.3" data-path="r-markdown.html"><a href="r-markdown.html#formatação-de-texto-com-markdown"><i class="fa fa-check"></i><b>22.3</b> Formatação de texto com markdown</a></li>
+<li class="chapter" data-level="22.4" data-path="r-markdown.html"><a href="r-markdown.html#trechos-de-código"><i class="fa fa-check"></i><b>22.4</b> Trechos de código</a></li>
+<li class="chapter" data-level="22.5" data-path="r-markdown.html"><a href="r-markdown.html#resolução-de-problemas"><i class="fa fa-check"></i><b>22.5</b> Resolução de problemas</a></li>
+<li class="chapter" data-level="22.6" data-path="r-markdown.html"><a href="r-markdown.html#header-yaml"><i class="fa fa-check"></i><b>22.6</b> Header YAML</a></li>
+<li class="chapter" data-level="22.7" data-path="r-markdown.html"><a href="r-markdown.html#aprendendo-mais-1"><i class="fa fa-check"></i><b>22.7</b> Aprendendo mais</a></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="gráficos-para-comunicação-com-ggplot2.html"><a href="gráficos-para-comunicação-com-ggplot2.html"><i class="fa fa-check"></i><b>23</b> Gráficos para comunicação com <code>ggplot2</code></a>
+<ul>
+<li class="chapter" data-level="23.1" data-path="gráficos-para-comunicação-com-ggplot2.html"><a href="gráficos-para-comunicação-com-ggplot2.html#introdução-18"><i class="fa fa-check"></i><b>23.1</b> Introdução</a></li>
+<li class="chapter" data-level="23.2" data-path="gráficos-para-comunicação-com-ggplot2.html"><a href="gráficos-para-comunicação-com-ggplot2.html#rótulo"><i class="fa fa-check"></i><b>23.2</b> Rótulo</a></li>
+<li class="chapter" data-level="23.3" data-path="gráficos-para-comunicação-com-ggplot2.html"><a href="gráficos-para-comunicação-com-ggplot2.html#anotações"><i class="fa fa-check"></i><b>23.3</b> Anotações</a></li>
+<li class="chapter" data-level="23.4" data-path="gráficos-para-comunicação-com-ggplot2.html"><a href="gráficos-para-comunicação-com-ggplot2.html#escalas"><i class="fa fa-check"></i><b>23.4</b> Escalas</a></li>
+<li class="chapter" data-level="23.5" data-path="gráficos-para-comunicação-com-ggplot2.html"><a href="gráficos-para-comunicação-com-ggplot2.html#dando-zoom"><i class="fa fa-check"></i><b>23.5</b> Dando zoom</a></li>
+<li class="chapter" data-level="23.6" data-path="gráficos-para-comunicação-com-ggplot2.html"><a href="gráficos-para-comunicação-com-ggplot2.html#temas"><i class="fa fa-check"></i><b>23.6</b> Temas</a></li>
+<li class="chapter" data-level="23.7" data-path="gráficos-para-comunicação-com-ggplot2.html"><a href="gráficos-para-comunicação-com-ggplot2.html#salvando-seus-gráficos"><i class="fa fa-check"></i><b>23.7</b> Salvando seus gráficos</a></li>
+<li class="chapter" data-level="23.8" data-path="gráficos-para-comunicação-com-ggplot2.html"><a href="gráficos-para-comunicação-com-ggplot2.html#aprendendo-mais-2"><i class="fa fa-check"></i><b>23.8</b> Aprendendo mais</a></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="formatos-r-markdown.html"><a href="formatos-r-markdown.html"><i class="fa fa-check"></i><b>24</b> Formatos R Markdown</a>
+<ul>
+<li class="chapter" data-level="24.1" data-path="formatos-r-markdown.html"><a href="formatos-r-markdown.html#introdução-19"><i class="fa fa-check"></i><b>24.1</b> Introdução</a></li>
+<li class="chapter" data-level="24.2" data-path="formatos-r-markdown.html"><a href="formatos-r-markdown.html#opções-de-saída"><i class="fa fa-check"></i><b>24.2</b> Opções de saída</a></li>
+<li class="chapter" data-level="24.3" data-path="formatos-r-markdown.html"><a href="formatos-r-markdown.html#documentos"><i class="fa fa-check"></i><b>24.3</b> Documentos</a></li>
+<li class="chapter" data-level="24.4" data-path="formatos-r-markdown.html"><a href="formatos-r-markdown.html#notebooks"><i class="fa fa-check"></i><b>24.4</b> Notebooks</a></li>
+<li class="chapter" data-level="24.5" data-path="formatos-r-markdown.html"><a href="formatos-r-markdown.html#apresentações"><i class="fa fa-check"></i><b>24.5</b> Apresentações</a></li>
+<li class="chapter" data-level="24.6" data-path="formatos-r-markdown.html"><a href="formatos-r-markdown.html#dashboards"><i class="fa fa-check"></i><b>24.6</b> Dashboards</a></li>
+<li class="chapter" data-level="24.7" data-path="formatos-r-markdown.html"><a href="formatos-r-markdown.html#interatividade"><i class="fa fa-check"></i><b>24.7</b> Interatividade</a></li>
+<li class="chapter" data-level="24.8" data-path="formatos-r-markdown.html"><a href="formatos-r-markdown.html#sites"><i class="fa fa-check"></i><b>24.8</b> Sites</a></li>
+<li class="chapter" data-level="24.9" data-path="formatos-r-markdown.html"><a href="formatos-r-markdown.html#outros-formatos"><i class="fa fa-check"></i><b>24.9</b> Outros formatos</a></li>
+<li class="chapter" data-level="24.10" data-path="formatos-r-markdown.html"><a href="formatos-r-markdown.html#aprendendo-mais-3"><i class="fa fa-check"></i><b>24.10</b> Aprendendo mais</a></li>
+</ul></li>
+<li class="chapter" data-level="25" data-path="fluxo-de-trabalho-de-r-markdown.html"><a href="fluxo-de-trabalho-de-r-markdown.html"><i class="fa fa-check"></i><b>25</b> Fluxo de trabalho de R Markdown</a></li>
+<li class="appendix"><span><b>Apéndices</b></span></li>
+<li class="chapter" data-level="A" data-path="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html"><i class="fa fa-check"></i><b>A</b> Apendice A - Estudo de caso sobre a arrumação de dados com <code>tidyr</code></a>
+<ul>
+<li class="chapter" data-level="" data-path="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#introdução-20"><i class="fa fa-check"></i>Introdução</a></li>
+<li class="chapter" data-level="" data-path="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#estudo-de-caso-1"><i class="fa fa-check"></i>Estudo de caso</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Publicado com bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R para Data Science</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr" class="section level1 hasAnchor" number="26">
+<h1><span class="header-section-number">Apêndice A</span> Apendice A - Estudo de caso sobre a arrumação de dados com <code>tidyr</code><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="introdução-20" class="section level2 unnumbered hasAnchor">
+<h2>Introdução<a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#introdução-20" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Neste apêndice, reproduzimos o estudo de caso conduzido pelos autores para exemplificar o uso do <code>tidyr</code> na arrumação de dados no capítulo 9 do livro.</p>
+<p>Para este estudo de caso, foi utilizado o conjunto de dados <code>tidyr::who</code>, que contém casos de tuberculose (TB) separados por ano, país, gênero e método e diagnose. Os dados são oriundos do <em>2014 World Health Organization Global Tuberculosis Report</em> disponível em: <em><a href="http://www.who.int/tb/country/data/download/en/">http://www.who.int/tb/country/data/download/en/</a></em>.</p>
+</div>
+<div id="estudo-de-caso-1" class="section level2 unnumbered hasAnchor">
+<h2>Estudo de caso<a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#estudo-de-caso-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Como dito na introdução, o conjunto de dados contém informações sobre os casos de tuberculose no mundo. As informações epidemiológicas contidas nesta base dados são riquíssimas, porém é desafiador trabalhar com os dados na forma em que são fornecidos:</p>
+<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb359-1"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb359-1" tabindex="-1"></a>who</span></code></pre></div>
+<pre><code>## # A tibble: 7,240 × 60
+##    country   iso2  iso3   year
+##    &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;
+##  1 Afghanis… AF    AFG    1980
+##  2 Afghanis… AF    AFG    1981
+##  3 Afghanis… AF    AFG    1982
+##  4 Afghanis… AF    AFG    1983
+##  5 Afghanis… AF    AFG    1984
+##  6 Afghanis… AF    AFG    1985
+##  7 Afghanis… AF    AFG    1986
+##  8 Afghanis… AF    AFG    1987
+##  9 Afghanis… AF    AFG    1988
+## 10 Afghanis… AF    AFG    1989
+## # ℹ 7,230 more rows
+## # ℹ 56 more variables:
+## #   new_sp_m014 &lt;dbl&gt;,
+## #   new_sp_m1524 &lt;dbl&gt;,
+## #   new_sp_m2534 &lt;dbl&gt;,
+## #   new_sp_m3544 &lt;dbl&gt;, …</code></pre>
+<p>Esse é um conjunto de dados real bem típico. Ele contém colunas redundantes, códigos estranhos de variáveis e muitos valores faltantes. Resumindo, <code>who</code> é bagunçado, e precisaremos de vários passos para arrumá-lo. Como <code>dplyr</code>, o <code>tidyr</code> é projetado para que cada função faça uma única coisa muito bem. Em situações reais, isso significa que você normalmente precisa juntar vários verbos em um pipeline.</p>
+<p>O melhor lugar para começar é quase sempre reunindo as colunas que não são variáveis. Vamos dar uma olhada no que temos:</p>
+<ul>
+<li>Parece que <code>country</code>, <code>iso2</code> e <code>iso3</code> são três variáveis que redundantemente especificam o país.</li>
+<li><code>year</code> também é claramente uma variável.</li>
+<li>Nós ainda não sabemos o que são todas as outras colunas, mas dada a estrutura dos comes das variáveis, provavelmente são valores, não variáveis.</li>
+</ul>
+<p>Então precisamos reunir todas as colunas de <code>new_sp_m014</code> até <code>newrel_f65</code>. Não sabemos, contudo, o que esses valores representam, então lhe daremos o nome genérico de “key”. Nós sabemos que as células representam a contagem de casos, então usaremos a variável <code>cases</code>. Há vários valores faltantes na representação atual, então, por enquanto, usaremos <code>na.rm</code> só para podermos focar nos valores que são apresentados.</p>
+<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb361-1" tabindex="-1"></a>(who1 <span class="ot">&lt;-</span> who <span class="sc">%&gt;%</span></span>
+<span id="cb361-2"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb361-2" tabindex="-1"></a>  <span class="fu">gather</span>(</span>
+<span id="cb361-3"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb361-3" tabindex="-1"></a>    new_sp_m014<span class="sc">:</span>newrel_f65,</span>
+<span id="cb361-4"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb361-4" tabindex="-1"></a>    <span class="at">key =</span> <span class="st">&quot;key&quot;</span>,</span>
+<span id="cb361-5"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb361-5" tabindex="-1"></a>    <span class="at">value =</span> <span class="st">&quot;cases&quot;</span>,</span>
+<span id="cb361-6"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb361-6" tabindex="-1"></a>    <span class="at">na.rm =</span> <span class="cn">TRUE</span></span>
+<span id="cb361-7"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb361-7" tabindex="-1"></a>  ))</span></code></pre></div>
+<pre><code>## # A tibble: 76,046 × 6
+##    country   iso2  iso3   year
+##    &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;
+##  1 Afghanis… AF    AFG    1997
+##  2 Afghanis… AF    AFG    1998
+##  3 Afghanis… AF    AFG    1999
+##  4 Afghanis… AF    AFG    2000
+##  5 Afghanis… AF    AFG    2001
+##  6 Afghanis… AF    AFG    2002
+##  7 Afghanis… AF    AFG    2003
+##  8 Afghanis… AF    AFG    2004
+##  9 Afghanis… AF    AFG    2005
+## 10 Afghanis… AF    AFG    2006
+## # ℹ 76,036 more rows
+## # ℹ 2 more variables:
+## #   key &lt;chr&gt;, cases &lt;dbl&gt;</code></pre>
+<p>Podemos conseguir algumas dicas da estrutura dos valores na nova coluna <code>key</code> ao contá-los:</p>
+<div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb363-1"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb363-1" tabindex="-1"></a>who1 <span class="sc">%&gt;%</span></span>
+<span id="cb363-2"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb363-2" tabindex="-1"></a>  <span class="fu">count</span>(key)</span></code></pre></div>
+<pre><code>## # A tibble: 56 × 2
+##    key              n
+##    &lt;chr&gt;        &lt;int&gt;
+##  1 new_ep_f014   1032
+##  2 new_ep_f1524  1021
+##  3 new_ep_f2534  1021
+##  4 new_ep_f3544  1021
+##  5 new_ep_f4554  1017
+##  6 new_ep_f5564  1017
+##  7 new_ep_f65    1014
+##  8 new_ep_m014   1038
+##  9 new_ep_m1524  1026
+## 10 new_ep_m2534  1020
+## # ℹ 46 more rows</code></pre>
+<p>Você pode até ser capaz de analisar isso sozinho com um pouco de raciocínio e experimentação, mas felizmente nós temos o dicionário de dados por perto. Ele nos diz:</p>
+<ol style="list-style-type: decimal">
+<li>As primeiras três letras de cada coluna denotam se a coluna contém casos novos ou antigos de TB. Nesse conjunto de dados, cada uma delas contém novos casos.</li>
+<li>As das letras seguintes descrevem o tipo de TB:</li>
+</ol>
+<ul>
+<li><code>rel</code> é para casos de relapsidade.</li>
+<li><code>ep</code> é para casos de TB extrapulmonar.</li>
+<li><code>sn</code> é para casos de TB pulmonar que não poderiam ser diagnosticados por uma amostra pulmonar (amostra negativa).</li>
+<li><code>sp</code> é para casos de TB pulmonar que poderiam ser diagnosticadas por amostra pulmonar (amostra positiva).</li>
+</ul>
+<ol start="3" style="list-style-type: decimal">
+<li>A sexta letra dá o gênero dos pacientes de TB. O conjunto de dados agrupa casos de homens (<code>m</code>) e mulheres (<code>f</code>).</li>
+<li>O restante dos números dá a faixa etária. o conjunto de dados agrupa os casos em sete faixas etárias:</li>
+</ol>
+<ul>
+<li>014 = 0 a 14 anos</li>
+<li>1524 = 15 a 34 anos</li>
+<li>2534 = 25 a 34 anos</li>
+<li>3544 = 35 a 44 anos</li>
+<li>4554 = 45 a 54 anos</li>
+<li>5564 = 55 a 64 anos</li>
+<li>65 = 65 ou mais</li>
+</ul>
+<p>Precisamos fazer uma pequena correção no formato dos nomes e colunas: infelismente os nomes são levemente inconsistentes porque, em vez de <code>new_rel</code>, temos <code>newrel</code> (é difícil identificar isso aqui, mas se você não fizer a correção, teremos erros nos passos subsequentes).</p>
+<div class="sourceCode" id="cb365"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb365-1"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb365-1" tabindex="-1"></a>(who2 <span class="ot">&lt;-</span> who1 <span class="sc">%&gt;%</span></span>
+<span id="cb365-2"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb365-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">key =</span> stringr<span class="sc">::</span><span class="fu">str_replace</span>(key, <span class="st">&quot;newrel&quot;</span>, <span class="st">&quot;new_rel&quot;</span>)))</span></code></pre></div>
+<pre><code>## # A tibble: 76,046 × 6
+##    country   iso2  iso3   year
+##    &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;
+##  1 Afghanis… AF    AFG    1997
+##  2 Afghanis… AF    AFG    1998
+##  3 Afghanis… AF    AFG    1999
+##  4 Afghanis… AF    AFG    2000
+##  5 Afghanis… AF    AFG    2001
+##  6 Afghanis… AF    AFG    2002
+##  7 Afghanis… AF    AFG    2003
+##  8 Afghanis… AF    AFG    2004
+##  9 Afghanis… AF    AFG    2005
+## 10 Afghanis… AF    AFG    2006
+## # ℹ 76,036 more rows
+## # ℹ 2 more variables:
+## #   key &lt;chr&gt;, cases &lt;dbl&gt;</code></pre>
+<p>Podemos agora separar os valores em cada código com duas passagens de <code>separate()</code>. A primeira passagem separará os códigos em cada underscore:</p>
+<div class="sourceCode" id="cb367"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb367-1"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb367-1" tabindex="-1"></a>(who3 <span class="ot">&lt;-</span> who2 <span class="sc">%&gt;%</span></span>
+<span id="cb367-2"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb367-2" tabindex="-1"></a>   <span class="fu">separate</span>(key, <span class="fu">c</span>(<span class="st">&quot;new&quot;</span>, <span class="st">&quot;type&quot;</span>, <span class="st">&quot;sexage&quot;</span>), <span class="at">sep =</span> <span class="st">&quot;_&quot;</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 76,046 × 8
+##    country   iso2  iso3   year
+##    &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;
+##  1 Afghanis… AF    AFG    1997
+##  2 Afghanis… AF    AFG    1998
+##  3 Afghanis… AF    AFG    1999
+##  4 Afghanis… AF    AFG    2000
+##  5 Afghanis… AF    AFG    2001
+##  6 Afghanis… AF    AFG    2002
+##  7 Afghanis… AF    AFG    2003
+##  8 Afghanis… AF    AFG    2004
+##  9 Afghanis… AF    AFG    2005
+## 10 Afghanis… AF    AFG    2006
+## # ℹ 76,036 more rows
+## # ℹ 4 more variables:
+## #   new &lt;chr&gt;, type &lt;chr&gt;,
+## #   sexage &lt;chr&gt;, cases &lt;dbl&gt;</code></pre>
+<p>Depois podemos deixar de lado a coluna <code>new</code>, porque ela é constante neste conjunto de dados. Enquanto estamos deixando colunas de lado, vamos deixar de lado também <code>iso2</code>e <code>iso3</code>, já que são redundantes.</p>
+<div class="sourceCode" id="cb369"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb369-1"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb369-1" tabindex="-1"></a>who3 <span class="sc">%&gt;%</span> </span>
+<span id="cb369-2"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb369-2" tabindex="-1"></a>  <span class="fu">count</span>(new)</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 2
+##   new       n
+##   &lt;chr&gt; &lt;int&gt;
+## 1 new   76046</code></pre>
+<div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb371-1"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb371-1" tabindex="-1"></a>(who4 <span class="ot">&lt;-</span> who3 <span class="sc">%&gt;%</span></span>
+<span id="cb371-2"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb371-2" tabindex="-1"></a>    <span class="fu">select</span>(<span class="sc">-</span>new, <span class="sc">-</span>iso2, <span class="sc">-</span>iso3))</span></code></pre></div>
+<pre><code>## # A tibble: 76,046 × 5
+##    country   year type  sexage
+##    &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+##  1 Afghani…  1997 sp    m014  
+##  2 Afghani…  1998 sp    m014  
+##  3 Afghani…  1999 sp    m014  
+##  4 Afghani…  2000 sp    m014  
+##  5 Afghani…  2001 sp    m014  
+##  6 Afghani…  2002 sp    m014  
+##  7 Afghani…  2003 sp    m014  
+##  8 Afghani…  2004 sp    m014  
+##  9 Afghani…  2005 sp    m014  
+## 10 Afghani…  2006 sp    m014  
+## # ℹ 76,036 more rows
+## # ℹ 1 more variable:
+## #   cases &lt;dbl&gt;</code></pre>
+<p>Em seguida vamos separar <code>sexage</code> em <code>sex</code> e <code>age</code> ao separar depois do primeiro caractere:</p>
+<div class="sourceCode" id="cb373"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb373-1"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb373-1" tabindex="-1"></a>(who5 <span class="ot">&lt;-</span> who4 <span class="sc">%&gt;%</span></span>
+<span id="cb373-2"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb373-2" tabindex="-1"></a>   <span class="fu">separate</span>(sexage, <span class="fu">c</span>(<span class="st">&quot;sex&quot;</span>, <span class="st">&quot;age&quot;</span>), <span class="at">sep =</span> <span class="dv">1</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 76,046 × 6
+##    country    year type  sex  
+##    &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;
+##  1 Afghanis…  1997 sp    m    
+##  2 Afghanis…  1998 sp    m    
+##  3 Afghanis…  1999 sp    m    
+##  4 Afghanis…  2000 sp    m    
+##  5 Afghanis…  2001 sp    m    
+##  6 Afghanis…  2002 sp    m    
+##  7 Afghanis…  2003 sp    m    
+##  8 Afghanis…  2004 sp    m    
+##  9 Afghanis…  2005 sp    m    
+## 10 Afghanis…  2006 sp    m    
+## # ℹ 76,036 more rows
+## # ℹ 2 more variables:
+## #   age &lt;chr&gt;, cases &lt;dbl&gt;</code></pre>
+<p>O conjunto de dados who agora está arrumado!</p>
+<p>Mostrei um pedaço de código de cada vez, atribuindo cada resultado provisório a uma nova variável. Normalmente não é assim que você trabalha interativamente. Em vez disso, você construitira gradualmente um pipe complexo:</p>
+<div class="sourceCode" id="cb375"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb375-1"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb375-1" tabindex="-1"></a>who <span class="sc">%&gt;%</span></span>
+<span id="cb375-2"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb375-2" tabindex="-1"></a>  <span class="fu">gather</span>(</span>
+<span id="cb375-3"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb375-3" tabindex="-1"></a>    new_sp_m014<span class="sc">:</span>newrel_f65, </span>
+<span id="cb375-4"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb375-4" tabindex="-1"></a>    <span class="at">key =</span> <span class="st">&quot;code&quot;</span>,</span>
+<span id="cb375-5"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb375-5" tabindex="-1"></a>    <span class="at">value =</span> <span class="st">&quot;cases&quot;</span>,</span>
+<span id="cb375-6"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb375-6" tabindex="-1"></a>    <span class="at">na.rm =</span> <span class="cn">TRUE</span></span>
+<span id="cb375-7"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb375-7" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb375-8"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb375-8" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb375-9"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb375-9" tabindex="-1"></a>    <span class="at">code =</span> stringr<span class="sc">::</span><span class="fu">str_replace</span>(code, <span class="st">&quot;newrel&quot;</span>, <span class="st">&quot;new_rel&quot;</span>)</span>
+<span id="cb375-10"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb375-10" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb375-11"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb375-11" tabindex="-1"></a>  <span class="fu">separate</span>(code, <span class="fu">c</span>(<span class="st">&quot;new&quot;</span>, <span class="st">&quot;type&quot;</span>, <span class="st">&quot;sexage&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb375-12"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb375-12" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>new, <span class="sc">-</span>iso2, <span class="sc">-</span>iso3) <span class="sc">%&gt;%</span></span>
+<span id="cb375-13"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb375-13" tabindex="-1"></a>  <span class="fu">separate</span>(sexage, <span class="fu">c</span>(<span class="st">&quot;sex&quot;</span>, <span class="st">&quot;age&quot;</span>), <span class="at">sep =</span> <span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 76,046 × 6
+##    country    year type  sex  
+##    &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;
+##  1 Afghanis…  1997 sp    m    
+##  2 Afghanis…  1998 sp    m    
+##  3 Afghanis…  1999 sp    m    
+##  4 Afghanis…  2000 sp    m    
+##  5 Afghanis…  2001 sp    m    
+##  6 Afghanis…  2002 sp    m    
+##  7 Afghanis…  2003 sp    m    
+##  8 Afghanis…  2004 sp    m    
+##  9 Afghanis…  2005 sp    m    
+## 10 Afghanis…  2006 sp    m    
+## # ℹ 76,036 more rows
+## # ℹ 2 more variables:
+## #   age &lt;chr&gt;, cases &lt;dbl&gt;</code></pre>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="fluxo-de-trabalho-de-r-markdown.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": true,
+"twitter": true,
+"linkedin": true,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": true,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["r4ds.pdf", "r4ds.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+},
+"info": false
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
