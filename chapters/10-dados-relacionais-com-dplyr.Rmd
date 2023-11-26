@@ -2,9 +2,61 @@
 
 ## Introdução
 
+Não temos exercícios nesta seção.
+
 ## `nycflights13`
 
+### Exercício 10.2.1 {- #exr10-2-1}
+
+::: {.enunciado}
+Imagine que você quisesse desenhar (aproximadamente) a rota que cada avião fez da sua origem ao seu destino. De quais variáveis você precisaria? Quais tabels você precisaria combinar?
+:::
+
+::: {.solution}
+
+:::
+
+### Exercício 10.2.2 {- #exr10-2-2}
+
+::: {.enunciado}
+Eu esqueci de desenhar o relacionamento entre `weather` e `airports`. Qual é o relacionamento e como ele deveria aparecer no diagrama?
+:::
+
+::: {.solution}
+Utilizaríamos as tabelas `weather` e `airports` por meio da variável `origin` de `weather`.
+:::
+
+### Exercício 10.2.3 {- #exr10-2-3}
+
+::: {.enunciado}
+`weather` só contém informações dos aeroportos de origem (NYC). Se contivesse registro de clima de todos os aeroportos dos Estados Unidos, qual relação adicional definiria com `flights`?
+:::
+
+::: {.solution}
+Haveria uma nova relação entre esses dois conjuntos de dados, utilizando além da data e hora de chegada, a variável `dest`.
+:::
+
+### Exercício 10.2.4 {- #exr10-2-4}
+
+::: {.enunciado}
+Nós sabemos que alguns dias do ano são "especiais", e menos pessoas que o normal viajam nesse período. Como você poderia representar esses dados como um data frame? Quais seriam as chaves primárias dessa tabela? Como ela se conectaria às tabelas existentes?
+:::
+
+::: {.solution}
+Haveria um novo conjunto de dados chamado, digamos, `special_dates`, e a chave seria formada pelas variáveis `year`, `month` e `day`
+:::
+
 ## Chaves (keys)
+
+### Exercício 10.3.1 {- #exr10-3-1}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::
 
 ## Mutating joins
 

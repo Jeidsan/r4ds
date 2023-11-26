@@ -119,7 +119,6 @@ lidando-com-falhas
 fazendo-map-com-vários-argumentos
 walk
 outros-padrões-para-loops-for
-part-modelar
 o-básico-de-modelos-com-modelr
 introdução-14
 um-modelo-simples
