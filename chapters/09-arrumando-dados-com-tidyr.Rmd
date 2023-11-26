@@ -136,7 +136,7 @@ Por que `gather()` e `spread()` não são perfeitamente simétricos? Considere c
 
 ```
 stocks <- tibble(
-  year   = c(2015, 2012, 2016, 2016),
+  year   = c(2015, 2015, 2016, 2016),
   half   = c(   1,    2,    1,    2),
   return = c(1.88, 0.59, 0.92, 0.17)
 )
@@ -152,6 +152,7 @@ Ambos `spread()` e `gather()` tês um argumento `convert`. O que ele faz?
 :::
 
 ::: {.solution}
+Ao espalhar e, depois, reunir os dados de um mesmo tibble, os tipos podem não ser conservados. No exemplo dado, os valores da variável ano acabam sendo convertidas para string. É possível efetuar uma conversão desses valores usando o parâmetro `convert`. Neste caso, o R buscará inferir o tipo de dado, ainda assim, os tipos podem não coincidir com o original.
 :::
 
 ### Exercício 9.3.2 {- #exr9-3-2}
@@ -159,13 +160,21 @@ Ambos `spread()` e `gather()` tês um argumento `convert`. O que ele faz?
 ::: {.enunciado}
 Por que este código falha?
 
-```
+```{r}
 table4a %>%
-  gather(199, 2000, key = "year", value = "cases")
+  gather(1999, 2000, key = "year", value = "cases")
 ```
 :::
 
 ::: {.solution}
+O método `gather` espera receber uma lista com os nomes das colunas que se deseja juntar. Para tal, é necessário informar ou o nome das colunas ou os seus índices. Como, no caso acima, foram informados números inteiros, a rotina os interpretará como índices das colunas, contudo o tibble não tem essa quantidade de colunas. 
+
+A solução para o problema é a seguinte:
+
+```{r}
+table4a %>%
+  gather(1999, 2000, key = "year", value = "cases")
+```
 :::
 
 ### Exercício 9.3.3 {- #exr9-3-3}
@@ -187,6 +196,7 @@ people <- tribble(
 :::
 
 ::: {.solution}
+Como existem dois valores de `age` para o registro em nome de Phillip Woods, a função `spread` não pode decidir qual delas utilizar. Para corrigir o problema, séria necessário verificar qual dos dois registros de idade de Phillip é o correto e excluir o outro.
 :::
 
 ### Exercício 9.3.4 {- #exr9-3-4}
@@ -204,6 +214,12 @@ preg <- tribble(
 :::
 
 ::: {.solution}
+
+```{r}
+preg %>%
+  gather(male, female, key = "sex", value = "count")
+```
+
 :::
 
 ## Separando e unindo
@@ -213,16 +229,17 @@ preg <- tribble(
 ::: {.enunciado}
 O que os argumentos `extra` e `fill` fazem em `separate()`? Experimente as várias opções para os dois conjuntos de dados de brinquedos a seguir:
 
-```
+```{r}
 tibble(x = c("a,b,c", "d,e,f,g", "h,i,j")) %>%
-  separate(x,c("one", "two", "three"))
+  separate(x,c("one", "two", "three"), extra = "merge")
   
 tibble(x = c("a,b,c", "d,e", "f,g,i")) %>%
-  separate(x,c("one", "two", "three"))
+  separate(x,c("one", "two", "three"), remove = FALSE)
 ```
 :::
 
 ::: {.solution}
+Durante a separação de um data frame, o parâmetro `extra` indica o que fazer quando houver mais valores excedendo a quantidade de colunas parametrizada. Da mesma forma o argumento `fill` indica o que fazer quando há menos argumentos do que a quantidade de colunas solicitada.
 :::
 
 ### Exercício 9.4.2 {- #exr9-4-2}
@@ -232,15 +249,19 @@ tibble(x = c("a,b,c", "d,e", "f,g,i")) %>%
 :::
 
 ::: {.solution}
+O argumento `remove` é utilizado para determinar se os valore originais serão mantidos numa coluna do data set resultante. Podemos usar `remove = FALSE` quando desejarmos manter a configuração original para efeito de comparação e controle. 
 :::
 
 ### Exercício 9.4.3 {- #exr9-4-3}
 
 ::: {.enunciado}
-Compare e contranste `separate()` e `extract()`. Por que há três variações de separação (por posição, por separador e com grupos), mas apenas uma para união?
+Compare e contraste `separate()` e `extract()`. Por que há três variações de separação (por posição, por separador e com grupos), mas apenas uma para união?
 :::
 
 ::: {.solution}
+Enquanto `separate()` usa um separador ou posição de caracter numa string para realizar a separação, `extract()` usa uma expressão regular, o que torna o processo mais dinâmico. Com `extract()` pode-se, por eexemplo, tratar variáveis cujos valores tem diferentes tipos de separador.
+
+O objetivo de `separate()` e `extract()` é separar uam coluna em várias. Existem diversas formas pelas quais a coluna a ser separada estará disposta, por isso existem várias formas de realizar a separação. Já no caso de `unite()`, o objetivo é juntar colunas em uma única e, assim, não há muitas opções a serem expressas, não sendo necessárias outras sobreposições.
 :::
 
 ## Valores faltantes
@@ -252,6 +273,7 @@ Compare e contraste os argumentos `fill` de `spread()` e `complete()`.
 :::
 
 ::: {.solution}
+Em `spread()`, o argumento `fill` é um caractere a ser utilizado quando um valor faltante for encontrado. Já em `complete()`, é possível informar uma lista nomeada indicando qual valor será atibuidos aos valores faltantes em cada uma das colunas.
 :::
 
 ### Exercício 9.5.2 {- #exr9-5-2}
@@ -261,6 +283,36 @@ O que o argumento de direção de `fill()` faz?
 :::
 
 ::: {.solution}
+
+O argumento é utilizado para controlar a forma como serão preenchidos os valores valtantes. 
+
+A opção padrão é `down`, que preenche os valores faltantes de uma coluna com o valor da linha imediatamente acima. `up` preenche com o valor imediatamente abaixo. `updown`  e `downup` parecem ser redundantes. Verificar. 
+
+```{r}
+treatment <- tribble(
+  ~person, ~treatment, ~response,
+  "Derrick", 1, 7,
+  NA, 2,10,
+  NA, 3,9,
+  "Kath", 1, 4,
+  NA, 2, 6,
+  "TESTE", 1, 4,
+)
+
+treatment %>% fill(person, .direction = "up")
+```
+
+```{r}
+treatment %>% fill(person, .direction = "down")
+```
+
+```{r}
+treatment %>% fill(person, .direction = "downup")
+```
+
+```{r}
+treatment %>% fill(person, .direction = "updown")
+```
 :::
 
 ## Estudo de caso
@@ -272,6 +324,24 @@ Neste estudo de caso eu configuro `na.rm = TRUE` só para facilitar a verificaç
 :::
 
 ::: {.solution}
+```{r}
+who %>%
+  gather(
+    new_sp_m014:newrel_f65, 
+    key = "code",
+    value = "cases"
+  ) %>%
+  mutate(
+    code = stringr::str_replace(code, "newrel", "new_rel")
+  ) %>%
+  separate(code, c("new", "type", "sexage")) %>%
+  select(-new, -iso2, -iso3) %>%
+  separate(sexage, c("sex", "age"), sep = 1)
+```
+
+Acima, repetimos o estudo de caso mantendo os valores faltantes explícitos. Para este exemplo, não faria muita diferença prática removê-los ou não, porém em outros cenários pode ser importante manter explícitos os valores faltantes, sobretudo no momento da comunicação dos resultados.
+
+No exemplo utilizado, caso uma observação possua o valor `NA` para a variável `casos`, significa que não estão disponíveis dados sobre TB neste país e ano específico, ou seja, não se sabe se houveram ou não casos de TB. Já o valor zero representa que os dados estavam disponíveis para coleta e é certo que não houve nenhum novo caso de TB naquele ano.
 :::
 
 ### Exercício 9.6.2 {- #exr9-6-2}
@@ -281,6 +351,22 @@ O que acontece se você negligenciar o passo `mutate()`? (`mutate(key = stringr:
 :::
 
 ::: {.solution}
+A operação é importante para o sucesso da análise, pois sem ela ocorre erro durante o passo de separação: é pedido para separar os valores em três colunas (`new`, `type` e `sexage`), porém só é encontrada uma divisão em alguns dos registros, gerando apenas as duas primeiras colunas (a terceira será preenchida com `NA`).
+
+
+```{r}
+who %>%
+  gather(
+    new_sp_m014:newrel_f65, 
+    key = "code",
+    value = "cases",
+    na.rm = TRUE
+  ) %>%
+  separate(code, c("new", "type", "sexage")) %>%
+  select(-new, -iso2, -iso3) %>%
+  separate(sexage, c("sex", "age"), sep = 1) %>%
+  count(type)
+```
 :::
 
 ### Exercício 9.6.3 {- #exr9-6-3}
@@ -290,6 +376,16 @@ Afirmei que `iso2` e `iso3` eram redundantes com `country`. Confirme essa afirma
 :::
 
 ::: {.solution}
+Para encontrar a resposta, podemos contar os elementos distintos da tripla formada por `country`, `iso2` e `iso3`:
+
+```{r}
+who %>%
+  select(country, iso2, iso3) %>%
+  distinct() %>%
+  group_by(country) %>%
+  filter(n() > 1)
+```
+
 :::
 
 ### Exercício 9.6.4 {- #exr9-6-4}
@@ -299,6 +395,34 @@ Para cada país, ano e gênero, calcule o número total de casos de TB. Faça um
 :::
 
 ::: {.solution}
+```{r}
+who %>%
+  filter( year > 1995) %>%
+  gather(
+    new_sp_m014:newrel_f65, 
+    key = "code",
+    value = "cases",
+    na.rm = T
+  ) %>%
+  mutate(
+    code = stringr::str_replace(code, "newrel", "new_rel")
+  ) %>%
+  separate(code, c("new", "type", "sexage")) %>%
+  select(-new, -iso2, -iso3) %>%
+  separate(sexage, c("sex", "age"), sep = 1) %>%
+  group_by(country, year, sex) %>%
+  summarise(
+    cases = sum(cases)
+  ) %>%
+  unite(country_sex, country, sex, remove = F) %>%
+  ggplot(aes(
+    x = year, 
+    y = cases, 
+    group = country_sex,
+    color = sex)
+  ) +
+    geom_line()
+```
 :::
 
 ## Dados desarrumados (não tidy)

@@ -61,4 +61,5 @@ Dúvidas ou sugestões de melhoria podem ser encaminhadas para o e-mail *jeidsan
 - [Exercício 5.5.12](#exr5-5-12);
 - [Exercício 8.2.3](#exr8-2-3);
 - [Exercício 8.3.6](#exr8-3-6);
+- [Exercício 9.5.2](#exr9-5-2);
 - 

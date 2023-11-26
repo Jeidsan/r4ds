@@ -48,3 +48,4 @@ rmd_files:
   - 'chapters/23-formatos-r-markdown.Rmd'
   - 'chapters/24-fluxo-de-trabalho-de-r-markdown.Rmd'
   - 'chapters/25-referencias.Rmd'
+  - 'chapters/26-arrumando-dados-com tidyr-estudo-de-caso.Rmd'
