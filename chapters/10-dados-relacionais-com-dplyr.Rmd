@@ -94,8 +94,265 @@ x
 
 ## Mutating joins
 
+### Exercício 10.4.1 {- #exr10-4-1}
+
+::: {.enunciado}
+Calcule o atraso médio por destino, depois faça join no data frame `airports` para que possa exibir a distribuição espacial dos atrasos. Eis uma maneira fácil de desenhar um mapa dos Estados Unidos:
+
+```{r}
+airports %>%
+  semi_join(flights, c("faa" = "dest")) %>%
+  ggplot(aes(lon, lat)) +
+    borders("state") + 
+    geom_point() +
+    coord_quickmap()
+```
+(Não se preocupe se você não entender o que `semi_join()` faz - você aprenderá isso em seguida.)
+
+Você pode querer usar `size` ou `color` dos pontos para exibir o atraso médio de casa aeroporto.
+:::
+
+::: {.solution}
+```{r}
+flights %>%
+  group_by(dest) %>%
+  summarise(
+    delay = mean(arr_delay, na.rm = TRUE)
+  ) %>%
+  left_join(airports, by = c("dest" = "faa")) %>%
+  select (name, delay, lat, lon) %>%
+  ggplot(aes(
+      x = lon, 
+      y = lat,
+      color = delay
+  )) +
+    borders("state") + 
+    geom_point() +
+    coord_quickmap()
+```
+
+:::
+
+### Exercício 10.4.2 {- #exr10-4-2}
+
+::: {.enunciado}
+Adicione a localização da origem e destino (isto é, `lat` e `lon`) para flights.
+:::
+
+::: {.solution}
+```{r}
+flights %>%
+  group_by(dest, origin) %>%
+  summarize(
+    delay = mean(arr_delay, na.rm = TRUE)
+  ) %>%
+  ungroup() %>%
+  left_join(airports, by = c("dest" = "faa")) %>%
+  left_join(airports, by = c("origin" = "faa"))
+```
+
+:::
+
+### Exercício 10.4.3 {- #exr10-4-3}
+
+::: {.enunciado}
+Há um relacionamento entre a idade de um avisão e seus atrasos?
+:::
+
+::: {.solution}
+Para responder essa questão, precisaremos:
+
+1. calular o atraso médio de um avião;
+2. juntar os dados do avião; e
+3. plotar o gráfico de dispersão correspondente.
+
+```{r}
+flights %>%
+  group_by(tailnum) %>%
+  summarise(
+    delay = mean(arr_delay, na.rm = TRUE)
+  ) %>%
+  filter(delay > 0) %>%
+  left_join(
+    planes %>% 
+      select(tailnum, year), 
+    by = "tailnum"
+  ) %>%
+  ggplot(aes(year, delay)) +
+    geom_smooth(se = FALSE)
+```
+
+Não há relação (melhorar resposta!)
+:::
+
+### Exercício 10.4.4 {- #exr10-4-4}
+
+::: {.enunciado}
+Quais condições climáticas tornam mais provável haver um atraso?
+:::
+
+::: {.solution}
+Vamos iniciar a nossa análise juntando os conjuntos de dados:
+
+```{r}
+(flights_weather <- flights %>%
+  inner_join(
+    weather, 
+    by = c(
+      "origin" = "origin",
+      "year" = "year",
+      "month" = "month",
+      "day" = "day",
+      "hour" = "hour"
+    )
+  ))
+```
+
+Agora vamos avaliar cada uma das condições climáticas antes em relação ao atraso médio na decolagem. 
+
+Para a temperatura do ar, não encontramos uma relação, conforme exemplo abaixo.
+
+```{r}
+flights_weather %>%
+  mutate(temp = cut_interval(temp, n = 10)) %>%
+  group_by(temp) %>%
+  summarise(delay = mean(dep_delay, na.rm = TRUE)) %>%
+  ggplot(aes(temp, delay)) +
+    geom_point()
+```
+Para a umidade do ar, parece haver uma pequena relação, porém esta pode estar associada a outras variáveis (`precip` e `visib`, mais especificamente).
+
+```{r}
+flights_weather %>%
+  mutate(humid = cut_interval(humid, n = 10)) %>%
+  group_by(humid) %>%
+  summarise(delay = mean(dep_delay, na.rm = TRUE)) %>%
+  ggplot(aes(humid, delay)) +
+    geom_point()
+```
+Para a quantidade de chuva, parece haver uma associação muito fraca.
+
+```{r}
+flights_weather %>%
+  group_by(precip) %>%
+  summarise(delay = mean(dep_delay, na.rm = TRUE)) %>%
+  ggplot(aes(precip, delay)) +
+    geom_point() +
+    geom_smooth()
+```
+
+Para a visibilidade, já podemos perceber uma relação negativa forte.
+
+```{r}
+flights_weather %>%
+  mutate(visib = cut_interval(visib, n = 10)) %>%
+  group_by(visib) %>%
+  summarise(delay = mean(dep_delay, na.rm = TRUE)) %>%
+  ggplot(aes(visib, delay)) +
+    geom_point() +
+    geom_smooth()
+```
+
+:::
+
+### Exercício 10.4.5 {- #exr10-4-5}
+
+::: {.enunciado}
+O que aconteceu no dia 13 de junho de 2013? Exiba o padrão espacial de atrasos e, então, uso o Google para fazer uma referência cruzada com o clima.
+:::
+
+::: {.solution}
+Houve grande número de atrasos nos voos para a região sudeste dos Estados Unidos. O fato está diretamente associado a fortes tempestades que ocorreram na região entre os dias 12 e 13 de junho de 2013.
+
+```{r}
+flights %>%
+  filter(year == 2013, month == 6, day == 13) %>%
+  group_by(dest) %>%
+  summarise(
+    delay = mean(arr_delay, na.rm = TRUE)
+  ) %>%
+  inner_join(airports, by = c("dest" = "faa")) %>%
+  select (name, delay, lat, lon) %>%
+  ggplot(aes(
+      x = lon, 
+      y = lat,
+      color = delay,
+      size = delay
+  )) +
+    borders("state") + 
+    geom_point() +
+    coord_quickmap()  +
+    scale_colour_viridis()
+```
+
+:::
+
 ## Filtering joins
+
+### Exercício 10.5.1 {- #exr10-5-1}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 10.5.2 {- #exr10-5-2}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 10.5.3 {- #exr10-5-3}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 10.5.4 {- #exr10-5-4}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 10.5.5 {- #exr10-5-5}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 10.5.6 {- #exr10-5-6}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::
 
 ## Problemas de joins
 
+Não temos exercícios nesta seção.
+
 ## Operações de conjuntos
+
+Não temos exercícios nesta seção.
