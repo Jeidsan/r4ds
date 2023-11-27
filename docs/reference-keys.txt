@@ -75,7 +75,7 @@ combinando-padrões-com-expressões-regulares
 ferramentas
 outros-tipos-de-padrões
 outros-usos-para-expressões-regulares
-string
+stringi
 fatores-com-forcats
 introdução-8
 criando-fatores

@@ -2,14 +2,427 @@
 
 ## Introdução
 
+Não temos exercícios nesta seção.
+
 ## O básico de string
+
+### Exercício 11.2.1 {- #exr11-2-1}
+
+::: {.enunciado}
+Em códigos que não usam **stringr**, você verá com frequência, `paste()` e `paste0())`. Qual é a diferença entre as duas funções? Elas são equivalentes a quais funções **stringr**? Como as funções diferem ao lidar com `NA`?
+:::
+
+::: {.solution}
+A diferença entre `paste()` e `paste0()` é que na segunda o separador é sempre a string vazia "", enquanto na primeira podemos especificar um separador. Ambas as funções são equivalentes à `str_c()`.
+
+As funções `paste()` e `paste0()` transformam `NA` em uma string e o concatena normalmente com as demais strings. Já no caso de `str_c()`, a operação de concatenação com `NA` resulta sempre em `NA`.
+:::
+
+### Exercício 11.2.2 {- #exr11-2-2}
+
+::: {.enunciado}
+Em suas prórprias palavras, descreva a diferença entre os argumentos `sep`  e `collapse` para `str_c()`.
+:::
+
+::: {.solution}
+Quando `str_c()` recebe dois ou mais vetores, ela retorna um novo vetor em que cada posição corresponde à concatenação das posições correspondentes dos vetores de entrada:
+
+```{r}
+a <- c("a", "b", "c")
+b <- c("1", "2", "3")
+str_c(a, b)
+```
+Caso seja informado um separador, cada posição no vetor resultante, será a combinação das posições equivalentes dos vetores de entrada, separados conforme o parâmetro `sep`:
+
+```{r}
+str_c(a, b, sep = " | ")
+```
+Agora, caso seja informado um valor para `collapse`, a função irá juntar todos os elementos do vetor resultante em uma única string, utilizando o valor de `collapse` para separar os elementos:
+
+```{r}
+str_c(a, b, collapse = "|")
+```
+:::
+
+### Exercício 11.2.3 {- #exr11-2-3}
+
+::: {.enunciado}
+Use `str_length()` e `str_sub()` para extrair o caractere do meio de uma string. O que você fará se a string tiver um número par de caracteres?
+:::
+
+::: {.solution}
+Para o caso de strings de tamanho ímpar, existe um caracter central e ele será retornado.
+Para o caso de uma string com comprimento par, traremos os dois caracteres centrais.
+
+```{r}
+a <- "Essa é uma string de tamanho ímpar!"
+b <- "Já essa é uma string de tamanho par!"
+
+str_central <- function(x) {
+  l <- str_length(x)
+  q <- l %/% 2
+  r <- l %% 2
+  
+  if (r == 0)
+    return(str_sub(x, q, q + 1))
+  else
+    return(str_sub(x, q + 1, q + 1))
+}
+
+str_central(a)
+str_central(b)
+```
+
+:::
+
+### Exercício 11.2.4 {- #exr11-2-4}
+
+::: {.enunciado}
+O que `str_wrap()` faz? Quando você pode querer usá-lo?
+:::
+
+::: {.solution}
+Esta função é utilizada para quebrar um texto em linhas (ou parágrafos). Ele pode ser útil quando precisamos imprimir um texto em uma largura específica, como nas impressoras termicas muito utilizadas ainda hoje. 
+:::
+
+### Exercício 11.2.5 {- #exr11-2-5}
+
+::: {.enunciado}
+O que `str_trim()` faz? Qual é o oposto de `str_trim()`?
+:::
+
+::: {.solution}
+A função `str_trim()` remove espaaços em branco do início e do fim de um texto. O oposto é a função `str_pad()`, que adiciona caracteres a uma string até que ela atinja um determinado tamanho.
+:::
+
+### Exercício 11.2.6 {- #exr11-2-6}
+
+::: {.enunciado}
+Escreva uma função que transforme (por exemplo) um vetor `c("a", "b", "c")` na string `a, b and c`. Pense cuidadosamente sobre o que ela deve fazer se lhe for dado um vetor de comprimento 0, 1 ou 2.
+:::
+
+::: {.solution}
+x
+:::
 
 ## Combinando padrões com expressões regulares
 
+### Exercício 11.3.1 {- #exr11-3-1}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 11.3.2 {- #exr11-3-2}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 11.3.3 {- #exr11-3-3}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 11.3.4 {- #exr11-3-4}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 11.3.5 {- #exr11-3-5}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 11.3.6 {- #exr11-3-6}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 11.3.7 {- #exr11-3-7}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 11.3.8 {- #exr11-3-8}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 11.3.9 {- #exr11-3-9}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 11.3.10 {- #exr11-3-10}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 11.3.11 {- #exr11-3-11}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 11.3.12 {- #exr11-3-12}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 11.3.13 {- #exr11-3-13}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 11.3.14 {- #exr11-3-14}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 11.3.15 {- #exr11-3-15}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 11.3.16 {- #exr11-3-16}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::
+
 ## Ferramentas 
+
+### Exercício 11.4.1 {- #exr11-4-1}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 11.4.2 {- #exr11-4-2}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 11.4.3 {- #exr11-4-3}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 11.4.4 {- #exr11-4-4}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 11.4.5 {- #exr11-4-5}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 11.4.6 {- #exr11-4-6}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 11.4.7 {- #exr11-4-7}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 11.4.8 {- #exr11-4-8}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 11.4.9 {- #exr11-4-9}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 11.4.10 {- #exr11-4-10}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 11.4.11 {- #exr11-4-11}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::
 
 ## Outros tipos de padrões
 
+### Exercício 11.5.1 {- #exr11-5-1}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 11.5.2 {- #exr11-5-2}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::
+
 ## Outros usos para expressões regulares
 
-## `string`
+Não temos exercícios nesta seção.
+
+## `stringi`
+
+### Exercício 11.7.1 {- #exr11-7-1}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 11.7.2 {- #exr11-7-2}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::

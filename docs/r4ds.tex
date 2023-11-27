@@ -325,6 +325,8 @@ Dúvidas ou sugestões de melhoria podem ser encaminhadas para o e-mail \emph{\h
 \item
   \protect\hyperlink{exr10-4-3}{Exercício 10.4.3};
 \item
+  \protect\hyperlink{exr11-2-6}{Exercício 11.2.6};
+\item
 \end{itemize}
 
 \mainmatter
@@ -4789,17 +4791,17 @@ Pratique referir-se a nomes de variáveis não sintáticos, no data frame a segu
 
 \begin{verbatim}
 ## # A tibble: 10 x 3
-##      one    two three
-##    <int>  <dbl> <dbl>
-##  1     1  0.242 0.242
-##  2     2  4.55  2.28 
-##  3     3  6.93  2.31 
-##  4     4  9.37  2.34 
-##  5     5 11.8   2.36 
-##  6     6 11.7   1.95 
-##  7     7 14.1   2.01 
-##  8     8 16.2   2.02 
-##  9     9 17.4   1.94 
+##      one   two three
+##    <int> <dbl> <dbl>
+##  1     1  2.11  2.11
+##  2     2  3.18  1.59
+##  3     3  3.87  1.29
+##  4     4  9.34  2.34
+##  5     5  7.78  1.56
+##  6     6 12.3   2.05
+##  7     7 13.5   1.93
+##  8     8 15.8   1.97
+##  9     9 18.2   2.02
 ## 10    10 19.8   1.98
 \end{verbatim}
 
@@ -6946,23 +6948,474 @@ Não temos exercícios nesta seção.
 \hypertarget{introduuxe7uxe3o-7}{%
 \section{Introdução}\label{introduuxe7uxe3o-7}}
 
+Não temos exercícios nesta seção.
+
 \hypertarget{o-buxe1sico-de-string}{%
 \section{O básico de string}\label{o-buxe1sico-de-string}}
+
+\hypertarget{exr11-2-1}{%
+\subsection*{Exercício 11.2.1}\label{exr11-2-1}}
+\addcontentsline{toc}{subsection}{Exercício 11.2.1}
+
+Em códigos que não usam \textbf{stringr}, você verá com frequência, \texttt{paste()} e \texttt{paste0())}. Qual é a diferença entre as duas funções? Elas são equivalentes a quais funções \textbf{stringr}? Como as funções diferem ao lidar com \texttt{NA}?
+
+\begin{solution}
+A diferença entre \texttt{paste()} e \texttt{paste0()} é que na segunda o separador é sempre a string vazia ``\,``, enquanto na primeira podemos especificar um separador. Ambas as funções são equivalentes à \texttt{str\_c()}.
+
+As funções \texttt{paste()} e \texttt{paste0()} transformam \texttt{NA} em uma string e o concatena normalmente com as demais strings. Já no caso de \texttt{str\_c()}, a operação de concatenação com \texttt{NA} resulta sempre em \texttt{NA}.
+\end{solution}
+
+\hypertarget{exr11-2-2}{%
+\subsection*{Exercício 11.2.2}\label{exr11-2-2}}
+\addcontentsline{toc}{subsection}{Exercício 11.2.2}
+
+Em suas prórprias palavras, descreva a diferença entre os argumentos \texttt{sep} e \texttt{collapse} para \texttt{str\_c()}.
+
+\begin{solution}
+
+Quando \texttt{str\_c()} recebe dois ou mais vetores, ela retorna um novo vetor em que cada posição corresponde à concatenação das posições correspondentes dos vetores de entrada:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{a }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"a"}\NormalTok{, }\StringTok{"b"}\NormalTok{, }\StringTok{"c"}\NormalTok{)}
+\NormalTok{b }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"1"}\NormalTok{, }\StringTok{"2"}\NormalTok{, }\StringTok{"3"}\NormalTok{)}
+\FunctionTok{str\_c}\NormalTok{(a, b)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "a1" "b2" "c3"
+\end{verbatim}
+
+Caso seja informado um separador, cada posição no vetor resultante, será a combinação das posições equivalentes dos vetores de entrada, separados conforme o parâmetro \texttt{sep}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{str\_c}\NormalTok{(a, b, }\AttributeTok{sep =} \StringTok{" | "}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "a | 1" "b | 2" "c | 3"
+\end{verbatim}
+
+Agora, caso seja informado um valor para \texttt{collapse}, a função irá juntar todos os elementos do vetor resultante em uma única string, utilizando o valor de \texttt{collapse} para separar os elementos:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{str\_c}\NormalTok{(a, b, }\AttributeTok{collapse =} \StringTok{"|"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "a1|b2|c3"
+\end{verbatim}
+
+\end{solution}
+
+\hypertarget{exr11-2-3}{%
+\subsection*{Exercício 11.2.3}\label{exr11-2-3}}
+\addcontentsline{toc}{subsection}{Exercício 11.2.3}
+
+Use \texttt{str\_length()} e \texttt{str\_sub()} para extrair o caractere do meio de uma string. O que você fará se a string tiver um número par de caracteres?
+
+\begin{solution}
+
+Para o caso de strings de tamanho ímpar, existe um caracter central e ele será retornado.
+Para o caso de uma string com comprimento par, traremos os dois caracteres centrais.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{a }\OtherTok{\textless{}{-}} \StringTok{"Essa é uma string de tamanho ímpar!"}
+\NormalTok{b }\OtherTok{\textless{}{-}} \StringTok{"Já essa é uma string de tamanho par!"}
+
+\NormalTok{str\_central }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x) \{}
+\NormalTok{  l }\OtherTok{\textless{}{-}} \FunctionTok{str\_length}\NormalTok{(x)}
+\NormalTok{  q }\OtherTok{\textless{}{-}}\NormalTok{ l }\SpecialCharTok{\%/\%} \DecValTok{2}
+\NormalTok{  r }\OtherTok{\textless{}{-}}\NormalTok{ l }\SpecialCharTok{\%\%} \DecValTok{2}
+  
+  \ControlFlowTok{if}\NormalTok{ (r }\SpecialCharTok{==} \DecValTok{0}\NormalTok{)}
+    \FunctionTok{return}\NormalTok{(}\FunctionTok{str\_sub}\NormalTok{(x, q, q }\SpecialCharTok{+} \DecValTok{1}\NormalTok{))}
+  \ControlFlowTok{else}
+    \FunctionTok{return}\NormalTok{(}\FunctionTok{str\_sub}\NormalTok{(x, q }\SpecialCharTok{+} \DecValTok{1}\NormalTok{, q }\SpecialCharTok{+} \DecValTok{1}\NormalTok{))}
+\NormalTok{\}}
+
+\FunctionTok{str\_central}\NormalTok{(a)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] " "
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{str\_central}\NormalTok{(b)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "in"
+\end{verbatim}
+
+\end{solution}
+
+\hypertarget{exr11-2-4}{%
+\subsection*{Exercício 11.2.4}\label{exr11-2-4}}
+\addcontentsline{toc}{subsection}{Exercício 11.2.4}
+
+O que \texttt{str\_wrap()} faz? Quando você pode querer usá-lo?
+
+\begin{solution}
+Esta função é utilizada para quebrar um texto em linhas (ou parágrafos). Ele pode ser útil quando precisamos imprimir um texto em uma largura específica, como nas impressoras termicas muito utilizadas ainda hoje.
+\end{solution}
+
+\hypertarget{exr11-2-5}{%
+\subsection*{Exercício 11.2.5}\label{exr11-2-5}}
+\addcontentsline{toc}{subsection}{Exercício 11.2.5}
+
+O que \texttt{str\_trim()} faz? Qual é o oposto de \texttt{str\_trim()}?
+
+\begin{solution}
+A função \texttt{str\_trim()} remove espaaços em branco do início e do fim de um texto. O oposto é a função \texttt{str\_pad()}, que adiciona caracteres a uma string até que ela atinja um determinado tamanho.
+\end{solution}
+
+\hypertarget{exr11-2-6}{%
+\subsection*{Exercício 11.2.6}\label{exr11-2-6}}
+\addcontentsline{toc}{subsection}{Exercício 11.2.6}
+
+Escreva uma função que transforme (por exemplo) um vetor \texttt{c("a",\ "b",\ "c")} na string \texttt{a,\ b\ and\ c}. Pense cuidadosamente sobre o que ela deve fazer se lhe for dado um vetor de comprimento 0, 1 ou 2.
+
+\begin{solution}
+x
+\end{solution}
 
 \hypertarget{combinando-padruxf5es-com-expressuxf5es-regulares}{%
 \section{Combinando padrões com expressões regulares}\label{combinando-padruxf5es-com-expressuxf5es-regulares}}
 
+\hypertarget{exr11-3-1}{%
+\subsection*{Exercício 11.3.1}\label{exr11-3-1}}
+\addcontentsline{toc}{subsection}{Exercício 11.3.1}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr11-3-2}{%
+\subsection*{Exercício 11.3.2}\label{exr11-3-2}}
+\addcontentsline{toc}{subsection}{Exercício 11.3.2}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr11-3-3}{%
+\subsection*{Exercício 11.3.3}\label{exr11-3-3}}
+\addcontentsline{toc}{subsection}{Exercício 11.3.3}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr11-3-4}{%
+\subsection*{Exercício 11.3.4}\label{exr11-3-4}}
+\addcontentsline{toc}{subsection}{Exercício 11.3.4}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr11-3-5}{%
+\subsection*{Exercício 11.3.5}\label{exr11-3-5}}
+\addcontentsline{toc}{subsection}{Exercício 11.3.5}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr11-3-6}{%
+\subsection*{Exercício 11.3.6}\label{exr11-3-6}}
+\addcontentsline{toc}{subsection}{Exercício 11.3.6}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr11-3-7}{%
+\subsection*{Exercício 11.3.7}\label{exr11-3-7}}
+\addcontentsline{toc}{subsection}{Exercício 11.3.7}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr11-3-8}{%
+\subsection*{Exercício 11.3.8}\label{exr11-3-8}}
+\addcontentsline{toc}{subsection}{Exercício 11.3.8}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr11-3-9}{%
+\subsection*{Exercício 11.3.9}\label{exr11-3-9}}
+\addcontentsline{toc}{subsection}{Exercício 11.3.9}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr11-3-10}{%
+\subsection*{Exercício 11.3.10}\label{exr11-3-10}}
+\addcontentsline{toc}{subsection}{Exercício 11.3.10}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr11-3-11}{%
+\subsection*{Exercício 11.3.11}\label{exr11-3-11}}
+\addcontentsline{toc}{subsection}{Exercício 11.3.11}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr11-3-12}{%
+\subsection*{Exercício 11.3.12}\label{exr11-3-12}}
+\addcontentsline{toc}{subsection}{Exercício 11.3.12}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr11-3-13}{%
+\subsection*{Exercício 11.3.13}\label{exr11-3-13}}
+\addcontentsline{toc}{subsection}{Exercício 11.3.13}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr11-3-14}{%
+\subsection*{Exercício 11.3.14}\label{exr11-3-14}}
+\addcontentsline{toc}{subsection}{Exercício 11.3.14}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr11-3-15}{%
+\subsection*{Exercício 11.3.15}\label{exr11-3-15}}
+\addcontentsline{toc}{subsection}{Exercício 11.3.15}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr11-3-16}{%
+\subsection*{Exercício 11.3.16}\label{exr11-3-16}}
+\addcontentsline{toc}{subsection}{Exercício 11.3.16}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
 \hypertarget{ferramentas}{%
 \section{Ferramentas}\label{ferramentas}}
+
+\hypertarget{exr11-4-1}{%
+\subsection*{Exercício 11.4.1}\label{exr11-4-1}}
+\addcontentsline{toc}{subsection}{Exercício 11.4.1}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr11-4-2}{%
+\subsection*{Exercício 11.4.2}\label{exr11-4-2}}
+\addcontentsline{toc}{subsection}{Exercício 11.4.2}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr11-4-3}{%
+\subsection*{Exercício 11.4.3}\label{exr11-4-3}}
+\addcontentsline{toc}{subsection}{Exercício 11.4.3}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr11-4-4}{%
+\subsection*{Exercício 11.4.4}\label{exr11-4-4}}
+\addcontentsline{toc}{subsection}{Exercício 11.4.4}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr11-4-5}{%
+\subsection*{Exercício 11.4.5}\label{exr11-4-5}}
+\addcontentsline{toc}{subsection}{Exercício 11.4.5}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr11-4-6}{%
+\subsection*{Exercício 11.4.6}\label{exr11-4-6}}
+\addcontentsline{toc}{subsection}{Exercício 11.4.6}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr11-4-7}{%
+\subsection*{Exercício 11.4.7}\label{exr11-4-7}}
+\addcontentsline{toc}{subsection}{Exercício 11.4.7}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr11-4-8}{%
+\subsection*{Exercício 11.4.8}\label{exr11-4-8}}
+\addcontentsline{toc}{subsection}{Exercício 11.4.8}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr11-4-9}{%
+\subsection*{Exercício 11.4.9}\label{exr11-4-9}}
+\addcontentsline{toc}{subsection}{Exercício 11.4.9}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr11-4-10}{%
+\subsection*{Exercício 11.4.10}\label{exr11-4-10}}
+\addcontentsline{toc}{subsection}{Exercício 11.4.10}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr11-4-11}{%
+\subsection*{Exercício 11.4.11}\label{exr11-4-11}}
+\addcontentsline{toc}{subsection}{Exercício 11.4.11}
+
+x
+
+\begin{solution}
+x
+\end{solution}
 
 \hypertarget{outros-tipos-de-padruxf5es}{%
 \section{Outros tipos de padrões}\label{outros-tipos-de-padruxf5es}}
 
+\hypertarget{exr11-5-1}{%
+\subsection*{Exercício 11.5.1}\label{exr11-5-1}}
+\addcontentsline{toc}{subsection}{Exercício 11.5.1}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr11-5-2}{%
+\subsection*{Exercício 11.5.2}\label{exr11-5-2}}
+\addcontentsline{toc}{subsection}{Exercício 11.5.2}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
 \hypertarget{outros-usos-para-expressuxf5es-regulares}{%
 \section{Outros usos para expressões regulares}\label{outros-usos-para-expressuxf5es-regulares}}
 
-\hypertarget{string}{%
-\section{\texorpdfstring{\texttt{string}}{string}}\label{string}}
+Não temos exercícios nesta seção.
+
+\hypertarget{stringi}{%
+\section{\texorpdfstring{\texttt{stringi}}{stringi}}\label{stringi}}
+
+\hypertarget{exr11-7-1}{%
+\subsection*{Exercício 11.7.1}\label{exr11-7-1}}
+\addcontentsline{toc}{subsection}{Exercício 11.7.1}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr11-7-2}{%
+\subsection*{Exercício 11.7.2}\label{exr11-7-2}}
+\addcontentsline{toc}{subsection}{Exercício 11.7.2}
+
+x
+
+\begin{solution}
+x
+\end{solution}
 
 \hypertarget{fatores-com-forcats}{%
 \chapter{\texorpdfstring{Fatores com \texttt{forcats}}{Fatores com forcats}}\label{fatores-com-forcats}}
