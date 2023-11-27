@@ -233,7 +233,7 @@
 \makeatother
 \subtitle{Solução dos exercícios}
 \author{Jeidsan A. da C. Pereira}
-\date{2023-11-26}
+\date{2023-11-27}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Teorema}[chapter]
@@ -316,6 +316,14 @@ Dúvidas ou sugestões de melhoria podem ser encaminhadas para o e-mail \emph{\h
   \protect\hyperlink{exr8-3-6}{Exercício 8.3.6};
 \item
   \protect\hyperlink{exr9-5-2}{Exercício 9.5.2};
+\item
+  \protect\hyperlink{exr10-2-1}{Exercício 10.2.1};
+\item
+  \protect\hyperlink{exr10-3-2}{Exercício 10.3.2};
+\item
+  \protect\hyperlink{exr10-3-3}{Exercício 10.3.3};
+\item
+  \protect\hyperlink{exr10-4-3}{Exercício 10.4.3};
 \item
 \end{itemize}
 
@@ -4781,18 +4789,18 @@ Pratique referir-se a nomes de variáveis não sintáticos, no data frame a segu
 
 \begin{verbatim}
 ## # A tibble: 10 x 3
-##      one   two three
-##    <int> <dbl> <dbl>
-##  1     1  1.91  1.91
-##  2     2  3.98  1.99
-##  3     3  4.25  1.42
-##  4     4  8.35  2.09
-##  5     5 10.5   2.10
-##  6     6 12.7   2.12
-##  7     7 16.6   2.37
-##  8     8 15.8   1.98
-##  9     9 18.0   2.00
-## 10    10 20.2   2.02
+##      one    two three
+##    <int>  <dbl> <dbl>
+##  1     1  0.242 0.242
+##  2     2  4.55  2.28 
+##  3     3  6.93  2.31 
+##  4     4  9.37  2.34 
+##  5     5 11.8   2.36 
+##  6     6 11.7   1.95 
+##  7     7 14.1   2.01 
+##  8     8 16.2   2.02 
+##  9     9 17.4   1.94 
+## 10    10 19.8   1.98
 \end{verbatim}
 
 \end{solution}
@@ -6110,23 +6118,827 @@ Não temos exercícios nesta seção.
 \hypertarget{introduuxe7uxe3o-6}{%
 \section{Introdução}\label{introduuxe7uxe3o-6}}
 
+Não temos exercícios nesta seção.
+
 \hypertarget{nycflights13}{%
 \section{\texorpdfstring{\texttt{nycflights13}}{nycflights13}}\label{nycflights13}}
+
+\hypertarget{exr10-2-1}{%
+\subsection*{Exercício 10.2.1}\label{exr10-2-1}}
+\addcontentsline{toc}{subsection}{Exercício 10.2.1}
+
+Imagine que você quisesse desenhar (aproximadamente) a rota que cada avião fez da sua origem ao seu destino. De quais variáveis você precisaria? Quais tabels você precisaria combinar?
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr10-2-2}{%
+\subsection*{Exercício 10.2.2}\label{exr10-2-2}}
+\addcontentsline{toc}{subsection}{Exercício 10.2.2}
+
+Eu esqueci de desenhar o relacionamento entre \texttt{weather} e \texttt{airports}. Qual é o relacionamento e como ele deveria aparecer no diagrama?
+
+\begin{solution}
+Utilizaríamos as tabelas \texttt{weather} e \texttt{airports} por meio da variável \texttt{origin} de \texttt{weather}.
+\end{solution}
+
+\hypertarget{exr10-2-3}{%
+\subsection*{Exercício 10.2.3}\label{exr10-2-3}}
+\addcontentsline{toc}{subsection}{Exercício 10.2.3}
+
+\texttt{weather} só contém informações dos aeroportos de origem (NYC). Se contivesse registro de clima de todos os aeroportos dos Estados Unidos, qual relação adicional definiria com \texttt{flights}?
+
+\begin{solution}
+Haveria uma nova relação entre esses dois conjuntos de dados, utilizando além da data e hora de chegada, a variável \texttt{dest}.
+\end{solution}
+
+\hypertarget{exr10-2-4}{%
+\subsection*{Exercício 10.2.4}\label{exr10-2-4}}
+\addcontentsline{toc}{subsection}{Exercício 10.2.4}
+
+Nós sabemos que alguns dias do ano são ``especiais'', e menos pessoas que o normal viajam nesse período. Como você poderia representar esses dados como um data frame? Quais seriam as chaves primárias dessa tabela? Como ela se conectaria às tabelas existentes?
+
+\begin{solution}
+Haveria um novo conjunto de dados chamado, digamos, \texttt{special\_dates}, e a chave seria formada pelas variáveis \texttt{year}, \texttt{month} e \texttt{day}
+\end{solution}
 
 \hypertarget{chaves-keys}{%
 \section{Chaves (keys)}\label{chaves-keys}}
 
+\hypertarget{exr10-3-1}{%
+\subsection*{Exercício 10.3.1}\label{exr10-3-1}}
+\addcontentsline{toc}{subsection}{Exercício 10.3.1}
+
+Adicione uma surrogate key para \texttt{flights}.
+
+\begin{solution}
+\leavevmode
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(flights1 }\OtherTok{\textless{}{-}}\NormalTok{ flights }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{id =} \FunctionTok{row\_number}\NormalTok{()))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 336,776 x 20
+##     year month   day dep_time
+##    <int> <int> <int>    <int>
+##  1  2013     1     1      517
+##  2  2013     1     1      533
+##  3  2013     1     1      542
+##  4  2013     1     1      544
+##  5  2013     1     1      554
+##  6  2013     1     1      554
+##  7  2013     1     1      555
+##  8  2013     1     1      557
+##  9  2013     1     1      557
+## 10  2013     1     1      558
+## # i 336,766 more rows
+## # i 16 more variables:
+## #   sched_dep_time <int>,
+## #   dep_delay <dbl>,
+## #   arr_time <int>,
+## #   sched_arr_time <int>, ...
+\end{verbatim}
+
+\end{solution}
+
+\hypertarget{exr10-3-2}{%
+\subsection*{Exercício 10.3.2}\label{exr10-3-2}}
+\addcontentsline{toc}{subsection}{Exercício 10.3.2}
+
+Identifique as keys nos seguintes conjuntos de dados:
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  \texttt{Lahman::Batting}
+\item
+  \texttt{babynames::babynames}
+\item
+  \texttt{nasaweather::atmos}
+\item
+  \texttt{fueleconomy::vehicles}
+\item
+  \texttt{ggplot2::diamonds}
+\end{enumerate}
+
+(Você precisará instalar alguns pacotes e ler algumas documentações.)
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr10-3-3}{%
+\subsection*{Exercício 10.3.3}\label{exr10-3-3}}
+\addcontentsline{toc}{subsection}{Exercício 10.3.3}
+
+Desenhe um diagrama ilustrando as conexões entre as tabelas \texttt{Batting}, \texttt{Master} e \texttt{Salaries} no pacote \textbf{Lahman}. Desenhe outro diagrama que mostre o relacionamento entre \texttt{Master}, \texttt{Managers} e \texttt{AwardsManagers}.
+
+Como você caracteriza o relacionamento entre as tabelas \texttt{Batting}, \texttt{Pitching} e \texttt{Fielding}?
+
+\begin{solution}
+x
+\end{solution}
+
 \hypertarget{mutating-joins}{%
 \section{Mutating joins}\label{mutating-joins}}
+
+\hypertarget{exr10-4-1}{%
+\subsection*{Exercício 10.4.1}\label{exr10-4-1}}
+\addcontentsline{toc}{subsection}{Exercício 10.4.1}
+
+Calcule o atraso médio por destino, depois faça join no data frame \texttt{airports} para que possa exibir a distribuição espacial dos atrasos. Eis uma maneira fácil de desenhar um mapa dos Estados Unidos:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{airports }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{semi\_join}\NormalTok{(flights, }\FunctionTok{c}\NormalTok{(}\StringTok{"faa"} \OtherTok{=} \StringTok{"dest"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(lon, lat)) }\SpecialCharTok{+}
+    \FunctionTok{borders}\NormalTok{(}\StringTok{"state"}\NormalTok{) }\SpecialCharTok{+} 
+    \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+    \FunctionTok{coord\_quickmap}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-167-1.pdf}
+(Não se preocupe se você não entender o que \texttt{semi\_join()} faz - você aprenderá isso em seguida.)
+
+Você pode querer usar \texttt{size} ou \texttt{color} dos pontos para exibir o atraso médio de casa aeroporto.
+
+\begin{solution}
+\leavevmode
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{flights }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(dest) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}
+    \AttributeTok{delay =} \FunctionTok{mean}\NormalTok{(arr\_delay, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{  ) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{left\_join}\NormalTok{(airports, }\AttributeTok{by =} \FunctionTok{c}\NormalTok{(}\StringTok{"dest"} \OtherTok{=} \StringTok{"faa"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{ (name, delay, lat, lon) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}
+      \AttributeTok{x =}\NormalTok{ lon, }
+      \AttributeTok{y =}\NormalTok{ lat,}
+      \AttributeTok{color =}\NormalTok{ delay}
+\NormalTok{  )) }\SpecialCharTok{+}
+    \FunctionTok{borders}\NormalTok{(}\StringTok{"state"}\NormalTok{) }\SpecialCharTok{+} 
+    \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+    \FunctionTok{coord\_quickmap}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Removed 4 rows containing missing values (`geom_point()`).
+\end{verbatim}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-168-1.pdf}
+
+\end{solution}
+
+\hypertarget{exr10-4-2}{%
+\subsection*{Exercício 10.4.2}\label{exr10-4-2}}
+\addcontentsline{toc}{subsection}{Exercício 10.4.2}
+
+Adicione a localização da origem e destino (isto é, \texttt{lat} e \texttt{lon}) para flights.
+
+\begin{solution}
+\leavevmode
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{flights }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(dest, origin) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarize}\NormalTok{(}
+    \AttributeTok{delay =} \FunctionTok{mean}\NormalTok{(arr\_delay, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{  ) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ungroup}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{left\_join}\NormalTok{(airports, }\AttributeTok{by =} \FunctionTok{c}\NormalTok{(}\StringTok{"dest"} \OtherTok{=} \StringTok{"faa"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{left\_join}\NormalTok{(airports, }\AttributeTok{by =} \FunctionTok{c}\NormalTok{(}\StringTok{"origin"} \OtherTok{=} \StringTok{"faa"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `summarise()` has grouped output by 'dest'. You can override using the
+## `.groups` argument.
+\end{verbatim}
+
+\begin{verbatim}
+## # A tibble: 224 x 17
+##    dest  origin  delay name.x 
+##    <chr> <chr>   <dbl> <chr>  
+##  1 ABQ   JFK     4.38  Albuqu~
+##  2 ACK   JFK     4.85  Nantuc~
+##  3 ALB   EWR    14.4   Albany~
+##  4 ANC   EWR    -2.5   Ted St~
+##  5 ATL   EWR    13.2   Hartsf~
+##  6 ATL   JFK     6.27  Hartsf~
+##  7 ATL   LGA    11.3   Hartsf~
+##  8 AUS   EWR    -0.474 Austin~
+##  9 AUS   JFK    10.3   Austin~
+## 10 AVL   EWR     8.80  Ashevi~
+## # i 214 more rows
+## # i 13 more variables:
+## #   lat.x <dbl>, lon.x <dbl>,
+## #   alt.x <dbl>, tz.x <dbl>,
+## #   ...
+\end{verbatim}
+
+\end{solution}
+
+\hypertarget{exr10-4-3}{%
+\subsection*{Exercício 10.4.3}\label{exr10-4-3}}
+\addcontentsline{toc}{subsection}{Exercício 10.4.3}
+
+Há um relacionamento entre a idade de um avisão e seus atrasos?
+
+\begin{solution}
+Para responder essa questão, precisaremos:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  calular o atraso médio de um avião;
+\item
+  juntar os dados do avião; e
+\item
+  plotar o gráfico de dispersão correspondente.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{flights }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(tailnum) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}
+    \AttributeTok{delay =} \FunctionTok{mean}\NormalTok{(arr\_delay, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{  ) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(delay }\SpecialCharTok{\textgreater{}} \DecValTok{0}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{left\_join}\NormalTok{(}
+\NormalTok{    planes }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{select}\NormalTok{(tailnum, year), }
+    \AttributeTok{by =} \StringTok{"tailnum"}
+\NormalTok{  ) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(year, delay)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{se =} \ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using method = 'gam' and formula = 'y ~ s(x, bs = "cs")'
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Removed 519 rows containing non-finite values (`stat_smooth()`).
+\end{verbatim}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-170-1.pdf}
+
+Não há relação (melhorar resposta!)
+\end{solution}
+
+\hypertarget{exr10-4-4}{%
+\subsection*{Exercício 10.4.4}\label{exr10-4-4}}
+\addcontentsline{toc}{subsection}{Exercício 10.4.4}
+
+Quais condições climáticas tornam mais provável haver um atraso?
+
+\begin{solution}
+Vamos iniciar a nossa análise juntando os conjuntos de dados:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(flights\_weather }\OtherTok{\textless{}{-}}\NormalTok{ flights }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{inner\_join}\NormalTok{(}
+\NormalTok{    weather, }
+    \AttributeTok{by =} \FunctionTok{c}\NormalTok{(}
+      \StringTok{"origin"} \OtherTok{=} \StringTok{"origin"}\NormalTok{,}
+      \StringTok{"year"} \OtherTok{=} \StringTok{"year"}\NormalTok{,}
+      \StringTok{"month"} \OtherTok{=} \StringTok{"month"}\NormalTok{,}
+      \StringTok{"day"} \OtherTok{=} \StringTok{"day"}\NormalTok{,}
+      \StringTok{"hour"} \OtherTok{=} \StringTok{"hour"}
+\NormalTok{    )}
+\NormalTok{  ))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 335,220 x 29
+##     year month   day dep_time
+##    <int> <int> <int>    <int>
+##  1  2013     1     1      517
+##  2  2013     1     1      533
+##  3  2013     1     1      542
+##  4  2013     1     1      544
+##  5  2013     1     1      554
+##  6  2013     1     1      554
+##  7  2013     1     1      555
+##  8  2013     1     1      557
+##  9  2013     1     1      557
+## 10  2013     1     1      558
+## # i 335,210 more rows
+## # i 25 more variables:
+## #   sched_dep_time <int>,
+## #   dep_delay <dbl>,
+## #   arr_time <int>,
+## #   sched_arr_time <int>, ...
+\end{verbatim}
+
+Agora vamos avaliar cada uma das condições climáticas antes em relação ao atraso médio na decolagem.
+
+Para a temperatura do ar, não encontramos uma relação, conforme exemplo abaixo.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{flights\_weather }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{temp =} \FunctionTok{cut\_interval}\NormalTok{(temp, }\AttributeTok{n =} \DecValTok{10}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(temp) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{delay =} \FunctionTok{mean}\NormalTok{(dep\_delay, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(temp, delay)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_point}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-172-1.pdf}
+Para a umidade do ar, parece haver uma pequena relação, porém esta pode estar associada a outras variáveis (\texttt{precip} e \texttt{visib}, mais especificamente).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{flights\_weather }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{humid =} \FunctionTok{cut\_interval}\NormalTok{(humid, }\AttributeTok{n =} \DecValTok{10}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(humid) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{delay =} \FunctionTok{mean}\NormalTok{(dep\_delay, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(humid, delay)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_point}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-173-1.pdf}
+Para a quantidade de chuva, parece haver uma associação muito fraca.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{flights\_weather }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(precip) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{delay =} \FunctionTok{mean}\NormalTok{(dep\_delay, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(precip, delay)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+    \FunctionTok{geom\_smooth}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using method = 'loess' and formula = 'y ~ x'
+\end{verbatim}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-174-1.pdf}
+
+Para a visibilidade, já podemos perceber uma relação negativa forte.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{flights\_weather }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{visib =} \FunctionTok{cut\_interval}\NormalTok{(visib, }\AttributeTok{n =} \DecValTok{10}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(visib) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{delay =} \FunctionTok{mean}\NormalTok{(dep\_delay, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(visib, delay)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+    \FunctionTok{geom\_smooth}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using method = 'loess' and formula = 'y ~ x'
+\end{verbatim}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-175-1.pdf}
+\end{solution}
+
+\hypertarget{exr10-4-5}{%
+\subsection*{Exercício 10.4.5}\label{exr10-4-5}}
+\addcontentsline{toc}{subsection}{Exercício 10.4.5}
+
+O que aconteceu no dia 13 de junho de 2013? Exiba o padrão espacial de atrasos e, então, uso o Google para fazer uma referência cruzada com o clima.
+
+\begin{solution}
+Houve grande número de atrasos nos voos para a região sudeste dos Estados Unidos. O fato está diretamente associado a fortes tempestades que ocorreram na região entre os dias 12 e 13 de junho de 2013.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{flights }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(year }\SpecialCharTok{==} \DecValTok{2013}\NormalTok{, month }\SpecialCharTok{==} \DecValTok{6}\NormalTok{, day }\SpecialCharTok{==} \DecValTok{13}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(dest) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}
+    \AttributeTok{delay =} \FunctionTok{mean}\NormalTok{(arr\_delay, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{  ) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{inner\_join}\NormalTok{(airports, }\AttributeTok{by =} \FunctionTok{c}\NormalTok{(}\StringTok{"dest"} \OtherTok{=} \StringTok{"faa"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{ (name, delay, lat, lon) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}
+      \AttributeTok{x =}\NormalTok{ lon, }
+      \AttributeTok{y =}\NormalTok{ lat,}
+      \AttributeTok{color =}\NormalTok{ delay,}
+      \AttributeTok{size =}\NormalTok{ delay}
+\NormalTok{  )) }\SpecialCharTok{+}
+    \FunctionTok{borders}\NormalTok{(}\StringTok{"state"}\NormalTok{) }\SpecialCharTok{+} 
+    \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+    \FunctionTok{coord\_quickmap}\NormalTok{()  }\SpecialCharTok{+}
+    \FunctionTok{scale\_colour\_viridis}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Removed 3 rows containing missing values (`geom_point()`).
+\end{verbatim}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-176-1.pdf}
+\end{solution}
 
 \hypertarget{filtering-joins}{%
 \section{Filtering joins}\label{filtering-joins}}
 
+\hypertarget{exr10-5-1}{%
+\subsection*{Exercício 10.5.1}\label{exr10-5-1}}
+\addcontentsline{toc}{subsection}{Exercício 10.5.1}
+
+O que significa para um voo ter um \texttt{tailnum} faltante? O que os números de cauda que não têm um registro correspondente em \texttt{planes} têm em comum? (Dica: uma variável explica aproximadamente 90\% dos problemas.)
+
+\begin{solution}
+Primeiro vamos avaliar o caso de \texttt{tailnum} faltante no conjunto \texttt{flights}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(flights }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(tailnum)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 2,512 x 19
+##     year month   day dep_time
+##    <int> <int> <int>    <int>
+##  1  2013     1     2       NA
+##  2  2013     1     2       NA
+##  3  2013     1     3       NA
+##  4  2013     1     3       NA
+##  5  2013     1     4       NA
+##  6  2013     1     4       NA
+##  7  2013     1     5       NA
+##  8  2013     1     7       NA
+##  9  2013     1     8       NA
+## 10  2013     1     9       NA
+## # i 2,502 more rows
+## # i 15 more variables:
+## #   sched_dep_time <int>,
+## #   dep_delay <dbl>,
+## #   arr_time <int>,
+## #   sched_arr_time <int>, ...
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{flights }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(tailnum), }\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(air\_time)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{nrow}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0
+\end{verbatim}
+
+Para este conjunto, observamos que \texttt{air\_time} é sempre faltante, o que indica que o vôo foi cancelado (possivelmente o cancelamento aconteceu antes mesmo de ser designada uma aeronave para executar o voo).
+
+Agora vamos avaliar o voos que não possuem um número de cauda correspondente no conjunto de dados \texttt{planes}. Inicialmente, vamos verificar quantos são os voos nessa condição:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(flights\_without\_planes }\OtherTok{\textless{}{-}} 
+\NormalTok{  flights }\SpecialCharTok{\%\textgreater{}\%} 
+    \FunctionTok{anti\_join}\NormalTok{(planes, }\AttributeTok{by =} \StringTok{"tailnum"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{nrow}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 52606
+\end{verbatim}
+
+Há 52.606 vôos sem correspondencia no conjunto de dados \texttt{planes}, isso equivale a aproximadamente 15,62\% dos vôos. Para avaliar o que eles tem em comum, vamos usar um pouco da nossa intuição: entre as variáveis, as que mais podem ter relação com um código de avião não cadastrado são a companhia que a operou (\texttt{carrier}) e o número do voo/percurso (\texttt{flight}). Vamos investigá-los!
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{flights\_without\_planes }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{count}\NormalTok{(carrier, }\AttributeTok{sort =} \ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{p =}\NormalTok{ n }\SpecialCharTok{/} \FunctionTok{sum}\NormalTok{(n))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 10 x 3
+##    carrier     n        p
+##    <chr>   <int>    <dbl>
+##  1 MQ      25397 0.483   
+##  2 AA      22558 0.429   
+##  3 UA       1693 0.0322  
+##  4 9E       1044 0.0198  
+##  5 B6        830 0.0158  
+##  6 US        699 0.0133  
+##  7 FL        187 0.00355 
+##  8 DL        110 0.00209 
+##  9 F9         50 0.000950
+## 10 WN         38 0.000722
+\end{verbatim}
+
+Vimos que aproximadamente 91,16\% dos vôos feitos em aeronaves não registradas foram operadas pela American Airlines Inc.~ou pela Envoy Air e, avaliando a documentação de \texttt{planes}, percebemos que essas companhias não reportam os números de cauda, por isso os valores estão faltantes.
+
+A ausência de registro para os 8,84\% restantes não podem ser explicadas a menos que assumamos que se tratam de erro de registro. Por se tratar de um valor muito pequeno em relação ao total de voos (aproximadamente 1,38\% do total), entendemos que os mesmos podem ser ignorados.
+\end{solution}
+
+\hypertarget{exr10-5-2}{%
+\subsection*{Exercício 10.5.2}\label{exr10-5-2}}
+\addcontentsline{toc}{subsection}{Exercício 10.5.2}
+
+Filtre os voos para exibir apenas aqueles que fizeram pelo menos 100 rotas.
+
+\begin{solution}
+
+Em primeiro lugar, precisamos identificar a quantidade de rotas realizadas por cada voo:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(flights\_over\_100 }\OtherTok{\textless{}{-}}\NormalTok{ flights }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(tailnum) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{count}\NormalTok{(}\AttributeTok{sort =} \ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(tailnum), n }\SpecialCharTok{\textgreater{}=} \DecValTok{100}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1,217 x 2
+## # Groups:   tailnum [1,217]
+##    tailnum     n
+##    <chr>   <int>
+##  1 N725MQ    575
+##  2 N722MQ    513
+##  3 N723MQ    507
+##  4 N711MQ    486
+##  5 N713MQ    483
+##  6 N258JB    427
+##  7 N298JB    407
+##  8 N353JB    404
+##  9 N351JB    402
+## 10 N735MQ    396
+## # i 1,207 more rows
+\end{verbatim}
+
+Agora vamos filtrar o total de voos:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{flights }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{semi\_join}\NormalTok{(flights\_over\_100, }\AttributeTok{by =} \StringTok{"tailnum"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 228,390 x 19
+##     year month   day dep_time
+##    <int> <int> <int>    <int>
+##  1  2013     1     1      517
+##  2  2013     1     1      533
+##  3  2013     1     1      544
+##  4  2013     1     1      554
+##  5  2013     1     1      555
+##  6  2013     1     1      557
+##  7  2013     1     1      557
+##  8  2013     1     1      558
+##  9  2013     1     1      558
+## 10  2013     1     1      558
+## # i 228,380 more rows
+## # i 15 more variables:
+## #   sched_dep_time <int>,
+## #   dep_delay <dbl>,
+## #   arr_time <int>,
+## #   sched_arr_time <int>, ...
+\end{verbatim}
+
+\end{solution}
+
+\hypertarget{exr10-5-3}{%
+\subsection*{Exercício 10.5.3}\label{exr10-5-3}}
+\addcontentsline{toc}{subsection}{Exercício 10.5.3}
+
+Combine \texttt{fueleconomy::vehicles} e \texttt{fueleconomy::common} para encontrar apenas os registros para os modelos mais comuns.
+
+\begin{solution}
+\leavevmode
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{vehicles }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{semi\_join}\NormalTok{(common, }\AttributeTok{by =} \FunctionTok{c}\NormalTok{(}\StringTok{"make"}\NormalTok{, }\StringTok{"model"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 14,531 x 12
+##       id make  model    year
+##    <dbl> <chr> <chr>   <dbl>
+##  1  1833 Acura Integra  1986
+##  2  1834 Acura Integra  1986
+##  3  3037 Acura Integra  1987
+##  4  3038 Acura Integra  1987
+##  5  4183 Acura Integra  1988
+##  6  4184 Acura Integra  1988
+##  7  5303 Acura Integra  1989
+##  8  5304 Acura Integra  1989
+##  9  6442 Acura Integra  1990
+## 10  6443 Acura Integra  1990
+## # i 14,521 more rows
+## # i 8 more variables:
+## #   class <chr>, trans <chr>,
+## #   drive <chr>, cyl <dbl>,
+## #   ...
+\end{verbatim}
+
+\end{solution}
+
+\hypertarget{exr10-5-4}{%
+\subsection*{Exercício 10.5.4}\label{exr10-5-4}}
+\addcontentsline{toc}{subsection}{Exercício 10.5.4}
+
+Encontre as 48 horas (no curso de um ano inteiro) que tiveram os piores atrasos. Faça as referências cruzadas com os dados de \texttt{weather}. Você consegue ver algum padrão?
+
+\begin{solution}
+Em primeiro lugar, vamos buscar as 48 horas com piores atrasos (consideraremos o atraso médio de decolagem dos vôos para cada intervalo de 1h, destes selecionaremos os 48 piores). Para isso:
+
+\begin{itemize}
+\tightlist
+\item
+  iniciaremos separando a hora em que estava planejada a decolagem;
+\item
+  agrupamos os voos por hora (incluímos a origem no agrupamento porque estamos considerando o atraso na decolagem!);
+\item
+  calculamos o atraso médio para cada um dos grupos;
+\item
+  ordenamos conforme o atraso;
+\item
+  seleciono as 48 piores horas (não contínuas);
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(most\_delayed }\OtherTok{\textless{}{-}}\NormalTok{ flights }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{hour =}\NormalTok{ sched\_dep\_time }\SpecialCharTok{\%/\%} \DecValTok{100}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(origin, year, month, day, hour) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{dep\_delay =} \FunctionTok{mean}\NormalTok{(dep\_delay, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ungroup}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{arrange}\NormalTok{(}\FunctionTok{desc}\NormalTok{(dep\_delay)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{slice}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{48}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `summarise()` has grouped output by 'origin', 'year', 'month', 'day'. You can
+## override using the `.groups` argument.
+\end{verbatim}
+
+\begin{verbatim}
+## # A tibble: 48 x 6
+##    origin  year month   day
+##    <chr>  <int> <int> <int>
+##  1 LGA     2013     7    28
+##  2 EWR     2013     2     9
+##  3 EWR     2013     2     9
+##  4 LGA     2013     9     2
+##  5 LGA     2013     7    22
+##  6 LGA     2013     7    28
+##  7 JFK     2013     4    10
+##  8 LGA     2013     9    12
+##  9 EWR     2013     3     8
+## 10 LGA     2013    12     5
+## # i 38 more rows
+## # i 2 more variables:
+## #   hour <dbl>,
+## #   dep_delay <dbl>
+\end{verbatim}
+
+Agora vamos selecionar as condições de tempo nestas horas que selecionamos.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(weather\_most\_delayed }\OtherTok{\textless{}{-}}\NormalTok{ weather }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{semi\_join}\NormalTok{(most\_delayed, }\AttributeTok{by =} \FunctionTok{c}\NormalTok{(}\StringTok{"origin"}\NormalTok{, }\StringTok{"year"}\NormalTok{, }\StringTok{"month"}\NormalTok{, }\StringTok{"day"}\NormalTok{, }\StringTok{"hour"}\NormalTok{))) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{ (temp, humid, precip, wind\_speed, visib)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 48 x 5
+##     temp humid precip
+##    <dbl> <dbl>  <dbl>
+##  1  27.0  65.8   0   
+##  2  28.0  60.1   0   
+##  3  28.9  57.9   0   
+##  4  33.8  95.8   0.06
+##  5  34.0  96.5   0.05
+##  6  80.1  79.2   0   
+##  7  86    57.1   0   
+##  8  73.4  94.1   0.08
+##  9  84.0  69.6   0   
+## 10  78.8  93.5   0.23
+## # i 38 more rows
+## # i 2 more variables:
+## #   wind_speed <dbl>,
+## #   visib <dbl>
+\end{verbatim}
+
+Vamos tentar visualizar esses dados de forma mais clara:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{weather\_most\_delayed }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}
+    \AttributeTok{x =}\NormalTok{ precip,}
+    \AttributeTok{y =}\NormalTok{ temp,}
+    \AttributeTok{color =}\NormalTok{ visib,}
+    \AttributeTok{size =}\NormalTok{ wind\_speed}
+\NormalTok{  )) }\SpecialCharTok{+}
+    \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+    \FunctionTok{scale\_colour\_viridis}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-186-1.pdf}
+\end{solution}
+
+\hypertarget{exr10-5-5}{%
+\subsection*{Exercício 10.5.5}\label{exr10-5-5}}
+\addcontentsline{toc}{subsection}{Exercício 10.5.5}
+
+O que \texttt{anti\_join(flights,\ airports,\ by\ =\ c("dest"\ =\ "faa"))} lhe diz? O que \texttt{anti\_join(airports,\ flights,\ by\ =\ c("faa"\ =\ "dest"))} lhe diz?
+
+\begin{solution}
+O comando \texttt{anti\_join(flights,\ airports,\ by\ =\ c("dest"\ =\ "faa"))} busca todos os voos cujo destino não está na lista de aeroportos, enquanto \texttt{anti\_join(airports,\ flights,\ by\ =\ c("faa"\ =\ "dest"))} busca todos os aeroportos que não são destino de nenhum dos voos.
+\end{solution}
+
+\hypertarget{exr10-5-6}{%
+\subsection*{Exercício 10.5.6}\label{exr10-5-6}}
+\addcontentsline{toc}{subsection}{Exercício 10.5.6}
+
+Você pode esperar que haja um relacionamento implícito entre avião e linha aérea, visto que cada avião é conduzido por uma única linha aérea. Confirme ou rejeite essa hipótese usando as ferramenas que você aprendeu na seção anterior.
+
+\begin{solution}
+
+Não é verdade que uma aeronave é operada apenas por uma única companhia aérea. Temos 17 aeronaves sendo operadas por mais de uma companhia.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{flights }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(tailnum)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(tailnum, carrier) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{distinct}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(tailnum) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(}\FunctionTok{n}\NormalTok{() }\SpecialCharTok{\textgreater{}} \DecValTok{1}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{left\_join}\NormalTok{(airlines, }\AttributeTok{by =} \StringTok{"carrier"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{arrange}\NormalTok{(tailnum, carrier)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 34 x 3
+## # Groups:   tailnum [17]
+##    tailnum carrier name       
+##    <chr>   <chr>   <chr>      
+##  1 N146PQ  9E      Endeavor A~
+##  2 N146PQ  EV      ExpressJet~
+##  3 N153PQ  9E      Endeavor A~
+##  4 N153PQ  EV      ExpressJet~
+##  5 N176PQ  9E      Endeavor A~
+##  6 N176PQ  EV      ExpressJet~
+##  7 N181PQ  9E      Endeavor A~
+##  8 N181PQ  EV      ExpressJet~
+##  9 N197PQ  9E      Endeavor A~
+## 10 N197PQ  EV      ExpressJet~
+## # i 24 more rows
+\end{verbatim}
+
+\end{solution}
+
 \hypertarget{problemas-de-joins}{%
 \section{Problemas de joins}\label{problemas-de-joins}}
 
+Não temos exercícios nesta seção.
+
 \hypertarget{operauxe7uxf5es-de-conjuntos}{%
 \section{Operações de conjuntos}\label{operauxe7uxf5es-de-conjuntos}}
+
+Não temos exercícios nesta seção.
 
 \hypertarget{strings-com-stringr}{%
 \chapter{\texorpdfstring{Strings com \texttt{stringr}}{Strings com stringr}}\label{strings-com-stringr}}

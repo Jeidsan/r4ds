@@ -13,7 +13,7 @@ Imagine que você quisesse desenhar (aproximadamente) a rota que cada avião fez
 :::
 
 ::: {.solution}
-
+x
 :::
 
 ### Exercício 10.2.2 {- #exr10-2-2}
@@ -56,8 +56,8 @@ Adicione uma surrogate key para `flights`.
 
 ::: {.solution}
 ```{r}
-flights1 <- flights %>%
-  mutate(id = row_number())
+(flights1 <- flights %>%
+  mutate(id = row_number()))
 ```
 
 :::
@@ -284,7 +284,6 @@ flights %>%
     coord_quickmap()  +
     scale_colour_viridis()
 ```
-
 :::
 
 ## Filtering joins
@@ -292,61 +291,161 @@ flights %>%
 ### Exercício 10.5.1 {- #exr10-5-1}
 
 ::: {.enunciado}
-x
+O que significa para um voo ter um `tailnum` faltante? O que os números de cauda que não têm um registro correspondente em `planes` têm em comum? (Dica: uma variável explica aproximadamente 90% dos problemas.)
 :::
 
 ::: {.solution}
-x
+Primeiro vamos avaliar o caso de `tailnum` faltante no conjunto `flights`:
+
+```{r}
+(flights %>%
+  filter(is.na(tailnum)))
+```
+
+```{r}
+flights %>%
+  filter(is.na(tailnum), !is.na(air_time)) %>%
+  nrow()
+```
+Para este conjunto, observamos que `air_time` é sempre faltante, o que indica que o vôo foi cancelado (possivelmente o cancelamento aconteceu antes mesmo de ser designada uma aeronave para executar o voo).
+
+Agora vamos avaliar o voos que não possuem um número de cauda correspondente no conjunto de dados `planes`. Inicialmente, vamos verificar quantos são os voos nessa condição:
+
+```{r}
+(flights_without_planes <- 
+  flights %>% 
+    anti_join(planes, by = "tailnum")) %>%
+  nrow()
+```
+Há 52.606 vôos sem correspondencia no conjunto de dados `planes`, isso equivale a aproximadamente 15,62% dos vôos. Para avaliar o que eles tem em comum, vamos usar um pouco da nossa intuição: entre as variáveis, as que mais podem ter relação com um código de avião não cadastrado são a companhia que a operou (`carrier`) e o número do voo/percurso (`flight`). Vamos investigá-los!
+
+```{r}
+flights_without_planes %>%
+  count(carrier, sort = TRUE) %>%
+  mutate(p = n / sum(n))
+```
+
+Vimos que aproximadamente 91,16% dos vôos feitos em aeronaves não registradas foram operadas pela American Airlines Inc. ou pela Envoy Air e, avaliando a documentação de `planes`, percebemos que essas companhias não reportam os números de cauda, por isso os valores estão faltantes. 
+
+A ausência de registro para os 8,84% restantes não podem ser explicadas a menos que assumamos que se tratam de erro de registro. Por se tratar de um valor muito pequeno em relação ao total de voos (aproximadamente 1,38% do total), entendemos que os mesmos podem ser ignorados.
 :::
 
 ### Exercício 10.5.2 {- #exr10-5-2}
 
 ::: {.enunciado}
-x
+Filtre os voos para exibir apenas aqueles que fizeram pelo menos 100 rotas.
 :::
 
 ::: {.solution}
-x
+Em primeiro lugar, precisamos identificar a quantidade de rotas realizadas por cada voo:
+
+```{r}
+(flights_over_100 <- flights %>%
+  group_by(tailnum) %>%
+  count(sort = TRUE) %>%
+  filter(!is.na(tailnum), n >= 100))
+```
+
+Agora vamos filtrar o total de voos:
+
+```{r}
+flights %>%
+  semi_join(flights_over_100, by = "tailnum")
+```
 :::
 
 ### Exercício 10.5.3 {- #exr10-5-3}
 
 ::: {.enunciado}
-x
+Combine `fueleconomy::vehicles` e `fueleconomy::common` para encontrar apenas os registros para os modelos mais comuns.
 :::
 
 ::: {.solution}
-x
+```{r}
+vehicles %>%
+  semi_join(common, by = c("make", "model"))
+```
+
 :::
 
 ### Exercício 10.5.4 {- #exr10-5-4}
 
 ::: {.enunciado}
-x
+Encontre as 48 horas (no curso de um ano inteiro) que tiveram os piores atrasos. Faça as referências cruzadas com os dados de `weather`. Você consegue ver algum padrão?
 :::
 
 ::: {.solution}
-x
+Em primeiro lugar, vamos buscar as 48 horas com piores atrasos (consideraremos o atraso médio de decolagem dos vôos para cada intervalo de 1h, destes selecionaremos os 48 piores). Para isso:
+
+- iniciaremos separando a hora em que estava planejada a decolagem;
+- agrupamos os voos por hora (incluímos a origem no agrupamento porque estamos considerando o atraso na decolagem!);
+- calculamos o atraso médio para cada um dos grupos;
+- ordenamos conforme o atraso;
+- seleciono as 48 piores horas (não contínuas);
+
+```{r}
+(most_delayed <- flights %>%
+  mutate(hour = sched_dep_time %/% 100) %>%
+  group_by(origin, year, month, day, hour) %>%
+  summarise(dep_delay = mean(dep_delay, na.rm = TRUE)) %>%
+  ungroup() %>%
+  arrange(desc(dep_delay)) %>%
+  slice(1:48))
+```
+
+Agora vamos selecionar as condições de tempo nestas horas que selecionamos.
+
+```{r}
+(weather_most_delayed <- weather %>%
+  semi_join(most_delayed, by = c("origin", "year", "month", "day", "hour"))) %>%
+  select (temp, humid, precip, wind_speed, visib)
+```
+
+Vamos tentar visualizar esses dados de forma mais clara:
+
+```{r}
+weather_most_delayed %>%
+  ggplot(aes(
+    x = precip,
+    y = temp,
+    color = visib,
+    size = wind_speed
+  )) +
+    geom_point() +
+    scale_colour_viridis()
+```
+
 :::
 
 ### Exercício 10.5.5 {- #exr10-5-5}
 
 ::: {.enunciado}
-x
+O que `anti_join(flights, airports, by = c("dest" = "faa"))` lhe diz? O que `anti_join(airports, flights, by = c("faa" = "dest"))` lhe diz?
 :::
 
 ::: {.solution}
-x
+O comando `anti_join(flights, airports, by = c("dest" = "faa"))` busca todos os voos cujo destino não está na lista de aeroportos, enquanto `anti_join(airports, flights, by = c("faa" = "dest"))` busca todos os aeroportos que não são destino de nenhum dos voos. 
 :::
 
 ### Exercício 10.5.6 {- #exr10-5-6}
 
 ::: {.enunciado}
-x
+Você pode esperar que haja um relacionamento implícito entre avião e linha aérea, visto que cada avião é conduzido por uma única linha aérea. Confirme ou rejeite essa hipótese usando as ferramenas que você aprendeu na seção anterior.
 :::
 
 ::: {.solution}
-x
+Não é verdade que uma aeronave é operada apenas por uma única companhia aérea. Temos 17 aeronaves sendo operadas por mais de uma companhia.
+
+```{r}
+flights %>%
+  filter(!is.na(tailnum)) %>%
+  select(tailnum, carrier) %>%
+  distinct() %>%
+  group_by(tailnum) %>%
+  filter(n() > 1) %>%
+  left_join(airlines, by = "carrier") %>%
+  arrange(tailnum, carrier)
+```
 :::
 
 ## Problemas de joins
