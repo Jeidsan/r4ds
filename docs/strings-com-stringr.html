@@ -23,7 +23,7 @@
 <meta name="author" content="Jeidsan A. da C. Pereira" />
 
 
-<meta name="date" content="2023-11-27" />
+<meta name="date" content="2023-11-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -763,7 +763,7 @@ Para o caso de uma string com comprimento par, traremos os dois caracteres centr
 <div id="exr11-3-1" class="section level3 unnumbered hasAnchor">
 <h3>Exercício 11.3.1<a href="strings-com-stringr.html#exr11-3-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="enunciado">
-<p>x</p>
+<p>Explique por que cada uma dessas strings não combina com uma <code>\</code>: “",”\“,”\".</p>
 </div>
 <div class="solution">
 <p><span id="unlabeled-div-153" class="solution"><em>Solução</em>. </span>x</p>
@@ -772,7 +772,7 @@ Para o caso de uma string com comprimento par, traremos os dois caracteres centr
 <div id="exr11-3-2" class="section level3 unnumbered hasAnchor">
 <h3>Exercício 11.3.2<a href="strings-com-stringr.html#exr11-3-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="enunciado">
-<p>x</p>
+<p>Como você combina a sequência <code>"'\</code>?</p>
 </div>
 <div class="solution">
 <p><span id="unlabeled-div-154" class="solution"><em>Solução</em>. </span>x</p>
@@ -781,7 +781,7 @@ Para o caso de uma string com comprimento par, traremos os dois caracteres centr
 <div id="exr11-3-3" class="section level3 unnumbered hasAnchor">
 <h3>Exercício 11.3.3<a href="strings-com-stringr.html#exr11-3-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="enunciado">
-<p>x</p>
+<p>Com quais padrões a expressão regular <code>\..\..\..</code> combinará? Como você a representaria como uma string?</p>
 </div>
 <div class="solution">
 <p><span id="unlabeled-div-155" class="solution"><em>Solução</em>. </span>x</p>
@@ -790,7 +790,7 @@ Para o caso de uma string com comprimento par, traremos os dois caracteres centr
 <div id="exr11-3-4" class="section level3 unnumbered hasAnchor">
 <h3>Exercício 11.3.4<a href="strings-com-stringr.html#exr11-3-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="enunciado">
-<p>x</p>
+<p>Como você combinaria a string literal <code>"$^$"</code>?</p>
 </div>
 <div class="solution">
 <p><span id="unlabeled-div-156" class="solution"><em>Solução</em>. </span>x</p>
@@ -799,7 +799,14 @@ Para o caso de uma string com comprimento par, traremos os dois caracteres centr
 <div id="exr11-3-5" class="section level3 unnumbered hasAnchor">
 <h3>Exercício 11.3.5<a href="strings-com-stringr.html#exr11-3-5" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="enunciado">
-<p>x</p>
+<p>Dado o <em>corpus</em> de palavras comuns em <code>stringr::words</code>, crie expressões regulares que encontrem todas as palavras que:</p>
+<ol style="list-style-type: lower-alpha">
+<li>Comecem com “y”.</li>
+<li>Terminem com “x”.</li>
+<li>Tenham exatamente 3 letras de comprimento. (Não trapaceie usando <code>str_length()</code>!)</li>
+<li>Tenham sete ou mais letras.</li>
+</ol>
+<p>Já que a lista é longa, você pode querer usar o argumento <code>match</code> para <code>str_view()</code> para exibir apenas as palavras que combinem ou não combinem.</p>
 </div>
 <div class="solution">
 <p><span id="unlabeled-div-157" class="solution"><em>Solução</em>. </span>x</p>
@@ -808,7 +815,13 @@ Para o caso de uma string com comprimento par, traremos os dois caracteres centr
 <div id="exr11-3-6" class="section level3 unnumbered hasAnchor">
 <h3>Exercício 11.3.6<a href="strings-com-stringr.html#exr11-3-6" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="enunciado">
-<p>x</p>
+<p>Crie expressões regulares para encontrar todas as palavras que:</p>
+<ol style="list-style-type: lower-alpha">
+<li>comecem com uma vogal.</li>
+<li>contenham apenas consoantes. (Dica: pense sobre combinar “não” vogais.)</li>
+<li>Terminem com <code>ed</code>, mas não com <code>eed</code>.</li>
+<li>Terminem com <code>ing</code> ou <code>ize</code>.</li>
+</ol>
 </div>
 <div class="solution">
 <p><span id="unlabeled-div-158" class="solution"><em>Solução</em>. </span>x</p>
@@ -817,7 +830,7 @@ Para o caso de uma string com comprimento par, traremos os dois caracteres centr
 <div id="exr11-3-7" class="section level3 unnumbered hasAnchor">
 <h3>Exercício 11.3.7<a href="strings-com-stringr.html#exr11-3-7" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="enunciado">
-<p>x</p>
+<p>Verifique empiricamente “i antes de e exceto depois de c”.</p>
 </div>
 <div class="solution">
 <p><span id="unlabeled-div-159" class="solution"><em>Solução</em>. </span>x</p>
@@ -826,7 +839,7 @@ Para o caso de uma string com comprimento par, traremos os dois caracteres centr
 <div id="exr11-3-8" class="section level3 unnumbered hasAnchor">
 <h3>Exercício 11.3.8<a href="strings-com-stringr.html#exr11-3-8" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="enunciado">
-<p>x</p>
+<p>O “q” é sempre seguido por um “u”?</p>
 </div>
 <div class="solution">
 <p><span id="unlabeled-div-160" class="solution"><em>Solução</em>. </span>x</p>
@@ -835,7 +848,7 @@ Para o caso de uma string com comprimento par, traremos os dois caracteres centr
 <div id="exr11-3-9" class="section level3 unnumbered hasAnchor">
 <h3>Exercício 11.3.9<a href="strings-com-stringr.html#exr11-3-9" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="enunciado">
-<p>x</p>
+<p>Escreva ma expressão regular que combine uma palavra se ela provavelmente for escrita em inglês britânico, não em inglês norte-americano.</p>
 </div>
 <div class="solution">
 <p><span id="unlabeled-div-161" class="solution"><em>Solução</em>. </span>x</p>
@@ -844,7 +857,7 @@ Para o caso de uma string com comprimento par, traremos os dois caracteres centr
 <div id="exr11-3-10" class="section level3 unnumbered hasAnchor">
 <h3>Exercício 11.3.10<a href="strings-com-stringr.html#exr11-3-10" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="enunciado">
-<p>x</p>
+<p>Crie uma expressão regular que combinará números de telefone, comumente escritos em seu país.</p>
 </div>
 <div class="solution">
 <p><span id="unlabeled-div-162" class="solution"><em>Solução</em>. </span>x</p>
@@ -853,7 +866,7 @@ Para o caso de uma string com comprimento par, traremos os dois caracteres centr
 <div id="exr11-3-11" class="section level3 unnumbered hasAnchor">
 <h3>Exercício 11.3.11<a href="strings-com-stringr.html#exr11-3-11" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="enunciado">
-<p>x</p>
+<p>Descreva os equivalentes de <code>?</code>, <code>+</code>, e <code>*</code> na forma <code>{m,n}</code>.</p>
 </div>
 <div class="solution">
 <p><span id="unlabeled-div-163" class="solution"><em>Solução</em>. </span>x</p>
@@ -862,7 +875,13 @@ Para o caso de uma string com comprimento par, traremos os dois caracteres centr
 <div id="exr11-3-12" class="section level3 unnumbered hasAnchor">
 <h3>Exercício 11.3.12<a href="strings-com-stringr.html#exr11-3-12" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="enunciado">
-<p>x</p>
+<p>Descreva em palavras o que essas expressões regulares combinam (leia cuidadosamente para verificar se estou usando uma expressão regular ou uma string que define uma expressão regular):</p>
+<ol style="list-style-type: lower-alpha">
+<li><code>^.*$</code></li>
+<li><code>"\\{.+\\}"</code></li>
+<li><code>\d{4}-\d{2}-\d{2}</code></li>
+<li><code>"\\\\{4}"</code></li>
+</ol>
 </div>
 <div class="solution">
 <p><span id="unlabeled-div-164" class="solution"><em>Solução</em>. </span>x</p>
@@ -871,7 +890,12 @@ Para o caso de uma string com comprimento par, traremos os dois caracteres centr
 <div id="exr11-3-13" class="section level3 unnumbered hasAnchor">
 <h3>Exercício 11.3.13<a href="strings-com-stringr.html#exr11-3-13" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="enunciado">
-<p>x</p>
+<p>Crie expressões regulares para encontrar todas as palavras que:</p>
+<ol style="list-style-type: lower-alpha">
+<li>Comecem com três consoantes.</li>
+<li>Tenham três ou mais vogais.</li>
+<li>Tenham dois ou mais pares seguidos de vogal-consoante.</li>
+</ol>
 </div>
 <div class="solution">
 <p><span id="unlabeled-div-165" class="solution"><em>Solução</em>. </span>x</p>
@@ -880,7 +904,7 @@ Para o caso de uma string com comprimento par, traremos os dois caracteres centr
 <div id="exr11-3-14" class="section level3 unnumbered hasAnchor">
 <h3>Exercício 11.3.14<a href="strings-com-stringr.html#exr11-3-14" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="enunciado">
-<p>x</p>
+<p>Resolva a cruzadinha de regexp para iniciantes em <em><a href="https://regexcrossword.com/challenges/beginner" class="uri">https://regexcrossword.com/challenges/beginner</a></em>.</p>
 </div>
 <div class="solution">
 <p><span id="unlabeled-div-166" class="solution"><em>Solução</em>. </span>x</p>
@@ -889,7 +913,14 @@ Para o caso de uma string com comprimento par, traremos os dois caracteres centr
 <div id="exr11-3-15" class="section level3 unnumbered hasAnchor">
 <h3>Exercício 11.3.15<a href="strings-com-stringr.html#exr11-3-15" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="enunciado">
-<p>x</p>
+<p>Descreva em palavras com o que essas expressões regulares combinarão.</p>
+<ol style="list-style-type: lower-alpha">
+<li><code>(.)\1\1</code></li>
+<li><code>"(.)(.)\\2\\1"</code></li>
+<li><code>(..)\1</code></li>
+<li><code>"(.).\\1.\\1"</code></li>
+<li><code>"(.)(.)(.).*\\3\\2\\1"</code></li>
+</ol>
 </div>
 <div class="solution">
 <p><span id="unlabeled-div-167" class="solution"><em>Solução</em>. </span>x</p>
@@ -898,7 +929,12 @@ Para o caso de uma string com comprimento par, traremos os dois caracteres centr
 <div id="exr11-3-16" class="section level3 unnumbered hasAnchor">
 <h3>Exercício 11.3.16<a href="strings-com-stringr.html#exr11-3-16" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="enunciado">
-<p>x</p>
+<p>Construa expressões regulares para combinar palavras que:</p>
+<ol style="list-style-type: lower-alpha">
+<li>comecem e terminem com o mesmo caractere.</li>
+<li>Contenham um par de letras repetidao (por exemplo, “Church” contém “ch” duas vezes).</li>
+<li>Contenham uma letra repetida em pelo menos três lugares (por exemplo, “eleven” contém três “e”).</li>
+</ol>
 </div>
 <div class="solution">
 <p><span id="unlabeled-div-168" class="solution"><em>Solução</em>. </span>x</p>
@@ -910,7 +946,13 @@ Para o caso de uma string com comprimento par, traremos os dois caracteres centr
 <div id="exr11-4-1" class="section level3 unnumbered hasAnchor">
 <h3>Exercício 11.4.1<a href="strings-com-stringr.html#exr11-4-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="enunciado">
-<p>x</p>
+<p>Para cada um dos desafios a seguir, tente resolver a questão usando uma expressão regular e uma combinação de múltiplas chamadas <code>str_detect()</code>:</p>
+<ol style="list-style-type: lower-alpha">
+<li>Encontre todas as palavras que comecem ou terminem com x.</li>
+<li>Encontre todas as palavras que comecem com uma vogal e terminem com uma consoante.</li>
+<li>Há alguma palavra que contenha pelo menos uma de cada uma das cinco vogais diferentes?</li>
+<li>Qual palavra tem o maior número de vogais? Qual palavra tem a maior proporção de vogais? (Dica: qual é o denominador?)</li>
+</ol>
 </div>
 <div class="solution">
 <p><span id="unlabeled-div-169" class="solution"><em>Solução</em>. </span>x</p>
@@ -919,7 +961,7 @@ Para o caso de uma string com comprimento par, traremos os dois caracteres centr
 <div id="exr11-4-2" class="section level3 unnumbered hasAnchor">
 <h3>Exercício 11.4.2<a href="strings-com-stringr.html#exr11-4-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="enunciado">
-<p>x</p>
+<p>No exemplo anterior, talvez tenha notado que a expressão regular combinou “flickered”, que não é uma cor. Modifique a regex para corrigir o problema.</p>
 </div>
 <div class="solution">
 <p><span id="unlabeled-div-170" class="solution"><em>Solução</em>. </span>x</p>
@@ -928,7 +970,12 @@ Para o caso de uma string com comprimento par, traremos os dois caracteres centr
 <div id="exr11-4-3" class="section level3 unnumbered hasAnchor">
 <h3>Exercício 11.4.3<a href="strings-com-stringr.html#exr11-4-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="enunciado">
-<p>x</p>
+<p>Dos dados das frases de Harvard, extraia:</p>
+<ol style="list-style-type: lower-alpha">
+<li>A primeira palavra de cada frase.</li>
+<li>Todas as palavras terminadas em <code>ing</code>.</li>
+<li>Todos os plurais.</li>
+</ol>
 </div>
 <div class="solution">
 <p><span id="unlabeled-div-171" class="solution"><em>Solução</em>. </span>x</p>
@@ -937,7 +984,7 @@ Para o caso de uma string com comprimento par, traremos os dois caracteres centr
 <div id="exr11-4-4" class="section level3 unnumbered hasAnchor">
 <h3>Exercício 11.4.4<a href="strings-com-stringr.html#exr11-4-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="enunciado">
-<p>x</p>
+<p>Encontre todas as palavras que vêm depois de um “número”, como “one”, “two”, “three” etc. Retire tanto o número, quanto a palavra.</p>
 </div>
 <div class="solution">
 <p><span id="unlabeled-div-172" class="solution"><em>Solução</em>. </span>x</p>
@@ -946,7 +993,7 @@ Para o caso de uma string com comprimento par, traremos os dois caracteres centr
 <div id="exr11-4-5" class="section level3 unnumbered hasAnchor">
 <h3>Exercício 11.4.5<a href="strings-com-stringr.html#exr11-4-5" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="enunciado">
-<p>x</p>
+<p>Encontre todas as contrações. Separe as partes antes e depois do apóstrofo.</p>
 </div>
 <div class="solution">
 <p><span id="unlabeled-div-173" class="solution"><em>Solução</em>. </span>x</p>
@@ -955,7 +1002,7 @@ Para o caso de uma string com comprimento par, traremos os dois caracteres centr
 <div id="exr11-4-6" class="section level3 unnumbered hasAnchor">
 <h3>Exercício 11.4.6<a href="strings-com-stringr.html#exr11-4-6" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="enunciado">
-<p>x</p>
+<p>Substitua todas as barras em uma string por barras invertidas.</p>
 </div>
 <div class="solution">
 <p><span id="unlabeled-div-174" class="solution"><em>Solução</em>. </span>x</p>
@@ -964,7 +1011,7 @@ Para o caso de uma string com comprimento par, traremos os dois caracteres centr
 <div id="exr11-4-7" class="section level3 unnumbered hasAnchor">
 <h3>Exercício 11.4.7<a href="strings-com-stringr.html#exr11-4-7" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="enunciado">
-<p>x</p>
+<p>Implemente uma versão de <code>str_to_lower()</code> usando <code>replace_all()</code>.</p>
 </div>
 <div class="solution">
 <p><span id="unlabeled-div-175" class="solution"><em>Solução</em>. </span>x</p>
@@ -973,7 +1020,7 @@ Para o caso de uma string com comprimento par, traremos os dois caracteres centr
 <div id="exr11-4-8" class="section level3 unnumbered hasAnchor">
 <h3>Exercício 11.4.8<a href="strings-com-stringr.html#exr11-4-8" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="enunciado">
-<p>x</p>
+<p>Troque as primeiras e as últimas letras em <code>words</code>. Quais dessas strings ainda são palavras?</p>
 </div>
 <div class="solution">
 <p><span id="unlabeled-div-176" class="solution"><em>Solução</em>. </span>x</p>
@@ -982,7 +1029,7 @@ Para o caso de uma string com comprimento par, traremos os dois caracteres centr
 <div id="exr11-4-9" class="section level3 unnumbered hasAnchor">
 <h3>Exercício 11.4.9<a href="strings-com-stringr.html#exr11-4-9" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="enunciado">
-<p>x</p>
+<p>Separe uma string como <code>"apples, pears, and bananas"</code> em componentes individuais.</p>
 </div>
 <div class="solution">
 <p><span id="unlabeled-div-177" class="solution"><em>Solução</em>. </span>x</p>
@@ -991,7 +1038,7 @@ Para o caso de uma string com comprimento par, traremos os dois caracteres centr
 <div id="exr11-4-10" class="section level3 unnumbered hasAnchor">
 <h3>Exercício 11.4.10<a href="strings-com-stringr.html#exr11-4-10" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="enunciado">
-<p>x</p>
+<p>Por que é melhor separar por <code>boundary("word")</code> do que ” “?</p>
 </div>
 <div class="solution">
 <p><span id="unlabeled-div-178" class="solution"><em>Solução</em>. </span>x</p>
@@ -1000,7 +1047,7 @@ Para o caso de uma string com comprimento par, traremos os dois caracteres centr
 <div id="exr11-4-11" class="section level3 unnumbered hasAnchor">
 <h3>Exercício 11.4.11<a href="strings-com-stringr.html#exr11-4-11" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="enunciado">
-<p>x</p>
+<p>Separar por uma string vazia (““) faz o quê? Experimente, e depois leia a documentação.</p>
 </div>
 <div class="solution">
 <p><span id="unlabeled-div-179" class="solution"><em>Solução</em>. </span>x</p>
@@ -1012,7 +1059,7 @@ Para o caso de uma string com comprimento par, traremos os dois caracteres centr
 <div id="exr11-5-1" class="section level3 unnumbered hasAnchor">
 <h3>Exercício 11.5.1<a href="strings-com-stringr.html#exr11-5-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="enunciado">
-<p>x</p>
+<p>Como você encontrartia todas as strings contendo  com <code>regex()</code> <em>versus</em> com <code>fixed()</code>?</p>
 </div>
 <div class="solution">
 <p><span id="unlabeled-div-180" class="solution"><em>Solução</em>. </span>x</p>
@@ -1021,7 +1068,7 @@ Para o caso de uma string com comprimento par, traremos os dois caracteres centr
 <div id="exr11-5-2" class="section level3 unnumbered hasAnchor">
 <h3>Exercício 11.5.2<a href="strings-com-stringr.html#exr11-5-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="enunciado">
-<p>x</p>
+<p>Quais são as cinco palavras mais comuns em <code>sentences</code>?</p>
 </div>
 <div class="solution">
 <p><span id="unlabeled-div-181" class="solution"><em>Solução</em>. </span>x</p>
@@ -1037,7 +1084,12 @@ Para o caso de uma string com comprimento par, traremos os dois caracteres centr
 <div id="exr11-7-1" class="section level3 unnumbered hasAnchor">
 <h3>Exercício 11.7.1<a href="strings-com-stringr.html#exr11-7-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="enunciado">
-<p>x</p>
+<p>Encontre as funções de <strong>stringi</strong> que:</p>
+<ol style="list-style-type: lower-alpha">
+<li>Contem o número de palavras.</li>
+<li>Encontrem strings duplicadas.</li>
+<li>Gerem texto aleatório.</li>
+</ol>
 </div>
 <div class="solution">
 <p><span id="unlabeled-div-182" class="solution"><em>Solução</em>. </span>x</p>
@@ -1046,7 +1098,7 @@ Para o caso de uma string com comprimento par, traremos os dois caracteres centr
 <div id="exr11-7-2" class="section level3 unnumbered hasAnchor">
 <h3>Exercício 11.7.2<a href="strings-com-stringr.html#exr11-7-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="enunciado">
-<p>x</p>
+<p>Como você controla a linguagem que <code>stri_sort()</code> usa para fazer a classificação?</p>
 </div>
 <div class="solution">
 <p><span id="unlabeled-div-183" class="solution"><em>Solução</em>. </span>x</p>

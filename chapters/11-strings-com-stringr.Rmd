@@ -110,7 +110,7 @@ x
 ### Exercício 11.3.1 {- #exr11-3-1}
 
 ::: {.enunciado}
-x
+Explique por que cada uma dessas strings não combina com uma `\`: "\", "\\", "\\\".
 :::
 
 ::: {.solution}
@@ -120,7 +120,7 @@ x
 ### Exercício 11.3.2 {- #exr11-3-2}
 
 ::: {.enunciado}
-x
+Como você combina a sequência `"'\`?
 :::
 
 ::: {.solution}
@@ -130,7 +130,7 @@ x
 ### Exercício 11.3.3 {- #exr11-3-3}
 
 ::: {.enunciado}
-x
+Com quais padrões a expressão regular `\..\..\..` combinará? Como você a representaria como uma string?
 :::
 
 ::: {.solution}
@@ -140,7 +140,7 @@ x
 ### Exercício 11.3.4 {- #exr11-3-4}
 
 ::: {.enunciado}
-x
+Como você combinaria a string literal `"$^$"`?
 :::
 
 ::: {.solution}
@@ -150,7 +150,14 @@ x
 ### Exercício 11.3.5 {- #exr11-3-5}
 
 ::: {.enunciado}
-x
+Dado o *corpus* de palavras comuns em `stringr::words`, crie expressões regulares que encontrem todas as palavras que:
+
+a. Comecem com "y".
+b. Terminem com "x".
+c. Tenham exatamente 3 letras de comprimento. (Não trapaceie usando `str_length()`!)
+d. Tenham sete ou mais letras.
+
+Já que a lista é longa, você pode querer usar o argumento `match` para `str_view()` para exibir apenas as palavras que combinem ou não combinem.
 :::
 
 ::: {.solution}
@@ -160,7 +167,12 @@ x
 ### Exercício 11.3.6 {- #exr11-3-6}
 
 ::: {.enunciado}
-x
+Crie expressões regulares para encontrar todas as palavras que:
+
+a. comecem com uma vogal.
+b. contenham apenas consoantes. (Dica: pense sobre combinar "não" vogais.)
+c. Terminem com `ed`, mas não com `eed`.
+d. Terminem com `ing` ou `ize`.
 :::
 
 ::: {.solution}
@@ -170,7 +182,7 @@ x
 ### Exercício 11.3.7 {- #exr11-3-7}
 
 ::: {.enunciado}
-x
+Verifique empiricamente "i antes de e exceto depois de c".
 :::
 
 ::: {.solution}
@@ -180,7 +192,7 @@ x
 ### Exercício 11.3.8 {- #exr11-3-8}
 
 ::: {.enunciado}
-x
+O "q" é sempre seguido por um "u"?
 :::
 
 ::: {.solution}
@@ -190,7 +202,7 @@ x
 ### Exercício 11.3.9 {- #exr11-3-9}
 
 ::: {.enunciado}
-x
+Escreva ma expressão regular que combine uma palavra se ela provavelmente for escrita em inglês britânico, não em inglês norte-americano.
 :::
 
 ::: {.solution}
@@ -200,7 +212,7 @@ x
 ### Exercício 11.3.10 {- #exr11-3-10}
 
 ::: {.enunciado}
-x
+Crie uma expressão regular que combinará números de telefone, comumente escritos em seu país.
 :::
 
 ::: {.solution}
@@ -210,7 +222,7 @@ x
 ### Exercício 11.3.11 {- #exr11-3-11}
 
 ::: {.enunciado}
-x
+Descreva os equivalentes de `?`, `+`, e `*` na forma `{m,n}`.
 :::
 
 ::: {.solution}
@@ -220,7 +232,12 @@ x
 ### Exercício 11.3.12 {- #exr11-3-12}
 
 ::: {.enunciado}
-x
+Descreva em palavras o que essas expressões regulares combinam (leia cuidadosamente para verificar se estou usando uma expressão regular ou uma string que define uma expressão regular):
+
+a. `^.*$`
+b. `"\\{.+\\}"`
+c. `\d{4}-\d{2}-\d{2}`
+d. `"\\\\{4}"`
 :::
 
 ::: {.solution}
@@ -230,7 +247,11 @@ x
 ### Exercício 11.3.13 {- #exr11-3-13}
 
 ::: {.enunciado}
-x
+Crie expressões regulares para encontrar todas as palavras que:
+
+a. Comecem com três consoantes.
+b. Tenham três ou mais vogais.
+c. Tenham dois ou mais pares seguidos de vogal-consoante.
 :::
 
 ::: {.solution}
@@ -240,7 +261,7 @@ x
 ### Exercício 11.3.14 {- #exr11-3-14}
 
 ::: {.enunciado}
-x
+Resolva a cruzadinha de regexp para iniciantes em *https://regexcrossword.com/challenges/beginner*.
 :::
 
 ::: {.solution}
@@ -250,7 +271,13 @@ x
 ### Exercício 11.3.15 {- #exr11-3-15}
 
 ::: {.enunciado}
-x
+Descreva em palavras com o que essas expressões regulares combinarão.
+
+a. `(.)\1\1`
+b. `"(.)(.)\\2\\1"`
+c. `(..)\1`
+d. `"(.).\\1.\\1"`
+e. `"(.)(.)(.).*\\3\\2\\1"`
 :::
 
 ::: {.solution}
@@ -260,7 +287,11 @@ x
 ### Exercício 11.3.16 {- #exr11-3-16}
 
 ::: {.enunciado}
-x
+Construa expressões regulares para combinar palavras que:
+
+a. comecem e terminem com o mesmo caractere.
+b. Contenham um par de letras repetidao (por exemplo, "Church" contém "ch" duas vezes).
+c. Contenham uma letra repetida em pelo menos três lugares (por exemplo, "eleven" contém três "e").
 :::
 
 ::: {.solution}
@@ -272,7 +303,12 @@ x
 ### Exercício 11.4.1 {- #exr11-4-1}
 
 ::: {.enunciado}
-x
+Para cada um dos desafios a seguir, tente resolver a questão usando uma expressão regular e uma combinação de múltiplas chamadas `str_detect()`:
+
+a. Encontre todas as palavras que comecem ou terminem com x.
+b. Encontre todas as palavras que comecem com uma vogal e terminem com uma consoante.
+c. Há alguma palavra que contenha pelo menos uma de cada uma das cinco vogais diferentes?
+d. Qual palavra tem o maior número de vogais? Qual palavra tem a maior proporção de vogais? (Dica: qual é o denominador?)
 :::
 
 ::: {.solution}
@@ -282,7 +318,7 @@ x
 ### Exercício 11.4.2 {- #exr11-4-2}
 
 ::: {.enunciado}
-x
+No exemplo anterior, talvez tenha notado que a expressão regular combinou "flickered", que não é uma cor. Modifique a regex para corrigir o problema.
 :::
 
 ::: {.solution}
@@ -292,7 +328,11 @@ x
 ### Exercício 11.4.3 {- #exr11-4-3}
 
 ::: {.enunciado}
-x
+Dos dados das frases de Harvard, extraia:
+
+a. A primeira palavra de cada frase.
+b. Todas as palavras terminadas em `ing`.
+c. Todos os plurais.
 :::
 
 ::: {.solution}
@@ -302,7 +342,7 @@ x
 ### Exercício 11.4.4 {- #exr11-4-4}
 
 ::: {.enunciado}
-x
+Encontre todas as palavras que vêm depois de um "número", como "one", "two", "three" etc. Retire tanto o número, quanto a palavra.
 :::
 
 ::: {.solution}
@@ -312,7 +352,7 @@ x
 ### Exercício 11.4.5 {- #exr11-4-5}
 
 ::: {.enunciado}
-x
+Encontre todas as contrações. Separe as partes antes e depois do apóstrofo.
 :::
 
 ::: {.solution}
@@ -322,7 +362,7 @@ x
 ### Exercício 11.4.6 {- #exr11-4-6}
 
 ::: {.enunciado}
-x
+Substitua todas as barras em uma string por barras invertidas.
 :::
 
 ::: {.solution}
@@ -332,7 +372,7 @@ x
 ### Exercício 11.4.7 {- #exr11-4-7}
 
 ::: {.enunciado}
-x
+Implemente uma versão de `str_to_lower()` usando `replace_all()`.
 :::
 
 ::: {.solution}
@@ -342,7 +382,7 @@ x
 ### Exercício 11.4.8 {- #exr11-4-8}
 
 ::: {.enunciado}
-x
+Troque as primeiras e as últimas letras em `words`. Quais dessas strings ainda são palavras?
 :::
 
 ::: {.solution}
@@ -352,7 +392,7 @@ x
 ### Exercício 11.4.9 {- #exr11-4-9}
 
 ::: {.enunciado}
-x
+Separe uma string como `"apples, pears, and bananas"` em componentes individuais.
 :::
 
 ::: {.solution}
@@ -362,7 +402,7 @@ x
 ### Exercício 11.4.10 {- #exr11-4-10}
 
 ::: {.enunciado}
-x
+Por que é melhor separar por `boundary("word")` do que " "?
 :::
 
 ::: {.solution}
@@ -372,7 +412,7 @@ x
 ### Exercício 11.4.11 {- #exr11-4-11}
 
 ::: {.enunciado}
-x
+Separar por uma string vazia ("") faz o quê? Experimente, e depois leia a documentação.
 :::
 
 ::: {.solution}
@@ -384,7 +424,7 @@ x
 ### Exercício 11.5.1 {- #exr11-5-1}
 
 ::: {.enunciado}
-x
+Como você encontrartia todas as strings contendo \ com `regex()` *versus* com `fixed()`?
 :::
 
 ::: {.solution}
@@ -394,7 +434,7 @@ x
 ### Exercício 11.5.2 {- #exr11-5-2}
 
 ::: {.enunciado}
-x
+Quais são as cinco palavras mais comuns em `sentences`?
 :::
 
 ::: {.solution}
@@ -410,7 +450,11 @@ Não temos exercícios nesta seção.
 ### Exercício 11.7.1 {- #exr11-7-1}
 
 ::: {.enunciado}
-x
+Encontre as funções de **stringi** que:
+
+a. Contem o número de palavras.
+b. Encontrem strings duplicadas.
+c. Gerem texto aleatório.
 :::
 
 ::: {.solution}
@@ -420,7 +464,7 @@ x
 ### Exercício 11.7.2 {- #exr11-7-2}
 
 ::: {.enunciado}
-x
+Como você controla a linguagem que `stri_sort()` usa para fazer a classificação?
 :::
 
 ::: {.solution}

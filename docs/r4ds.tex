@@ -233,7 +233,7 @@
 \makeatother
 \subtitle{Solução dos exercícios}
 \author{Jeidsan A. da C. Pereira}
-\date{2023-11-27}
+\date{2023-11-28}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Teorema}[chapter]
@@ -325,7 +325,7 @@ Dúvidas ou sugestões de melhoria podem ser encaminhadas para o e-mail \emph{\h
 \item
   \protect\hyperlink{exr10-4-3}{Exercício 10.4.3};
 \item
-  \protect\hyperlink{exr11-2-6}{Exercício 11.2.6};
+  Exercícios do capítulo 11;
 \item
 \end{itemize}
 
@@ -4793,16 +4793,16 @@ Pratique referir-se a nomes de variáveis não sintáticos, no data frame a segu
 ## # A tibble: 10 x 3
 ##      one   two three
 ##    <int> <dbl> <dbl>
-##  1     1  2.11  2.11
-##  2     2  3.18  1.59
-##  3     3  3.87  1.29
-##  4     4  9.34  2.34
-##  5     5  7.78  1.56
-##  6     6 12.3   2.05
-##  7     7 13.5   1.93
-##  8     8 15.8   1.97
-##  9     9 18.2   2.02
-## 10    10 19.8   1.98
+##  1     1  1.77  1.77
+##  2     2  4.71  2.36
+##  3     3  6.36  2.12
+##  4     4  7.61  1.90
+##  5     5  8.37  1.67
+##  6     6 13.7   2.29
+##  7     7 13.2   1.89
+##  8     8 18.0   2.25
+##  9     9 18.0   2.00
+## 10    10 20.7   2.07
 \end{verbatim}
 
 \end{solution}
@@ -7097,7 +7097,7 @@ x
 \subsection*{Exercício 11.3.1}\label{exr11-3-1}}
 \addcontentsline{toc}{subsection}{Exercício 11.3.1}
 
-x
+Explique por que cada uma dessas strings não combina com uma \texttt{\textbackslash{}}: ``",''\textbackslash{}``,''\textbackslash".
 
 \begin{solution}
 x
@@ -7107,7 +7107,7 @@ x
 \subsection*{Exercício 11.3.2}\label{exr11-3-2}}
 \addcontentsline{toc}{subsection}{Exercício 11.3.2}
 
-x
+Como você combina a sequência \texttt{"\textquotesingle{}\textbackslash{}}?
 
 \begin{solution}
 x
@@ -7117,7 +7117,7 @@ x
 \subsection*{Exercício 11.3.3}\label{exr11-3-3}}
 \addcontentsline{toc}{subsection}{Exercício 11.3.3}
 
-x
+Com quais padrões a expressão regular \texttt{\textbackslash{}..\textbackslash{}..\textbackslash{}..} combinará? Como você a representaria como uma string?
 
 \begin{solution}
 x
@@ -7127,7 +7127,7 @@ x
 \subsection*{Exercício 11.3.4}\label{exr11-3-4}}
 \addcontentsline{toc}{subsection}{Exercício 11.3.4}
 
-x
+Como você combinaria a string literal \texttt{"\$\^{}\$"}?
 
 \begin{solution}
 x
@@ -7137,7 +7137,22 @@ x
 \subsection*{Exercício 11.3.5}\label{exr11-3-5}}
 \addcontentsline{toc}{subsection}{Exercício 11.3.5}
 
-x
+Dado o \emph{corpus} de palavras comuns em \texttt{stringr::words}, crie expressões regulares que encontrem todas as palavras que:
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  Comecem com ``y''.
+\item
+  Terminem com ``x''.
+\item
+  Tenham exatamente 3 letras de comprimento. (Não trapaceie usando \texttt{str\_length()}!)
+\item
+  Tenham sete ou mais letras.
+\end{enumerate}
+
+Já que a lista é longa, você pode querer usar o argumento \texttt{match} para \texttt{str\_view()} para exibir apenas as palavras que combinem ou não combinem.
 
 \begin{solution}
 x
@@ -7147,7 +7162,20 @@ x
 \subsection*{Exercício 11.3.6}\label{exr11-3-6}}
 \addcontentsline{toc}{subsection}{Exercício 11.3.6}
 
-x
+Crie expressões regulares para encontrar todas as palavras que:
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  comecem com uma vogal.
+\item
+  contenham apenas consoantes. (Dica: pense sobre combinar ``não'' vogais.)
+\item
+  Terminem com \texttt{ed}, mas não com \texttt{eed}.
+\item
+  Terminem com \texttt{ing} ou \texttt{ize}.
+\end{enumerate}
 
 \begin{solution}
 x
@@ -7157,7 +7185,7 @@ x
 \subsection*{Exercício 11.3.7}\label{exr11-3-7}}
 \addcontentsline{toc}{subsection}{Exercício 11.3.7}
 
-x
+Verifique empiricamente ``i antes de e exceto depois de c''.
 
 \begin{solution}
 x
@@ -7167,7 +7195,7 @@ x
 \subsection*{Exercício 11.3.8}\label{exr11-3-8}}
 \addcontentsline{toc}{subsection}{Exercício 11.3.8}
 
-x
+O ``q'' é sempre seguido por um ``u''?
 
 \begin{solution}
 x
@@ -7177,7 +7205,7 @@ x
 \subsection*{Exercício 11.3.9}\label{exr11-3-9}}
 \addcontentsline{toc}{subsection}{Exercício 11.3.9}
 
-x
+Escreva ma expressão regular que combine uma palavra se ela provavelmente for escrita em inglês britânico, não em inglês norte-americano.
 
 \begin{solution}
 x
@@ -7187,7 +7215,7 @@ x
 \subsection*{Exercício 11.3.10}\label{exr11-3-10}}
 \addcontentsline{toc}{subsection}{Exercício 11.3.10}
 
-x
+Crie uma expressão regular que combinará números de telefone, comumente escritos em seu país.
 
 \begin{solution}
 x
@@ -7197,7 +7225,7 @@ x
 \subsection*{Exercício 11.3.11}\label{exr11-3-11}}
 \addcontentsline{toc}{subsection}{Exercício 11.3.11}
 
-x
+Descreva os equivalentes de \texttt{?}, \texttt{+}, e \texttt{*} na forma \texttt{\{m,n\}}.
 
 \begin{solution}
 x
@@ -7207,7 +7235,20 @@ x
 \subsection*{Exercício 11.3.12}\label{exr11-3-12}}
 \addcontentsline{toc}{subsection}{Exercício 11.3.12}
 
-x
+Descreva em palavras o que essas expressões regulares combinam (leia cuidadosamente para verificar se estou usando uma expressão regular ou uma string que define uma expressão regular):
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  \texttt{\^{}.*\$}
+\item
+  \texttt{"\textbackslash{}\textbackslash{}\{.+\textbackslash{}\textbackslash{}\}"}
+\item
+  \texttt{\textbackslash{}d\{4\}-\textbackslash{}d\{2\}-\textbackslash{}d\{2\}}
+\item
+  \texttt{"\textbackslash{}\textbackslash{}\textbackslash{}\textbackslash{}\{4\}"}
+\end{enumerate}
 
 \begin{solution}
 x
@@ -7217,7 +7258,18 @@ x
 \subsection*{Exercício 11.3.13}\label{exr11-3-13}}
 \addcontentsline{toc}{subsection}{Exercício 11.3.13}
 
-x
+Crie expressões regulares para encontrar todas as palavras que:
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  Comecem com três consoantes.
+\item
+  Tenham três ou mais vogais.
+\item
+  Tenham dois ou mais pares seguidos de vogal-consoante.
+\end{enumerate}
 
 \begin{solution}
 x
@@ -7227,7 +7279,7 @@ x
 \subsection*{Exercício 11.3.14}\label{exr11-3-14}}
 \addcontentsline{toc}{subsection}{Exercício 11.3.14}
 
-x
+Resolva a cruzadinha de regexp para iniciantes em \emph{\url{https://regexcrossword.com/challenges/beginner}}.
 
 \begin{solution}
 x
@@ -7237,7 +7289,22 @@ x
 \subsection*{Exercício 11.3.15}\label{exr11-3-15}}
 \addcontentsline{toc}{subsection}{Exercício 11.3.15}
 
-x
+Descreva em palavras com o que essas expressões regulares combinarão.
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  \texttt{(.)\textbackslash{}1\textbackslash{}1}
+\item
+  \texttt{"(.)(.)\textbackslash{}\textbackslash{}2\textbackslash{}\textbackslash{}1"}
+\item
+  \texttt{(..)\textbackslash{}1}
+\item
+  \texttt{"(.).\textbackslash{}\textbackslash{}1.\textbackslash{}\textbackslash{}1"}
+\item
+  \texttt{"(.)(.)(.).*\textbackslash{}\textbackslash{}3\textbackslash{}\textbackslash{}2\textbackslash{}\textbackslash{}1"}
+\end{enumerate}
 
 \begin{solution}
 x
@@ -7247,7 +7314,18 @@ x
 \subsection*{Exercício 11.3.16}\label{exr11-3-16}}
 \addcontentsline{toc}{subsection}{Exercício 11.3.16}
 
-x
+Construa expressões regulares para combinar palavras que:
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  comecem e terminem com o mesmo caractere.
+\item
+  Contenham um par de letras repetidao (por exemplo, ``Church'' contém ``ch'' duas vezes).
+\item
+  Contenham uma letra repetida em pelo menos três lugares (por exemplo, ``eleven'' contém três ``e'').
+\end{enumerate}
 
 \begin{solution}
 x
@@ -7260,7 +7338,20 @@ x
 \subsection*{Exercício 11.4.1}\label{exr11-4-1}}
 \addcontentsline{toc}{subsection}{Exercício 11.4.1}
 
-x
+Para cada um dos desafios a seguir, tente resolver a questão usando uma expressão regular e uma combinação de múltiplas chamadas \texttt{str\_detect()}:
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  Encontre todas as palavras que comecem ou terminem com x.
+\item
+  Encontre todas as palavras que comecem com uma vogal e terminem com uma consoante.
+\item
+  Há alguma palavra que contenha pelo menos uma de cada uma das cinco vogais diferentes?
+\item
+  Qual palavra tem o maior número de vogais? Qual palavra tem a maior proporção de vogais? (Dica: qual é o denominador?)
+\end{enumerate}
 
 \begin{solution}
 x
@@ -7270,7 +7361,7 @@ x
 \subsection*{Exercício 11.4.2}\label{exr11-4-2}}
 \addcontentsline{toc}{subsection}{Exercício 11.4.2}
 
-x
+No exemplo anterior, talvez tenha notado que a expressão regular combinou ``flickered'', que não é uma cor. Modifique a regex para corrigir o problema.
 
 \begin{solution}
 x
@@ -7280,7 +7371,18 @@ x
 \subsection*{Exercício 11.4.3}\label{exr11-4-3}}
 \addcontentsline{toc}{subsection}{Exercício 11.4.3}
 
-x
+Dos dados das frases de Harvard, extraia:
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  A primeira palavra de cada frase.
+\item
+  Todas as palavras terminadas em \texttt{ing}.
+\item
+  Todos os plurais.
+\end{enumerate}
 
 \begin{solution}
 x
@@ -7290,7 +7392,7 @@ x
 \subsection*{Exercício 11.4.4}\label{exr11-4-4}}
 \addcontentsline{toc}{subsection}{Exercício 11.4.4}
 
-x
+Encontre todas as palavras que vêm depois de um ``número'', como ``one'', ``two'', ``three'' etc. Retire tanto o número, quanto a palavra.
 
 \begin{solution}
 x
@@ -7300,7 +7402,7 @@ x
 \subsection*{Exercício 11.4.5}\label{exr11-4-5}}
 \addcontentsline{toc}{subsection}{Exercício 11.4.5}
 
-x
+Encontre todas as contrações. Separe as partes antes e depois do apóstrofo.
 
 \begin{solution}
 x
@@ -7310,7 +7412,7 @@ x
 \subsection*{Exercício 11.4.6}\label{exr11-4-6}}
 \addcontentsline{toc}{subsection}{Exercício 11.4.6}
 
-x
+Substitua todas as barras em uma string por barras invertidas.
 
 \begin{solution}
 x
@@ -7320,7 +7422,7 @@ x
 \subsection*{Exercício 11.4.7}\label{exr11-4-7}}
 \addcontentsline{toc}{subsection}{Exercício 11.4.7}
 
-x
+Implemente uma versão de \texttt{str\_to\_lower()} usando \texttt{replace\_all()}.
 
 \begin{solution}
 x
@@ -7330,7 +7432,7 @@ x
 \subsection*{Exercício 11.4.8}\label{exr11-4-8}}
 \addcontentsline{toc}{subsection}{Exercício 11.4.8}
 
-x
+Troque as primeiras e as últimas letras em \texttt{words}. Quais dessas strings ainda são palavras?
 
 \begin{solution}
 x
@@ -7340,7 +7442,7 @@ x
 \subsection*{Exercício 11.4.9}\label{exr11-4-9}}
 \addcontentsline{toc}{subsection}{Exercício 11.4.9}
 
-x
+Separe uma string como \texttt{"apples,\ pears,\ and\ bananas"} em componentes individuais.
 
 \begin{solution}
 x
@@ -7350,7 +7452,7 @@ x
 \subsection*{Exercício 11.4.10}\label{exr11-4-10}}
 \addcontentsline{toc}{subsection}{Exercício 11.4.10}
 
-x
+Por que é melhor separar por \texttt{boundary("word")} do que '' ``?
 
 \begin{solution}
 x
@@ -7360,7 +7462,7 @@ x
 \subsection*{Exercício 11.4.11}\label{exr11-4-11}}
 \addcontentsline{toc}{subsection}{Exercício 11.4.11}
 
-x
+Separar por uma string vazia (``\,``) faz o quê? Experimente, e depois leia a documentação.
 
 \begin{solution}
 x
@@ -7373,7 +7475,7 @@ x
 \subsection*{Exercício 11.5.1}\label{exr11-5-1}}
 \addcontentsline{toc}{subsection}{Exercício 11.5.1}
 
-x
+Como você encontrartia todas as strings contendo ~com \texttt{regex()} \emph{versus} com \texttt{fixed()}?
 
 \begin{solution}
 x
@@ -7383,7 +7485,7 @@ x
 \subsection*{Exercício 11.5.2}\label{exr11-5-2}}
 \addcontentsline{toc}{subsection}{Exercício 11.5.2}
 
-x
+Quais são as cinco palavras mais comuns em \texttt{sentences}?
 
 \begin{solution}
 x
@@ -7401,7 +7503,18 @@ Não temos exercícios nesta seção.
 \subsection*{Exercício 11.7.1}\label{exr11-7-1}}
 \addcontentsline{toc}{subsection}{Exercício 11.7.1}
 
-x
+Encontre as funções de \textbf{stringi} que:
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  Contem o número de palavras.
+\item
+  Encontrem strings duplicadas.
+\item
+  Gerem texto aleatório.
+\end{enumerate}
 
 \begin{solution}
 x
@@ -7411,7 +7524,7 @@ x
 \subsection*{Exercício 11.7.2}\label{exr11-7-2}}
 \addcontentsline{toc}{subsection}{Exercício 11.7.2}
 
-x
+Como você controla a linguagem que \texttt{stri\_sort()} usa para fazer a classificação?
 
 \begin{solution}
 x
