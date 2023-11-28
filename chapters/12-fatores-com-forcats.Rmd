@@ -2,10 +2,178 @@
 
 ## Introdução
 
+Não temos exercícios nesta seção.
+
 ## Criando fatores
+
+Não temos exercícios para esta seção.
 
 ## General Social Survey
 
+### Exercício 12.3.1 {- #exr12-3-1}
+
+::: {.enunciado}
+Explore a distribuição de `rincome` (reported income - renda relatada). O que torna o gráfico de barra padrão tão difícil de entender? Como você melhoraria o gráfico?
+:::
+
+::: {.solution}
+```{r}
+gss_cat %>%
+  ggplot(aes(rincome)) +
+    geom_bar()
+```
+Como temos muitas classes possíveis para `rincome`, a visualização fica comprometida, por isso vamos inverter os eixo do gráfico.
+
+```{r}
+gss_cat %>%
+  ggplot(aes(rincome)) +
+    geom_bar() +
+    coord_flip()
+```
+Vamos também remover a categoria `Not applicabe`, que não agrega nenhuma informação o nosso gráfico, uma vez que queremos avaliar apenas as pessoas que possuem uma renda informada.
+
+```{r}
+gss_cat %>%
+  filter(rincome != "Not applicable") %>%
+  ggplot(aes(rincome)) +
+    geom_bar() + 
+    coord_flip()
+```
+Vamos também substituir o termo `LT $1000` por `Less than $1000`.
+
+```{r}
+gss_cat %>%
+  filter(rincome != "Not applicable") %>%
+  mutate(rincome = fct_recode(rincome, "Less than $1000" = "Lt $1000")) %>%
+  ggplot(aes(rincome)) +
+    geom_bar() + 
+    coord_flip()
+```
+
+Ainda poderíamos pensar em se é possível agrupar algumas das classes para tornar a visualização melhor. 
+:::
+
+### Exercício 12.3.2 {- #exr12-3-2}
+
+::: {.enunciado}
+Qual é a `relig` mais comum nessa pesquisa? Qual é a `partyid` mais comum?
+:::
+
+::: {.solution}
+```{r}
+gss_cat %>%
+  count(relig) %>%
+  arrange(desc(n))
+```
+
+A religião com maior número de adeptos é a Protestante.
+
+```{r}
+gss_cat %>%
+  count(partyid) %>%
+  arrange(desc(n))
+```
+E o partido com maior número de afiliados é o Independent.
+
+:::
+
+### Exercício 12.3.3 {- #exr12-3-3}
+
+::: {.enunciado}
+A qual `relig` é aplicada `denom` (denominação)? Como você pode descobrir isso com uma tabela? e com uma visualização?
+:::
+
+::: {.solution}
+Primeiro vamos verificar as categorias possíveis para `relig` e para `denom`:
+
+```{r}
+writeLines("relig:")
+levels(gss_cat$relig)
+writeLines("\ndenom:")
+levels(gss_cat$denom)
+```
+Nossa experiência nos diz que as denominações se referem à religião protestante, mas, para validar nossa hipótese, iremos remover os registros com denominação nas categorias `Not applicable`, `No answer`, `Don't know` e `No denomination`.
+
+```{r}
+gss_cat %>%
+  filter(!denom %in% c("Not applicable", "No answer", "Don't know", "No denomination")) %>%
+  count(relig)
+```
+Uma outra possibilidade é:
+
+```{r}
+gss_cat %>%
+  count(relig, denom)
+```
+
+Para a forma gráfica, podemos usar o seguinte:
+
+```{r}
+gss_cat %>%
+  count(relig, denom) %>%
+  ggplot(aes(relig, denom, fill = n)) +
+    geom_raster() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+    labs(
+      x = "Religião",
+      y = "Denominação",
+      fill = "Contagem"
+    ) +
+    scale_fill_viridis()
+```
+
+:::
+
 ## Modificando a ordem dos fatores
 
+### Exercício 12.4.1 {- #exr12-4-1}
+
+::: {.enunciado}
+Há alguns números suspeitosamente altos em `tvhours`. A média pe um bom resumo?
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 12.4.2 {- #exr12-4-2}
+
+::: {.enunciado}
+Para cada fator em `gss_cat`, identifique se a ordem dos níveis é arbitrária ou com princípios.
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 12.4.3 {- #exr12-4-3}
+
+::: {.enunciado}
+Por que mover "Not applicable" para a frente dos níveis o move para a parte de baixo do gráfico?
+:::
+
+::: {.solution}
+x
+:::
+
 ## Modificando níveis de fatores
+
+### Exercício 12.5.1 {- #exr12-5-1}
+
+::: {.enunciado}
+Como a proporção de pessoas identificadas como Democratas, Republicanos e Independentes mudou ao longo do tempo?
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 12.5.2 {- #exr12-5-2}
+
+::: {.enunciado}
+Como você poderia colapsar `rincome` em um conjunto de pequeno de categorias?
+:::
+
+::: {.solution}
+x
+:::
