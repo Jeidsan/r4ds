@@ -133,7 +133,27 @@ Há alguns números suspeitosamente altos em `tvhours`. A média pe um bom resum
 :::
 
 ::: {.solution}
-x
+Inicialmente vamos avaliar a distribuição de `tvhours`.
+
+```{r}
+gss_cat %>%
+  ggplot(aes(tvhours)) +
+    geom_histogram(bins = 15)
+```
+```{r}
+gss_cat %>%
+  ggplot(aes(tvhours, relig)) +
+    geom_boxplot()
+```
+De fato, há muitos valores discrepantes, nesse caso, seria melhor utilizarmos a mediana.
+
+```{r}
+gss_cat %>%
+  group_by(relig) %>%
+  summarise(tvhours = median(tvhours, na.rm = TRUE)) %>%
+  ggplot(aes(tvhours, fct_reorder(relig, tvhours))) +
+  geom_point()
+```
 :::
 
 ### Exercício 12.4.2 {- #exr12-4-2}
@@ -143,7 +163,23 @@ Para cada fator em `gss_cat`, identifique se a ordem dos níveis é arbitrária 
 :::
 
 ::: {.solution}
-x
+Primeiro vamos visualizar o cabeçalho do conjunto de dados para identificar as colunas que são fatores.
+
+```{r}
+gss_cat %>%
+  head()
+```
+Agora, vamos listar as categorias em cada fator para avalia se são variáveis ordinais ou não.
+
+```{r}
+levels(gss_cat$marital)
+levels(gss_cat$race)
+levels(gss_cat$rincome)
+levels(gss_cat$partyid)
+levels(gss_cat$relig)
+levels(gss_cat$denom)
+```
+Apenas `rincome` pode ser ordenada.
 :::
 
 ### Exercício 12.4.3 {- #exr12-4-3}
@@ -153,7 +189,7 @@ Por que mover "Not applicable" para a frente dos níveis o move para a parte de 
 :::
 
 ::: {.solution}
-x
+Porque o gráfico é montado de baixo para cima.
 :::
 
 ## Modificando níveis de fatores
@@ -165,7 +201,35 @@ Como a proporção de pessoas identificadas como Democratas, Republicanos e Inde
 :::
 
 ::: {.solution}
-x
+Para solucionar este exercício, vamos realizar os seguintes passos:
+
+1. Recodificar os valores do fator `partyid`;
+2. Contar os respondentes filiados a cada partido por ano;
+3. Calcular as proporções por ano; e
+4. Plotar o resultado no gráfico.
+
+```{r}
+gss_cat %>%
+  mutate(partyid = fct_collapse(partyid, 
+                                other = c("No answer", "Don't know", "Other party"),
+                                rep = c("Strong republican","Not str republican"),
+                                ind = c("Ind,near rep", "Independent", "Ind,near dem"),
+                                dem = c("Strong democrat", "Not str democrat"))
+         ) %>%
+  count(year, partyid) %>%
+  group_by(year) %>%
+  mutate(prop = n * 100 / sum(n)) %>%
+  ggplot(aes(
+    x = year, 
+    y = prop, 
+    color = fct_reorder2(partyid, year, prop)
+  )) +
+    geom_line() +
+    geom_point() +
+    labs(color = "Party ID")
+  
+
+```
 :::
 
 ### Exercício 12.5.2 {- #exr12-5-2}
@@ -175,5 +239,22 @@ Como você poderia colapsar `rincome` em um conjunto de pequeno de categorias?
 :::
 
 ::: {.solution}
-x
+```{r}
+levels(gss_cat$rincome)
+
+gss_cat %>%
+  mutate(
+    rincome = fct_collapse(rincome,
+                           "Unknown" = c("No answer", "Don't know", "Refused", "Not applicable"),
+                           "Less than $4000" = c("Lt $1000", str_c("$", c("1000", "3000"), " to ", c("2999", "3999"))),
+                           "$4000 to $6999" = c(str_c("$", c("4000", "5000", "6000"), " to ", c("4999", "5999", "6999"))),
+                           "$7000 to $14999" = c(str_c("$", c("7000", "8000", "10000"), " to ", c("7999", "9999", "14999")), "$10000 - 14999"),
+                           "$15000 or more" = c("$15000 - 19999", "$20000 - 24999", "$25000 or more")
+                           )
+  ) %>%
+  ggplot(aes(rincome)) +
+  geom_bar() +
+  coord_flip()
+```
+
 :::

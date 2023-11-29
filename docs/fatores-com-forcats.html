@@ -525,9 +525,23 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="12.1" data-path="fatores-com-forcats.html"><a href="fatores-com-forcats.html#introdução-8"><i class="fa fa-check"></i><b>12.1</b> Introdução</a></li>
 <li class="chapter" data-level="12.2" data-path="fatores-com-forcats.html"><a href="fatores-com-forcats.html#criando-fatores"><i class="fa fa-check"></i><b>12.2</b> Criando fatores</a></li>
-<li class="chapter" data-level="12.3" data-path="fatores-com-forcats.html"><a href="fatores-com-forcats.html#general-social-survey"><i class="fa fa-check"></i><b>12.3</b> General Social Survey</a></li>
-<li class="chapter" data-level="12.4" data-path="fatores-com-forcats.html"><a href="fatores-com-forcats.html#modificando-a-ordem-dos-fatores"><i class="fa fa-check"></i><b>12.4</b> Modificando a ordem dos fatores</a></li>
-<li class="chapter" data-level="12.5" data-path="fatores-com-forcats.html"><a href="fatores-com-forcats.html#modificando-níveis-de-fatores"><i class="fa fa-check"></i><b>12.5</b> Modificando níveis de fatores</a></li>
+<li class="chapter" data-level="12.3" data-path="fatores-com-forcats.html"><a href="fatores-com-forcats.html#general-social-survey"><i class="fa fa-check"></i><b>12.3</b> General Social Survey</a>
+<ul>
+<li class="chapter" data-level="" data-path="fatores-com-forcats.html"><a href="fatores-com-forcats.html#exr12-3-1"><i class="fa fa-check"></i>Exercício 12.3.1</a></li>
+<li class="chapter" data-level="" data-path="fatores-com-forcats.html"><a href="fatores-com-forcats.html#exr12-3-2"><i class="fa fa-check"></i>Exercício 12.3.2</a></li>
+<li class="chapter" data-level="" data-path="fatores-com-forcats.html"><a href="fatores-com-forcats.html#exr12-3-3"><i class="fa fa-check"></i>Exercício 12.3.3</a></li>
+</ul></li>
+<li class="chapter" data-level="12.4" data-path="fatores-com-forcats.html"><a href="fatores-com-forcats.html#modificando-a-ordem-dos-fatores"><i class="fa fa-check"></i><b>12.4</b> Modificando a ordem dos fatores</a>
+<ul>
+<li class="chapter" data-level="" data-path="fatores-com-forcats.html"><a href="fatores-com-forcats.html#exr12-4-1"><i class="fa fa-check"></i>Exercício 12.4.1</a></li>
+<li class="chapter" data-level="" data-path="fatores-com-forcats.html"><a href="fatores-com-forcats.html#exr12-4-2"><i class="fa fa-check"></i>Exercício 12.4.2</a></li>
+<li class="chapter" data-level="" data-path="fatores-com-forcats.html"><a href="fatores-com-forcats.html#exr12-4-3"><i class="fa fa-check"></i>Exercício 12.4.3</a></li>
+</ul></li>
+<li class="chapter" data-level="12.5" data-path="fatores-com-forcats.html"><a href="fatores-com-forcats.html#modificando-níveis-de-fatores"><i class="fa fa-check"></i><b>12.5</b> Modificando níveis de fatores</a>
+<ul>
+<li class="chapter" data-level="" data-path="fatores-com-forcats.html"><a href="fatores-com-forcats.html#exr12-5-1"><i class="fa fa-check"></i>Exercício 12.5.1</a></li>
+<li class="chapter" data-level="" data-path="fatores-com-forcats.html"><a href="fatores-com-forcats.html#exr12-5-2"><i class="fa fa-check"></i>Exercício 12.5.2</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="datas-e-horas-com-lubridate.html"><a href="datas-e-horas-com-lubridate.html"><i class="fa fa-check"></i><b>13</b> Datas e horas com <code>lubridate</code></a>
 <ul>
@@ -669,19 +683,356 @@ div.csl-indent {
 <h1><span class="header-section-number">Capítulo 12</span> Fatores com <code>forcats</code><a href="fatores-com-forcats.html#fatores-com-forcats" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <div id="introdução-8" class="section level2 hasAnchor" number="12.1">
 <h2><span class="header-section-number">12.1</span> Introdução<a href="fatores-com-forcats.html#introdução-8" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Não temos exercícios nesta seção.</p>
 </div>
 <div id="criando-fatores" class="section level2 hasAnchor" number="12.2">
 <h2><span class="header-section-number">12.2</span> Criando fatores<a href="fatores-com-forcats.html#criando-fatores" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Não temos exercícios para esta seção.</p>
 </div>
 <div id="general-social-survey" class="section level2 hasAnchor" number="12.3">
 <h2><span class="header-section-number">12.3</span> General Social Survey<a href="fatores-com-forcats.html#general-social-survey" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="exr12-3-1" class="section level3 unnumbered hasAnchor">
+<h3>Exercício 12.3.1<a href="fatores-com-forcats.html#exr12-3-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="enunciado">
+<p>Explore a distribuição de <code>rincome</code> (reported income - renda relatada). O que torna o gráfico de barra padrão tão difícil de entender? Como você melhoraria o gráfico?</p>
+</div>
+<div class="solution">
+<p><span id="unlabeled-div-184" class="solution"><em>Solução</em>. </span></p>
+<div class="sourceCode" id="cb412"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb412-1"><a href="fatores-com-forcats.html#cb412-1" tabindex="-1"></a>gss_cat <span class="sc">%&gt;%</span></span>
+<span id="cb412-2"><a href="fatores-com-forcats.html#cb412-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(rincome)) <span class="sc">+</span></span>
+<span id="cb412-3"><a href="fatores-com-forcats.html#cb412-3" tabindex="-1"></a>    <span class="fu">geom_bar</span>()</span></code></pre></div>
+<p><img src="r4ds_files/figure-html/unnamed-chunk-192-1.png" width="672" />
+Como temos muitas classes possíveis para <code>rincome</code>, a visualização fica comprometida, por isso vamos inverter os eixo do gráfico.</p>
+<div class="sourceCode" id="cb413"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb413-1"><a href="fatores-com-forcats.html#cb413-1" tabindex="-1"></a>gss_cat <span class="sc">%&gt;%</span></span>
+<span id="cb413-2"><a href="fatores-com-forcats.html#cb413-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(rincome)) <span class="sc">+</span></span>
+<span id="cb413-3"><a href="fatores-com-forcats.html#cb413-3" tabindex="-1"></a>    <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb413-4"><a href="fatores-com-forcats.html#cb413-4" tabindex="-1"></a>    <span class="fu">coord_flip</span>()</span></code></pre></div>
+<p><img src="r4ds_files/figure-html/unnamed-chunk-193-1.png" width="672" />
+Vamos também remover a categoria <code>Not applicabe</code>, que não agrega nenhuma informação o nosso gráfico, uma vez que queremos avaliar apenas as pessoas que possuem uma renda informada.</p>
+<div class="sourceCode" id="cb414"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb414-1"><a href="fatores-com-forcats.html#cb414-1" tabindex="-1"></a>gss_cat <span class="sc">%&gt;%</span></span>
+<span id="cb414-2"><a href="fatores-com-forcats.html#cb414-2" tabindex="-1"></a>  <span class="fu">filter</span>(rincome <span class="sc">!=</span> <span class="st">&quot;Not applicable&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb414-3"><a href="fatores-com-forcats.html#cb414-3" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(rincome)) <span class="sc">+</span></span>
+<span id="cb414-4"><a href="fatores-com-forcats.html#cb414-4" tabindex="-1"></a>    <span class="fu">geom_bar</span>() <span class="sc">+</span> </span>
+<span id="cb414-5"><a href="fatores-com-forcats.html#cb414-5" tabindex="-1"></a>    <span class="fu">coord_flip</span>()</span></code></pre></div>
+<p><img src="r4ds_files/figure-html/unnamed-chunk-194-1.png" width="672" />
+Vamos também substituir o termo <code>LT $1000</code> por <code>Less than $1000</code>.</p>
+<div class="sourceCode" id="cb415"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb415-1"><a href="fatores-com-forcats.html#cb415-1" tabindex="-1"></a>gss_cat <span class="sc">%&gt;%</span></span>
+<span id="cb415-2"><a href="fatores-com-forcats.html#cb415-2" tabindex="-1"></a>  <span class="fu">filter</span>(rincome <span class="sc">!=</span> <span class="st">&quot;Not applicable&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb415-3"><a href="fatores-com-forcats.html#cb415-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rincome =</span> <span class="fu">fct_recode</span>(rincome, <span class="st">&quot;Less than $1000&quot;</span> <span class="ot">=</span> <span class="st">&quot;Lt $1000&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb415-4"><a href="fatores-com-forcats.html#cb415-4" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(rincome)) <span class="sc">+</span></span>
+<span id="cb415-5"><a href="fatores-com-forcats.html#cb415-5" tabindex="-1"></a>    <span class="fu">geom_bar</span>() <span class="sc">+</span> </span>
+<span id="cb415-6"><a href="fatores-com-forcats.html#cb415-6" tabindex="-1"></a>    <span class="fu">coord_flip</span>()</span></code></pre></div>
+<p><img src="r4ds_files/figure-html/unnamed-chunk-195-1.png" width="672" /></p>
+<p>Ainda poderíamos pensar em se é possível agrupar algumas das classes para tornar a visualização melhor.</p>
+</div>
+</div>
+<div id="exr12-3-2" class="section level3 unnumbered hasAnchor">
+<h3>Exercício 12.3.2<a href="fatores-com-forcats.html#exr12-3-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="enunciado">
+<p>Qual é a <code>relig</code> mais comum nessa pesquisa? Qual é a <code>partyid</code> mais comum?</p>
+</div>
+<div class="solution">
+<p><span id="unlabeled-div-185" class="solution"><em>Solução</em>. </span></p>
+<div class="sourceCode" id="cb416"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb416-1"><a href="fatores-com-forcats.html#cb416-1" tabindex="-1"></a>gss_cat <span class="sc">%&gt;%</span></span>
+<span id="cb416-2"><a href="fatores-com-forcats.html#cb416-2" tabindex="-1"></a>  <span class="fu">count</span>(relig) <span class="sc">%&gt;%</span></span>
+<span id="cb416-3"><a href="fatores-com-forcats.html#cb416-3" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n))</span></code></pre></div>
+<pre><code>## # A tibble: 15 × 2
+##    relig                     n
+##    &lt;fct&gt;                 &lt;int&gt;
+##  1 Protestant            10846
+##  2 Catholic               5124
+##  3 None                   3523
+##  4 Christian               689
+##  5 Jewish                  388
+##  6 Other                   224
+##  7 Buddhism                147
+##  8 Inter-nondenominatio…   109
+##  9 Moslem/islam            104
+## 10 Orthodox-christian       95
+## 11 No answer                93
+## 12 Hinduism                 71
+## 13 Other eastern            32
+## 14 Native american          23
+## 15 Don&#39;t know               15</code></pre>
+<p>A religião com maior número de adeptos é a Protestante.</p>
+<div class="sourceCode" id="cb418"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb418-1"><a href="fatores-com-forcats.html#cb418-1" tabindex="-1"></a>gss_cat <span class="sc">%&gt;%</span></span>
+<span id="cb418-2"><a href="fatores-com-forcats.html#cb418-2" tabindex="-1"></a>  <span class="fu">count</span>(partyid) <span class="sc">%&gt;%</span></span>
+<span id="cb418-3"><a href="fatores-com-forcats.html#cb418-3" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n))</span></code></pre></div>
+<pre><code>## # A tibble: 10 × 2
+##    partyid                n
+##    &lt;fct&gt;              &lt;int&gt;
+##  1 Independent         4119
+##  2 Not str democrat    3690
+##  3 Strong democrat     3490
+##  4 Not str republican  3032
+##  5 Ind,near dem        2499
+##  6 Strong republican   2314
+##  7 Ind,near rep        1791
+##  8 Other party          393
+##  9 No answer            154
+## 10 Don&#39;t know             1</code></pre>
+<p>E o partido com maior número de afiliados é o Independent.</p>
+</div>
+</div>
+<div id="exr12-3-3" class="section level3 unnumbered hasAnchor">
+<h3>Exercício 12.3.3<a href="fatores-com-forcats.html#exr12-3-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="enunciado">
+<p>A qual <code>relig</code> é aplicada <code>denom</code> (denominação)? Como você pode descobrir isso com uma tabela? e com uma visualização?</p>
+</div>
+<div class="solution">
+<p><span id="unlabeled-div-186" class="solution"><em>Solução</em>. </span>Primeiro vamos verificar as categorias possíveis para <code>relig</code> e para <code>denom</code>:</p>
+<div class="sourceCode" id="cb420"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb420-1"><a href="fatores-com-forcats.html#cb420-1" tabindex="-1"></a><span class="fu">writeLines</span>(<span class="st">&quot;relig:&quot;</span>)</span></code></pre></div>
+<pre><code>## relig:</code></pre>
+<div class="sourceCode" id="cb422"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb422-1"><a href="fatores-com-forcats.html#cb422-1" tabindex="-1"></a><span class="fu">levels</span>(gss_cat<span class="sc">$</span>relig)</span></code></pre></div>
+<pre><code>##  [1] &quot;No answer&quot;               &quot;Don&#39;t know&quot;             
+##  [3] &quot;Inter-nondenominational&quot; &quot;Native american&quot;        
+##  [5] &quot;Christian&quot;               &quot;Orthodox-christian&quot;     
+##  [7] &quot;Moslem/islam&quot;            &quot;Other eastern&quot;          
+##  [9] &quot;Hinduism&quot;                &quot;Buddhism&quot;               
+## [11] &quot;Other&quot;                   &quot;None&quot;                   
+## [13] &quot;Jewish&quot;                  &quot;Catholic&quot;               
+## [15] &quot;Protestant&quot;              &quot;Not applicable&quot;</code></pre>
+<div class="sourceCode" id="cb424"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb424-1"><a href="fatores-com-forcats.html#cb424-1" tabindex="-1"></a><span class="fu">writeLines</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">denom:&quot;</span>)</span></code></pre></div>
+<pre><code>## 
+## denom:</code></pre>
+<div class="sourceCode" id="cb426"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb426-1"><a href="fatores-com-forcats.html#cb426-1" tabindex="-1"></a><span class="fu">levels</span>(gss_cat<span class="sc">$</span>denom)</span></code></pre></div>
+<pre><code>##  [1] &quot;No answer&quot;            &quot;Don&#39;t know&quot;           &quot;No denomination&quot;     
+##  [4] &quot;Other&quot;                &quot;Episcopal&quot;            &quot;Presbyterian-dk wh&quot;  
+##  [7] &quot;Presbyterian, merged&quot; &quot;Other presbyterian&quot;   &quot;United pres ch in us&quot;
+## [10] &quot;Presbyterian c in us&quot; &quot;Lutheran-dk which&quot;    &quot;Evangelical luth&quot;    
+## [13] &quot;Other lutheran&quot;       &quot;Wi evan luth synod&quot;   &quot;Lutheran-mo synod&quot;   
+## [16] &quot;Luth ch in america&quot;   &quot;Am lutheran&quot;          &quot;Methodist-dk which&quot;  
+## [19] &quot;Other methodist&quot;      &quot;United methodist&quot;     &quot;Afr meth ep zion&quot;    
+## [22] &quot;Afr meth episcopal&quot;   &quot;Baptist-dk which&quot;     &quot;Other baptists&quot;      
+## [25] &quot;Southern baptist&quot;     &quot;Nat bapt conv usa&quot;    &quot;Nat bapt conv of am&quot; 
+## [28] &quot;Am bapt ch in usa&quot;    &quot;Am baptist asso&quot;      &quot;Not applicable&quot;</code></pre>
+<p>Nossa experiência nos diz que as denominações se referem à religião protestante, mas, para validar nossa hipótese, iremos remover os registros com denominação nas categorias <code>Not applicable</code>, <code>No answer</code>, <code>Don't know</code> e <code>No denomination</code>.</p>
+<div class="sourceCode" id="cb428"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb428-1"><a href="fatores-com-forcats.html#cb428-1" tabindex="-1"></a>gss_cat <span class="sc">%&gt;%</span></span>
+<span id="cb428-2"><a href="fatores-com-forcats.html#cb428-2" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>denom <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Not applicable&quot;</span>, <span class="st">&quot;No answer&quot;</span>, <span class="st">&quot;Don&#39;t know&quot;</span>, <span class="st">&quot;No denomination&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb428-3"><a href="fatores-com-forcats.html#cb428-3" tabindex="-1"></a>  <span class="fu">count</span>(relig)</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 2
+##   relig          n
+##   &lt;fct&gt;      &lt;int&gt;
+## 1 Protestant  9559</code></pre>
+<p>Uma outra possibilidade é:</p>
+<div class="sourceCode" id="cb430"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb430-1"><a href="fatores-com-forcats.html#cb430-1" tabindex="-1"></a>gss_cat <span class="sc">%&gt;%</span></span>
+<span id="cb430-2"><a href="fatores-com-forcats.html#cb430-2" tabindex="-1"></a>  <span class="fu">count</span>(relig, denom)</span></code></pre></div>
+<pre><code>## # A tibble: 47 × 3
+##    relig           denom     n
+##    &lt;fct&gt;           &lt;fct&gt; &lt;int&gt;
+##  1 No answer       No a…    93
+##  2 Don&#39;t know      Not …    15
+##  3 Inter-nondenom… Not …   109
+##  4 Native american Not …    23
+##  5 Christian       No a…     2
+##  6 Christian       Don&#39;…    11
+##  7 Christian       No d…   452
+##  8 Christian       Not …   224
+##  9 Orthodox-chris… Not …    95
+## 10 Moslem/islam    Not …   104
+## # ℹ 37 more rows</code></pre>
+<p>Para a forma gráfica, podemos usar o seguinte:</p>
+<div class="sourceCode" id="cb432"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb432-1"><a href="fatores-com-forcats.html#cb432-1" tabindex="-1"></a>gss_cat <span class="sc">%&gt;%</span></span>
+<span id="cb432-2"><a href="fatores-com-forcats.html#cb432-2" tabindex="-1"></a>  <span class="fu">count</span>(relig, denom) <span class="sc">%&gt;%</span></span>
+<span id="cb432-3"><a href="fatores-com-forcats.html#cb432-3" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(relig, denom, <span class="at">fill =</span> n)) <span class="sc">+</span></span>
+<span id="cb432-4"><a href="fatores-com-forcats.html#cb432-4" tabindex="-1"></a>    <span class="fu">geom_raster</span>() <span class="sc">+</span></span>
+<span id="cb432-5"><a href="fatores-com-forcats.html#cb432-5" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb432-6"><a href="fatores-com-forcats.html#cb432-6" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb432-7"><a href="fatores-com-forcats.html#cb432-7" tabindex="-1"></a>      <span class="at">x =</span> <span class="st">&quot;Religião&quot;</span>,</span>
+<span id="cb432-8"><a href="fatores-com-forcats.html#cb432-8" tabindex="-1"></a>      <span class="at">y =</span> <span class="st">&quot;Denominação&quot;</span>,</span>
+<span id="cb432-9"><a href="fatores-com-forcats.html#cb432-9" tabindex="-1"></a>      <span class="at">fill =</span> <span class="st">&quot;Contagem&quot;</span></span>
+<span id="cb432-10"><a href="fatores-com-forcats.html#cb432-10" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb432-11"><a href="fatores-com-forcats.html#cb432-11" tabindex="-1"></a>    <span class="fu">scale_fill_viridis</span>()</span></code></pre></div>
+<p><img src="r4ds_files/figure-html/unnamed-chunk-201-1.png" width="672" /></p>
+</div>
+</div>
 </div>
 <div id="modificando-a-ordem-dos-fatores" class="section level2 hasAnchor" number="12.4">
 <h2><span class="header-section-number">12.4</span> Modificando a ordem dos fatores<a href="fatores-com-forcats.html#modificando-a-ordem-dos-fatores" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="exr12-4-1" class="section level3 unnumbered hasAnchor">
+<h3>Exercício 12.4.1<a href="fatores-com-forcats.html#exr12-4-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="enunciado">
+<p>Há alguns números suspeitosamente altos em <code>tvhours</code>. A média pe um bom resumo?</p>
+</div>
+<div class="solution">
+<p><span id="unlabeled-div-187" class="solution"><em>Solução</em>. </span>Inicialmente vamos avaliar a distribuição de <code>tvhours</code>.</p>
+<div class="sourceCode" id="cb433"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb433-1"><a href="fatores-com-forcats.html#cb433-1" tabindex="-1"></a>gss_cat <span class="sc">%&gt;%</span></span>
+<span id="cb433-2"><a href="fatores-com-forcats.html#cb433-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(tvhours)) <span class="sc">+</span></span>
+<span id="cb433-3"><a href="fatores-com-forcats.html#cb433-3" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">15</span>)</span></code></pre></div>
+<pre><code>## Warning: Removed 10146 rows containing non-finite values (`stat_bin()`).</code></pre>
+<p><img src="r4ds_files/figure-html/unnamed-chunk-202-1.png" width="672" /></p>
+<div class="sourceCode" id="cb435"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb435-1"><a href="fatores-com-forcats.html#cb435-1" tabindex="-1"></a>gss_cat <span class="sc">%&gt;%</span></span>
+<span id="cb435-2"><a href="fatores-com-forcats.html#cb435-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(tvhours, relig)) <span class="sc">+</span></span>
+<span id="cb435-3"><a href="fatores-com-forcats.html#cb435-3" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>()</span></code></pre></div>
+<pre><code>## Warning: Removed 10146 rows containing non-finite values (`stat_boxplot()`).</code></pre>
+<p><img src="r4ds_files/figure-html/unnamed-chunk-203-1.png" width="672" />
+De fato, há muitos valores discrepantes, nesse caso, seria melhor utilizarmos a mediana.</p>
+<div class="sourceCode" id="cb437"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb437-1"><a href="fatores-com-forcats.html#cb437-1" tabindex="-1"></a>gss_cat <span class="sc">%&gt;%</span></span>
+<span id="cb437-2"><a href="fatores-com-forcats.html#cb437-2" tabindex="-1"></a>  <span class="fu">group_by</span>(relig) <span class="sc">%&gt;%</span></span>
+<span id="cb437-3"><a href="fatores-com-forcats.html#cb437-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">tvhours =</span> <span class="fu">median</span>(tvhours, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb437-4"><a href="fatores-com-forcats.html#cb437-4" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(tvhours, <span class="fu">fct_reorder</span>(relig, tvhours))) <span class="sc">+</span></span>
+<span id="cb437-5"><a href="fatores-com-forcats.html#cb437-5" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
+<p><img src="r4ds_files/figure-html/unnamed-chunk-204-1.png" width="672" /></p>
+</div>
+</div>
+<div id="exr12-4-2" class="section level3 unnumbered hasAnchor">
+<h3>Exercício 12.4.2<a href="fatores-com-forcats.html#exr12-4-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="enunciado">
+<p>Para cada fator em <code>gss_cat</code>, identifique se a ordem dos níveis é arbitrária ou com princípios.</p>
+</div>
+<div class="solution">
+<p><span id="unlabeled-div-188" class="solution"><em>Solução</em>. </span>Primeiro vamos visualizar o cabeçalho do conjunto de dados para identificar as colunas que são fatores.</p>
+<div class="sourceCode" id="cb438"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb438-1"><a href="fatores-com-forcats.html#cb438-1" tabindex="-1"></a>gss_cat <span class="sc">%&gt;%</span></span>
+<span id="cb438-2"><a href="fatores-com-forcats.html#cb438-2" tabindex="-1"></a>  <span class="fu">head</span>()</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 9
+##    year marital      age race 
+##   &lt;int&gt; &lt;fct&gt;      &lt;int&gt; &lt;fct&gt;
+## 1  2000 Never mar…    26 White
+## 2  2000 Divorced      48 White
+## 3  2000 Widowed       67 White
+## 4  2000 Never mar…    39 White
+## 5  2000 Divorced      25 White
+## 6  2000 Married       25 White
+## # ℹ 5 more variables:
+## #   rincome &lt;fct&gt;,
+## #   partyid &lt;fct&gt;,
+## #   relig &lt;fct&gt;, denom &lt;fct&gt;,
+## #   …</code></pre>
+<p>Agora, vamos listar as categorias em cada fator para avalia se são variáveis ordinais ou não.</p>
+<div class="sourceCode" id="cb440"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb440-1"><a href="fatores-com-forcats.html#cb440-1" tabindex="-1"></a><span class="fu">writeLines</span>(<span class="st">&quot;marital&quot;</span>)</span></code></pre></div>
+<pre><code>## marital</code></pre>
+<div class="sourceCode" id="cb442"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb442-1"><a href="fatores-com-forcats.html#cb442-1" tabindex="-1"></a><span class="fu">levels</span>(gss_cat<span class="sc">$</span>marital)</span></code></pre></div>
+<pre><code>## [1] &quot;No answer&quot;     &quot;Never married&quot; &quot;Separated&quot;     &quot;Divorced&quot;     
+## [5] &quot;Widowed&quot;       &quot;Married&quot;</code></pre>
+<div class="sourceCode" id="cb444"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb444-1"><a href="fatores-com-forcats.html#cb444-1" tabindex="-1"></a><span class="fu">writeLines</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">race&quot;</span>)</span></code></pre></div>
+<pre><code>## 
+## race</code></pre>
+<div class="sourceCode" id="cb446"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb446-1"><a href="fatores-com-forcats.html#cb446-1" tabindex="-1"></a><span class="fu">levels</span>(gss_cat<span class="sc">$</span>race)</span></code></pre></div>
+<pre><code>## [1] &quot;Other&quot;          &quot;Black&quot;          &quot;White&quot;          &quot;Not applicable&quot;</code></pre>
+<div class="sourceCode" id="cb448"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb448-1"><a href="fatores-com-forcats.html#cb448-1" tabindex="-1"></a><span class="fu">writeLines</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">rincome&quot;</span>)</span></code></pre></div>
+<pre><code>## 
+## rincome</code></pre>
+<div class="sourceCode" id="cb450"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb450-1"><a href="fatores-com-forcats.html#cb450-1" tabindex="-1"></a><span class="fu">levels</span>(gss_cat<span class="sc">$</span>rincome)</span></code></pre></div>
+<pre><code>##  [1] &quot;No answer&quot;      &quot;Don&#39;t know&quot;     &quot;Refused&quot;        &quot;$25000 or more&quot;
+##  [5] &quot;$20000 - 24999&quot; &quot;$15000 - 19999&quot; &quot;$10000 - 14999&quot; &quot;$8000 to 9999&quot; 
+##  [9] &quot;$7000 to 7999&quot;  &quot;$6000 to 6999&quot;  &quot;$5000 to 5999&quot;  &quot;$4000 to 4999&quot; 
+## [13] &quot;$3000 to 3999&quot;  &quot;$1000 to 2999&quot;  &quot;Lt $1000&quot;       &quot;Not applicable&quot;</code></pre>
+<div class="sourceCode" id="cb452"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb452-1"><a href="fatores-com-forcats.html#cb452-1" tabindex="-1"></a><span class="fu">writeLines</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">partyid&quot;</span>)</span></code></pre></div>
+<pre><code>## 
+## partyid</code></pre>
+<div class="sourceCode" id="cb454"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb454-1"><a href="fatores-com-forcats.html#cb454-1" tabindex="-1"></a><span class="fu">levels</span>(gss_cat<span class="sc">$</span>partyid)</span></code></pre></div>
+<pre><code>##  [1] &quot;No answer&quot;          &quot;Don&#39;t know&quot;         &quot;Other party&quot;       
+##  [4] &quot;Strong republican&quot;  &quot;Not str republican&quot; &quot;Ind,near rep&quot;      
+##  [7] &quot;Independent&quot;        &quot;Ind,near dem&quot;       &quot;Not str democrat&quot;  
+## [10] &quot;Strong democrat&quot;</code></pre>
+<div class="sourceCode" id="cb456"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb456-1"><a href="fatores-com-forcats.html#cb456-1" tabindex="-1"></a><span class="fu">writeLines</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">relig&quot;</span>)</span></code></pre></div>
+<pre><code>## 
+## relig</code></pre>
+<div class="sourceCode" id="cb458"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb458-1"><a href="fatores-com-forcats.html#cb458-1" tabindex="-1"></a><span class="fu">levels</span>(gss_cat<span class="sc">$</span>relig)</span></code></pre></div>
+<pre><code>##  [1] &quot;No answer&quot;               &quot;Don&#39;t know&quot;             
+##  [3] &quot;Inter-nondenominational&quot; &quot;Native american&quot;        
+##  [5] &quot;Christian&quot;               &quot;Orthodox-christian&quot;     
+##  [7] &quot;Moslem/islam&quot;            &quot;Other eastern&quot;          
+##  [9] &quot;Hinduism&quot;                &quot;Buddhism&quot;               
+## [11] &quot;Other&quot;                   &quot;None&quot;                   
+## [13] &quot;Jewish&quot;                  &quot;Catholic&quot;               
+## [15] &quot;Protestant&quot;              &quot;Not applicable&quot;</code></pre>
+<div class="sourceCode" id="cb460"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb460-1"><a href="fatores-com-forcats.html#cb460-1" tabindex="-1"></a><span class="fu">writeLines</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">denom&quot;</span>)</span></code></pre></div>
+<pre><code>## 
+## denom</code></pre>
+<div class="sourceCode" id="cb462"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb462-1"><a href="fatores-com-forcats.html#cb462-1" tabindex="-1"></a><span class="fu">levels</span>(gss_cat<span class="sc">$</span>denom)</span></code></pre></div>
+<pre><code>##  [1] &quot;No answer&quot;            &quot;Don&#39;t know&quot;           &quot;No denomination&quot;     
+##  [4] &quot;Other&quot;                &quot;Episcopal&quot;            &quot;Presbyterian-dk wh&quot;  
+##  [7] &quot;Presbyterian, merged&quot; &quot;Other presbyterian&quot;   &quot;United pres ch in us&quot;
+## [10] &quot;Presbyterian c in us&quot; &quot;Lutheran-dk which&quot;    &quot;Evangelical luth&quot;    
+## [13] &quot;Other lutheran&quot;       &quot;Wi evan luth synod&quot;   &quot;Lutheran-mo synod&quot;   
+## [16] &quot;Luth ch in america&quot;   &quot;Am lutheran&quot;          &quot;Methodist-dk which&quot;  
+## [19] &quot;Other methodist&quot;      &quot;United methodist&quot;     &quot;Afr meth ep zion&quot;    
+## [22] &quot;Afr meth episcopal&quot;   &quot;Baptist-dk which&quot;     &quot;Other baptists&quot;      
+## [25] &quot;Southern baptist&quot;     &quot;Nat bapt conv usa&quot;    &quot;Nat bapt conv of am&quot; 
+## [28] &quot;Am bapt ch in usa&quot;    &quot;Am baptist asso&quot;      &quot;Not applicable&quot;</code></pre>
+<p>Apenas <code>rincome</code> pode ser ordenada.</p>
+</div>
+</div>
+<div id="exr12-4-3" class="section level3 unnumbered hasAnchor">
+<h3>Exercício 12.4.3<a href="fatores-com-forcats.html#exr12-4-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="enunciado">
+<p>Por que mover “Not applicable” para a frente dos níveis o move para a parte de baixo do gráfico?</p>
+</div>
+<div class="solution">
+<p><span id="unlabeled-div-189" class="solution"><em>Solução</em>. </span>Porque o gráfico é montado de baixo para cima.</p>
+</div>
+</div>
 </div>
 <div id="modificando-níveis-de-fatores" class="section level2 hasAnchor" number="12.5">
 <h2><span class="header-section-number">12.5</span> Modificando níveis de fatores<a href="fatores-com-forcats.html#modificando-níveis-de-fatores" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="exr12-5-1" class="section level3 unnumbered hasAnchor">
+<h3>Exercício 12.5.1<a href="fatores-com-forcats.html#exr12-5-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="enunciado">
+<p>Como a proporção de pessoas identificadas como Democratas, Republicanos e Independentes mudou ao longo do tempo?</p>
+</div>
+<div class="solution">
+<p><span id="unlabeled-div-190" class="solution"><em>Solução</em>. </span>Para solucionar este exercício, vamos realizar os seguintes passos:</p>
+<ol style="list-style-type: decimal">
+<li>Recodificar os valores do fator <code>partyid</code>;</li>
+<li>Contar os respondentes filiados a cada partido por ano;</li>
+<li>Calcular as proporções por ano; e</li>
+<li>Plotar o resultado no gráfico.</li>
+</ol>
+<div class="sourceCode" id="cb464"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb464-1"><a href="fatores-com-forcats.html#cb464-1" tabindex="-1"></a>gss_cat <span class="sc">%&gt;%</span></span>
+<span id="cb464-2"><a href="fatores-com-forcats.html#cb464-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">partyid =</span> <span class="fu">fct_collapse</span>(partyid, </span>
+<span id="cb464-3"><a href="fatores-com-forcats.html#cb464-3" tabindex="-1"></a>                                <span class="at">other =</span> <span class="fu">c</span>(<span class="st">&quot;No answer&quot;</span>, <span class="st">&quot;Don&#39;t know&quot;</span>, <span class="st">&quot;Other party&quot;</span>),</span>
+<span id="cb464-4"><a href="fatores-com-forcats.html#cb464-4" tabindex="-1"></a>                                <span class="at">rep =</span> <span class="fu">c</span>(<span class="st">&quot;Strong republican&quot;</span>,<span class="st">&quot;Not str republican&quot;</span>),</span>
+<span id="cb464-5"><a href="fatores-com-forcats.html#cb464-5" tabindex="-1"></a>                                <span class="at">ind =</span> <span class="fu">c</span>(<span class="st">&quot;Ind,near rep&quot;</span>, <span class="st">&quot;Independent&quot;</span>, <span class="st">&quot;Ind,near dem&quot;</span>),</span>
+<span id="cb464-6"><a href="fatores-com-forcats.html#cb464-6" tabindex="-1"></a>                                <span class="at">dem =</span> <span class="fu">c</span>(<span class="st">&quot;Strong democrat&quot;</span>, <span class="st">&quot;Not str democrat&quot;</span>))</span>
+<span id="cb464-7"><a href="fatores-com-forcats.html#cb464-7" tabindex="-1"></a>         ) <span class="sc">%&gt;%</span></span>
+<span id="cb464-8"><a href="fatores-com-forcats.html#cb464-8" tabindex="-1"></a>  <span class="fu">count</span>(year, partyid) <span class="sc">%&gt;%</span></span>
+<span id="cb464-9"><a href="fatores-com-forcats.html#cb464-9" tabindex="-1"></a>  <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span></span>
+<span id="cb464-10"><a href="fatores-com-forcats.html#cb464-10" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">prop =</span> n <span class="sc">*</span> <span class="dv">100</span> <span class="sc">/</span> <span class="fu">sum</span>(n)) <span class="sc">%&gt;%</span></span>
+<span id="cb464-11"><a href="fatores-com-forcats.html#cb464-11" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(</span>
+<span id="cb464-12"><a href="fatores-com-forcats.html#cb464-12" tabindex="-1"></a>    <span class="at">x =</span> year, </span>
+<span id="cb464-13"><a href="fatores-com-forcats.html#cb464-13" tabindex="-1"></a>    <span class="at">y =</span> prop, </span>
+<span id="cb464-14"><a href="fatores-com-forcats.html#cb464-14" tabindex="-1"></a>    <span class="at">color =</span> <span class="fu">fct_reorder2</span>(partyid, year, prop)</span>
+<span id="cb464-15"><a href="fatores-com-forcats.html#cb464-15" tabindex="-1"></a>  )) <span class="sc">+</span></span>
+<span id="cb464-16"><a href="fatores-com-forcats.html#cb464-16" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb464-17"><a href="fatores-com-forcats.html#cb464-17" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb464-18"><a href="fatores-com-forcats.html#cb464-18" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">color =</span> <span class="st">&quot;Party ID&quot;</span>)</span></code></pre></div>
+<p><img src="r4ds_files/figure-html/unnamed-chunk-207-1.png" width="672" /></p>
+</div>
+</div>
+<div id="exr12-5-2" class="section level3 unnumbered hasAnchor">
+<h3>Exercício 12.5.2<a href="fatores-com-forcats.html#exr12-5-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="enunciado">
+<p>Como você poderia colapsar <code>rincome</code> em um conjunto de pequeno de categorias?</p>
+</div>
+<div class="solution">
+<p><span id="unlabeled-div-191" class="solution"><em>Solução</em>. </span></p>
+<div class="sourceCode" id="cb465"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb465-1"><a href="fatores-com-forcats.html#cb465-1" tabindex="-1"></a><span class="fu">levels</span>(gss_cat<span class="sc">$</span>rincome)</span></code></pre></div>
+<pre><code>##  [1] &quot;No answer&quot;      &quot;Don&#39;t know&quot;     &quot;Refused&quot;        &quot;$25000 or more&quot;
+##  [5] &quot;$20000 - 24999&quot; &quot;$15000 - 19999&quot; &quot;$10000 - 14999&quot; &quot;$8000 to 9999&quot; 
+##  [9] &quot;$7000 to 7999&quot;  &quot;$6000 to 6999&quot;  &quot;$5000 to 5999&quot;  &quot;$4000 to 4999&quot; 
+## [13] &quot;$3000 to 3999&quot;  &quot;$1000 to 2999&quot;  &quot;Lt $1000&quot;       &quot;Not applicable&quot;</code></pre>
+<div class="sourceCode" id="cb467"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb467-1"><a href="fatores-com-forcats.html#cb467-1" tabindex="-1"></a>gss_cat <span class="sc">%&gt;%</span></span>
+<span id="cb467-2"><a href="fatores-com-forcats.html#cb467-2" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb467-3"><a href="fatores-com-forcats.html#cb467-3" tabindex="-1"></a>    <span class="at">rincome =</span> <span class="fu">fct_collapse</span>(rincome,</span>
+<span id="cb467-4"><a href="fatores-com-forcats.html#cb467-4" tabindex="-1"></a>                           <span class="st">&quot;Unknown&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;No answer&quot;</span>, <span class="st">&quot;Don&#39;t know&quot;</span>, <span class="st">&quot;Refused&quot;</span>, <span class="st">&quot;Not applicable&quot;</span>),</span>
+<span id="cb467-5"><a href="fatores-com-forcats.html#cb467-5" tabindex="-1"></a>                           <span class="st">&quot;Less than $4000&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;Lt $1000&quot;</span>, <span class="fu">str_c</span>(<span class="st">&quot;$&quot;</span>, <span class="fu">c</span>(<span class="st">&quot;1000&quot;</span>, <span class="st">&quot;3000&quot;</span>), <span class="st">&quot; to &quot;</span>, <span class="fu">c</span>(<span class="st">&quot;2999&quot;</span>, <span class="st">&quot;3999&quot;</span>))),</span>
+<span id="cb467-6"><a href="fatores-com-forcats.html#cb467-6" tabindex="-1"></a>                           <span class="st">&quot;$4000 to $6999&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">str_c</span>(<span class="st">&quot;$&quot;</span>, <span class="fu">c</span>(<span class="st">&quot;4000&quot;</span>, <span class="st">&quot;5000&quot;</span>, <span class="st">&quot;6000&quot;</span>), <span class="st">&quot; to &quot;</span>, <span class="fu">c</span>(<span class="st">&quot;4999&quot;</span>, <span class="st">&quot;5999&quot;</span>, <span class="st">&quot;6999&quot;</span>))),</span>
+<span id="cb467-7"><a href="fatores-com-forcats.html#cb467-7" tabindex="-1"></a>                           <span class="st">&quot;$7000 to $14999&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">str_c</span>(<span class="st">&quot;$&quot;</span>, <span class="fu">c</span>(<span class="st">&quot;7000&quot;</span>, <span class="st">&quot;8000&quot;</span>, <span class="st">&quot;10000&quot;</span>), <span class="st">&quot; to &quot;</span>, <span class="fu">c</span>(<span class="st">&quot;7999&quot;</span>, <span class="st">&quot;9999&quot;</span>, <span class="st">&quot;14999&quot;</span>)), <span class="st">&quot;$10000 - 14999&quot;</span>),</span>
+<span id="cb467-8"><a href="fatores-com-forcats.html#cb467-8" tabindex="-1"></a>                           <span class="st">&quot;$15000 or more&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;$15000 - 19999&quot;</span>, <span class="st">&quot;$20000 - 24999&quot;</span>, <span class="st">&quot;$25000 or more&quot;</span>)</span>
+<span id="cb467-9"><a href="fatores-com-forcats.html#cb467-9" tabindex="-1"></a>                           )</span>
+<span id="cb467-10"><a href="fatores-com-forcats.html#cb467-10" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb467-11"><a href="fatores-com-forcats.html#cb467-11" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(rincome)) <span class="sc">+</span></span>
+<span id="cb467-12"><a href="fatores-com-forcats.html#cb467-12" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb467-13"><a href="fatores-com-forcats.html#cb467-13" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code></pre></div>
+<pre><code>## Warning: There was 1 warning in `mutate()`.
+## ℹ In argument: `rincome = fct_collapse(...)`.
+## Caused by warning:
+## ! Unknown levels in `f`: $10000 to 14999</code></pre>
+<p><img src="r4ds_files/figure-html/unnamed-chunk-208-1.png" width="672" /></p>
+</div>
 
+</div>
 </div>
 </div>
             </section>

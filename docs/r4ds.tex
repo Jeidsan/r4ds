@@ -327,6 +327,8 @@ Dúvidas ou sugestões de melhoria podem ser encaminhadas para o e-mail \emph{\h
 \item
   Exercícios do capítulo 11;
 \item
+  \protect\hyperlink{exr12-3-3}{Exercício 12.3.3};
+\item
 \end{itemize}
 
 \mainmatter
@@ -4793,16 +4795,16 @@ Pratique referir-se a nomes de variáveis não sintáticos, no data frame a segu
 ## # A tibble: 10 x 3
 ##      one   two three
 ##    <int> <dbl> <dbl>
-##  1     1  1.77  1.77
-##  2     2  4.71  2.36
-##  3     3  6.36  2.12
-##  4     4  7.61  1.90
-##  5     5  8.37  1.67
-##  6     6 13.7   2.29
-##  7     7 13.2   1.89
-##  8     8 18.0   2.25
-##  9     9 18.0   2.00
-## 10    10 20.7   2.07
+##  1     1  2.90  2.90
+##  2     2  4.52  2.26
+##  3     3  5.66  1.89
+##  4     4  7.65  1.91
+##  5     5 11.2   2.24
+##  6     6 12.1   2.02
+##  7     7 14.0   2.00
+##  8     8 16.9   2.11
+##  9     9 20.4   2.26
+## 10    10 20.2   2.02
 \end{verbatim}
 
 \end{solution}
@@ -7536,17 +7538,627 @@ x
 \hypertarget{introduuxe7uxe3o-8}{%
 \section{Introdução}\label{introduuxe7uxe3o-8}}
 
+Não temos exercícios nesta seção.
+
 \hypertarget{criando-fatores}{%
 \section{Criando fatores}\label{criando-fatores}}
+
+Não temos exercícios para esta seção.
 
 \hypertarget{general-social-survey}{%
 \section{General Social Survey}\label{general-social-survey}}
 
+\hypertarget{exr12-3-1}{%
+\subsection*{Exercício 12.3.1}\label{exr12-3-1}}
+\addcontentsline{toc}{subsection}{Exercício 12.3.1}
+
+Explore a distribuição de \texttt{rincome} (reported income - renda relatada). O que torna o gráfico de barra padrão tão difícil de entender? Como você melhoraria o gráfico?
+
+\begin{solution}
+\leavevmode
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{gss\_cat }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(rincome)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_bar}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-192-1.pdf}
+Como temos muitas classes possíveis para \texttt{rincome}, a visualização fica comprometida, por isso vamos inverter os eixo do gráfico.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{gss\_cat }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(rincome)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_bar}\NormalTok{() }\SpecialCharTok{+}
+    \FunctionTok{coord\_flip}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-193-1.pdf}
+Vamos também remover a categoria \texttt{Not\ applicabe}, que não agrega nenhuma informação o nosso gráfico, uma vez que queremos avaliar apenas as pessoas que possuem uma renda informada.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{gss\_cat }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(rincome }\SpecialCharTok{!=} \StringTok{"Not applicable"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(rincome)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_bar}\NormalTok{() }\SpecialCharTok{+} 
+    \FunctionTok{coord\_flip}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-194-1.pdf}
+Vamos também substituir o termo \texttt{LT\ \$1000} por \texttt{Less\ than\ \$1000}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{gss\_cat }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(rincome }\SpecialCharTok{!=} \StringTok{"Not applicable"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{rincome =} \FunctionTok{fct\_recode}\NormalTok{(rincome, }\StringTok{"Less than $1000"} \OtherTok{=} \StringTok{"Lt $1000"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(rincome)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_bar}\NormalTok{() }\SpecialCharTok{+} 
+    \FunctionTok{coord\_flip}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-195-1.pdf}
+
+Ainda poderíamos pensar em se é possível agrupar algumas das classes para tornar a visualização melhor.
+
+\end{solution}
+
+\hypertarget{exr12-3-2}{%
+\subsection*{Exercício 12.3.2}\label{exr12-3-2}}
+\addcontentsline{toc}{subsection}{Exercício 12.3.2}
+
+Qual é a \texttt{relig} mais comum nessa pesquisa? Qual é a \texttt{partyid} mais comum?
+
+\begin{solution}
+\leavevmode
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{gss\_cat }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{count}\NormalTok{(relig) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{arrange}\NormalTok{(}\FunctionTok{desc}\NormalTok{(n))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 15 x 2
+##    relig                     n
+##    <fct>                 <int>
+##  1 Protestant            10846
+##  2 Catholic               5124
+##  3 None                   3523
+##  4 Christian               689
+##  5 Jewish                  388
+##  6 Other                   224
+##  7 Buddhism                147
+##  8 Inter-nondenominatio~   109
+##  9 Moslem/islam            104
+## 10 Orthodox-christian       95
+## 11 No answer                93
+## 12 Hinduism                 71
+## 13 Other eastern            32
+## 14 Native american          23
+## 15 Don't know               15
+\end{verbatim}
+
+A religião com maior número de adeptos é a Protestante.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{gss\_cat }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{count}\NormalTok{(partyid) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{arrange}\NormalTok{(}\FunctionTok{desc}\NormalTok{(n))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 10 x 2
+##    partyid                n
+##    <fct>              <int>
+##  1 Independent         4119
+##  2 Not str democrat    3690
+##  3 Strong democrat     3490
+##  4 Not str republican  3032
+##  5 Ind,near dem        2499
+##  6 Strong republican   2314
+##  7 Ind,near rep        1791
+##  8 Other party          393
+##  9 No answer            154
+## 10 Don't know             1
+\end{verbatim}
+
+E o partido com maior número de afiliados é o Independent.
+
+\end{solution}
+
+\hypertarget{exr12-3-3}{%
+\subsection*{Exercício 12.3.3}\label{exr12-3-3}}
+\addcontentsline{toc}{subsection}{Exercício 12.3.3}
+
+A qual \texttt{relig} é aplicada \texttt{denom} (denominação)? Como você pode descobrir isso com uma tabela? e com uma visualização?
+
+\begin{solution}
+Primeiro vamos verificar as categorias possíveis para \texttt{relig} e para \texttt{denom}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{writeLines}\NormalTok{(}\StringTok{"relig:"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## relig:
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{levels}\NormalTok{(gss\_cat}\SpecialCharTok{$}\NormalTok{relig)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "No answer"               "Don't know"             
+##  [3] "Inter-nondenominational" "Native american"        
+##  [5] "Christian"               "Orthodox-christian"     
+##  [7] "Moslem/islam"            "Other eastern"          
+##  [9] "Hinduism"                "Buddhism"               
+## [11] "Other"                   "None"                   
+## [13] "Jewish"                  "Catholic"               
+## [15] "Protestant"              "Not applicable"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{writeLines}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{denom:"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## denom:
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{levels}\NormalTok{(gss\_cat}\SpecialCharTok{$}\NormalTok{denom)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "No answer"            "Don't know"           "No denomination"     
+##  [4] "Other"                "Episcopal"            "Presbyterian-dk wh"  
+##  [7] "Presbyterian, merged" "Other presbyterian"   "United pres ch in us"
+## [10] "Presbyterian c in us" "Lutheran-dk which"    "Evangelical luth"    
+## [13] "Other lutheran"       "Wi evan luth synod"   "Lutheran-mo synod"   
+## [16] "Luth ch in america"   "Am lutheran"          "Methodist-dk which"  
+## [19] "Other methodist"      "United methodist"     "Afr meth ep zion"    
+## [22] "Afr meth episcopal"   "Baptist-dk which"     "Other baptists"      
+## [25] "Southern baptist"     "Nat bapt conv usa"    "Nat bapt conv of am" 
+## [28] "Am bapt ch in usa"    "Am baptist asso"      "Not applicable"
+\end{verbatim}
+
+Nossa experiência nos diz que as denominações se referem à religião protestante, mas, para validar nossa hipótese, iremos remover os registros com denominação nas categorias \texttt{Not\ applicable}, \texttt{No\ answer}, \texttt{Don\textquotesingle{}t\ know} e \texttt{No\ denomination}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{gss\_cat }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\NormalTok{denom }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"Not applicable"}\NormalTok{, }\StringTok{"No answer"}\NormalTok{, }\StringTok{"Don\textquotesingle{}t know"}\NormalTok{, }\StringTok{"No denomination"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{count}\NormalTok{(relig)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1 x 2
+##   relig          n
+##   <fct>      <int>
+## 1 Protestant  9559
+\end{verbatim}
+
+Uma outra possibilidade é:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{gss\_cat }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{count}\NormalTok{(relig, denom)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 47 x 3
+##    relig           denom     n
+##    <fct>           <fct> <int>
+##  1 No answer       No a~    93
+##  2 Don't know      Not ~    15
+##  3 Inter-nondenom~ Not ~   109
+##  4 Native american Not ~    23
+##  5 Christian       No a~     2
+##  6 Christian       Don'~    11
+##  7 Christian       No d~   452
+##  8 Christian       Not ~   224
+##  9 Orthodox-chris~ Not ~    95
+## 10 Moslem/islam    Not ~   104
+## # i 37 more rows
+\end{verbatim}
+
+Para a forma gráfica, podemos usar o seguinte:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{gss\_cat }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{count}\NormalTok{(relig, denom) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(relig, denom, }\AttributeTok{fill =}\NormalTok{ n)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_raster}\NormalTok{() }\SpecialCharTok{+}
+    \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{45}\NormalTok{, }\AttributeTok{hjust =} \DecValTok{1}\NormalTok{)) }\SpecialCharTok{+}
+    \FunctionTok{labs}\NormalTok{(}
+      \AttributeTok{x =} \StringTok{"Religião"}\NormalTok{,}
+      \AttributeTok{y =} \StringTok{"Denominação"}\NormalTok{,}
+      \AttributeTok{fill =} \StringTok{"Contagem"}
+\NormalTok{    ) }\SpecialCharTok{+}
+    \FunctionTok{scale\_fill\_viridis}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-201-1.pdf}
+\end{solution}
+
 \hypertarget{modificando-a-ordem-dos-fatores}{%
 \section{Modificando a ordem dos fatores}\label{modificando-a-ordem-dos-fatores}}
 
+\hypertarget{exr12-4-1}{%
+\subsection*{Exercício 12.4.1}\label{exr12-4-1}}
+\addcontentsline{toc}{subsection}{Exercício 12.4.1}
+
+Há alguns números suspeitosamente altos em \texttt{tvhours}. A média pe um bom resumo?
+
+\begin{solution}
+Inicialmente vamos avaliar a distribuição de \texttt{tvhours}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{gss\_cat }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(tvhours)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{bins =} \DecValTok{15}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Removed 10146 rows containing non-finite values (`stat_bin()`).
+\end{verbatim}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-202-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{gss\_cat }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(tvhours, relig)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_boxplot}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Removed 10146 rows containing non-finite values (`stat_boxplot()`).
+\end{verbatim}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-203-1.pdf}
+De fato, há muitos valores discrepantes, nesse caso, seria melhor utilizarmos a mediana.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{gss\_cat }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(relig) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{tvhours =} \FunctionTok{median}\NormalTok{(tvhours, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(tvhours, }\FunctionTok{fct\_reorder}\NormalTok{(relig, tvhours))) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-204-1.pdf}
+\end{solution}
+
+\hypertarget{exr12-4-2}{%
+\subsection*{Exercício 12.4.2}\label{exr12-4-2}}
+\addcontentsline{toc}{subsection}{Exercício 12.4.2}
+
+Para cada fator em \texttt{gss\_cat}, identifique se a ordem dos níveis é arbitrária ou com princípios.
+
+\begin{solution}
+Primeiro vamos visualizar o cabeçalho do conjunto de dados para identificar as colunas que são fatores.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{gss\_cat }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{head}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 9
+##    year marital      age race 
+##   <int> <fct>      <int> <fct>
+## 1  2000 Never mar~    26 White
+## 2  2000 Divorced      48 White
+## 3  2000 Widowed       67 White
+## 4  2000 Never mar~    39 White
+## 5  2000 Divorced      25 White
+## 6  2000 Married       25 White
+## # i 5 more variables:
+## #   rincome <fct>,
+## #   partyid <fct>,
+## #   relig <fct>, denom <fct>,
+## #   ...
+\end{verbatim}
+
+Agora, vamos listar as categorias em cada fator para avalia se são variáveis ordinais ou não.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{writeLines}\NormalTok{(}\StringTok{"marital"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## marital
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{levels}\NormalTok{(gss\_cat}\SpecialCharTok{$}\NormalTok{marital)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "No answer"     "Never married" "Separated"     "Divorced"     
+## [5] "Widowed"       "Married"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{writeLines}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{race"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## race
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{levels}\NormalTok{(gss\_cat}\SpecialCharTok{$}\NormalTok{race)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Other"          "Black"          "White"          "Not applicable"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{writeLines}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{rincome"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## rincome
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{levels}\NormalTok{(gss\_cat}\SpecialCharTok{$}\NormalTok{rincome)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "No answer"      "Don't know"     "Refused"        "$25000 or more"
+##  [5] "$20000 - 24999" "$15000 - 19999" "$10000 - 14999" "$8000 to 9999" 
+##  [9] "$7000 to 7999"  "$6000 to 6999"  "$5000 to 5999"  "$4000 to 4999" 
+## [13] "$3000 to 3999"  "$1000 to 2999"  "Lt $1000"       "Not applicable"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{writeLines}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{partyid"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## partyid
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{levels}\NormalTok{(gss\_cat}\SpecialCharTok{$}\NormalTok{partyid)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "No answer"          "Don't know"         "Other party"       
+##  [4] "Strong republican"  "Not str republican" "Ind,near rep"      
+##  [7] "Independent"        "Ind,near dem"       "Not str democrat"  
+## [10] "Strong democrat"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{writeLines}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{relig"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## relig
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{levels}\NormalTok{(gss\_cat}\SpecialCharTok{$}\NormalTok{relig)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "No answer"               "Don't know"             
+##  [3] "Inter-nondenominational" "Native american"        
+##  [5] "Christian"               "Orthodox-christian"     
+##  [7] "Moslem/islam"            "Other eastern"          
+##  [9] "Hinduism"                "Buddhism"               
+## [11] "Other"                   "None"                   
+## [13] "Jewish"                  "Catholic"               
+## [15] "Protestant"              "Not applicable"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{writeLines}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{denom"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## denom
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{levels}\NormalTok{(gss\_cat}\SpecialCharTok{$}\NormalTok{denom)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "No answer"            "Don't know"           "No denomination"     
+##  [4] "Other"                "Episcopal"            "Presbyterian-dk wh"  
+##  [7] "Presbyterian, merged" "Other presbyterian"   "United pres ch in us"
+## [10] "Presbyterian c in us" "Lutheran-dk which"    "Evangelical luth"    
+## [13] "Other lutheran"       "Wi evan luth synod"   "Lutheran-mo synod"   
+## [16] "Luth ch in america"   "Am lutheran"          "Methodist-dk which"  
+## [19] "Other methodist"      "United methodist"     "Afr meth ep zion"    
+## [22] "Afr meth episcopal"   "Baptist-dk which"     "Other baptists"      
+## [25] "Southern baptist"     "Nat bapt conv usa"    "Nat bapt conv of am" 
+## [28] "Am bapt ch in usa"    "Am baptist asso"      "Not applicable"
+\end{verbatim}
+
+Apenas \texttt{rincome} pode ser ordenada.
+\end{solution}
+
+\hypertarget{exr12-4-3}{%
+\subsection*{Exercício 12.4.3}\label{exr12-4-3}}
+\addcontentsline{toc}{subsection}{Exercício 12.4.3}
+
+Por que mover ``Not applicable'' para a frente dos níveis o move para a parte de baixo do gráfico?
+
+\begin{solution}
+Porque o gráfico é montado de baixo para cima.
+\end{solution}
+
 \hypertarget{modificando-nuxedveis-de-fatores}{%
 \section{Modificando níveis de fatores}\label{modificando-nuxedveis-de-fatores}}
+
+\hypertarget{exr12-5-1}{%
+\subsection*{Exercício 12.5.1}\label{exr12-5-1}}
+\addcontentsline{toc}{subsection}{Exercício 12.5.1}
+
+Como a proporção de pessoas identificadas como Democratas, Republicanos e Independentes mudou ao longo do tempo?
+
+\begin{solution}
+Para solucionar este exercício, vamos realizar os seguintes passos:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Recodificar os valores do fator \texttt{partyid};
+\item
+  Contar os respondentes filiados a cada partido por ano;
+\item
+  Calcular as proporções por ano; e
+\item
+  Plotar o resultado no gráfico.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{gss\_cat }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{partyid =} \FunctionTok{fct\_collapse}\NormalTok{(partyid, }
+                                \AttributeTok{other =} \FunctionTok{c}\NormalTok{(}\StringTok{"No answer"}\NormalTok{, }\StringTok{"Don\textquotesingle{}t know"}\NormalTok{, }\StringTok{"Other party"}\NormalTok{),}
+                                \AttributeTok{rep =} \FunctionTok{c}\NormalTok{(}\StringTok{"Strong republican"}\NormalTok{,}\StringTok{"Not str republican"}\NormalTok{),}
+                                \AttributeTok{ind =} \FunctionTok{c}\NormalTok{(}\StringTok{"Ind,near rep"}\NormalTok{, }\StringTok{"Independent"}\NormalTok{, }\StringTok{"Ind,near dem"}\NormalTok{),}
+                                \AttributeTok{dem =} \FunctionTok{c}\NormalTok{(}\StringTok{"Strong democrat"}\NormalTok{, }\StringTok{"Not str democrat"}\NormalTok{))}
+\NormalTok{         ) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{count}\NormalTok{(year, partyid) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(year) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{prop =}\NormalTok{ n }\SpecialCharTok{*} \DecValTok{100} \SpecialCharTok{/} \FunctionTok{sum}\NormalTok{(n)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}
+    \AttributeTok{x =}\NormalTok{ year, }
+    \AttributeTok{y =}\NormalTok{ prop, }
+    \AttributeTok{color =} \FunctionTok{fct\_reorder2}\NormalTok{(partyid, year, prop)}
+\NormalTok{  )) }\SpecialCharTok{+}
+    \FunctionTok{geom\_line}\NormalTok{() }\SpecialCharTok{+}
+    \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+    \FunctionTok{labs}\NormalTok{(}\AttributeTok{color =} \StringTok{"Party ID"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-207-1.pdf}
+\end{solution}
+
+\hypertarget{exr12-5-2}{%
+\subsection*{Exercício 12.5.2}\label{exr12-5-2}}
+\addcontentsline{toc}{subsection}{Exercício 12.5.2}
+
+Como você poderia colapsar \texttt{rincome} em um conjunto de pequeno de categorias?
+
+\begin{solution}
+\leavevmode
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{levels}\NormalTok{(gss\_cat}\SpecialCharTok{$}\NormalTok{rincome)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "No answer"      "Don't know"     "Refused"        "$25000 or more"
+##  [5] "$20000 - 24999" "$15000 - 19999" "$10000 - 14999" "$8000 to 9999" 
+##  [9] "$7000 to 7999"  "$6000 to 6999"  "$5000 to 5999"  "$4000 to 4999" 
+## [13] "$3000 to 3999"  "$1000 to 2999"  "Lt $1000"       "Not applicable"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{gss\_cat }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{rincome =} \FunctionTok{fct\_collapse}\NormalTok{(rincome,}
+                           \StringTok{"Unknown"} \OtherTok{=} \FunctionTok{c}\NormalTok{(}\StringTok{"No answer"}\NormalTok{, }\StringTok{"Don\textquotesingle{}t know"}\NormalTok{, }\StringTok{"Refused"}\NormalTok{, }\StringTok{"Not applicable"}\NormalTok{),}
+                           \StringTok{"Less than $4000"} \OtherTok{=} \FunctionTok{c}\NormalTok{(}\StringTok{"Lt $1000"}\NormalTok{, }\FunctionTok{str\_c}\NormalTok{(}\StringTok{"$"}\NormalTok{, }\FunctionTok{c}\NormalTok{(}\StringTok{"1000"}\NormalTok{, }\StringTok{"3000"}\NormalTok{), }\StringTok{" to "}\NormalTok{, }\FunctionTok{c}\NormalTok{(}\StringTok{"2999"}\NormalTok{, }\StringTok{"3999"}\NormalTok{))),}
+                           \StringTok{"$4000 to $6999"} \OtherTok{=} \FunctionTok{c}\NormalTok{(}\FunctionTok{str\_c}\NormalTok{(}\StringTok{"$"}\NormalTok{, }\FunctionTok{c}\NormalTok{(}\StringTok{"4000"}\NormalTok{, }\StringTok{"5000"}\NormalTok{, }\StringTok{"6000"}\NormalTok{), }\StringTok{" to "}\NormalTok{, }\FunctionTok{c}\NormalTok{(}\StringTok{"4999"}\NormalTok{, }\StringTok{"5999"}\NormalTok{, }\StringTok{"6999"}\NormalTok{))),}
+                           \StringTok{"$7000 to $14999"} \OtherTok{=} \FunctionTok{c}\NormalTok{(}\FunctionTok{str\_c}\NormalTok{(}\StringTok{"$"}\NormalTok{, }\FunctionTok{c}\NormalTok{(}\StringTok{"7000"}\NormalTok{, }\StringTok{"8000"}\NormalTok{, }\StringTok{"10000"}\NormalTok{), }\StringTok{" to "}\NormalTok{, }\FunctionTok{c}\NormalTok{(}\StringTok{"7999"}\NormalTok{, }\StringTok{"9999"}\NormalTok{, }\StringTok{"14999"}\NormalTok{)), }\StringTok{"$10000 {-} 14999"}\NormalTok{),}
+                           \StringTok{"$15000 or more"} \OtherTok{=} \FunctionTok{c}\NormalTok{(}\StringTok{"$15000 {-} 19999"}\NormalTok{, }\StringTok{"$20000 {-} 24999"}\NormalTok{, }\StringTok{"$25000 or more"}\NormalTok{)}
+\NormalTok{                           )}
+\NormalTok{  ) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(rincome)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{coord\_flip}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: There was 1 warning in `mutate()`.
+## i In argument: `rincome = fct_collapse(...)`.
+## Caused by warning:
+## ! Unknown levels in `f`: $10000 to 14999
+\end{verbatim}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-208-1.pdf}
+
+\end{solution}
 
 \hypertarget{datas-e-horas-com-lubridate}{%
 \chapter{\texorpdfstring{Datas e horas com \texttt{lubridate}}{Datas e horas com lubridate}}\label{datas-e-horas-com-lubridate}}
