@@ -4,8 +4,16 @@
 
 ## Introdução
 
+Não temos exercícios para esta seção.
+
 ## Alternativas ao piping
+
+Não temos exercícios para esta seção.
 
 ## Quando não usar o pipe
 
+Não temos exercícios para esta seção.
+
 ## Outras ferramentas do `magrittr`
+
+Não temos exercícios para esta seção.
