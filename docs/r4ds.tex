@@ -233,7 +233,7 @@
 \makeatother
 \subtitle{Solução dos exercícios}
 \author{Jeidsan A. da C. Pereira}
-\date{2023-11-28}
+\date{2023-12-25}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Teorema}[chapter]
@@ -328,6 +328,10 @@ Dúvidas ou sugestões de melhoria podem ser encaminhadas para o e-mail \emph{\h
   Exercícios do capítulo 11;
 \item
   \protect\hyperlink{exr12-3-3}{Exercício 12.3.3};
+\item
+  \protect\hyperlink{exr13-3-3}{Exercício 13.3.3};
+\item
+  \protect\hyperlink{exr13-3-7}{Exercício 13.3.7};
 \item
 \end{itemize}
 
@@ -4795,16 +4799,16 @@ Pratique referir-se a nomes de variáveis não sintáticos, no data frame a segu
 ## # A tibble: 10 x 3
 ##      one   two three
 ##    <int> <dbl> <dbl>
-##  1     1  2.90  2.90
-##  2     2  4.52  2.26
-##  3     3  5.66  1.89
-##  4     4  7.65  1.91
-##  5     5 11.2   2.24
-##  6     6 12.1   2.02
-##  7     7 14.0   2.00
-##  8     8 16.9   2.11
-##  9     9 20.4   2.26
-## 10    10 20.2   2.02
+##  1     1  3.03  3.03
+##  2     2  3.48  1.74
+##  3     3  6.59  2.20
+##  4     4  8.99  2.25
+##  5     5  8.79  1.76
+##  6     6 12.6   2.10
+##  7     7 15.8   2.26
+##  8     8 16.1   2.02
+##  9     9 17.9   1.99
+## 10    10 19.9   1.99
 \end{verbatim}
 
 \end{solution}
@@ -7899,16 +7903,6 @@ Agora, vamos listar as categorias em cada fator para avalia se são variáveis o
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{writeLines}\NormalTok{(}\StringTok{"marital"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## marital
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \FunctionTok{levels}\NormalTok{(gss\_cat}\SpecialCharTok{$}\NormalTok{marital)}
 \end{Highlighting}
 \end{Shaded}
@@ -7920,34 +7914,12 @@ Agora, vamos listar as categorias em cada fator para avalia se são variáveis o
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{writeLines}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{race"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## 
-## race
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \FunctionTok{levels}\NormalTok{(gss\_cat}\SpecialCharTok{$}\NormalTok{race)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 ## [1] "Other"          "Black"          "White"          "Not applicable"
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{writeLines}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{rincome"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## 
-## rincome
 \end{verbatim}
 
 \begin{Shaded}
@@ -7965,17 +7937,6 @@ Agora, vamos listar as categorias em cada fator para avalia se são variáveis o
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{writeLines}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{partyid"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## 
-## partyid
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \FunctionTok{levels}\NormalTok{(gss\_cat}\SpecialCharTok{$}\NormalTok{partyid)}
 \end{Highlighting}
 \end{Shaded}
@@ -7985,17 +7946,6 @@ Agora, vamos listar as categorias em cada fator para avalia se são variáveis o
 ##  [4] "Strong republican"  "Not str republican" "Ind,near rep"      
 ##  [7] "Independent"        "Ind,near dem"       "Not str democrat"  
 ## [10] "Strong democrat"
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{writeLines}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{relig"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## 
-## relig
 \end{verbatim}
 
 \begin{Shaded}
@@ -8013,17 +7963,6 @@ Agora, vamos listar as categorias em cada fator para avalia se são variáveis o
 ## [11] "Other"                   "None"                   
 ## [13] "Jewish"                  "Catholic"               
 ## [15] "Protestant"              "Not applicable"
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{writeLines}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{denom"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## 
-## denom
 \end{verbatim}
 
 \begin{Shaded}
@@ -8163,20 +8102,548 @@ Como você poderia colapsar \texttt{rincome} em um conjunto de pequeno de catego
 \hypertarget{datas-e-horas-com-lubridate}{%
 \chapter{\texorpdfstring{Datas e horas com \texttt{lubridate}}{Datas e horas com lubridate}}\label{datas-e-horas-com-lubridate}}
 
+No decorrer deste capítulo, utilizaremos o seguinte código como base:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{make\_datetime\_100 }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(year, month, day, time) \{}
+  \FunctionTok{make\_datetime}\NormalTok{(year, month, day, time }\SpecialCharTok{\%/\%} \DecValTok{100}\NormalTok{, time }\SpecialCharTok{\%\%} \DecValTok{100}\NormalTok{)}
+\NormalTok{\}}
+
+\NormalTok{flights\_dt }\OtherTok{\textless{}{-}}\NormalTok{ flights }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(dep\_time), }\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(arr\_time)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{dep\_time =} \FunctionTok{make\_datetime\_100}\NormalTok{(year, month, day, dep\_time),}
+    \AttributeTok{arr\_time =} \FunctionTok{make\_datetime\_100}\NormalTok{(year, month, day, arr\_time),}
+    \AttributeTok{sched\_dep\_time =} \FunctionTok{make\_datetime\_100}\NormalTok{(year, month, day, sched\_dep\_time),}
+    \AttributeTok{sched\_arr\_time =} \FunctionTok{make\_datetime\_100}\NormalTok{(year, month, day, sched\_arr\_time)}
+\NormalTok{  ) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(origin, dest, }\FunctionTok{ends\_with}\NormalTok{(}\StringTok{"delay"}\NormalTok{), }\FunctionTok{ends\_with}\NormalTok{(}\StringTok{"time"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
 \hypertarget{introduuxe7uxe3o-9}{%
 \section{Introdução}\label{introduuxe7uxe3o-9}}
+
+Não temos exercícios nesta seção.
 
 \hypertarget{criando-datahoras}{%
 \section{Criando data/horas}\label{criando-datahoras}}
 
+\hypertarget{exr13-2-1}{%
+\subsection*{Exercício 13.2.1}\label{exr13-2-1}}
+\addcontentsline{toc}{subsection}{Exercício 13.2.1}
+
+O que acontece se você analisar uma string que contenha datas inválidas?
+
+\begin{verbatim}
+ymd(c("2010-10-10", "bananas"))
+\end{verbatim}
+
+\begin{solution}
+
+Ao tentar avaliar uma string que não corresponda a um formato de data, \emph{lubridate} emite um alerta indicando falha na conversão e substitui a posição correspondente por \texttt{NA}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ymd}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"2010{-}10{-}10"}\NormalTok{, }\StringTok{"bananas"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: 1 failed to parse.
+\end{verbatim}
+
+\begin{verbatim}
+## [1] "2010-10-10" NA
+\end{verbatim}
+
+\end{solution}
+
+\hypertarget{exr13-2-2}{%
+\subsection*{Exercício 13.2.2}\label{exr13-2-2}}
+\addcontentsline{toc}{subsection}{Exercício 13.2.2}
+
+O que o argumento \texttt{tzone} para \texttt{today()} faz? Por que ele é importante?
+
+\begin{solution}
+O argumento serve para determinar a timezone. Como em diferentes partes do mundo podemos ter datas diferentes, o valor de \texttt{today()} pode ser diferente do esperado.
+\end{solution}
+
+\hypertarget{exr13-2-3}{%
+\subsection*{Exercício 13.2.3}\label{exr13-2-3}}
+\addcontentsline{toc}{subsection}{Exercício 13.2.3}
+
+Use a função adequada de \textbf{lubridate} para analisar cada uma das datas a seguir:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{d1 }\OtherTok{\textless{}{-}} \StringTok{"January 1, 2010"}
+\NormalTok{d2 }\OtherTok{\textless{}{-}} \StringTok{"2015{-}Mar{-}07"}
+\NormalTok{d3 }\OtherTok{\textless{}{-}} \StringTok{"06{-}Jun{-}2017"}
+\NormalTok{d4 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"August 19 (2015)"}\NormalTok{, }\StringTok{"July 1 (2015)"}\NormalTok{)}
+\NormalTok{d5 }\OtherTok{\textless{}{-}} \StringTok{"12/30/14"} \CommentTok{\# Dec 30, 2014}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{solution}
+\leavevmode
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mdy}\NormalTok{(d1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "2010-01-01"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ymd}\NormalTok{(d2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "2015-03-07"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dmy}\NormalTok{(d3)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "2017-06-06"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mdy}\NormalTok{(d4)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "2015-08-19" "2015-07-01"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mdy}\NormalTok{(d5)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "2014-12-30"
+\end{verbatim}
+
+\end{solution}
+
 \hypertarget{componentes-de-data-hora}{%
 \section{Componentes de data-hora}\label{componentes-de-data-hora}}
+
+\hypertarget{exr13-3-1}{%
+\subsection*{Exercício 13.3.1}\label{exr13-3-1}}
+\addcontentsline{toc}{subsection}{Exercício 13.3.1}
+
+Como a distribuição dos tempos de voo dentro de um dia mudam ao longo do curso do ano?
+
+\begin{solution}
+Para avaliar o cenário, vamos recorrer ao data set \texttt{flights\_dt} e criar duas novas variáveis. A primeira contém apenas a hora do dia (utilizamos a função \texttt{mutate()} para levar todas as datas ao primeiro dia do ano) e a segunda conterá o mês. Em seguida, plotaremos o gráfico mostrando a densidade por hora, agrupado pelo mês.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{flights\_dt }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(dep\_time)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{hour =} \FunctionTok{update}\NormalTok{(dep\_time, }\AttributeTok{yday =} \DecValTok{1}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{month =} \FunctionTok{factor}\NormalTok{(}\FunctionTok{month}\NormalTok{(dep\_time))) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}
+    \AttributeTok{x =}\NormalTok{ hour, }
+    \AttributeTok{y =}\NormalTok{ ..density..,}
+    \AttributeTok{color =}\NormalTok{ month}
+\NormalTok{  )) }\SpecialCharTok{+}
+    \FunctionTok{geom\_freqpoly}\NormalTok{(}\AttributeTok{binwidth =} \DecValTok{60} \SpecialCharTok{*} \DecValTok{60}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-213-1.pdf}
+
+Notamos que não há grandes variações durante o ano. A quantidade de voos a cada hora é aproximadamente constante durante todo o ano.
+\end{solution}
+
+\hypertarget{exr13-3-2}{%
+\subsection*{Exercício 13.3.2}\label{exr13-3-2}}
+\addcontentsline{toc}{subsection}{Exercício 13.3.2}
+
+Compare \texttt{dep\_time}, \texttt{sched\_dep\_time} e \texttt{dep\_delay}. São consistentes? Explique suas descobertas.
+
+\begin{solution}
+Consideraremos os dados consistentes se eles satisfizerem \texttt{dep\_time\ =\ sched\_dep\_time\ +\ dep\_delay}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{flights\_dt }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(dep\_time)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{calc\_dep\_time =}\NormalTok{ sched\_dep\_time }\SpecialCharTok{+}\NormalTok{ dep\_delay }\SpecialCharTok{*} \DecValTok{60}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(dep\_time }\SpecialCharTok{!=}\NormalTok{ calc\_dep\_time) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(dep\_time, sched\_dep\_time, dep\_delay, calc\_dep\_time) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{arrange}\NormalTok{(}\FunctionTok{desc}\NormalTok{(dep\_delay))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1,205 x 4
+##    dep_time           
+##    <dttm>             
+##  1 2013-01-09 06:41:00
+##  2 2013-06-15 14:32:00
+##  3 2013-01-10 11:21:00
+##  4 2013-09-20 11:39:00
+##  5 2013-07-22 08:45:00
+##  6 2013-04-10 11:00:00
+##  7 2013-06-27 09:59:00
+##  8 2013-12-05 07:56:00
+##  9 2013-05-03 11:33:00
+## 10 2013-01-01 08:48:00
+## # i 1,195 more rows
+## # i 3 more variables:
+## #   sched_dep_time <dttm>,
+## #   dep_delay <dbl>,
+## #   calc_dep_time <dttm>
+\end{verbatim}
+
+Parece que a variável \texttt{dep\_time} contém a hora correta, mas não a data. Vamos confirmar essa hipótese movendo todos as horas para o mesmo dia e recalcular a diferença.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{flights\_dt }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(dep\_time)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{calc\_dep\_time =}\NormalTok{ sched\_dep\_time }\SpecialCharTok{+}\NormalTok{ dep\_delay }\SpecialCharTok{*} \DecValTok{60}\NormalTok{,}
+    \AttributeTok{dep\_time\_2 =} \FunctionTok{update}\NormalTok{(dep\_time, }\AttributeTok{year =} \DecValTok{2013}\NormalTok{, }\AttributeTok{month =} \DecValTok{1}\NormalTok{, }\AttributeTok{day =} \DecValTok{1}\NormalTok{),}
+    \AttributeTok{calc\_dep\_time\_2 =} \FunctionTok{update}\NormalTok{(calc\_dep\_time, }\AttributeTok{year =} \DecValTok{2013}\NormalTok{, }\AttributeTok{month =} \DecValTok{1}\NormalTok{, }\AttributeTok{day =} \DecValTok{1}\NormalTok{)}
+\NormalTok{  ) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(dep\_time\_2 }\SpecialCharTok{!=}\NormalTok{ calc\_dep\_time\_2) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(dep\_time, dep\_time\_2, calc\_dep\_time, calc\_dep\_time\_2, dep\_delay) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{arrange}\NormalTok{(}\FunctionTok{desc}\NormalTok{(dep\_delay))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 0 x 5
+## # i 5 variables:
+## #   dep_time <dttm>,
+## #   dep_time_2 <dttm>,
+## #   calc_dep_time <dttm>,
+## #   calc_dep_time_2 <dttm>,
+## #   ...
+\end{verbatim}
+
+De fato, não há nenhum voo cuja hora real de decolagem seja diferente do nosso cálculo. Sendo assim, a única inconsistência é que a data real da decolagem não foi ajustada nos casos em que o atraso fez o voo sair apenas no dia seguinte.
+\end{solution}
+
+\hypertarget{exr13-3-3}{%
+\subsection*{Exercício 13.3.3}\label{exr13-3-3}}
+\addcontentsline{toc}{subsection}{Exercício 13.3.3}
+
+Compare \texttt{air\_time} com a duração entre a partida e a chegada. Explique seus resultados. (Dica: considere a localização do aeroporto.)
+
+\begin{solution}
+
+Inicialmente vamos calcular a difernça entre a partida e a chegada.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{flights\_dt }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(dep\_time)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{calc\_dep\_time =}\NormalTok{ sched\_dep\_time }\SpecialCharTok{+}\NormalTok{ dep\_delay }\SpecialCharTok{*} \DecValTok{60}\NormalTok{,}
+    \AttributeTok{flight\_duration =}\NormalTok{ arr\_time }\SpecialCharTok{{-}}\NormalTok{ dep\_time,}
+    \AttributeTok{diff =}\NormalTok{ flight\_duration }\SpecialCharTok{{-}}\NormalTok{ air\_time}
+\NormalTok{  ) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(origin, dest, dep\_time, calc\_dep\_time, arr\_time, air\_time, flight\_duration, diff) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{arrange}\NormalTok{(diff)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 328,063 x 8
+##    origin dest 
+##    <chr>  <chr>
+##  1 EWR    HNL  
+##  2 EWR    SFO  
+##  3 EWR    SFO  
+##  4 EWR    PHX  
+##  5 EWR    SEA  
+##  6 JFK    LAX  
+##  7 EWR    SAN  
+##  8 JFK    LAS  
+##  9 EWR    LAS  
+## 10 JFK    PDX  
+## # i 328,053 more rows
+## # i 6 more variables:
+## #   dep_time <dttm>,
+## #   calc_dep_time <dttm>,
+## #   arr_time <dttm>,
+## #   air_time <dbl>, ...
+\end{verbatim}
+
+Notamos que existem alguns voos para os quais \texttt{flights\_duration} é negativa. Esse problema parece estar relacionado à inconsistência apontada no exercício anterior, que ocorre tanto navariável \texttt{dep\_time}, quanto na variável \texttt{arr\_time}. Vamos tentar resolver o problema ajustando a data de chegada.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{flights\_dt }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(dep\_time)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{calc\_dep\_time =}\NormalTok{ sched\_dep\_time }\SpecialCharTok{+}\NormalTok{ dep\_delay }\SpecialCharTok{*} \DecValTok{60}\NormalTok{,}
+    \AttributeTok{calc\_arr\_time =} \FunctionTok{if\_else}\NormalTok{(arr\_time }\SpecialCharTok{\textless{}=}\NormalTok{ calc\_dep\_time, arr\_time }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{24}\SpecialCharTok{*}\DecValTok{60}\SpecialCharTok{*}\DecValTok{60}\NormalTok{), arr\_time),}
+    \AttributeTok{flight\_duration =}\NormalTok{ calc\_arr\_time }\SpecialCharTok{{-}}\NormalTok{ calc\_dep\_time,}
+    \AttributeTok{diff =}\NormalTok{ flight\_duration }\SpecialCharTok{{-}}\NormalTok{ air\_time}
+\NormalTok{  ) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(origin, dest, , calc\_dep\_time, calc\_arr\_time, air\_time, flight\_duration, diff) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{arrange}\NormalTok{(diff)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 328,063 x 7
+##    origin dest 
+##    <chr>  <chr>
+##  1 JFK    HNL  
+##  2 JFK    HNL  
+##  3 JFK    HNL  
+##  4 EWR    HNL  
+##  5 JFK    HNL  
+##  6 EWR    HNL  
+##  7 EWR    HNL  
+##  8 EWR    HNL  
+##  9 JFK    HNL  
+## 10 EWR    HNL  
+## # i 328,053 more rows
+## # i 5 more variables:
+## #   calc_dep_time <dttm>,
+## #   calc_arr_time <dttm>,
+## #   air_time <dbl>,
+## #   flight_duration <drtn>,
+## #   ...
+\end{verbatim}
+
+\end{solution}
+
+\hypertarget{exr13-3-4}{%
+\subsection*{Exercício 13.3.4}\label{exr13-3-4}}
+\addcontentsline{toc}{subsection}{Exercício 13.3.4}
+
+Como o tempo médio de atraso muda ao longo do dia? Você deveria usar \texttt{dep\_time} ou \texttt{sched\_dep\_time}? Por quê?
+
+\begin{solution}
+Para avaliar este cenário, iremos verificar o atraso nos voos agrupando-os pela hora de decolagem agendada.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{flights\_dt }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{sched\_dep\_hour =} \FunctionTok{hour}\NormalTok{(sched\_dep\_time)}
+\NormalTok{  ) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(sched\_dep\_hour) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{dep\_delay =} \FunctionTok{mean}\NormalTok{(dep\_delay)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ sched\_dep\_hour, }\AttributeTok{y =}\NormalTok{ dep\_delay)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+    \FunctionTok{geom\_smooth}\NormalTok{() }\SpecialCharTok{+}
+\NormalTok{    tema}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using method = 'loess' and formula = 'y ~ x'
+\end{verbatim}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-218-1.pdf}
+
+Na média, os maiores atrasos ocorrem entre o final da tarde e início da noite.
+\end{solution}
+
+\hypertarget{exr13-3-5}{%
+\subsection*{Exercício 13.3.5}\label{exr13-3-5}}
+\addcontentsline{toc}{subsection}{Exercício 13.3.5}
+
+Em que dia da semana você deve partir se quiser minimizar a chance de uma atraso?
+
+\begin{solution}
+Para solucionar este caso, vamos identificar o dia da semana de cada voo, realizar o agrupamento e calcular a média em cada grupo.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{flights\_dt }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{day =} \FunctionTok{wday}\NormalTok{(sched\_dep\_time, }\AttributeTok{label =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{abbr =} \ConstantTok{FALSE}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(day) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{dep\_delay =} \FunctionTok{mean}\NormalTok{(dep\_delay)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(day, dep\_delay)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_col}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-219-1.pdf}
+O melhor dia para viajar é no sábado!
+\end{solution}
+
+\hypertarget{exr13-3-6}{%
+\subsection*{Exercício 13.3.6}\label{exr13-3-6}}
+\addcontentsline{toc}{subsection}{Exercício 13.3.6}
+
+O que torna as distribuições de \texttt{diamonds\$carat} e \texttt{flights\$sched\_dep\_time} simnilares?
+
+\begin{solution}
+Em primeiro lugar iremos plotar ambas as distribuições para avaliá-las melhor.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{diamonds }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ carat }\SpecialCharTok{\%\%} \DecValTok{1} \SpecialCharTok{*} \DecValTok{100}\NormalTok{)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{binwidth =} \DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-220-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{flights\_dt }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FunctionTok{minute}\NormalTok{(sched\_dep\_time))) }\SpecialCharTok{+}
+    \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{binwidth =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+} 
+    \FunctionTok{scale\_x\_continuous}\NormalTok{(}\AttributeTok{breaks =} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{60}\NormalTok{, }\DecValTok{5}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-221-1.pdf}
+
+Em ambos os casos, percebemos uma concentração de observações em um determinado valor (os picos nos gráficos). Isso se deve ao fato de humanos terem uma predileção por valores arredondados.
+\end{solution}
+
+\hypertarget{exr13-3-7}{%
+\subsection*{Exercício 13.3.7}\label{exr13-3-7}}
+\addcontentsline{toc}{subsection}{Exercício 13.3.7}
+
+Confirme minha hipótese de que partidas antecipadas nos minutos 20-30 e 50-60 são causadas por vôos agendados que saem cedo. Dica: crie uma variável binária que lhe diga se houve atraso ou não.
+
+\begin{solution}
+x
+\end{solution}
 
 \hypertarget{intervalos-de-tempo}{%
 \section{Intervalos de tempo}\label{intervalos-de-tempo}}
 
+\hypertarget{exr13-4-1}{%
+\subsection*{Exercício 13.4.1}\label{exr13-4-1}}
+\addcontentsline{toc}{subsection}{Exercício 13.4.1}
+
+Por que há \texttt{months()} e não \texttt{dmonths()}?
+
+\begin{solution}
+Não faz muito sentido haver uma função \texttt{dmonths()} porque há muitas variações. Alguns meses tem 28, 29, 30 ou 31 dias.
+\end{solution}
+
+\hypertarget{exr13-4-2}{%
+\subsection*{Exercício 13.4.2}\label{exr13-4-2}}
+\addcontentsline{toc}{subsection}{Exercício 13.4.2}
+
+Explique \texttt{days(overnight\ *\ 1)} para alguém que acabou de começar a aprender R. Como isso funciona?
+
+\begin{solution}
+A função \texttt{days()} retorna uma quantidade de dias. O argumento recebido é um produto entre \texttt{overnight} (que indica se o vôo decola antes da meia noite e chega ao destino depois da meia noite, assumindo os valores \texttt{0} ou \texttt{1}, respectivamente) e 1. Dessa forma, a depender do valor de \texttt{overnight}, adicionaremos ou não um dia à data de decolagem/pouso.
+\end{solution}
+
+\hypertarget{exr13-4-3}{%
+\subsection*{Exercício 13.4.3}\label{exr13-4-3}}
+\addcontentsline{toc}{subsection}{Exercício 13.4.3}
+
+Crie um vetor de datas dando o primeiro dia de cada mês em 2015. Crie um vetor de datas dando o primeiro dia de cada mês no ano atual.
+
+\begin{solution}
+
+Como as funções em \textbf{lubridate} podem receber vetores como argumento, vamos utilizar a função \texttt{months()} em conjunto com o vetor \texttt{0:11}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dmy}\NormalTok{(}\DecValTok{01012015}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{months}\NormalTok{(}\DecValTok{0}\SpecialCharTok{:}\DecValTok{11}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "2015-01-01" "2015-02-01" "2015-03-01" "2015-04-01" "2015-05-01"
+##  [6] "2015-06-01" "2015-07-01" "2015-08-01" "2015-09-01" "2015-10-01"
+## [11] "2015-11-01" "2015-12-01"
+\end{verbatim}
+
+Já para pegar o primeiro dia de cada mês do ano atual, utilizaremos a mesma técnica, porém usando também as funções \texttt{today()} e \texttt{floor\_date()}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{floor\_date}\NormalTok{(}\FunctionTok{today}\NormalTok{(), }\AttributeTok{unit =} \StringTok{"year"}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{months}\NormalTok{(}\DecValTok{0}\SpecialCharTok{:}\DecValTok{11}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "2023-01-01" "2023-02-01" "2023-03-01" "2023-04-01" "2023-05-01"
+##  [6] "2023-06-01" "2023-07-01" "2023-08-01" "2023-09-01" "2023-10-01"
+## [11] "2023-11-01" "2023-12-01"
+\end{verbatim}
+
+\end{solution}
+
+\hypertarget{exr13-4-4}{%
+\subsection*{Exercício 13.4.4}\label{exr13-4-4}}
+\addcontentsline{toc}{subsection}{Exercício 13.4.4}
+
+Escreva uma função que, dado o seu aniversário (como uma data) retorne quantos anos você tem.
+
+\begin{solution}
+\leavevmode
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{how\_old }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(birthday) \{}
+\NormalTok{  (}\FunctionTok{dmy}\NormalTok{(}\DecValTok{19081990}\NormalTok{) }\SpecialCharTok{\%{-}{-}\%} \FunctionTok{today}\NormalTok{()) }\SpecialCharTok{\%/\%} \FunctionTok{years}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\NormalTok{\}}
+
+\FunctionTok{how\_old}\NormalTok{(}\DecValTok{19081990}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 33
+\end{verbatim}
+
+\end{solution}
+
+\hypertarget{exr13-4-5}{%
+\subsection*{Exercício 13.4.5}\label{exr13-4-5}}
+\addcontentsline{toc}{subsection}{Exercício 13.4.5}
+
+Por que \texttt{(today()\ \%-\/-\%\ (today()\ +\ years(1))\ /\ months(1)} não funciona?
+
+\begin{solution}
+
+Faltava um parentesis. o correto deveria ser:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(}\FunctionTok{today}\NormalTok{() }\SpecialCharTok{\%{-}{-}\%}\NormalTok{ (}\FunctionTok{today}\NormalTok{() }\SpecialCharTok{+} \FunctionTok{years}\NormalTok{(}\DecValTok{1}\NormalTok{))) }\SpecialCharTok{/} \FunctionTok{months}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 12
+\end{verbatim}
+
+\end{solution}
+
 \hypertarget{fusos-horuxe1rios}{%
 \section{Fusos horários}\label{fusos-horuxe1rios}}
+
+Não temos exercícios para esta seção.
 
 \hypertarget{part-programar}{%
 \part{Programar}\label{part-programar}}

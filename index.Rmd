@@ -23,6 +23,7 @@ library(viridis)
 library(fueleconomy)
 library(stringr)
 library(forcats)
+library(lubridate)
 
 options(repr.plot.width = 24, repr.plot.height = 13)
 
@@ -72,4 +73,6 @@ Dúvidas ou sugestões de melhoria podem ser encaminhadas para o e-mail *jeidsan
 - [Exercício 10.4.3](#exr10-4-3);
 - Exercícios do capítulo 11;
 - [Exercício 12.3.3](#exr12-3-3);
--
+- [Exercício 13.3.3](#exr13-3-3);
+- [Exercício 13.3.7](#exr13-3-7);
+- 

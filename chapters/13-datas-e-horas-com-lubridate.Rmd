@@ -1,11 +1,341 @@
 # Datas e horas com `lubridate`
 
+No decorrer deste capítulo, utilizaremos o seguinte código como base:
+
+```{r}
+make_datetime_100 <- function(year, month, day, time) {
+  make_datetime(year, month, day, time %/% 100, time %% 100)
+}
+
+flights_dt <- flights %>%
+  filter(!is.na(dep_time), !is.na(arr_time)) %>%
+  mutate(
+    dep_time = make_datetime_100(year, month, day, dep_time),
+    arr_time = make_datetime_100(year, month, day, arr_time),
+    sched_dep_time = make_datetime_100(year, month, day, sched_dep_time),
+    sched_arr_time = make_datetime_100(year, month, day, sched_arr_time)
+  ) %>%
+  select(origin, dest, ends_with("delay"), ends_with("time"))
+```
+
 ## Introdução
+
+Não temos exercícios nesta seção.
 
 ## Criando data/horas
 
+### Exercício 13.2.1 {- #exr13-2-1}
+
+::: {.enunciado}
+O que acontece se você analisar uma string que contenha datas inválidas?
+
+```
+ymd(c("2010-10-10", "bananas"))
+```
+:::
+
+::: {.solution}
+Ao tentar avaliar uma string que não corresponda a um formato de data, *lubridate* emite um alerta indicando falha na conversão e substitui a posição correspondente por `NA`.
+
+```{r}
+ymd(c("2010-10-10", "bananas"))
+```
+
+:::
+
+### Exercício 13.2.2 {- #exr13-2-2}
+
+::: {.enunciado}
+O que o argumento `tzone` para `today()` faz? Por que ele é importante?
+:::
+
+::: {.solution}
+O argumento serve para determinar a timezone. Como em diferentes partes do mundo podemos ter datas diferentes, o valor de `today()` pode ser diferente do esperado.
+:::
+
+### Exercício 13.2.3 {- #exr13-2-3}
+
+::: {.enunciado}
+Use a função adequada de **lubridate** para analisar cada uma das datas a seguir:
+
+```{r}
+d1 <- "January 1, 2010"
+d2 <- "2015-Mar-07"
+d3 <- "06-Jun-2017"
+d4 <- c("August 19 (2015)", "July 1 (2015)")
+d5 <- "12/30/14" # Dec 30, 2014
+```
+:::
+
+::: {.solution}
+```{r}
+mdy(d1)
+
+ymd(d2)
+
+dmy(d3)
+
+mdy(d4)
+
+mdy(d5)
+```
+:::
+
 ## Componentes de data-hora
+
+### Exercício 13.3.1 {- #exr13-3-1}
+
+::: {.enunciado}
+Como a distribuição dos tempos de voo dentro de um dia mudam ao longo do curso do ano?
+:::
+
+::: {.solution}
+Para avaliar o cenário, vamos recorrer ao data set `flights_dt` e criar duas novas variáveis. A primeira contém apenas a hora do dia (utilizamos a função `mutate()` para levar todas as datas ao primeiro dia do ano) e a segunda conterá o mês. Em seguida, plotaremos o gráfico mostrando a densidade por hora, agrupado pelo mês.
+
+```{r}
+flights_dt %>%
+  filter(!is.na(dep_time)) %>%
+  mutate(hour = update(dep_time, yday = 1)) %>%
+  mutate(month = factor(month(dep_time))) %>%
+  ggplot(aes(
+    x = hour, 
+    y = ..density..,
+    color = month
+  )) +
+    geom_freqpoly(binwidth = 60 * 60)
+  
+```
+
+Notamos que não há grandes variações durante o ano. A quantidade de voos a cada hora é aproximadamente constante durante todo o ano.
+:::
+
+### Exercício 13.3.2 {- #exr13-3-2}
+
+::: {.enunciado}
+Compare `dep_time`, `sched_dep_time` e `dep_delay`. São consistentes? Explique suas descobertas.
+:::
+
+::: {.solution}
+Consideraremos os dados consistentes se eles satisfizerem `dep_time = sched_dep_time + dep_delay`.
+
+```{r}
+flights_dt %>%
+  filter(!is.na(dep_time)) %>%
+  mutate(calc_dep_time = sched_dep_time + dep_delay * 60) %>%
+  filter(dep_time != calc_dep_time) %>%
+  select(dep_time, sched_dep_time, dep_delay, calc_dep_time) %>%
+  arrange(desc(dep_delay))
+```
+
+Parece que a variável `dep_time` contém a hora correta, mas não a data. Vamos confirmar essa hipótese movendo todos as horas para o mesmo dia e recalcular a diferença.
+
+```{r}
+flights_dt %>%
+  filter(!is.na(dep_time)) %>%
+  mutate(
+    calc_dep_time = sched_dep_time + dep_delay * 60,
+    dep_time_2 = update(dep_time, year = 2013, month = 1, day = 1),
+    calc_dep_time_2 = update(calc_dep_time, year = 2013, month = 1, day = 1)
+  ) %>%
+  filter(dep_time_2 != calc_dep_time_2) %>%
+  select(dep_time, dep_time_2, calc_dep_time, calc_dep_time_2, dep_delay) %>%
+  arrange(desc(dep_delay))
+```
+
+De fato, não há nenhum voo cuja hora real de decolagem seja diferente do nosso cálculo. Sendo assim, a única inconsistência é que a data real da decolagem não foi ajustada nos casos em que o atraso fez o voo sair apenas no dia seguinte.
+
+:::
+
+### Exercício 13.3.3 {- #exr13-3-3}
+
+::: {.enunciado}
+Compare `air_time` com a duração entre a partida e a chegada. Explique seus resultados. (Dica: considere a localização do aeroporto.)
+:::
+
+::: {.solution}
+Inicialmente vamos calcular a difernça entre a partida e a chegada.
+
+```{r}
+flights_dt %>%
+  filter(!is.na(dep_time)) %>%
+  mutate(
+    calc_dep_time = sched_dep_time + dep_delay * 60,
+    flight_duration = arr_time - dep_time,
+    diff = flight_duration - air_time
+  ) %>%
+  select(origin, dest, dep_time, calc_dep_time, arr_time, air_time, flight_duration, diff) %>%
+  arrange(diff)
+```
+
+Notamos que existem alguns voos para os quais `flights_duration` é negativa. Esse problema parece estar relacionado à inconsistência apontada no exercício anterior, que ocorre tanto navariável `dep_time`, quanto na variável `arr_time`. Vamos tentar resolver o problema ajustando a data de chegada.
+
+```{r}
+flights_dt %>%
+  filter(!is.na(dep_time)) %>%
+  mutate(
+    calc_dep_time = sched_dep_time + dep_delay * 60,
+    calc_arr_time = if_else(arr_time <= calc_dep_time, arr_time + (24*60*60), arr_time),
+    flight_duration = calc_arr_time - calc_dep_time,
+    diff = flight_duration - air_time
+  ) %>%
+  select(origin, dest, , calc_dep_time, calc_arr_time, air_time, flight_duration, diff) %>%
+  arrange(diff)
+```
+
+
+:::
+
+### Exercício 13.3.4 {- #exr13-3-4}
+
+::: {.enunciado}
+Como o tempo médio de atraso muda ao longo do dia? Você deveria usar `dep_time` ou `sched_dep_time`? Por quê?
+:::
+
+::: {.solution}
+Para avaliar este cenário, iremos verificar o atraso nos voos agrupando-os pela hora de decolagem agendada. 
+
+```{r}
+flights_dt %>%
+  mutate(
+    sched_dep_hour = hour(sched_dep_time)
+  ) %>%
+  group_by(sched_dep_hour) %>%
+  summarise(dep_delay = mean(dep_delay)) %>%
+  ggplot(aes(x = sched_dep_hour, y = dep_delay)) +
+    geom_point() +
+    geom_smooth() +
+    tema
+```
+
+Na média, os maiores atrasos ocorrem entre o final da tarde e início da noite.
+:::
+
+### Exercício 13.3.5 {- #exr13-3-5}
+
+::: {.enunciado}
+Em que dia da semana você deve partir se quiser minimizar a chance de uma atraso?
+:::
+
+::: {.solution}
+Para solucionar este caso, vamos identificar o dia da semana de cada voo, realizar o agrupamento e calcular a média em cada grupo.
+
+```{r}
+flights_dt %>%
+  mutate(day = wday(sched_dep_time, label = TRUE, abbr = FALSE)) %>%
+  group_by(day) %>%
+  summarise(dep_delay = mean(dep_delay)) %>%
+  ggplot(aes(day, dep_delay)) +
+    geom_col()
+```
+O melhor dia para viajar é no sábado!
+:::
+
+### Exercício 13.3.6 {- #exr13-3-6}
+
+::: {.enunciado}
+O que torna as distribuições de `diamonds$carat` e `flights$sched_dep_time` simnilares?
+:::
+
+::: {.solution}
+Em primeiro lugar iremos plotar ambas as distribuições para avaliá-las melhor.
+
+```{r}
+diamonds %>%
+  ggplot(aes(x = carat %% 1 * 100)) +
+    geom_histogram(binwidth = 1)
+```
+```{r}
+flights_dt %>%
+  ggplot(aes(x = minute(sched_dep_time))) +
+    geom_histogram(binwidth = 1) + 
+    scale_x_continuous(breaks = seq(0, 60, 5))
+```
+
+Em ambos os casos, percebemos uma concentração de observações em um determinado valor (os picos nos gráficos). Isso se deve ao fato de humanos terem uma predileção por valores arredondados. 
+:::
+
+### Exercício 13.3.7 {- #exr13-3-7}
+
+::: {.enunciado}
+Confirme minha hipótese de que partidas antecipadas nos minutos 20-30 e 50-60 são causadas por vôos agendados que saem cedo. Dica: crie uma variável binária que lhe diga se houve atraso ou não.
+:::
+
+::: {.solution}
+x
+:::
 
 ## Intervalos de tempo
 
+### Exercício 13.4.1 {- #exr13-4-1}
+
+::: {.enunciado}
+Por que há `months()` e não `dmonths()`?
+:::
+
+::: {.solution}
+Não faz muito sentido haver uma função `dmonths()` porque há muitas variações. Alguns meses tem 28, 29, 30 ou 31 dias.
+:::
+
+### Exercício 13.4.2 {- #exr13-4-2}
+
+::: {.enunciado}
+Explique `days(overnight * 1)` para alguém que acabou de começar a aprender R. Como isso funciona?
+:::
+
+::: {.solution}
+A função `days()` retorna uma quantidade de dias. O argumento recebido é um produto entre `overnight` (que indica se o vôo decola antes da meia noite e chega ao destino depois da meia noite, assumindo os valores `0` ou `1`, respectivamente) e 1. Dessa forma, a depender do valor de `overnight`, adicionaremos ou não um dia à data de decolagem/pouso.
+:::
+
+### Exercício 13.4.3 {- #exr13-4-3}
+
+::: {.enunciado}
+Crie um vetor de datas dando o primeiro dia de cada mês em 2015. Crie um vetor de datas dando o primeiro dia de cada mês no ano atual.
+:::
+
+::: {.solution}
+Como as funções em **lubridate** podem receber vetores como argumento, vamos utilizar a função `months()` em conjunto com o vetor `0:11`.
+
+```{r}
+dmy(01012015) + months(0:11)
+```
+Já para pegar o primeiro dia de cada mês do ano atual, utilizaremos a mesma técnica, porém usando também as funções `today()` e `floor_date()`:
+
+```{r}
+floor_date(today(), unit = "year") + months(0:11)
+```
+:::
+
+### Exercício 13.4.4 {- #exr13-4-4}
+
+::: {.enunciado}
+Escreva uma função que, dado o seu aniversário (como uma data) retorne quantos anos você tem.
+:::
+
+::: {.solution}
+```{r}
+how_old <- function(birthday) {
+  (dmy(19081990) %--% today()) %/% years(1)
+}
+
+how_old(19081990)
+```
+
+:::
+
+### Exercício 13.4.5 {- #exr13-4-5}
+
+::: {.enunciado}
+Por que `(today() %--% (today() + years(1)) / months(1)` não funciona?
+:::
+
+::: {.solution}
+Faltava um parentesis. o correto deveria ser:
+
+```{r}
+(today() %--% (today() + years(1))) / months(1)
+```
+:::
+
 ## Fusos horários
+
+Não temos exercícios para esta seção.
