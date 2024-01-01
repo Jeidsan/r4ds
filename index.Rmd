@@ -75,4 +75,9 @@ Dúvidas ou sugestões de melhoria podem ser encaminhadas para o e-mail *jeidsan
 - [Exercício 12.3.3](#exr12-3-3);
 - [Exercício 13.3.3](#exr13-3-3);
 - [Exercício 13.3.7](#exr13-3-7);
+- [Exercício 15.2.7](#exr15-2-7);
+- [Exercício 15.3.2](#exr15-3-2);
+- [Exercício 15.3.3](#exr15-3-3);
+- [Exercício 15.3.4](#exr15-3-4);
+- Exercícios da seção 15.5;
 - 

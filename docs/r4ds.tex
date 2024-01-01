@@ -233,7 +233,7 @@
 \makeatother
 \subtitle{Solução dos exercícios}
 \author{Jeidsan A. da C. Pereira}
-\date{2023-12-25}
+\date{2024-01-01}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Teorema}[chapter]
@@ -332,6 +332,16 @@ Dúvidas ou sugestões de melhoria podem ser encaminhadas para o e-mail \emph{\h
   \protect\hyperlink{exr13-3-3}{Exercício 13.3.3};
 \item
   \protect\hyperlink{exr13-3-7}{Exercício 13.3.7};
+\item
+  \protect\hyperlink{exr15-2-7}{Exercício 15.2.7};
+\item
+  \protect\hyperlink{exr15-3-2}{Exercício 15.3.2};
+\item
+  \protect\hyperlink{exr15-3-3}{Exercício 15.3.3};
+\item
+  \protect\hyperlink{exr15-3-4}{Exercício 15.3.4};
+\item
+  Exercícios da seção 15.5;
 \item
 \end{itemize}
 
@@ -4799,16 +4809,16 @@ Pratique referir-se a nomes de variáveis não sintáticos, no data frame a segu
 ## # A tibble: 10 x 3
 ##      one   two three
 ##    <int> <dbl> <dbl>
-##  1     1  2.04  2.04
-##  2     2  2.69  1.34
-##  3     3  6.58  2.19
-##  4     4  8.01  2.00
-##  5     5  9.34  1.87
-##  6     6 11.4   1.91
-##  7     7 12.9   1.84
-##  8     8 16.1   2.01
-##  9     9 17.4   1.93
-## 10    10 18.6   1.86
+##  1     1  1.46  1.46
+##  2     2  5.03  2.52
+##  3     3  5.86  1.95
+##  4     4  8.42  2.10
+##  5     5 10.6   2.11
+##  6     6 11.8   1.96
+##  7     7 12.9   1.85
+##  8     8 16.9   2.11
+##  9     9 18.3   2.04
+## 10    10 20.5   2.05
 \end{verbatim}
 
 \end{solution}
@@ -8586,9 +8596,9 @@ Já para pegar o primeiro dia de cada mês do ano atual, utilizaremos a mesma t�
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] "2023-01-01" "2023-02-01" "2023-03-01" "2023-04-01" "2023-05-01"
-##  [6] "2023-06-01" "2023-07-01" "2023-08-01" "2023-09-01" "2023-10-01"
-## [11] "2023-11-01" "2023-12-01"
+##  [1] "2024-01-01" "2024-02-01" "2024-03-01" "2024-04-01" "2024-05-01"
+##  [6] "2024-06-01" "2024-07-01" "2024-08-01" "2024-09-01" "2024-10-01"
+## [11] "2024-11-01" "2024-12-01"
 \end{verbatim}
 
 \end{solution}
@@ -8677,23 +8687,729 @@ Não temos exercícios para esta seção.
 \hypertarget{introduuxe7uxe3o-11}{%
 \section{Introdução}\label{introduuxe7uxe3o-11}}
 
+Não temos exercícios nesta seção.
+
 \hypertarget{quando-vocuxea-deveria-escrever-uma-funuxe7uxe3o}{%
 \section{Quando você deveria escrever uma função?}\label{quando-vocuxea-deveria-escrever-uma-funuxe7uxe3o}}
+
+\hypertarget{exr15-2-1}{%
+\subsection*{Exercício 15.2.1}\label{exr15-2-1}}
+\addcontentsline{toc}{subsection}{Exercício 15.2.1}
+
+Por que \texttt{TRUE} não é um parâmetro para \texttt{rescale01()}? O que aconteceria se \texttt{x} contivesse um único valor faltante e \texttt{na.rm} fosse \texttt{FALSE}?
+
+\begin{solution}
+Inicialmente, reescrevemos a função \texttt{rescale01} mantendo os valores padrão para \texttt{na.rm} e \texttt{finite}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rescale01 }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x) \{}
+\NormalTok{  rng }\OtherTok{\textless{}{-}} \FunctionTok{range}\NormalTok{(x)}
+\NormalTok{  (x }\SpecialCharTok{{-}}\NormalTok{ rng[}\DecValTok{1}\NormalTok{])}\SpecialCharTok{/}\NormalTok{(rng[}\DecValTok{2}\NormalTok{] }\SpecialCharTok{{-}}\NormalTok{ rng[}\DecValTok{1}\NormalTok{])}
+\NormalTok{\}}
+
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\ConstantTok{NA}\NormalTok{, }\DecValTok{5}\NormalTok{)}
+
+\FunctionTok{rescale01}\NormalTok{(x)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] NA NA NA NA NA
+\end{verbatim}
+
+Como a maior parte das operações envolvendo um valor faltante resulta também em um valor faltante, a presença de um único \texttt{NA} se propagaria por todo o vetor e tornaria a função pouco útil.
+\end{solution}
+
+\hypertarget{exr15-2-2}{%
+\subsection*{Exercício 15.2.2}\label{exr15-2-2}}
+\addcontentsline{toc}{subsection}{Exercício 15.2.2}
+
+Na segunda variante de \texttt{rescale01()}, valores infinitos não são alterados. Reescreva \texttt{rescale01()} para que \texttt{-Inf} seja mapeado parra 0 e \texttt{Inf} seja mapeado para 1.
+
+\begin{solution}
+\leavevmode
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rescale01 }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x) \{}
+\NormalTok{  rng }\OtherTok{\textless{}{-}} \FunctionTok{range}\NormalTok{(x, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{finite =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{  y }\OtherTok{\textless{}{-}}\NormalTok{ (x }\SpecialCharTok{{-}}\NormalTok{ rng[}\DecValTok{1}\NormalTok{])}\SpecialCharTok{/}\NormalTok{(rng[}\DecValTok{2}\NormalTok{] }\SpecialCharTok{{-}}\NormalTok{ rng[}\DecValTok{1}\NormalTok{])}
+  
+\NormalTok{  y[y }\SpecialCharTok{==} \SpecialCharTok{{-}}\ConstantTok{Inf}\NormalTok{] }\OtherTok{\textless{}{-}} \DecValTok{0}
+\NormalTok{  y[y }\SpecialCharTok{==} \ConstantTok{Inf}\NormalTok{] }\OtherTok{\textless{}{-}} \DecValTok{1}
+  
+\NormalTok{  y}
+\NormalTok{\}}
+
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\ConstantTok{Inf}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{, }\ConstantTok{Inf}\NormalTok{, }\ConstantTok{NA}\NormalTok{)}
+
+\FunctionTok{rescale01}\NormalTok{(x)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.00 0.00 0.25 0.50 0.75 1.00 1.00   NA
+\end{verbatim}
+
+\end{solution}
+
+\hypertarget{exr15-2-3}{%
+\subsection*{Exercício 15.2.3}\label{exr15-2-3}}
+\addcontentsline{toc}{subsection}{Exercício 15.2.3}
+
+Pratique transformar os seguintes fragmentos de código em funções. Pense sobre o que cada função faz. Como você a chamaria, De quantos argumentos precisa? Você consegue reescrevê-la para que seja mais expressiva ou menos duplicativa?
+
+\begin{verbatim}
+mean(is.na(x))
+
+x / sum(x, na.rm = TRUE)
+
+sd(x, na.rm = TRUE) / mean(x, na.rm = TRUE)
+\end{verbatim}
+
+\begin{solution}
+
+No primeiro bloco de código, o objetivo é calcular a proporção de valores faltantes dentro de um vetor.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{proportion\_na }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x) \{}
+  \FunctionTok{mean}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(x))}
+\NormalTok{\}}
+
+\FunctionTok{proportion\_na}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\ConstantTok{NA}\NormalTok{, }\DecValTok{1}\NormalTok{, }\ConstantTok{NA}\NormalTok{, }\DecValTok{3}\NormalTok{, }\ConstantTok{NA}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.6
+\end{verbatim}
+
+No segundo caso, o código padroniza o vetor de modo que a soma seja 1.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sum\_to\_one }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x) \{}
+\NormalTok{  x }\SpecialCharTok{/} \FunctionTok{sum}\NormalTok{(x, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{\}}
+
+\FunctionTok{sum\_to\_one}\NormalTok{(}\DecValTok{0}\SpecialCharTok{:}\DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.0 0.1 0.2 0.3 0.4
+\end{verbatim}
+
+No terceiro caso, calcula-se o coeficiente de variação.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{coef\_variation }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x) \{}
+  \FunctionTok{sd}\NormalTok{(x, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{/} \FunctionTok{mean}\NormalTok{(x, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{\}}
+
+\FunctionTok{coef\_variation}\NormalTok{(}\DecValTok{0}\SpecialCharTok{:}\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.7483315
+\end{verbatim}
+
+\end{solution}
+
+\hypertarget{exr15-2-4}{%
+\subsection*{Exercício 15.2.4}\label{exr15-2-4}}
+\addcontentsline{toc}{subsection}{Exercício 15.2.4}
+
+Siga \emph{\url{http://nicercode.github.io/intro/writing-functions.html}} para escrever suas prórprias funções a fim de calcular a variação e inclinação de um vetor numérico.
+
+\begin{solution}
+
+Inicialmente vamos carregar o dataset utilizado no site acima e, em seguida, definiremos a função para cálculo da inclinação.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}
+  \AttributeTok{Height =} \FunctionTok{c}\NormalTok{(}\DecValTok{31}\NormalTok{, }\DecValTok{41}\NormalTok{, }\DecValTok{42}\NormalTok{, }\DecValTok{64}\NormalTok{, }\DecValTok{47}\NormalTok{, }\DecValTok{52}\NormalTok{, }\DecValTok{57}\NormalTok{, }\DecValTok{27}\NormalTok{, }\DecValTok{40}\NormalTok{, }\DecValTok{33}\NormalTok{, }\DecValTok{51}\NormalTok{, }\DecValTok{41}\NormalTok{, }\DecValTok{38}\NormalTok{, }\DecValTok{61}\NormalTok{, }\DecValTok{46}\NormalTok{, }\DecValTok{34}\NormalTok{, }\DecValTok{50}\NormalTok{, }\DecValTok{51}\NormalTok{, }\DecValTok{33}\NormalTok{, }\DecValTok{41}\NormalTok{, }\DecValTok{67}\NormalTok{, }\DecValTok{30}\NormalTok{, }\DecValTok{48}\NormalTok{, }\DecValTok{37}\NormalTok{, }\DecValTok{61}\NormalTok{, }\DecValTok{50}\NormalTok{, }\DecValTok{44}\NormalTok{, }\DecValTok{50}\NormalTok{, }\DecValTok{45}\NormalTok{, }\DecValTok{66}\NormalTok{, }\DecValTok{76}\NormalTok{, }\DecValTok{77}\NormalTok{, }\DecValTok{60}\NormalTok{, }\DecValTok{82}\NormalTok{, }\DecValTok{61}\NormalTok{, }\DecValTok{72}\NormalTok{, }\DecValTok{37}\NormalTok{, }\DecValTok{49}\NormalTok{, }\DecValTok{72}\NormalTok{, }\DecValTok{65}\NormalTok{, }\DecValTok{51}\NormalTok{, }\DecValTok{77}\NormalTok{, }\DecValTok{59}\NormalTok{, }\DecValTok{67}\NormalTok{, }\DecValTok{42}\NormalTok{, }\DecValTok{33}\NormalTok{, }\DecValTok{39}\NormalTok{, }\DecValTok{43}\NormalTok{, }\DecValTok{41}\NormalTok{, }\DecValTok{58}\NormalTok{, }\DecValTok{47}\NormalTok{, }\DecValTok{28}\NormalTok{, }\DecValTok{55}\NormalTok{, }\DecValTok{40}\NormalTok{, }\DecValTok{16}\NormalTok{, }\DecValTok{54}\NormalTok{, }\DecValTok{57}\NormalTok{, }\DecValTok{46}\NormalTok{, }\DecValTok{30}\NormalTok{, }\DecValTok{36}\NormalTok{, }\DecValTok{59}\NormalTok{, }\DecValTok{45}\NormalTok{, }\DecValTok{27}\NormalTok{, }\DecValTok{53}\NormalTok{, }\DecValTok{72}\NormalTok{, }\DecValTok{44}\NormalTok{, }\DecValTok{54}\NormalTok{, }\DecValTok{69}\NormalTok{, }\DecValTok{84}\NormalTok{, }\DecValTok{40}\NormalTok{, }\DecValTok{59}\NormalTok{, }\DecValTok{41}\NormalTok{, }\DecValTok{89}\NormalTok{, }\DecValTok{42}\NormalTok{, }\DecValTok{55}\NormalTok{, }\DecValTok{67}\NormalTok{, }\DecValTok{50}\NormalTok{, }\DecValTok{47}\NormalTok{, }\DecValTok{48}\NormalTok{, }\DecValTok{38}\NormalTok{, }\DecValTok{50}\NormalTok{, }\DecValTok{59}\NormalTok{, }\DecValTok{46}\NormalTok{, }\DecValTok{32}\NormalTok{, }\DecValTok{43}\NormalTok{, }\DecValTok{37}\NormalTok{, }\DecValTok{38}\NormalTok{, }\DecValTok{71}\NormalTok{, }\DecValTok{74}\NormalTok{, }\DecValTok{57}\NormalTok{, }\DecValTok{46}\NormalTok{, }\DecValTok{62}\NormalTok{, }\DecValTok{51}\NormalTok{, }\DecValTok{46}\NormalTok{, }\DecValTok{55}\NormalTok{, }\DecValTok{70}\NormalTok{, }\DecValTok{90}\NormalTok{, }\DecValTok{75}\NormalTok{, }\DecValTok{56}\NormalTok{, }\DecValTok{70}\NormalTok{, }\DecValTok{61}\NormalTok{, }\DecValTok{57}\NormalTok{, }\DecValTok{59}\NormalTok{, }\DecValTok{63}\NormalTok{, }\DecValTok{59}\NormalTok{, }\DecValTok{42}\NormalTok{, }\DecValTok{23}\NormalTok{, }\DecValTok{47}\NormalTok{, }\DecValTok{32}\NormalTok{, }\DecValTok{53}\NormalTok{, }\DecValTok{80}\NormalTok{, }\DecValTok{80}\NormalTok{, }\DecValTok{45}\NormalTok{, }\DecValTok{64}\NormalTok{, }\DecValTok{84}\NormalTok{, }\DecValTok{60}\NormalTok{, }\DecValTok{43}\NormalTok{, }\DecValTok{36}\NormalTok{, }\DecValTok{51}\NormalTok{, }\DecValTok{44}\NormalTok{, }\DecValTok{52}\NormalTok{, }\DecValTok{56}\NormalTok{, }\DecValTok{73}\NormalTok{, }\DecValTok{64}\NormalTok{, }\DecValTok{41}\NormalTok{, }\DecValTok{45}\NormalTok{, }\DecValTok{94}\NormalTok{, }\DecValTok{73}\NormalTok{, }\DecValTok{61}\NormalTok{, }\DecValTok{67}\NormalTok{, }\DecValTok{77}\NormalTok{, }\DecValTok{50}\NormalTok{, }\DecValTok{67}\NormalTok{, }\DecValTok{97}\NormalTok{, }\DecValTok{67}\NormalTok{, }\DecValTok{62}\NormalTok{, }\DecValTok{76}\NormalTok{, }\DecValTok{68}\NormalTok{, }\DecValTok{88}\NormalTok{, }\DecValTok{64}\NormalTok{, }\DecValTok{57}\NormalTok{, }\DecValTok{51}\NormalTok{, }\DecValTok{50}\NormalTok{, }\DecValTok{65}\NormalTok{, }\DecValTok{46}\NormalTok{, }\DecValTok{63}\NormalTok{, }\DecValTok{80}\NormalTok{, }\DecValTok{54}\NormalTok{, }\DecValTok{60}\NormalTok{, }\DecValTok{54}\NormalTok{, }\DecValTok{48}\NormalTok{, }\DecValTok{56}\NormalTok{, }\DecValTok{60}\NormalTok{, }\DecValTok{50}\NormalTok{, }\DecValTok{80}\NormalTok{, }\DecValTok{71}\NormalTok{, }\DecValTok{74}\NormalTok{, }\DecValTok{46}\NormalTok{, }\DecValTok{40}\NormalTok{, }\DecValTok{64}\NormalTok{, }\DecValTok{45}\NormalTok{, }\DecValTok{68}\NormalTok{, }\DecValTok{69}\NormalTok{, }\DecValTok{83}\NormalTok{, }\DecValTok{97}\NormalTok{, }\DecValTok{79}\NormalTok{, }\DecValTok{71}\NormalTok{, }\DecValTok{48}\NormalTok{, }\DecValTok{74}\NormalTok{),}
+  \AttributeTok{Weight =} \FunctionTok{c}\NormalTok{(}\FloatTok{4.16}\NormalTok{, }\FloatTok{5.82}\NormalTok{, }\FloatTok{3.51}\NormalTok{, }\FloatTok{7.16}\NormalTok{, }\FloatTok{6.17}\NormalTok{, }\FloatTok{5.32}\NormalTok{, }\FloatTok{23.44}\NormalTok{, }\FloatTok{1.76}\NormalTok{, }\FloatTok{4.01}\NormalTok{, }\FloatTok{2.58}\NormalTok{, }\FloatTok{5.98}\NormalTok{, }\FloatTok{2.75}\NormalTok{, }\FloatTok{2.15}\NormalTok{, }\FloatTok{21.59}\NormalTok{, }\FloatTok{6.86}\NormalTok{, }\FloatTok{3.36}\NormalTok{, }\FloatTok{15.76}\NormalTok{, }\FloatTok{8.73}\NormalTok{, }\FloatTok{3.24}\NormalTok{, }\FloatTok{2.49}\NormalTok{, }\FloatTok{14.06}\NormalTok{, }\FloatTok{3.94}\NormalTok{, }\FloatTok{1.95}\NormalTok{, }\FloatTok{4.08}\NormalTok{, }\FloatTok{12.74}\NormalTok{, }\FloatTok{7.58}\NormalTok{, }\FloatTok{1.57}\NormalTok{, }\FloatTok{7.96}\NormalTok{, }\FloatTok{5.59}\NormalTok{, }\FloatTok{21.1}\NormalTok{, }\FloatTok{18.55}\NormalTok{, }\FloatTok{13.68}\NormalTok{, }\FloatTok{14.77}\NormalTok{, }\FloatTok{14.33}\NormalTok{, }\FloatTok{3.42}\NormalTok{, }\FloatTok{17.57}\NormalTok{, }\FloatTok{3.92}\NormalTok{, }\FloatTok{3.99}\NormalTok{, }\FloatTok{13.62}\NormalTok{, }\FloatTok{10.18}\NormalTok{, }\FloatTok{4.71}\NormalTok{, }\FloatTok{16.08}\NormalTok{, }\FloatTok{12.75}\NormalTok{, }\FloatTok{14.48}\NormalTok{, }\FloatTok{12.86}\NormalTok{, }\FloatTok{2.82}\NormalTok{, }\FloatTok{4.44}\NormalTok{, }\FloatTok{2.19}\NormalTok{, }\FloatTok{6.28}\NormalTok{, }\FloatTok{19.05}\NormalTok{, }\FloatTok{6.27}\NormalTok{, }\FloatTok{1.18}\NormalTok{, }\FloatTok{6.78}\NormalTok{, }\FloatTok{3.44}\NormalTok{, }\FloatTok{0.26}\NormalTok{, }\FloatTok{16.84}\NormalTok{, }\FloatTok{9.51}\NormalTok{, }\FloatTok{6.15}\NormalTok{, }\FloatTok{3.21}\NormalTok{, }\FloatTok{4.62}\NormalTok{, }\FloatTok{7.3}\NormalTok{, }\FloatTok{6.7}\NormalTok{, }\FloatTok{3.66}\NormalTok{, }\FloatTok{4.43}\NormalTok{, }\FloatTok{46.24}\NormalTok{, }\FloatTok{1.85}\NormalTok{, }\FloatTok{8.26}\NormalTok{, }\FloatTok{8.32}\NormalTok{, }\FloatTok{18.7}\NormalTok{, }\FloatTok{13.18}\NormalTok{, }\FloatTok{14.49}\NormalTok{, }\FloatTok{5.59}\NormalTok{, }\FloatTok{27.7}\NormalTok{, }\FloatTok{6.13}\NormalTok{, }\FloatTok{11.43}\NormalTok{, }\FloatTok{11.16}\NormalTok{, }\FloatTok{9.96}\NormalTok{, }\FloatTok{4.04}\NormalTok{, }\FloatTok{12.84}\NormalTok{, }\FloatTok{6.88}\NormalTok{, }\FloatTok{7.06}\NormalTok{, }\FloatTok{8.38}\NormalTok{, }\FloatTok{7.32}\NormalTok{, }\FloatTok{2.6}\NormalTok{, }\FloatTok{0.77}\NormalTok{, }\FloatTok{2.87}\NormalTok{, }\FloatTok{2.93}\NormalTok{, }\FloatTok{10.48}\NormalTok{, }\FloatTok{9.31}\NormalTok{, }\FloatTok{8.57}\NormalTok{, }\FloatTok{4.45}\NormalTok{, }\FloatTok{5.12}\NormalTok{, }\FloatTok{5.96}\NormalTok{, }\FloatTok{4.89}\NormalTok{, }\FloatTok{15.91}\NormalTok{, }\FloatTok{12.6}\NormalTok{, }\FloatTok{30.71}\NormalTok{, }\FloatTok{16.27}\NormalTok{, }\FloatTok{3.87}\NormalTok{, }\FloatTok{45.58}\NormalTok{, }\FloatTok{9.03}\NormalTok{, }\FloatTok{16.12}\NormalTok{, }\FloatTok{10.86}\NormalTok{, }\FloatTok{14.8}\NormalTok{, }\FloatTok{22.18}\NormalTok{, }\FloatTok{8.01}\NormalTok{, }\FloatTok{0.47}\NormalTok{, }\FloatTok{7.27}\NormalTok{, }\FloatTok{2.05}\NormalTok{, }\FloatTok{8.53}\NormalTok{, }\FloatTok{19.4}\NormalTok{, }\FloatTok{15.61}\NormalTok{, }\FloatTok{5.03}\NormalTok{, }\FloatTok{15.29}\NormalTok{, }\FloatTok{14.64}\NormalTok{, }\FloatTok{7.96}\NormalTok{, }\FloatTok{5.6}\NormalTok{, }\FloatTok{4.25}\NormalTok{, }\FloatTok{24.31}\NormalTok{, }\FloatTok{2.05}\NormalTok{, }\FloatTok{9.25}\NormalTok{, }\FloatTok{4.07}\NormalTok{, }\FloatTok{12.01}\NormalTok{, }\FloatTok{17.54}\NormalTok{, }\FloatTok{3.93}\NormalTok{, }\FloatTok{1.75}\NormalTok{, }\FloatTok{55.51}\NormalTok{, }\FloatTok{43.59}\NormalTok{, }\FloatTok{8.05}\NormalTok{, }\FloatTok{14.09}\NormalTok{, }\FloatTok{12.34}\NormalTok{, }\FloatTok{6.62}\NormalTok{, }\FloatTok{5.29}\NormalTok{, }\FloatTok{41.21}\NormalTok{, }\FloatTok{16.84}\NormalTok{, }\FloatTok{11.41}\NormalTok{, }\FloatTok{10.54}\NormalTok{, }\FloatTok{11.11}\NormalTok{, }\FloatTok{47.12}\NormalTok{, }\FloatTok{8.87}\NormalTok{, }\FloatTok{2.6}\NormalTok{, }\FloatTok{9.68}\NormalTok{, }\FloatTok{3.22}\NormalTok{, }\FloatTok{19.9}\NormalTok{, }\FloatTok{2.08}\NormalTok{, }\FloatTok{13.59}\NormalTok{, }\FloatTok{28.16}\NormalTok{, }\FloatTok{15.96}\NormalTok{, }\FloatTok{24.04}\NormalTok{, }\FloatTok{3.85}\NormalTok{, }\FloatTok{4.04}\NormalTok{, }\FloatTok{7.01}\NormalTok{, }\FloatTok{9.11}\NormalTok{, }\FloatTok{3.45}\NormalTok{, }\FloatTok{11.56}\NormalTok{, }\FloatTok{15.22}\NormalTok{, }\FloatTok{30.18}\NormalTok{, }\FloatTok{3.79}\NormalTok{, }\FloatTok{6.59}\NormalTok{, }\FloatTok{13.83}\NormalTok{, }\FloatTok{6.36}\NormalTok{, }\FloatTok{23.88}\NormalTok{, }\FloatTok{16.77}\NormalTok{, }\FloatTok{30.38}\NormalTok{, }\FloatTok{22.13}\NormalTok{, }\FloatTok{37.25}\NormalTok{, }\FloatTok{27.92}\NormalTok{, }\FloatTok{6.24}\NormalTok{, }\FloatTok{19.25}\NormalTok{)}
+\NormalTok{)}
+
+\NormalTok{skewness }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x) \{}
+\NormalTok{  n }\OtherTok{\textless{}{-}} \FunctionTok{length}\NormalTok{(x)}
+\NormalTok{  v }\OtherTok{\textless{}{-}} \FunctionTok{var}\NormalTok{(x)}
+\NormalTok{  m }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(x)}
+
+  \FunctionTok{sum}\NormalTok{((x }\SpecialCharTok{{-}}\NormalTok{ m) }\SpecialCharTok{\^{}} \DecValTok{3}\NormalTok{) }\SpecialCharTok{/}\NormalTok{ ((n }\SpecialCharTok{{-}} \DecValTok{2}\NormalTok{) }\SpecialCharTok{*}\NormalTok{ (v }\SpecialCharTok{\^{}}\NormalTok{ (}\DecValTok{3}\SpecialCharTok{/}\DecValTok{2}\NormalTok{)))}
+\NormalTok{\}}
+
+\FunctionTok{skewness}\NormalTok{(data}\SpecialCharTok{$}\NormalTok{Height)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.3011218
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{skewness}\NormalTok{(data}\SpecialCharTok{$}\NormalTok{Weight)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1.953767
+\end{verbatim}
+
+\end{solution}
+
+\hypertarget{exr15-2-5}{%
+\subsection*{Exercício 15.2.5}\label{exr15-2-5}}
+\addcontentsline{toc}{subsection}{Exercício 15.2.5}
+
+Escreva \texttt{both\_na()} uma função que recebe dois vetores de mesmo comprimento e retorna o número de posições que rem um \texttt{NA} em ambos os vetores.
+
+\begin{solution}
+\leavevmode
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{,  }\DecValTok{3}\NormalTok{, }\ConstantTok{NA}\NormalTok{, }\DecValTok{5}\NormalTok{, }\ConstantTok{NA}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{8}\NormalTok{,  }\ConstantTok{NA}\NormalTok{, }\DecValTok{10}\NormalTok{)}
+\NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\ConstantTok{NA}\NormalTok{, }\DecValTok{3}\NormalTok{, }\ConstantTok{NA}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{,  }\DecValTok{7}\NormalTok{, }\ConstantTok{NA}\NormalTok{, }\ConstantTok{NA}\NormalTok{, }\DecValTok{10}\NormalTok{)}
+
+\NormalTok{both\_na }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x, y) \{}
+  \FunctionTok{sum}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(x) }\SpecialCharTok{\&} \FunctionTok{is.na}\NormalTok{(y))}
+\NormalTok{\}}
+
+\FunctionTok{both\_na}\NormalTok{(x, y)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2
+\end{verbatim}
+
+\end{solution}
+
+\hypertarget{exr15-2-6}{%
+\subsection*{Exercício 15.2.6}\label{exr15-2-6}}
+\addcontentsline{toc}{subsection}{Exercício 15.2.6}
+
+O que as funções a seguir fazem? Por que são úteis, mesmo embora sejam tão curtas?
+
+\begin{verbatim}
+is_directory <- funtion(x) file.info(x) $isdir
+
+is_readable <- function(x) file.access(x, 4) == 0
+\end{verbatim}
+
+\begin{solution}
+A primeira função verifica se uma string passada como parâmetro corresponde a um diretório, enquanto a segunda verifica se uma string (ou vetor de strings) corresponde a arquivos que podem ser lidos pelo programa.
+
+Elas são uteis quando estamos trabalhamos com arquivos dentro do R, por exemplo, para verificarmos a existência e as permissões de acesso a um arquivo selecionado pelo usuário. Embora sejam funções curtas, elas simplificam as verificações e tornam o código mais legível. É muito mais entendível lermos uma chamada a \texttt{is\_readable()} do que sabermos o que significa \texttt{file.access(x,\ 4)\ ==\ 0}.
+\end{solution}
+
+\hypertarget{exr15-2-7}{%
+\subsection*{Exercício 15.2.7}\label{exr15-2-7}}
+\addcontentsline{toc}{subsection}{Exercício 15.2.7}
+
+Leia a letra completa (\url{https://bit.ly/littlebunnyfoofoo}) de ``Little Bunny Foo Foo''. Há bastante duplicação nessa música. Estenda o exemplo de piping inicial para recriar a música completa, e use funções para reduzir a duplicação.
+
+\begin{solution}
+x
+\end{solution}
 
 \hypertarget{funuxe7uxf5es-suxe3o-para-humanos-e-computadores}{%
 \section{Funções são para humanos e computadores}\label{funuxe7uxf5es-suxe3o-para-humanos-e-computadores}}
 
+\hypertarget{exr15-3-1}{%
+\subsection*{Exercício 15.3.1}\label{exr15-3-1}}
+\addcontentsline{toc}{subsection}{Exercício 15.3.1}
+
+Leia o código-fonte para cada uma das três funções a seguir, descubra o que elas fazem e então dê ideias de nomes melhores.
+
+\begin{verbatim}
+f1 <- function(string, prefix) {
+  substr(string, 1, nchar(prefix)) == prefix
+}
+
+f2 <- function(x) {
+  if (length(x) <= 1 ) return(NULL)
+  x[ -length(x)]
+}
+
+f3 <- function(x, y) {
+  rep(y, length.out = length(x))
+}
+\end{verbatim}
+
+\begin{solution}
+
+A primeira função tem como objetivo verificar se uma determinada string começa com o prefixo informado. Sugerimos que a função seja nomeada como \texttt{str\_starts\_with}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{str\_starts\_with }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(string, prefix) \{}
+  \FunctionTok{substr}\NormalTok{(string, }\DecValTok{1}\NormalTok{, }\FunctionTok{nchar}\NormalTok{(prefix)) }\SpecialCharTok{==}\NormalTok{ prefix}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+A função \texttt{f2} remove de um vetor o seu último elemento. Sugerimos renomeá-la \texttt{vct\_remove\_last}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{vct\_remove\_last }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x) \{}
+  \ControlFlowTok{if}\NormalTok{ (}\FunctionTok{length}\NormalTok{(x) }\SpecialCharTok{\textless{}=} \DecValTok{1}\NormalTok{ ) }\FunctionTok{return}\NormalTok{(}\ConstantTok{NULL}\NormalTok{)}
+\NormalTok{  x[ }\SpecialCharTok{{-}}\FunctionTok{length}\NormalTok{(x)]}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+A última função tem como objetivo expandir um vetor até que ele atinja o tamanho de um segundo. Por esta razão, faz sentido chamar a função de \texttt{vct\_expand}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{vct\_expand }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x, y) \{}
+  \FunctionTok{rep}\NormalTok{(y, }\AttributeTok{length.out =} \FunctionTok{length}\NormalTok{(x))}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\end{solution}
+
+\hypertarget{exr15-3-2}{%
+\subsection*{Exercício 15.3.2}\label{exr15-3-2}}
+\addcontentsline{toc}{subsection}{Exercício 15.3.2}
+
+Pegue uma função que você tenha escrito recentemente e passe cinco minutos pensando em nomes melhores para ela e seus argumentos.
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr15-3-3}{%
+\subsection*{Exercício 15.3.3}\label{exr15-3-3}}
+\addcontentsline{toc}{subsection}{Exercício 15.3.3}
+
+Compare e contraste \texttt{rnorm()} e \texttt{MASS::mvrnorm()}. COmo você poderia torná-las mais consistentes?
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr15-3-4}{%
+\subsection*{Exercício 15.3.4}\label{exr15-3-4}}
+\addcontentsline{toc}{subsection}{Exercício 15.3.4}
+
+Construa um argumento sobre porque \texttt{norm\_r()}, \texttt{norm\_d()}, etc. seriam melhores do que \texttt{rnorm()}, \texttt{dnorm()}. Construa um argumento para o caso oposto.
+
+\begin{solution}
+x
+\end{solution}
+
 \hypertarget{execuuxe7uxe3o-condicional}{%
 \section{Execução condicional}\label{execuuxe7uxe3o-condicional}}
+
+\hypertarget{exr15-4-1}{%
+\subsection*{Exercício 15.4.1}\label{exr15-4-1}}
+\addcontentsline{toc}{subsection}{Exercício 15.4.1}
+
+Qual é a diferença entre \texttt{if} e \texttt{ifelse()}? Leia cuidadosamente a ajuda e construa três exemplos que ilustrem as principais diferenças.
+
+\begin{solution}
+
+Enquanto \texttt{if} é um bloco de controle de fluxo da linguagem, \texttt{ifelse} é uma função constuida em R. A instrução \texttt{if} avalia uma condição e desvia o fluxo de execução para o bloco de código correspondente. Já a função \texttt{ifelse} avalia um vetor de condições e retorna um valor dos vetores \texttt{yes} e \texttt{no}, conforme a posição da condições.
+
+Por exemplo, suponha que queiramos classificar um conjunto de valores conforme a paridade.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \DecValTok{0}\SpecialCharTok{:}\DecValTok{10}
+\end{Highlighting}
+\end{Shaded}
+
+Caso tentemos avaliar todos os valores do vetor de uma única vez com a instrução \texttt{if}, receberemos uma mensagem de erro.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{(x }\SpecialCharTok{\%\%} \DecValTok{2} \SpecialCharTok{==} \DecValTok{0}\NormalTok{) \{}
+\NormalTok{  y }\OtherTok{\textless{}{-}} \StringTok{"PAR"}
+\NormalTok{\} }\ControlFlowTok{else}\NormalTok{ \{}
+\NormalTok{  y }\OtherTok{\textless{}{-}} \StringTok{"IMPAR"}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Error in if (x%%2 == 0) {: the condition has length > 1
+\end{verbatim}
+
+Precisaríamos utilizar outro bloco de controle para avaliar cada posição do vetor individualmente:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{length}\NormalTok{(x)) \{}
+  \ControlFlowTok{if}\NormalTok{ (x[i] }\SpecialCharTok{\%\%} \DecValTok{2} \SpecialCharTok{==} \DecValTok{0}\NormalTok{) \{}
+\NormalTok{    y[i] }\OtherTok{\textless{}{-}} \StringTok{"PAR"}
+\NormalTok{  \} }\ControlFlowTok{else}\NormalTok{ \{}
+\NormalTok{    y[i] }\OtherTok{\textless{}{-}} \StringTok{"IMPAR"}
+\NormalTok{  \}}
+\NormalTok{\}}
+
+\NormalTok{y}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "PAR"   "IMPAR" "PAR"   "IMPAR" "PAR"   "IMPAR" "PAR"   "IMPAR" "PAR"  
+## [10] "IMPAR" "PAR"
+\end{verbatim}
+
+Utilizando a função \texttt{ifelse}, temos um código muito mais enxuto:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(y }\OtherTok{\textless{}{-}} \FunctionTok{ifelse}\NormalTok{(x }\SpecialCharTok{\%\%} \DecValTok{2} \SpecialCharTok{==} \DecValTok{0}\NormalTok{, }\StringTok{"PAR"}\NormalTok{, }\StringTok{"IMPAR"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "PAR"   "IMPAR" "PAR"   "IMPAR" "PAR"   "IMPAR" "PAR"   "IMPAR" "PAR"  
+## [10] "IMPAR" "PAR"
+\end{verbatim}
+
+\end{solution}
+
+\hypertarget{exr15-4-2}{%
+\subsection*{Exercício 15.4.2}\label{exr15-4-2}}
+\addcontentsline{toc}{subsection}{Exercício 15.4.2}
+
+Escreva uma função que diga ``good morning'', ``good afternoon'', ou ``good evening'', dependendo da hora do dia. (Dica: use um argumento de tempo padrão de \texttt{lubridate::now()}. Isso facilitará testar sua função.)
+
+\begin{solution}
+\leavevmode
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{greet }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(}\AttributeTok{time =}\NormalTok{ lubridate}\SpecialCharTok{::}\FunctionTok{now}\NormalTok{()) \{}
+\NormalTok{  h }\OtherTok{\textless{}{-}}\NormalTok{ lubridate}\SpecialCharTok{::}\FunctionTok{hour}\NormalTok{(time)}
+  
+  \ControlFlowTok{if}\NormalTok{(h }\SpecialCharTok{\textgreater{}=} \DecValTok{6} \SpecialCharTok{\&\&}\NormalTok{ h }\SpecialCharTok{\textless{}} \DecValTok{12}\NormalTok{) \{}
+    \FunctionTok{print}\NormalTok{(}\StringTok{"Bom dia!"}\NormalTok{)}
+\NormalTok{  \} }\ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{(h }\SpecialCharTok{\textgreater{}=} \DecValTok{12} \SpecialCharTok{\&\&}\NormalTok{ h }\SpecialCharTok{\textless{}} \DecValTok{18}\NormalTok{) \{}
+    \FunctionTok{print}\NormalTok{(}\StringTok{"Boa tarde!"}\NormalTok{)}
+\NormalTok{  \} }\ControlFlowTok{else}\NormalTok{ \{}
+    \FunctionTok{print}\NormalTok{(}\StringTok{"Boa noite!"}\NormalTok{)}
+\NormalTok{  \}}
+\NormalTok{\}}
+
+\FunctionTok{greet}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Boa tarde!"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{greet}\NormalTok{(}\FunctionTok{ymd\_hm}\NormalTok{(}\StringTok{"2023{-}12{-}31 00:00"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Boa noite!"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{greet}\NormalTok{(}\FunctionTok{ymd\_hm}\NormalTok{(}\StringTok{"2023{-}12{-}31 06:00"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Bom dia!"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{greet}\NormalTok{(}\FunctionTok{ymd\_hm}\NormalTok{(}\StringTok{"2023{-}12{-}31 11:59"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Bom dia!"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{greet}\NormalTok{(}\FunctionTok{ymd\_hm}\NormalTok{(}\StringTok{"2023{-}12{-}31 12:00"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Boa tarde!"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{greet}\NormalTok{(}\FunctionTok{ymd\_hm}\NormalTok{(}\StringTok{"2023{-}12{-}31 17:59"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Boa tarde!"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{greet}\NormalTok{(}\FunctionTok{ymd\_hm}\NormalTok{(}\StringTok{"2023{-}12{-}31 18:00"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Boa noite!"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{greet}\NormalTok{(}\FunctionTok{ymd\_hm}\NormalTok{(}\StringTok{"2023{-}12{-}31 23:59"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Boa noite!"
+\end{verbatim}
+
+\end{solution}
+
+\hypertarget{exr15-4-3}{%
+\subsection*{Exercício 15.4.3}\label{exr15-4-3}}
+\addcontentsline{toc}{subsection}{Exercício 15.4.3}
+
+Implemente um função \texttt{fizzbuzz}. Ela recebe um único número como entrada. Se o número for divisível por três, retorna um ``fizz''. Se for divisível por cinco, retona um ``buzz''. Se for divisível por três e por cinco, retona um ``fizzbuzz''. Caso contrário, retorna o número. Certifique-se de escrever o código antes de criar a função.
+
+\begin{solution}
+\leavevmode
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fizzbuzz }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x) \{}
+\NormalTok{  result }\OtherTok{\textless{}{-}} \StringTok{""}
+
+  \ControlFlowTok{if}\NormalTok{(x }\SpecialCharTok{\%\%} \DecValTok{3} \SpecialCharTok{==} \DecValTok{0}\NormalTok{)}
+\NormalTok{    result }\OtherTok{\textless{}{-}} \StringTok{"fizz"}
+
+  \ControlFlowTok{if}\NormalTok{(x }\SpecialCharTok{\%\%} \DecValTok{5} \SpecialCharTok{==} \DecValTok{0}\NormalTok{)}
+\NormalTok{    result }\OtherTok{\textless{}{-}} \FunctionTok{str\_c}\NormalTok{(result, }\StringTok{"buzz"}\NormalTok{)}
+
+  \ControlFlowTok{if}\NormalTok{ (}\FunctionTok{str\_length}\NormalTok{(result) }\SpecialCharTok{==} \DecValTok{0}\NormalTok{)}
+\NormalTok{    result }\OtherTok{\textless{}{-}}\NormalTok{ x}
+
+\NormalTok{  result}
+\NormalTok{\}}
+
+\FunctionTok{fizzbuzz}\NormalTok{(}\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "fizz"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{fizzbuzz}\NormalTok{(}\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "buzz"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{fizzbuzz}\NormalTok{(}\DecValTok{15}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "fizzbuzz"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{fizzbuzz}\NormalTok{(}\DecValTok{13}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 13
+\end{verbatim}
+
+\end{solution}
+
+\hypertarget{exr15-4-4}{%
+\subsection*{Exercício 15.4.4}\label{exr15-4-4}}
+\addcontentsline{toc}{subsection}{Exercício 15.4.4}
+
+Como você poderia usar \texttt{cut()} para simplificar esse conjunto de declarações if-else agrupadas?
+
+\begin{verbatim}
+if(temp <= 0) {
+  "freezing"
+} else if(temp <= 10) {
+  "cold"
+} else if(temp <= 20) {
+  "cool"
+} else if(temp <= 30) {
+  "warm"
+} else {
+  "hot"
+}
+\end{verbatim}
+
+Como você mudaria a chamada de \texttt{cut()} se eu usasse \texttt{\textless{}}, em vez de \texttt{\textless{}=}? Qual é a outra vantagem principal de \texttt{cut()} para esse problema? (Dica: o que acontece se você tem muitos valores em \texttt{temp}?)
+
+\begin{solution}
+Inicialmente vamos verificar na ajuda que a função \texttt{cut()} visa classificar um vetor \texttt{x} conforme os seus valores caem em intervalos definidos por um vetor \texttt{y}, atribuindo \emph{labels} aos valores de \texttt{x}.
+
+Desta forma, podemos resumir o código acima no seguinte:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{temp }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{10}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{15}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{30}\NormalTok{, }\DecValTok{50}\NormalTok{)}
+
+\FunctionTok{cut}\NormalTok{(}
+  \AttributeTok{x =}\NormalTok{ temp,}
+  \AttributeTok{breaks =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\ConstantTok{Inf}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{30}\NormalTok{, }\ConstantTok{Inf}\NormalTok{),}
+  \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"freezing"}\NormalTok{, }\StringTok{"cold"}\NormalTok{, }\StringTok{"cool"}\NormalTok{, }\StringTok{"warm"}\NormalTok{, }\StringTok{"hot"}\NormalTok{),}
+  \AttributeTok{right =} \ConstantTok{TRUE}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] freezing cold     cold     cool     cool     warm     hot     
+## Levels: freezing cold cool warm hot
+\end{verbatim}
+
+Caso tivesse sito utilizado \texttt{\textless{}} em vez de \texttt{\textless{}=}, bastaria definirmos como \texttt{FALSE} o argumento \texttt{right} da função \texttt{cut()}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cut}\NormalTok{(}
+  \AttributeTok{x =}\NormalTok{ temp,}
+  \AttributeTok{breaks =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\ConstantTok{Inf}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{30}\NormalTok{, }\ConstantTok{Inf}\NormalTok{),}
+  \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"freezing"}\NormalTok{, }\StringTok{"cold"}\NormalTok{, }\StringTok{"cool"}\NormalTok{, }\StringTok{"warm"}\NormalTok{, }\StringTok{"hot"}\NormalTok{),}
+  \AttributeTok{right =} \ConstantTok{FALSE}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] freezing cold     cold     cool     warm     hot      hot     
+## Levels: freezing cold cool warm hot
+\end{verbatim}
+
+Por fim, a vantagem de usarmos \texttt{cut()} é que ele é otimizado para trabalhar com vetores, enquanto \texttt{if} pode avaliar apenas valores únicos.
+\end{solution}
+
+\hypertarget{exr15-4-5}{%
+\subsection*{Exercício 15.4.5}\label{exr15-4-5}}
+\addcontentsline{toc}{subsection}{Exercício 15.4.5}
+
+O que ocorre se você usar \texttt{switch()} com valores numéricos? O que esta chamada de \texttt{switch()} faz? O que acontece de \texttt{x} for ``e''?
+
+\begin{verbatim}
+switch(x,
+ a = ,
+ b = "ab",
+ c = ,
+ d = "cd"
+)
+\end{verbatim}
+
+\begin{solution}
+Se passarmos um valor numérico para \texttt{switch()}, ele será interpretado como uma posição e será retornada o valor correspondente à posição (ou \texttt{NULL}, caso a posição não tenha sido listada em \texttt{switch()}).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \DecValTok{2}
+
+\ControlFlowTok{switch}\NormalTok{(x,}
+ \AttributeTok{a =}\NormalTok{ ,}
+ \AttributeTok{b =} \StringTok{"ab"}\NormalTok{,}
+ \AttributeTok{c =}\NormalTok{ ,}
+ \AttributeTok{d =} \StringTok{"cd"}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "ab"
+\end{verbatim}
+
+Caso seja informado ``e'', será retornado \texttt{NULL}, uma vez que o valor não foi listado.
+
+Note também que, para \texttt{x\ =\ "a"}, é retonado o valor ``ab''. Isso ocorre porque \texttt{switch()} retornará o primeiro elemento não ausente da lista. O código acima pode ser entendido como: ``se \texttt{x\ =\ "a"} ou \texttt{x\ =\ "b"}, retorne''ab''; se \texttt{x\ =\ c} ou \texttt{x\ =\ d}, retorne ``cd''; retorne \texttt{NULL} nos demais casos.''
+\end{solution}
 
 \hypertarget{argumentos-de-funuxe7uxf5es}{%
 \section{Argumentos de funções}\label{argumentos-de-funuxe7uxf5es}}
 
+\hypertarget{exr15-5-1}{%
+\subsection*{Exercício 15.5.1}\label{exr15-5-1}}
+\addcontentsline{toc}{subsection}{Exercício 15.5.1}
+
+O que \texttt{commass(letters,\ collapse\ =\ "-")} faz? Por quê?
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr15-5-2}{%
+\subsection*{Exercício 15.5.2}\label{exr15-5-2}}
+\addcontentsline{toc}{subsection}{Exercício 15.5.2}
+
+Seria bom se você pudesse fornecer vários caracteres ao argumento \texttt{pad}, por exemplo, \texttt{rule("Title",\ pad\ =\ "-+")}. Por que isso não funciona atualmente? Como você corrigiria isso?
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr15-5-3}{%
+\subsection*{Exercício 15.5.3}\label{exr15-5-3}}
+\addcontentsline{toc}{subsection}{Exercício 15.5.3}
+
+O que o argumento \texttt{trim} para \texttt{mean()} faz? Quando você pode usá-lo?
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr15-5-4}{%
+\subsection*{Exercício 15.5.4}\label{exr15-5-4}}
+\addcontentsline{toc}{subsection}{Exercício 15.5.4}
+
+O valor padrão para o argumento \texttt{method} para \texttt{cor()} é \texttt{c("pearson",\ "kendall",\ "spearman")}. o que isso significa? Qual valor é usado por padrão?
+
+\begin{solution}
+x
+\end{solution}
+
 \hypertarget{retorno-de-valores}{%
 \section{Retorno de valores}\label{retorno-de-valores}}
 
+Não temos exercícios nesta seção.
+
 \hypertarget{ambiente}{%
 \section{Ambiente}\label{ambiente}}
+
+Não temos exercícios nesta seção.
 
 \hypertarget{vetores}{%
 \chapter{Vetores}\label{vetores}}

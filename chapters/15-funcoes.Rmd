@@ -2,14 +2,497 @@
 
 ## Introdução
 
+Não temos exercícios nesta seção.
+
 ## Quando você deveria escrever uma função?
+
+### Exercício 15.2.1 {- #exr15-2-1}
+
+::: {.enunciado}
+Por que `TRUE` não é um parâmetro para `rescale01()`?  O que aconteceria se `x` contivesse um único valor faltante e `na.rm` fosse `FALSE`?
+:::
+
+::: {.solution}
+Inicialmente, reescrevemos a função `rescale01` mantendo os valores padrão para `na.rm` e `finite`.
+
+```{r}
+rescale01 <- function(x) {
+  rng <- range(x)
+  (x - rng[1])/(rng[2] - rng[1])
+}
+
+x <- c(1, 2, 3, NA, 5)
+
+rescale01(x)
+```
+Como a maior parte das operações envolvendo um valor faltante resulta também em um valor faltante, a presença de um único `NA` se propagaria por todo o vetor e tornaria a função pouco útil.
+:::
+
+### Exercício 15.2.2 {- #exr15-2-2}
+
+::: {.enunciado}
+Na segunda variante de `rescale01()`, valores infinitos não são alterados. Reescreva `rescale01()` para que `-Inf` seja mapeado parra 0 e `Inf` seja mapeado para 1.
+:::
+
+::: {.solution}
+```{r}
+rescale01 <- function(x) {
+  rng <- range(x, na.rm = TRUE, finite = TRUE)
+  y <- (x - rng[1])/(rng[2] - rng[1])
+  
+  y[y == -Inf] <- 0
+  y[y == Inf] <- 1
+  
+  y
+}
+
+x <- c(-Inf, 1, 2, 3, 4, 5, Inf, NA)
+
+rescale01(x)
+```
+:::
+
+### Exercício 15.2.3 {- #exr15-2-3}
+
+::: {.enunciado}
+Pratique transformar os seguintes fragmentos de código em funções. Pense sobre o que cada função faz. Como você a chamaria, De quantos argumentos precisa? Você consegue reescrevê-la para que seja mais expressiva ou menos duplicativa?
+
+```
+mean(is.na(x))
+
+x / sum(x, na.rm = TRUE)
+
+sd(x, na.rm = TRUE) / mean(x, na.rm = TRUE)
+```
+:::
+
+::: {.solution}
+No primeiro bloco de código, o objetivo é calcular a proporção de valores faltantes dentro de um vetor.
+
+```{r}
+proportion_na <- function(x) {
+  mean(is.na(x))
+}
+
+proportion_na(c(NA, 1, NA, 3, NA))
+```
+
+No segundo caso, o código padroniza o vetor de modo que a soma seja 1.
+
+```{r}
+sum_to_one <- function(x) {
+  x / sum(x, na.rm = TRUE)
+}
+
+sum_to_one(0:4)
+```
+No terceiro caso, calcula-se o coeficiente de variação.
+
+```{r}
+coef_variation <- function(x) {
+  sd(x, na.rm = TRUE) / mean(x, na.rm = TRUE)
+}
+
+coef_variation(0:5)
+```
+:::
+
+### Exercício 15.2.4 {- #exr15-2-4}
+
+::: {.enunciado}
+Siga *http://nicercode.github.io/intro/writing-functions.html* para escrever suas prórprias funções a fim de calcular a variação e inclinação de um vetor numérico. 
+:::
+
+::: {.solution}
+Inicialmente vamos carregar o dataset utilizado no site acima e, em seguida, definiremos a função para cálculo da inclinação. 
+
+```{r}
+data <- data.frame(
+  Height = c(31, 41, 42, 64, 47, 52, 57, 27, 40, 33, 51, 41, 38, 61, 46, 34, 50, 51, 33, 41, 67, 30, 48, 37, 61, 50, 44, 50, 45, 66, 76, 77, 60, 82, 61, 72, 37, 49, 72, 65, 51, 77, 59, 67, 42, 33, 39, 43, 41, 58, 47, 28, 55, 40, 16, 54, 57, 46, 30, 36, 59, 45, 27, 53, 72, 44, 54, 69, 84, 40, 59, 41, 89, 42, 55, 67, 50, 47, 48, 38, 50, 59, 46, 32, 43, 37, 38, 71, 74, 57, 46, 62, 51, 46, 55, 70, 90, 75, 56, 70, 61, 57, 59, 63, 59, 42, 23, 47, 32, 53, 80, 80, 45, 64, 84, 60, 43, 36, 51, 44, 52, 56, 73, 64, 41, 45, 94, 73, 61, 67, 77, 50, 67, 97, 67, 62, 76, 68, 88, 64, 57, 51, 50, 65, 46, 63, 80, 54, 60, 54, 48, 56, 60, 50, 80, 71, 74, 46, 40, 64, 45, 68, 69, 83, 97, 79, 71, 48, 74),
+  Weight = c(4.16, 5.82, 3.51, 7.16, 6.17, 5.32, 23.44, 1.76, 4.01, 2.58, 5.98, 2.75, 2.15, 21.59, 6.86, 3.36, 15.76, 8.73, 3.24, 2.49, 14.06, 3.94, 1.95, 4.08, 12.74, 7.58, 1.57, 7.96, 5.59, 21.1, 18.55, 13.68, 14.77, 14.33, 3.42, 17.57, 3.92, 3.99, 13.62, 10.18, 4.71, 16.08, 12.75, 14.48, 12.86, 2.82, 4.44, 2.19, 6.28, 19.05, 6.27, 1.18, 6.78, 3.44, 0.26, 16.84, 9.51, 6.15, 3.21, 4.62, 7.3, 6.7, 3.66, 4.43, 46.24, 1.85, 8.26, 8.32, 18.7, 13.18, 14.49, 5.59, 27.7, 6.13, 11.43, 11.16, 9.96, 4.04, 12.84, 6.88, 7.06, 8.38, 7.32, 2.6, 0.77, 2.87, 2.93, 10.48, 9.31, 8.57, 4.45, 5.12, 5.96, 4.89, 15.91, 12.6, 30.71, 16.27, 3.87, 45.58, 9.03, 16.12, 10.86, 14.8, 22.18, 8.01, 0.47, 7.27, 2.05, 8.53, 19.4, 15.61, 5.03, 15.29, 14.64, 7.96, 5.6, 4.25, 24.31, 2.05, 9.25, 4.07, 12.01, 17.54, 3.93, 1.75, 55.51, 43.59, 8.05, 14.09, 12.34, 6.62, 5.29, 41.21, 16.84, 11.41, 10.54, 11.11, 47.12, 8.87, 2.6, 9.68, 3.22, 19.9, 2.08, 13.59, 28.16, 15.96, 24.04, 3.85, 4.04, 7.01, 9.11, 3.45, 11.56, 15.22, 30.18, 3.79, 6.59, 13.83, 6.36, 23.88, 16.77, 30.38, 22.13, 37.25, 27.92, 6.24, 19.25)
+)
+
+skewness <- function(x) {
+  n <- length(x)
+  v <- var(x)
+  m <- mean(x)
+
+  sum((x - m) ^ 3) / ((n - 2) * (v ^ (3/2)))
+}
+
+skewness(data$Height)
+skewness(data$Weight)
+```
+:::
+
+### Exercício 15.2.5 {- #exr15-2-5}
+
+::: {.enunciado}
+Escreva `both_na()` uma função que recebe dois vetores de mesmo comprimento e retorna o número de posições que rem um `NA` em ambos os vetores.
+:::
+
+::: {.solution}
+```{r}
+x <- c(1, 2,  3, NA, 5, NA, 7, 8,  NA, 10)
+y <- c(1, NA, 3, NA, 5, 6,  7, NA, NA, 10)
+
+both_na <- function(x, y) {
+  sum(is.na(x) & is.na(y))
+}
+
+both_na(x, y)
+```
+:::
+
+### Exercício 15.2.6 {- #exr15-2-6}
+
+::: {.enunciado}
+O que as funções a seguir fazem? Por que são úteis, mesmo embora sejam tão curtas?
+
+```
+is_directory <- funtion(x) file.info(x) $isdir
+
+is_readable <- function(x) file.access(x, 4) == 0
+```
+:::
+
+::: {.solution}
+A primeira função verifica se uma string passada como parâmetro corresponde a um diretório, enquanto a segunda verifica se uma string (ou vetor de strings) corresponde a arquivos que podem ser lidos pelo programa. 
+
+Elas são uteis quando estamos trabalhamos com arquivos dentro do R, por exemplo, para verificarmos a existência e as permissões de acesso a um arquivo selecionado pelo usuário. Embora sejam funções curtas, elas simplificam as verificações e tornam o código mais legível. É muito mais entendível lermos uma chamada a `is_readable()` do que sabermos o que significa `file.access(x, 4) == 0`.
+:::
+
+### Exercício 15.2.7 {- #exr15-2-7}
+
+::: {.enunciado}
+Leia a letra completa (https://bit.ly/littlebunnyfoofoo) de "Little Bunny Foo Foo". Há bastante duplicação nessa música. Estenda o exemplo de piping inicial para recriar a música completa, e use funções para reduzir a duplicação.
+:::
+
+::: {.solution}
+x
+:::
 
 ## Funções são para humanos e computadores
 
+### Exercício 15.3.1 {- #exr15-3-1}
+
+::: {.enunciado}
+Leia o código-fonte para cada uma das três funções a seguir, descubra o que elas fazem e então dê ideias de nomes melhores.
+
+```
+f1 <- function(string, prefix) {
+  substr(string, 1, nchar(prefix)) == prefix
+}
+
+f2 <- function(x) {
+  if (length(x) <= 1 ) return(NULL)
+  x[ -length(x)]
+}
+
+f3 <- function(x, y) {
+  rep(y, length.out = length(x))
+}
+```
+:::
+
+::: {.solution}
+A primeira função tem como objetivo verificar se uma determinada string começa com o prefixo informado. Sugerimos que a função seja nomeada como `str_starts_with`.
+
+```{r}
+str_starts_with <- function(string, prefix) {
+  substr(string, 1, nchar(prefix)) == prefix
+}
+```
+
+A função `f2` remove de um vetor o seu último elemento. Sugerimos renomeá-la `vct_remove_last`.
+
+```{r}
+vct_remove_last <- function(x) {
+  if (length(x) <= 1 ) return(NULL)
+  x[ -length(x)]
+}
+```
+
+A última função tem como objetivo expandir um vetor até que ele atinja o tamanho de um segundo. Por esta razão, faz sentido chamar a função de `vct_expand`.
+
+```{r}
+vct_expand <- function(x, y) {
+  rep(y, length.out = length(x))
+}
+```
+
+:::
+
+### Exercício 15.3.2 {- #exr15-3-2}
+
+::: {.enunciado}
+Pegue uma função que você tenha escrito recentemente e passe cinco minutos pensando em nomes melhores para ela e seus argumentos.
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 15.3.3 {- #exr15-3-3}
+
+::: {.enunciado}
+Compare e contraste `rnorm()` e `MASS::mvrnorm()`. COmo você poderia torná-las mais consistentes?
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 15.3.4 {- #exr15-3-4}
+
+::: {.enunciado}
+Construa um argumento sobre porque `norm_r()`, `norm_d()`, etc. seriam melhores do que `rnorm()`, `dnorm()`. Construa um argumento para o caso oposto.
+:::
+
+::: {.solution}
+x
+:::
+
 ## Execução condicional
+
+### Exercício 15.4.1 {- #exr15-4-1}
+
+::: {.enunciado}
+Qual é a diferença entre `if` e `ifelse()`? Leia cuidadosamente a ajuda e construa três exemplos que ilustrem as principais diferenças.
+:::
+
+::: {.solution}
+Enquanto `if` é um bloco de controle de fluxo da linguagem, `ifelse` é uma função constuida em R. A instrução `if` avalia uma condição e desvia o fluxo de execução para o bloco de código correspondente. Já a função `ifelse` avalia um vetor de condições e retorna um valor dos vetores `yes` e `no`, conforme a posição da condições. 
+
+Por exemplo, suponha que queiramos classificar um conjunto de valores conforme a paridade.
+
+```{r}
+x <- 0:10
+```
+
+Caso tentemos avaliar todos os valores do vetor de uma única vez com a instrução `if`, receberemos uma mensagem de erro.
+
+```{r,  error=TRUE}
+if(x %% 2 == 0) {
+  y <- "PAR"
+} else {
+  y <- "IMPAR"
+}
+```
+Precisaríamos utilizar outro bloco de controle para avaliar cada posição do vetor individualmente:
+
+```{r}
+for (i in 1:length(x)) {
+  if (x[i] %% 2 == 0) {
+    y[i] <- "PAR"
+  } else {
+    y[i] <- "IMPAR"
+  }
+}
+
+y
+```
+
+Utilizando a função `ifelse`, temos um código muito mais enxuto:
+
+```{r}
+(y <- ifelse(x %% 2 == 0, "PAR", "IMPAR"))
+```
+:::
+
+### Exercício 15.4.2 {- #exr15-4-2}
+
+::: {.enunciado}
+Escreva uma função que diga "good morning", "good afternoon", ou "good evening", dependendo da hora do dia. (Dica: use um argumento de tempo padrão de `lubridate::now()`. Isso facilitará testar sua função.)
+:::
+
+::: {.solution}
+```{r}
+greet <- function(time = lubridate::now()) {
+  h <- lubridate::hour(time)
+  
+  if(h >= 6 && h < 12) {
+    print("Bom dia!")
+  } else if(h >= 12 && h < 18) {
+    print("Boa tarde!")
+  } else {
+    print("Boa noite!")
+  }
+}
+
+greet()
+greet(ymd_hm("2023-12-31 00:00"))
+greet(ymd_hm("2023-12-31 06:00"))
+greet(ymd_hm("2023-12-31 11:59"))
+greet(ymd_hm("2023-12-31 12:00"))
+greet(ymd_hm("2023-12-31 17:59"))
+greet(ymd_hm("2023-12-31 18:00"))
+greet(ymd_hm("2023-12-31 23:59"))
+```
+:::
+
+### Exercício 15.4.3 {- #exr15-4-3}
+
+::: {.enunciado}
+Implemente um função `fizzbuzz`. Ela recebe um único número como entrada. Se o número for divisível por três, retorna um "fizz". Se for divisível por cinco, retona um "buzz". Se for divisível por três e por cinco, retona um "fizzbuzz". Caso contrário, retorna o número. Certifique-se de escrever o código antes de criar a função.
+:::
+
+::: {.solution}
+```{r}
+fizzbuzz <- function(x) {
+  result <- ""
+
+  if(x %% 3 == 0)
+    result <- "fizz"
+
+  if(x %% 5 == 0)
+    result <- str_c(result, "buzz")
+
+  if (str_length(result) == 0)
+    result <- x
+
+  result
+}
+
+fizzbuzz(3)
+fizzbuzz(5)
+fizzbuzz(15)
+fizzbuzz(13)
+```
+:::
+
+### Exercício 15.4.4 {- #exr15-4-4}
+
+::: {.enunciado}
+Como você poderia usar `cut()` para simplificar esse conjunto de declarações if-else agrupadas?
+
+```
+if(temp <= 0) {
+  "freezing"
+} else if(temp <= 10) {
+  "cold"
+} else if(temp <= 20) {
+  "cool"
+} else if(temp <= 30) {
+  "warm"
+} else {
+  "hot"
+}
+```
+
+Como você mudaria a chamada de `cut()` se eu usasse `<`, em vez de `<=`? Qual é a outra vantagem principal de `cut()` para esse problema? (Dica: o que acontece se você tem muitos valores em `temp`?)
+:::
+
+::: {.solution}
+Inicialmente vamos verificar na ajuda que a função `cut()` visa classificar um vetor `x` conforme os seus valores caem em intervalos definidos por um vetor `y`, atribuindo *labels* aos valores de `x`.
+
+Desta forma, podemos resumir o código acima no seguinte:
+
+```{r}
+temp <- c(-10, 5, 4, 15, 20, 30, 50)
+
+cut(
+  x = temp,
+  breaks = c(-Inf, 0, 10, 20, 30, Inf),
+  labels = c("freezing", "cold", "cool", "warm", "hot"),
+  right = TRUE
+)
+```
+
+Caso tivesse sito utilizado `<` em vez de `<=`, bastaria definirmos como `FALSE` o argumento `right` da função `cut()`.
+
+```{r}
+cut(
+  x = temp,
+  breaks = c(-Inf, 0, 10, 20, 30, Inf),
+  labels = c("freezing", "cold", "cool", "warm", "hot"),
+  right = FALSE
+)
+```
+Por fim, a vantagem de usarmos `cut()` é que ele é otimizado para trabalhar com vetores, enquanto `if` pode avaliar apenas valores únicos. 
+:::
+
+### Exercício 15.4.5 {- #exr15-4-5}
+
+::: {.enunciado}
+O que ocorre se você usar `switch()` com valores numéricos? O que esta chamada de `switch()` faz? O que acontece de `x` for "e"?
+
+```
+switch(x,
+ a = ,
+ b = "ab",
+ c = ,
+ d = "cd"
+)
+```
+:::
+
+::: {.solution}
+Se passarmos um valor numérico para `switch()`, ele será interpretado como uma posição e será retornada o valor correspondente à posição (ou `NULL`, caso a posição não tenha sido listada em `switch()`).
+
+```{r}
+x <- 2
+
+switch(x,
+ a = ,
+ b = "ab",
+ c = ,
+ d = "cd"
+)
+```
+Caso seja informado "e", será retornado `NULL`, uma vez que o valor não foi listado.
+
+Note também que, para `x = "a"`, é retonado o valor "ab". Isso ocorre porque `switch()` retornará o primeiro elemento não ausente da lista. O código acima pode ser entendido como: "se `x = "a"` ou `x = "b"`, retorne "ab"; se `x = c` ou `x = d`, retorne "cd"; retorne `NULL` nos demais casos."
+:::
 
 ## Argumentos de funções 
 
+### Exercício 15.5.1 {- #exr15-5-1}
+
+::: {.enunciado}
+O que `commass(letters, collapse = "-")` faz? Por quê?
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 15.5.2 {- #exr15-5-2}
+
+::: {.enunciado}
+Seria bom se você pudesse fornecer vários caracteres ao argumento `pad`, por exemplo, `rule("Title", pad = "-+")`. Por que isso não funciona atualmente? Como você corrigiria isso?
+:::
+
+::: {.solution}
+x
+:::
+
+
+### Exercício 15.5.3 {- #exr15-5-3}
+
+::: {.enunciado}
+O que o argumento `trim` para `mean()` faz? Quando você pode usá-lo?
+:::
+
+::: {.solution}
+x
+:::
+
+
+### Exercício 15.5.4 {- #exr15-5-4}
+
+::: {.enunciado}
+O valor padrão para o argumento `method` para `cor()` é `c("pearson", "kendall", "spearman")`. o que isso significa? Qual valor é usado por padrão?
+:::
+
+::: {.solution}
+x
+:::
+
 ## Retorno de valores
 
+Não temos exercícios nesta seção.
+
 ## Ambiente
+
+Não temos exercícios nesta seção.
