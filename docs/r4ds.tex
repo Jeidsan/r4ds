@@ -233,7 +233,7 @@
 \makeatother
 \subtitle{Solução dos exercícios}
 \author{Jeidsan A. da C. Pereira}
-\date{2024-01-01}
+\date{2024-01-02}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Teorema}[chapter]
@@ -342,6 +342,8 @@ Dúvidas ou sugestões de melhoria podem ser encaminhadas para o e-mail \emph{\h
   \protect\hyperlink{exr15-3-4}{Exercício 15.3.4};
 \item
   Exercícios da seção 15.5;
+\item
+  \protect\hyperlink{exr16-3-3}{Exercício 16.3.3};
 \item
 \end{itemize}
 
@@ -4809,16 +4811,16 @@ Pratique referir-se a nomes de variáveis não sintáticos, no data frame a segu
 ## # A tibble: 10 x 3
 ##      one   two three
 ##    <int> <dbl> <dbl>
-##  1     1  1.46  1.46
-##  2     2  5.03  2.52
-##  3     3  5.86  1.95
-##  4     4  8.42  2.10
-##  5     5 10.6   2.11
-##  6     6 11.8   1.96
-##  7     7 12.9   1.85
-##  8     8 16.9   2.11
-##  9     9 18.3   2.04
-## 10    10 20.5   2.05
+##  1     1  2.71  2.71
+##  2     2  2.35  1.17
+##  3     3  6.82  2.27
+##  4     4  7.23  1.81
+##  5     5 11.2   2.24
+##  6     6 11.5   1.91
+##  7     7 13.8   1.97
+##  8     8 15.3   1.92
+##  9     9 18.7   2.08
+## 10    10 19.8   1.98
 \end{verbatim}
 
 \end{solution}
@@ -9111,7 +9113,7 @@ Escreva uma função que diga ``good morning'', ``good afternoon'', ou ``good ev
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "Boa tarde!"
+## [1] "Bom dia!"
 \end{verbatim}
 
 \begin{Shaded}
@@ -9417,23 +9419,228 @@ Não temos exercícios nesta seção.
 \hypertarget{introduuxe7uxe3o-12}{%
 \section{Introdução}\label{introduuxe7uxe3o-12}}
 
+Não temos exercícios nesta seção.
+
 \hypertarget{o-buxe1sico-de-vetores}{%
 \section{O Básico de vetores}\label{o-buxe1sico-de-vetores}}
+
+Não temos exercícios nesta seção.
 
 \hypertarget{tipos-importantes-de-vetores-atuxf4micos}{%
 \section{Tipos importantes de vetores atômicos}\label{tipos-importantes-de-vetores-atuxf4micos}}
 
-\hypertarget{usando-vetores-atuxf3micos}{%
-\section{Usando vetores atómicos}\label{usando-vetores-atuxf3micos}}
+\hypertarget{exr16-3-1}{%
+\subsection*{Exercício 16.3.1}\label{exr16-3-1}}
+\addcontentsline{toc}{subsection}{Exercício 16.3.1}
+
+Descreva a diferença entre \texttt{is.finite(x)} e \texttt{!is.infinity(x)}.
+
+\begin{solution}
+Para obter essa resposta, vamos comparar o comportamento dessas duas funções aplicadas sobre um vetor contendo \texttt{0}, \texttt{NA}, \texttt{NaN}, \texttt{Inf} e \texttt{-Inf}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\ConstantTok{NA}\NormalTok{, }\ConstantTok{NaN}\NormalTok{, }\ConstantTok{Inf}\NormalTok{, }\SpecialCharTok{{-}}\ConstantTok{Inf}\NormalTok{)}
+
+\NormalTok{x}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]    0   NA  NaN  Inf -Inf
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{is.finite}\NormalTok{(x)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  TRUE FALSE FALSE FALSE FALSE
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{is.infinite}\NormalTok{(x)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] FALSE FALSE FALSE  TRUE  TRUE
+\end{verbatim}
+
+Podemos notar que a função \texttt{is.finite()} considera que os valores \texttt{NA}, \texttt{NaN}, \texttt{Inf} e \texttt{-Inf} não são finitos, enquanto todo o resto é finito. Já a função \texttt{is.infinite()} funciona de uma forma levemente diferente, não sendo a simples negação da função anterior. \texttt{is.infinite()} considera apenas \texttt{Inf} e \texttt{-Inf} como infinitos e todo o restante (valores não faltantes, \texttt{NA} e \texttt{NaN}) como não infinitos.
+
+Em outras palavras, podemos dizer que \texttt{NA} e \texttt{NaN} não são nem finitos, nem infinitos.
+\end{solution}
+
+\hypertarget{exr16-3-2}{%
+\subsection*{Exercício 16.3.2}\label{exr16-3-2}}
+\addcontentsline{toc}{subsection}{Exercício 16.3.2}
+
+Leia o código fonte de \texttt{dplyr::near()}. Como ele funciona?
+
+\begin{solution}
+Esta função verifica se o módulo da diferença entre os números é menor do que um valor de tolerancia. A tolerânica padrão é um valor característico da máquina na qual está rodando o R, um valor muito pequeno, em torno da raiz quadrada de 2.220446e-16.
+\end{solution}
+
+\hypertarget{exr16-3-3}{%
+\subsection*{Exercício 16.3.3}\label{exr16-3-3}}
+\addcontentsline{toc}{subsection}{Exercício 16.3.3}
+
+Um vetor lógico pode receber três valores possíveis. Quantos valores possíveis um vetor integer pode receber? Quantos valores possíveis um double pode receber? Use o Google para pesquisar.
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr16-3-4}{%
+\subsection*{Exercício 16.3.4}\label{exr16-3-4}}
+\addcontentsline{toc}{subsection}{Exercício 16.3.4}
+
+Pense em pelo menos quatro funções que permitem que você converta um double em um integer. COmo elas diferem? Seja preciso.
+
+\begin{solution}
+As funções \texttt{as.integer()} e \texttt{trunc()} retornam apenas a parte inteira de um determinado número passado como parâmetro.
+A função \texttt{floor()} retorna o maior inteiro menor do que ou igual ao número recebido como parâmetro.
+A função \texttt{ceiling()} retornam o menor inteiro que é maior do que ou igual ao número recebido como atributo.
+Já a função \texttt{round()} retorna o número arredondado para um inteiro.
+\end{solution}
+
+\hypertarget{exr16-3-5}{%
+\subsection*{Exercício 16.3.5}\label{exr16-3-5}}
+\addcontentsline{toc}{subsection}{Exercício 16.3.5}
+
+Quais funções do pacote \textbf{readr} possibilitam que você transforme uma string em um vetor lógico, integer ou double?
+
+\begin{solution}
+As funções são, respectivamente, \texttt{parse\_logical()}, \texttt{parse\_integer()} e \texttt{parse\_number()}.
+\end{solution}
+
+\hypertarget{usando-vetores-atuxf4micos}{%
+\section{Usando vetores atômicos}\label{usando-vetores-atuxf4micos}}
+
+\hypertarget{exr16-4-1}{%
+\subsection*{Exercício 16.4.1}\label{exr16-4-1}}
+\addcontentsline{toc}{subsection}{Exercício 16.4.1}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr16-4-2}{%
+\subsection*{Exercício 16.4.2}\label{exr16-4-2}}
+\addcontentsline{toc}{subsection}{Exercício 16.4.2}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr16-4-3}{%
+\subsection*{Exercício 16.4.3}\label{exr16-4-3}}
+\addcontentsline{toc}{subsection}{Exercício 16.4.3}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr16-4-4}{%
+\subsection*{Exercício 16.4.4}\label{exr16-4-4}}
+\addcontentsline{toc}{subsection}{Exercício 16.4.4}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr16-4-5}{%
+\subsection*{Exercício 16.4.5}\label{exr16-4-5}}
+\addcontentsline{toc}{subsection}{Exercício 16.4.5}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr16-4-6}{%
+\subsection*{Exercício 16.4.6}\label{exr16-4-6}}
+\addcontentsline{toc}{subsection}{Exercício 16.4.6}
+
+x
+
+\begin{solution}
+x
+\end{solution}
 
 \hypertarget{vetores-recursivos-listas}{%
 \section{Vetores recursivos (listas)}\label{vetores-recursivos-listas}}
 
+\hypertarget{exr16-5-1}{%
+\subsection*{Exercício 16.5.1}\label{exr16-5-1}}
+\addcontentsline{toc}{subsection}{Exercício 16.5.1}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr16-5-2}{%
+\subsection*{Exercício 16.5.2}\label{exr16-5-2}}
+\addcontentsline{toc}{subsection}{Exercício 16.5.2}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
 \hypertarget{atributos}{%
 \section{Atributos}\label{atributos}}
 
+Não temos exercícios para esta seção.
+
 \hypertarget{vetores-aumentados}{%
 \section{Vetores aumentados}\label{vetores-aumentados}}
+
+\hypertarget{exr16-7-1}{%
+\subsection*{Exercício 16.7.1}\label{exr16-7-1}}
+\addcontentsline{toc}{subsection}{Exercício 16.7.1}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr16-7-2}{%
+\subsection*{Exercício 16.7.2}\label{exr16-7-2}}
+\addcontentsline{toc}{subsection}{Exercício 16.7.2}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr16-7-3}{%
+\subsection*{Exercício 16.7.3}\label{exr16-7-3}}
+\addcontentsline{toc}{subsection}{Exercício 16.7.3}
+
+x
+
+\begin{solution}
+x
+\end{solution}
 
 \hypertarget{iterauxe7uxe3o-com-purrr}{%
 \chapter{\texorpdfstring{Iteração com \texttt{purrr}}{Iteração com purrr}}\label{iterauxe7uxe3o-com-purrr}}

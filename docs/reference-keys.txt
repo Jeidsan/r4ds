@@ -105,7 +105,7 @@ vetores
 introdução-12
 o-básico-de-vetores
 tipos-importantes-de-vetores-atômicos
-usando-vetores-atómicos
+usando-vetores-atômicos
 vetores-recursivos-listas
 atributos
 vetores-aumentados

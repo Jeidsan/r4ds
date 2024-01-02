@@ -2,14 +2,194 @@
 
 ## Introdução
 
+Não temos exercícios nesta seção.
+
 ## O Básico de vetores
+
+Não temos exercícios nesta seção.
 
 ## Tipos importantes de vetores atômicos 
 
-## Usando vetores atómicos
+### Exercício 16.3.1 {- #exr16-3-1}
+
+::: {.enunciado}
+Descreva a diferença entre `is.finite(x)` e `!is.infinity(x)`.
+:::
+
+::: {.solution}
+Para obter essa resposta, vamos comparar o comportamento dessas duas funções aplicadas sobre um vetor contendo `0`, `NA`, `NaN`, `Inf` e `-Inf`:
+
+```{r}
+x <- c(0, NA, NaN, Inf, -Inf)
+
+x
+is.finite(x)
+is.infinite(x)
+```
+Podemos notar que a função `is.finite()` considera que os valores `NA`, `NaN`, `Inf` e `-Inf` não são finitos, enquanto todo o resto é finito. Já a função `is.infinite()` funciona de uma forma levemente diferente, não sendo a simples negação da função anterior. `is.infinite()` considera apenas `Inf` e `-Inf` como infinitos e todo o restante (valores não faltantes, `NA` e `NaN`) como não infinitos.
+
+Em outras palavras, podemos dizer que `NA` e `NaN` não são nem finitos, nem infinitos. 
+:::
+
+### Exercício 16.3.2 {- #exr16-3-2}
+
+::: {.enunciado}
+Leia o código fonte de `dplyr::near()`. Como ele funciona?
+:::
+
+::: {.solution}
+Esta função verifica se o módulo da diferença entre os números é menor do que um valor de tolerancia. A tolerânica padrão é um valor característico da máquina na qual está rodando o R, um valor muito pequeno, em torno da raiz quadrada de 2.220446e-16.
+:::
+
+### Exercício 16.3.3 {- #exr16-3-3}
+
+::: {.enunciado}
+Um vetor lógico pode receber três valores possíveis. Quantos valores possíveis um vetor integer pode receber? Quantos valores possíveis um double pode receber? Use o Google para pesquisar.
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 16.3.4 {- #exr16-3-4}
+
+::: {.enunciado}
+Pense em pelo menos quatro funções que permitem que você converta um double em um integer. COmo elas diferem? Seja preciso.
+:::
+
+::: {.solution}
+As funções `as.integer()` e `trunc()` retornam apenas a parte inteira de um determinado número passado como parâmetro.
+A função `floor()` retorna o maior inteiro menor do que ou igual ao número recebido como parâmetro.
+A função `ceiling()` retornam o menor inteiro que é maior do que ou igual ao número recebido como atributo.
+Já a função `round()` retorna o número arredondado para um inteiro. 
+:::
+
+### Exercício 16.3.5 {- #exr16-3-5}
+
+::: {.enunciado}
+Quais funções do pacote **readr** possibilitam que você transforme uma string em um vetor lógico, integer ou double?
+:::
+
+::: {.solution}
+As funções são, respectivamente, `parse_logical()`, `parse_integer()` e `parse_number()`.
+:::
+
+## Usando vetores atômicos
+
+### Exercício 16.4.1 {- #exr16-4-1}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 16.4.2 {- #exr16-4-2}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 16.4.3 {- #exr16-4-3}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 16.4.4 {- #exr16-4-4}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 16.4.5 {- #exr16-4-5}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 16.4.6 {- #exr16-4-6}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::
 
 ## Vetores recursivos (listas)
 
+### Exercício 16.5.1 {- #exr16-5-1}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 16.5.2 {- #exr16-5-2}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::
+
 ## Atributos
 
+Não temos exercícios para esta seção.
+
 ## Vetores aumentados
+
+### Exercício 16.7.1 {- #exr16-7-1}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 16.7.2 {- #exr16-7-2}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 16.7.3 {- #exr16-7-3}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::
