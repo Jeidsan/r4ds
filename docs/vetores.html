@@ -23,7 +23,7 @@
 <meta name="author" content="Jeidsan A. da C. Pereira" />
 
 
-<meta name="date" content="2024-01-02" />
+<meta name="date" content="2024-01-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -828,25 +828,26 @@ Já a função <code>round()</code> retorna o número arredondado para um inteir
 <div id="exr16-4-1" class="section level3 unnumbered hasAnchor">
 <h3>Exercício 16.4.1<a href="vetores.html#exr16-4-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="enunciado">
-<p>x</p>
+<p>O que <code>mean(is.na(x))</code> lhe diz sobre um vetor <code>x</code>? e <code>sum(!is.finite(x))</code>?</p>
 </div>
 <div class="solution">
-<p><span id="unlabeled-div-232" class="solution"><em>Solução</em>. </span>x</p>
+<p><span id="unlabeled-div-232" class="solution"><em>Solução</em>. </span>O comando <code>mean(is.na(x))</code> calcula a proporção de valores ausentes ou <code>NaN</code> no vetor <code>x</code>. Já o comando <code>sum(!is.finite(x))</code> calcula o número de valores não finitos em <code>x</code>.</p>
 </div>
 </div>
 <div id="exr16-4-2" class="section level3 unnumbered hasAnchor">
 <h3>Exercício 16.4.2<a href="vetores.html#exr16-4-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="enunciado">
-<p>x</p>
+<p>Leia cuidadosamente a documentação de <code>is.vector()</code>. O que ele realmente testa? Por que <code>is.atomic()</code> não concorda com as definições de vetores atômicos acima?</p>
 </div>
 <div class="solution">
-<p><span id="unlabeled-div-233" class="solution"><em>Solução</em>. </span>x</p>
+<p><span id="unlabeled-div-233" class="solution"><em>Solução</em>. </span>A função <code>is.vector()</code> retorna <code>TRUE</code> se <code>x</code> não contiver nenhum atributo além do nome. Neste caso, uma lista é também considerada um vetor.
+A função <code>is.atomic()</code> verifica se um objeto é de um dos tipos atômicos (lógico, inteiro, numérico, complexo, caractere e raw). Ela não leva em conta se o objeto tem outros atributos além do nome e esse e o ponto de diferença para a definição apresentada no livro.</p>
 </div>
 </div>
 <div id="exr16-4-3" class="section level3 unnumbered hasAnchor">
 <h3>Exercício 16.4.3<a href="vetores.html#exr16-4-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="enunciado">
-<p>x</p>
+<p>Compare e contraste <code>setNames()</code> com <code>purrr::set_names()</code>.</p>
 </div>
 <div class="solution">
 <p><span id="unlabeled-div-234" class="solution"><em>Solução</em>. </span>x</p>
@@ -855,16 +856,59 @@ Já a função <code>round()</code> retorna o número arredondado para um inteir
 <div id="exr16-4-4" class="section level3 unnumbered hasAnchor">
 <h3>Exercício 16.4.4<a href="vetores.html#exr16-4-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="enunciado">
-<p>x</p>
+<p>Crei funções que recebam um vetor como entrada e retornem:</p>
+<ol style="list-style-type: lower-alpha">
+<li>o último valor. Você deveria usar <code>[</code> ou <code>[[</code>?</li>
+<li>Os elementos das posições pares.</li>
+<li>Cada elemento, exceto o último valor.</li>
+<li>Apenas números paes (e nenhum valor faltante).</li>
+</ol>
 </div>
 <div class="solution">
-<p><span id="unlabeled-div-235" class="solution"><em>Solução</em>. </span>x</p>
+<p><span id="unlabeled-div-235" class="solution"><em>Solução</em>. </span>Inicialmente, vamos definir um vetor que será utilizado em todos os exercícios:</p>
+<div class="sourceCode" id="cb562"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb562-1"><a href="vetores.html#cb562-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="cn">NA</span>, <span class="dv">4</span>, <span class="cn">NaN</span>, <span class="dv">6</span>, <span class="cn">Inf</span>, <span class="dv">8</span>, <span class="dv">9</span>)</span></code></pre></div>
+<ol style="list-style-type: lower-alpha">
+<li>Para retornar o último elemento do vamos usar o seguinte:</li>
+</ol>
+<div class="sourceCode" id="cb563"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb563-1"><a href="vetores.html#cb563-1" tabindex="-1"></a>last <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb563-2"><a href="vetores.html#cb563-2" tabindex="-1"></a>  x[[<span class="fu">length</span>(x)]]</span>
+<span id="cb563-3"><a href="vetores.html#cb563-3" tabindex="-1"></a>}</span>
+<span id="cb563-4"><a href="vetores.html#cb563-4" tabindex="-1"></a></span>
+<span id="cb563-5"><a href="vetores.html#cb563-5" tabindex="-1"></a><span class="fu">last</span>(x)</span></code></pre></div>
+<pre><code>## [1] 9</code></pre>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Para retornar os elementos nas posições pares:</li>
+</ol>
+<div class="sourceCode" id="cb565"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb565-1"><a href="vetores.html#cb565-1" tabindex="-1"></a>even_positions <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb565-2"><a href="vetores.html#cb565-2" tabindex="-1"></a>  x[<span class="sc">-</span><span class="fu">seq</span>(<span class="dv">1</span>,<span class="dv">9</span>,<span class="dv">2</span>)]</span>
+<span id="cb565-3"><a href="vetores.html#cb565-3" tabindex="-1"></a>}</span>
+<span id="cb565-4"><a href="vetores.html#cb565-4" tabindex="-1"></a></span>
+<span id="cb565-5"><a href="vetores.html#cb565-5" tabindex="-1"></a><span class="fu">even_positions</span>(x)</span></code></pre></div>
+<pre><code>## [1] 2 4 6 8</code></pre>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Para retornar todos os elementos, exceto o último:</li>
+</ol>
+<div class="sourceCode" id="cb567"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb567-1"><a href="vetores.html#cb567-1" tabindex="-1"></a>remove_last <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb567-2"><a href="vetores.html#cb567-2" tabindex="-1"></a>  x[<span class="sc">-</span><span class="fu">length</span>(x)]</span>
+<span id="cb567-3"><a href="vetores.html#cb567-3" tabindex="-1"></a>}</span>
+<span id="cb567-4"><a href="vetores.html#cb567-4" tabindex="-1"></a></span>
+<span id="cb567-5"><a href="vetores.html#cb567-5" tabindex="-1"></a><span class="fu">remove_last</span>(x)</span></code></pre></div>
+<pre><code>## [1]   1   2  NA   4 NaN   6 Inf   8</code></pre>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>Para retornar apenas os números pares, mas nenhum valor faltante:</li>
+</ol>
+<div class="sourceCode" id="cb569"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb569-1"><a href="vetores.html#cb569-1" tabindex="-1"></a>even_values <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb569-2"><a href="vetores.html#cb569-2" tabindex="-1"></a>  (x <span class="sc">%%</span> <span class="dv">2</span> <span class="sc">==</span> <span class="dv">0</span> <span class="sc">&amp;</span> <span class="fu">is.finite</span>(x))</span>
+<span id="cb569-3"><a href="vetores.html#cb569-3" tabindex="-1"></a>}</span>
+<span id="cb569-4"><a href="vetores.html#cb569-4" tabindex="-1"></a></span>
+<span id="cb569-5"><a href="vetores.html#cb569-5" tabindex="-1"></a><span class="fu">even_values</span>(x)</span></code></pre></div>
+<pre><code>## [1] FALSE  TRUE FALSE  TRUE FALSE  TRUE FALSE  TRUE FALSE</code></pre>
 </div>
 </div>
 <div id="exr16-4-5" class="section level3 unnumbered hasAnchor">
 <h3>Exercício 16.4.5<a href="vetores.html#exr16-4-5" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="enunciado">
-<p>x</p>
+<p>Por que <code>x[-wich(x &gt; 0)]</code> não é o mesmo que <code>x[x &lt;= 0]</code>?</p>
 </div>
 <div class="solution">
 <p><span id="unlabeled-div-236" class="solution"><em>Solução</em>. </span>x</p>
@@ -873,10 +917,10 @@ Já a função <code>round()</code> retorna o número arredondado para um inteir
 <div id="exr16-4-6" class="section level3 unnumbered hasAnchor">
 <h3>Exercício 16.4.6<a href="vetores.html#exr16-4-6" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="enunciado">
-<p>x</p>
+<p>O que acontece quando você fas um subconjunto com integer positivo que é maior do que o comprimento do vetor? O que acontece quando você faz um subconjunto com um nome que não existe?</p>
 </div>
 <div class="solution">
-<p><span id="unlabeled-div-237" class="solution"><em>Solução</em>. </span>x</p>
+<p><span id="unlabeled-div-237" class="solution"><em>Solução</em>. </span>Em ambos os casos, será retornado <code>NA</code>.</p>
 </div>
 </div>
 </div>
@@ -885,7 +929,11 @@ Já a função <code>round()</code> retorna o número arredondado para um inteir
 <div id="exr16-5-1" class="section level3 unnumbered hasAnchor">
 <h3>Exercício 16.5.1<a href="vetores.html#exr16-5-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="enunciado">
-<p>x</p>
+<p>Desenhe as seguintes listas como conjuntos agrupados:</p>
+<ol style="list-style-type: lower-alpha">
+<li><code>list(a, b, list(c, d), list(e, f))</code></li>
+<li><code>list(list(list(list(list(list(a))))))</code></li>
+</ol>
 </div>
 <div class="solution">
 <p><span id="unlabeled-div-238" class="solution"><em>Solução</em>. </span>x</p>
@@ -894,10 +942,10 @@ Já a função <code>round()</code> retorna o número arredondado para um inteir
 <div id="exr16-5-2" class="section level3 unnumbered hasAnchor">
 <h3>Exercício 16.5.2<a href="vetores.html#exr16-5-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="enunciado">
-<p>x</p>
+<p>O que acontece se você fizer um subconjunto de um tibble como se estivesse fazendo um subconjunto de uma lista?</p>
 </div>
 <div class="solution">
-<p><span id="unlabeled-div-239" class="solution"><em>Solução</em>. </span>x</p>
+<p><span id="unlabeled-div-239" class="solution"><em>Solução</em>. </span>Como o tibble é um tipo especial de lista, os subconjuntos funcionarão da mesma maneira. A principal diferença que se pode notar entre tibbles e listas comuns, é que todas as “colunas” de um tibble vão ter o mesmo tamanho.</p>
 </div>
 </div>
 </div>
@@ -910,28 +958,66 @@ Já a função <code>round()</code> retorna o número arredondado para um inteir
 <div id="exr16-7-1" class="section level3 unnumbered hasAnchor">
 <h3>Exercício 16.7.1<a href="vetores.html#exr16-7-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="enunciado">
-<p>x</p>
+<p>O que <code>hms::hms(3600)</code> retorna? COmo ´pe impresso? Sobre qual tipo primitivo o vetor aumentado é construído? QUais atributos ele usa?</p>
 </div>
 <div class="solution">
-<p><span id="unlabeled-div-240" class="solution"><em>Solução</em>. </span>x</p>
+<p><span id="unlabeled-div-240" class="solution"><em>Solução</em>. </span><code>hms::hms(3600)</code> retorna a hora “01:00:00”, que é impresso no formato padrão de hora que usamos.</p>
+<p>O tipo básico sobre o qual é construído é <code>double</code>:</p>
+<div class="sourceCode" id="cb571"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb571-1"><a href="vetores.html#cb571-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> hms<span class="sc">::</span><span class="fu">hms</span>(<span class="dv">3600</span>)</span>
+<span id="cb571-2"><a href="vetores.html#cb571-2" tabindex="-1"></a></span>
+<span id="cb571-3"><a href="vetores.html#cb571-3" tabindex="-1"></a><span class="fu">typeof</span>(x)</span></code></pre></div>
+<pre><code>## [1] &quot;double&quot;</code></pre>
+<p>Os atributos do objeto são <code>units</code> e <code>class</code>:</p>
+<div class="sourceCode" id="cb573"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb573-1"><a href="vetores.html#cb573-1" tabindex="-1"></a><span class="fu">attributes</span>(x)</span></code></pre></div>
+<pre><code>## $units
+## [1] &quot;secs&quot;
+## 
+## $class
+## [1] &quot;hms&quot;      &quot;difftime&quot;</code></pre>
 </div>
 </div>
 <div id="exr16-7-2" class="section level3 unnumbered hasAnchor">
 <h3>Exercício 16.7.2<a href="vetores.html#exr16-7-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="enunciado">
-<p>x</p>
+<p>Teste fazer um tibble que tenha colunas com comprimentos diferentes. O que acontece?</p>
 </div>
 <div class="solution">
-<p><span id="unlabeled-div-241" class="solution"><em>Solução</em>. </span>x</p>
+<p><span id="unlabeled-div-241" class="solution"><em>Solução</em>. </span>Caso uma das colunas seja um escalar, o tibble será construído e o valor escalar reciclado até o tamanho da maior coluna.</p>
+<div class="sourceCode" id="cb575"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb575-1"><a href="vetores.html#cb575-1" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">x =</span> <span class="dv">1</span>, <span class="at">y =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 5 × 2
+##       x     y
+##   &lt;dbl&gt; &lt;int&gt;
+## 1     1     1
+## 2     1     2
+## 3     1     3
+## 4     1     4
+## 5     1     5</code></pre>
+<p>Contudo, se ambas as colunas forem vetores de tamanhos diferentes e maiores do que 1, um erro será retornado.</p>
+<div class="sourceCode" id="cb577"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb577-1"><a href="vetores.html#cb577-1" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">y =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)</span></code></pre></div>
+<pre><code>## Error in `tibble()`:
+## ! Tibble columns must have compatible sizes.
+## • Size 2: Existing data.
+## • Size 4: Column `y`.
+## ℹ Only values of size one are recycled.</code></pre>
 </div>
 </div>
 <div id="exr16-7-3" class="section level3 unnumbered hasAnchor">
 <h3>Exercício 16.7.3<a href="vetores.html#exr16-7-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="enunciado">
-<p>x</p>
+<p>Com base na definição anterior, há um problema em ter uma lista como uma coluna de um tibble?</p>
 </div>
 <div class="solution">
-<p><span id="unlabeled-div-242" class="solution"><em>Solução</em>. </span>x</p>
+<p><span id="unlabeled-div-242" class="solution"><em>Solução</em>. </span>Desde que a lista informada tenha a quantidade correta de elementos, não há problema em criar o tibble.</p>
+<div class="sourceCode" id="cb579"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb579-1"><a href="vetores.html#cb579-1" tabindex="-1"></a><span class="fu">tibble</span>(</span>
+<span id="cb579-2"><a href="vetores.html#cb579-2" tabindex="-1"></a>  <span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,</span>
+<span id="cb579-3"><a href="vetores.html#cb579-3" tabindex="-1"></a>  <span class="at">y =</span> <span class="fu">list</span>(<span class="st">&quot;a&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="fu">list</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>))</span>
+<span id="cb579-4"><a href="vetores.html#cb579-4" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## # A tibble: 3 × 2
+##       x y         
+##   &lt;int&gt; &lt;list&gt;    
+## 1     1 &lt;chr [1]&gt; 
+## 2     2 &lt;int [3]&gt; 
+## 3     3 &lt;list [1]&gt;</code></pre>
 </div>
 
 </div>

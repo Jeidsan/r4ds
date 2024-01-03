@@ -79,27 +79,28 @@ As funções são, respectivamente, `parse_logical()`, `parse_integer()` e `pars
 ### Exercício 16.4.1 {- #exr16-4-1}
 
 ::: {.enunciado}
-x
+O que `mean(is.na(x))` lhe diz sobre um vetor `x`? e `sum(!is.finite(x))`?
 :::
 
 ::: {.solution}
-x
+O comando `mean(is.na(x))` calcula a proporção de valores ausentes ou `NaN` no vetor `x`. Já o comando `sum(!is.finite(x))` calcula o número de valores não finitos em `x`.
 :::
 
 ### Exercício 16.4.2 {- #exr16-4-2}
 
 ::: {.enunciado}
-x
+Leia cuidadosamente a documentação de `is.vector()`. O que ele realmente testa? Por que `is.atomic()` não concorda com as definições de vetores atômicos acima?
 :::
 
 ::: {.solution}
-x
+A função `is.vector()` retorna `TRUE` se `x` não contiver nenhum atributo além do nome. Neste caso, uma lista é também considerada um vetor.
+A função `is.atomic()` verifica se um objeto é de um dos tipos atômicos (lógico, inteiro, numérico, complexo, caractere e raw). Ela não leva em conta se o objeto tem outros atributos além do nome e esse e o ponto de diferença para a definição apresentada no livro.
 :::
 
 ### Exercício 16.4.3 {- #exr16-4-3}
 
 ::: {.enunciado}
-x
+Compare e contraste `setNames()` com `purrr::set_names()`.
 :::
 
 ::: {.solution}
@@ -109,17 +110,65 @@ x
 ### Exercício 16.4.4 {- #exr16-4-4}
 
 ::: {.enunciado}
-x
+Crei funções que recebam um vetor como entrada e retornem:
+
+a. o último valor. Você deveria usar `[` ou `[[`?
+b. Os elementos das posições pares.
+c. Cada elemento, exceto o último valor.
+d. Apenas números paes (e nenhum valor faltante).
 :::
 
 ::: {.solution}
-x
+Inicialmente, vamos definir um vetor que será utilizado em todos os exercícios:
+
+```{r}
+x <- c(1, 2, NA, 4, NaN, 6, Inf, 8, 9)
+```
+
+a. Para retornar o último elemento do vamos usar o seguinte:
+
+```{r}
+last <- function(x) {
+  x[[length(x)]]
+}
+
+last(x)
+```
+b. Para retornar os elementos nas posições pares:
+
+```{r}
+even_positions <- function(x) {
+  x[-seq(1,9,2)]
+}
+
+even_positions(x)
+```
+c. Para retornar todos os elementos, exceto o último:
+
+```{r}
+remove_last <- function(x) {
+  x[-length(x)]
+}
+
+remove_last(x)
+```
+
+d. Para retornar apenas os números pares, mas nenhum valor faltante:
+
+```{r}
+even_values <- function(x) {
+  (x %% 2 == 0 & is.finite(x))
+}
+
+even_values(x)
+```
+
 :::
 
 ### Exercício 16.4.5 {- #exr16-4-5}
 
 ::: {.enunciado}
-x
+Por que `x[-wich(x > 0)]` não é o mesmo que `x[x <= 0]`?
 :::
 
 ::: {.solution}
@@ -129,11 +178,11 @@ x
 ### Exercício 16.4.6 {- #exr16-4-6}
 
 ::: {.enunciado}
-x
+O que acontece quando você fas um subconjunto com integer positivo que é maior do que o comprimento do vetor? O que acontece quando você faz um subconjunto com um nome que não existe?
 :::
 
 ::: {.solution}
-x
+Em ambos os casos, será retornado `NA`.
 :::
 
 ## Vetores recursivos (listas)
@@ -141,7 +190,10 @@ x
 ### Exercício 16.5.1 {- #exr16-5-1}
 
 ::: {.enunciado}
-x
+Desenhe as seguintes listas como conjuntos agrupados:
+
+a. `list(a, b, list(c, d), list(e, f))`
+b. `list(list(list(list(list(list(a))))))`
 :::
 
 ::: {.solution}
@@ -151,11 +203,11 @@ x
 ### Exercício 16.5.2 {- #exr16-5-2}
 
 ::: {.enunciado}
-x
+O que acontece se você fizer um subconjunto de um tibble como se estivesse fazendo um subconjunto de uma lista?
 :::
 
 ::: {.solution}
-x
+Como o tibble é um tipo especial de lista, os subconjuntos funcionarão da mesma maneira. A principal diferença que se pode notar entre tibbles e listas comuns, é que todas as "colunas" de um tibble vão ter o mesmo tamanho.
 :::
 
 ## Atributos
@@ -167,29 +219,61 @@ Não temos exercícios para esta seção.
 ### Exercício 16.7.1 {- #exr16-7-1}
 
 ::: {.enunciado}
-x
+O que `hms::hms(3600)` retorna? COmo ´pe impresso? Sobre qual tipo primitivo o vetor aumentado é construído? QUais atributos ele usa?
 :::
 
 ::: {.solution}
-x
+`hms::hms(3600)` retorna a hora "01:00:00", que é impresso no formato padrão de hora que usamos.
+
+O tipo básico sobre o qual é construído é `double`:
+
+```{r}
+x <- hms::hms(3600)
+
+typeof(x)
+```
+Os atributos do objeto são `units` e `class`:
+
+```{r}
+attributes(x)
+```
 :::
 
 ### Exercício 16.7.2 {- #exr16-7-2}
 
 ::: {.enunciado}
-x
+Teste fazer um tibble que tenha colunas com comprimentos diferentes. O que acontece?
 :::
 
 ::: {.solution}
-x
+Caso uma das colunas seja um escalar, o tibble será construído e o valor escalar reciclado até o tamanho da maior coluna.
+
+```{r}
+tibble(x = 1, y = 1:5)
+```
+
+Contudo, se ambas as colunas forem vetores de tamanhos diferentes e maiores do que 1, um erro será retornado.
+
+```{r, error=TRUE}
+tibble(x = 1:2, y = 1:4)
+```
+
 :::
 
 ### Exercício 16.7.3 {- #exr16-7-3}
 
 ::: {.enunciado}
-x
+Com base na definição anterior, há um problema em ter uma lista como uma coluna de um tibble?
 :::
 
 ::: {.solution}
-x
+Desde que a lista informada tenha a quantidade correta de elementos, não há problema em criar o tibble.
+
+```{r}
+tibble(
+  x = 1:3,
+  y = list("a", 1:3, list(1:3))
+)
+```
+
 :::

@@ -233,7 +233,7 @@
 \makeatother
 \subtitle{Solução dos exercícios}
 \author{Jeidsan A. da C. Pereira}
-\date{2024-01-02}
+\date{2024-01-03}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Teorema}[chapter]
@@ -344,6 +344,12 @@ Dúvidas ou sugestões de melhoria podem ser encaminhadas para o e-mail \emph{\h
   Exercícios da seção 15.5;
 \item
   \protect\hyperlink{exr16-3-3}{Exercício 16.3.3};
+\item
+  \protect\hyperlink{exr16-4-3}{Exercício 16.4.3};
+\item
+  \protect\hyperlink{exr16-4-5}{Exercício 16.4.5};
+\item
+  \protect\hyperlink{exr16-5-1}{Exercício 16.5.1};
 \item
 \end{itemize}
 
@@ -4811,16 +4817,16 @@ Pratique referir-se a nomes de variáveis não sintáticos, no data frame a segu
 ## # A tibble: 10 x 3
 ##      one   two three
 ##    <int> <dbl> <dbl>
-##  1     1  2.71  2.71
-##  2     2  2.35  1.17
-##  3     3  6.82  2.27
-##  4     4  7.23  1.81
-##  5     5 11.2   2.24
-##  6     6 11.5   1.91
-##  7     7 13.8   1.97
-##  8     8 15.3   1.92
-##  9     9 18.7   2.08
-## 10    10 19.8   1.98
+##  1     1  2.91  2.91
+##  2     2  3.48  1.74
+##  3     3  5.30  1.77
+##  4     4  9.83  2.46
+##  5     5  7.97  1.59
+##  6     6 12.9   2.15
+##  7     7 14.3   2.04
+##  8     8 15.7   1.96
+##  9     9 17.4   1.93
+## 10    10 18.9   1.89
 \end{verbatim}
 
 \end{solution}
@@ -9525,27 +9531,28 @@ As funções são, respectivamente, \texttt{parse\_logical()}, \texttt{parse\_in
 \subsection*{Exercício 16.4.1}\label{exr16-4-1}}
 \addcontentsline{toc}{subsection}{Exercício 16.4.1}
 
-x
+O que \texttt{mean(is.na(x))} lhe diz sobre um vetor \texttt{x}? e \texttt{sum(!is.finite(x))}?
 
 \begin{solution}
-x
+O comando \texttt{mean(is.na(x))} calcula a proporção de valores ausentes ou \texttt{NaN} no vetor \texttt{x}. Já o comando \texttt{sum(!is.finite(x))} calcula o número de valores não finitos em \texttt{x}.
 \end{solution}
 
 \hypertarget{exr16-4-2}{%
 \subsection*{Exercício 16.4.2}\label{exr16-4-2}}
 \addcontentsline{toc}{subsection}{Exercício 16.4.2}
 
-x
+Leia cuidadosamente a documentação de \texttt{is.vector()}. O que ele realmente testa? Por que \texttt{is.atomic()} não concorda com as definições de vetores atômicos acima?
 
 \begin{solution}
-x
+A função \texttt{is.vector()} retorna \texttt{TRUE} se \texttt{x} não contiver nenhum atributo além do nome. Neste caso, uma lista é também considerada um vetor.
+A função \texttt{is.atomic()} verifica se um objeto é de um dos tipos atômicos (lógico, inteiro, numérico, complexo, caractere e raw). Ela não leva em conta se o objeto tem outros atributos além do nome e esse e o ponto de diferença para a definição apresentada no livro.
 \end{solution}
 
 \hypertarget{exr16-4-3}{%
 \subsection*{Exercício 16.4.3}\label{exr16-4-3}}
 \addcontentsline{toc}{subsection}{Exercício 16.4.3}
 
-x
+Compare e contraste \texttt{setNames()} com \texttt{purrr::set\_names()}.
 
 \begin{solution}
 x
@@ -9555,17 +9562,125 @@ x
 \subsection*{Exercício 16.4.4}\label{exr16-4-4}}
 \addcontentsline{toc}{subsection}{Exercício 16.4.4}
 
-x
+Crei funções que recebam um vetor como entrada e retornem:
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  o último valor. Você deveria usar \texttt{{[}} ou \texttt{{[}{[}}?
+\item
+  Os elementos das posições pares.
+\item
+  Cada elemento, exceto o último valor.
+\item
+  Apenas números paes (e nenhum valor faltante).
+\end{enumerate}
 
 \begin{solution}
-x
+
+Inicialmente, vamos definir um vetor que será utilizado em todos os exercícios:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\ConstantTok{NA}\NormalTok{, }\DecValTok{4}\NormalTok{, }\ConstantTok{NaN}\NormalTok{, }\DecValTok{6}\NormalTok{, }\ConstantTok{Inf}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{9}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  Para retornar o último elemento do vamos usar o seguinte:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{last }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x) \{}
+\NormalTok{  x[[}\FunctionTok{length}\NormalTok{(x)]]}
+\NormalTok{\}}
+
+\FunctionTok{last}\NormalTok{(x)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 9
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Para retornar os elementos nas posições pares:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{even\_positions }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x) \{}
+\NormalTok{  x[}\SpecialCharTok{{-}}\FunctionTok{seq}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{9}\NormalTok{,}\DecValTok{2}\NormalTok{)]}
+\NormalTok{\}}
+
+\FunctionTok{even\_positions}\NormalTok{(x)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2 4 6 8
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Para retornar todos os elementos, exceto o último:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{remove\_last }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x) \{}
+\NormalTok{  x[}\SpecialCharTok{{-}}\FunctionTok{length}\NormalTok{(x)]}
+\NormalTok{\}}
+
+\FunctionTok{remove\_last}\NormalTok{(x)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]   1   2  NA   4 NaN   6 Inf   8
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Para retornar apenas os números pares, mas nenhum valor faltante:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{even\_values }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x) \{}
+\NormalTok{  (x }\SpecialCharTok{\%\%} \DecValTok{2} \SpecialCharTok{==} \DecValTok{0} \SpecialCharTok{\&} \FunctionTok{is.finite}\NormalTok{(x))}
+\NormalTok{\}}
+
+\FunctionTok{even\_values}\NormalTok{(x)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] FALSE  TRUE FALSE  TRUE FALSE  TRUE FALSE  TRUE FALSE
+\end{verbatim}
+
 \end{solution}
 
 \hypertarget{exr16-4-5}{%
 \subsection*{Exercício 16.4.5}\label{exr16-4-5}}
 \addcontentsline{toc}{subsection}{Exercício 16.4.5}
 
-x
+Por que \texttt{x{[}-wich(x\ \textgreater{}\ 0){]}} não é o mesmo que \texttt{x{[}x\ \textless{}=\ 0{]}}?
 
 \begin{solution}
 x
@@ -9575,10 +9690,10 @@ x
 \subsection*{Exercício 16.4.6}\label{exr16-4-6}}
 \addcontentsline{toc}{subsection}{Exercício 16.4.6}
 
-x
+O que acontece quando você fas um subconjunto com integer positivo que é maior do que o comprimento do vetor? O que acontece quando você faz um subconjunto com um nome que não existe?
 
 \begin{solution}
-x
+Em ambos os casos, será retornado \texttt{NA}.
 \end{solution}
 
 \hypertarget{vetores-recursivos-listas}{%
@@ -9588,7 +9703,16 @@ x
 \subsection*{Exercício 16.5.1}\label{exr16-5-1}}
 \addcontentsline{toc}{subsection}{Exercício 16.5.1}
 
-x
+Desenhe as seguintes listas como conjuntos agrupados:
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  \texttt{list(a,\ b,\ list(c,\ d),\ list(e,\ f))}
+\item
+  \texttt{list(list(list(list(list(list(a))))))}
+\end{enumerate}
 
 \begin{solution}
 x
@@ -9598,10 +9722,10 @@ x
 \subsection*{Exercício 16.5.2}\label{exr16-5-2}}
 \addcontentsline{toc}{subsection}{Exercício 16.5.2}
 
-x
+O que acontece se você fizer um subconjunto de um tibble como se estivesse fazendo um subconjunto de uma lista?
 
 \begin{solution}
-x
+Como o tibble é um tipo especial de lista, os subconjuntos funcionarão da mesma maneira. A principal diferença que se pode notar entre tibbles e listas comuns, é que todas as ``colunas'' de um tibble vão ter o mesmo tamanho.
 \end{solution}
 
 \hypertarget{atributos}{%
@@ -9616,30 +9740,117 @@ Não temos exercícios para esta seção.
 \subsection*{Exercício 16.7.1}\label{exr16-7-1}}
 \addcontentsline{toc}{subsection}{Exercício 16.7.1}
 
-x
+O que \texttt{hms::hms(3600)} retorna? COmo ´pe impresso? Sobre qual tipo primitivo o vetor aumentado é construído? QUais atributos ele usa?
 
 \begin{solution}
-x
+
+\texttt{hms::hms(3600)} retorna a hora ``01:00:00'', que é impresso no formato padrão de hora que usamos.
+
+O tipo básico sobre o qual é construído é \texttt{double}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}}\NormalTok{ hms}\SpecialCharTok{::}\FunctionTok{hms}\NormalTok{(}\DecValTok{3600}\NormalTok{)}
+
+\FunctionTok{typeof}\NormalTok{(x)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "double"
+\end{verbatim}
+
+Os atributos do objeto são \texttt{units} e \texttt{class}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{attributes}\NormalTok{(x)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $units
+## [1] "secs"
+## 
+## $class
+## [1] "hms"      "difftime"
+\end{verbatim}
+
 \end{solution}
 
 \hypertarget{exr16-7-2}{%
 \subsection*{Exercício 16.7.2}\label{exr16-7-2}}
 \addcontentsline{toc}{subsection}{Exercício 16.7.2}
 
-x
+Teste fazer um tibble que tenha colunas com comprimentos diferentes. O que acontece?
 
 \begin{solution}
-x
+
+Caso uma das colunas seja um escalar, o tibble será construído e o valor escalar reciclado até o tamanho da maior coluna.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{tibble}\NormalTok{(}\AttributeTok{x =} \DecValTok{1}\NormalTok{, }\AttributeTok{y =} \DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 5 x 2
+##       x     y
+##   <dbl> <int>
+## 1     1     1
+## 2     1     2
+## 3     1     3
+## 4     1     4
+## 5     1     5
+\end{verbatim}
+
+Contudo, se ambas as colunas forem vetores de tamanhos diferentes e maiores do que 1, um erro será retornado.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{tibble}\NormalTok{(}\AttributeTok{x =} \DecValTok{1}\SpecialCharTok{:}\DecValTok{2}\NormalTok{, }\AttributeTok{y =} \DecValTok{1}\SpecialCharTok{:}\DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Error in `tibble()`:
+## ! Tibble columns must have compatible sizes.
+## * Size 2: Existing data.
+## * Size 4: Column `y`.
+## i Only values of size one are recycled.
+\end{verbatim}
+
 \end{solution}
 
 \hypertarget{exr16-7-3}{%
 \subsection*{Exercício 16.7.3}\label{exr16-7-3}}
 \addcontentsline{toc}{subsection}{Exercício 16.7.3}
 
-x
+Com base na definição anterior, há um problema em ter uma lista como uma coluna de um tibble?
 
 \begin{solution}
-x
+
+Desde que a lista informada tenha a quantidade correta de elementos, não há problema em criar o tibble.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{tibble}\NormalTok{(}
+  \AttributeTok{x =} \DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{,}
+  \AttributeTok{y =} \FunctionTok{list}\NormalTok{(}\StringTok{"a"}\NormalTok{, }\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{, }\FunctionTok{list}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{))}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 3 x 2
+##       x y         
+##   <int> <list>    
+## 1     1 <chr [1]> 
+## 2     2 <int [3]> 
+## 3     3 <list [1]>
+\end{verbatim}
+
 \end{solution}
 
 \hypertarget{iterauxe7uxe3o-com-purrr}{%
