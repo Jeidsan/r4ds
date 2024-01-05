@@ -78,22 +78,89 @@ for(x in letters) {
 
 x <- sample(100)
 sd <- 0
-```
+for (i in seq_along(x)) {
+  sd <- sd + (x[i] - mean(x)) ^ 2
+}
+sd <- sqrt(sd / (length(x) - 1))
 
+x <- runif(100)
+out <- vector("numeric", length(x))
+out[1] <- x[1]
+for (i in 2:length(x)) {
+  out[i] <- out[i - 1] + x[i]
+}
+```
 :::
 
 ::: {.solution}
-x
+O primeiro loop apenas concatena os valores do vetor, e poderia ser substituído por:
+
+```{r}
+stringr::str_c(letters, collapse = "")
+```
+
+O segundo loop realiza o cálculo do desvio padrão e poderia ser substituído por:
+
+```{r}
+x <- sample(100)
+sd <- sd(x)
+sd
+```
+O último loop calcula a soma cumulativa de um vetor e poderia ser substituído por:
+
+```{r}
+x <- runif(100)
+out <- cumsum(x)
+out
+```
 :::
 
 ### Exercício 17.2.3 {- #exr17-2-3}
 
 ::: {.enunciado}
-x
+Combine suas habilidades de escrita de funções e loops for:
+
+a. Escreva um loop for que imprima (`print()`) a letra da música infantil "Alice the Camel".
+b. Converta a cantiga infantil "Ten in the Bed" em uma função. Generalize-a para qualquer número de pessoas em qualquer estrutura de dormir.
 :::
 
 ::: {.solution}
-x
+a.
+
+```{r}
+humps <- 5
+for (i in seq(humps, 0, -1)) {
+  cat(
+    str_c("Alice the camel has ", rep(i, 3), " humps", collapse = "\n"), 
+    collapse = "\n"
+  )
+  
+  if(i == 0) {
+    cat("Now Alice is a horse.\n")
+  } else {
+    cat("So go, Alice, go. Boom, boom, boom!\n\n")
+  }
+}
+```
+b. 
+
+```{r}
+n_in_the_bed <- function(n = 10, structure = "bed") {
+  cat("LYRICS FOR ", n, " IN THE ", str_to_upper(structure), "\n\n")
+  
+  for (i in n:2) {
+    cat("There were ", i, " in the ", structure, "\n")
+    cat("And the little one said \"Roll over, roll over\"\n")
+    cat("So they all rolled over and one fell out \n\n")
+  }
+
+  cat("There was ", i - 1, " in the bad\n")
+  cat("And the little one said, \"Goodnight\" \n\n")
+}
+
+n_in_the_bed()
+n_in_the_bed(5, "rede")
+```
 :::
 
 ### Exercício 17.2.4 {- #exr17-2-4}

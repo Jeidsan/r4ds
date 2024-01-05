@@ -233,7 +233,7 @@
 \makeatother
 \subtitle{Solução dos exercícios}
 \author{Jeidsan A. da C. Pereira}
-\date{2024-01-03}
+\date{2024-01-05}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Teorema}[chapter]
@@ -4817,16 +4817,16 @@ Pratique referir-se a nomes de variáveis não sintáticos, no data frame a segu
 ## # A tibble: 10 x 3
 ##      one   two three
 ##    <int> <dbl> <dbl>
-##  1     1  2.91  2.91
-##  2     2  3.48  1.74
-##  3     3  5.30  1.77
-##  4     4  9.83  2.46
-##  5     5  7.97  1.59
-##  6     6 12.9   2.15
+##  1     1  1.20  1.20
+##  2     2  4.77  2.38
+##  3     3  5.31  1.77
+##  4     4  7.10  1.78
+##  5     5  9.55  1.91
+##  6     6  9.94  1.66
 ##  7     7 14.3   2.04
-##  8     8 15.7   1.96
-##  9     9 17.4   1.93
-## 10    10 18.9   1.89
+##  8     8 18.0   2.25
+##  9     9 19.2   2.13
+## 10    10 20.7   2.07
 \end{verbatim}
 
 \end{solution}
@@ -9859,8 +9859,408 @@ Desde que a lista informada tenha a quantidade correta de elementos, não há pr
 \hypertarget{introduuxe7uxe3o-13}{%
 \section{Introdução}\label{introduuxe7uxe3o-13}}
 
+Não temos exercícios para esta seção.
+
 \hypertarget{loops-for}{%
 \section{\texorpdfstring{Loops \texttt{for}}{Loops for}}\label{loops-for}}
+
+\hypertarget{exr17-2-1}{%
+\subsection*{Exercício 17.2.1}\label{exr17-2-1}}
+\addcontentsline{toc}{subsection}{Exercício 17.2.1}
+
+Escreva loops for para:
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  Calcular a média de cada coluna em \texttt{mtcars}.
+\item
+  Determinar o tipo de cada colunas em \texttt{nycflights13::flights}.
+\item
+  Calcular o número de valores únicos em cada coluna de \texttt{iris}.
+\item
+  Gerar 10 valores aleatórias normalmente distribuídos para cada \texttt{\$mu\$\ =\ -10,\ 0,\ 10,\ 100}.
+\end{enumerate}
+
+Pense sobre saída, seuência e corpo \emph{antes} de começar a escrever o loop.
+
+\begin{solution}
+\leavevmode
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  Para calcular a média de cada uma das colunas de \texttt{mtcars}, podemos utilizar o seguinte \emph{loop}:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{output }\OtherTok{\textless{}{-}} \FunctionTok{vector}\NormalTok{(}\StringTok{"double"}\NormalTok{, }\FunctionTok{ncol}\NormalTok{(mtcars))}
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \FunctionTok{seq\_along}\NormalTok{(mtcars)) \{}
+\NormalTok{  output[[i]] }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(mtcars[[i]])}
+\NormalTok{\}}
+
+\NormalTok{output}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1]  20.090625   6.187500 230.721875 146.687500   3.596563   3.217250
+##  [7]  17.848750   0.437500   0.406250   3.687500   2.812500
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Para determinar o tipo de cada uma das colunas de \texttt{nycflights13::flights}, podemos usar o seguinte:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{output }\OtherTok{\textless{}{-}} \FunctionTok{vector}\NormalTok{(}\StringTok{"character"}\NormalTok{, }\FunctionTok{ncol}\NormalTok{(flights))}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \FunctionTok{seq\_along}\NormalTok{(flights)) \{}
+\NormalTok{  output[[i]] }\OtherTok{\textless{}{-}} \FunctionTok{typeof}\NormalTok{(flights[[i]])}
+\NormalTok{\}}
+
+\NormalTok{output}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "integer"   "integer"   "integer"   "integer"   "integer"   "double"   
+##  [7] "integer"   "integer"   "double"    "character" "integer"   "character"
+## [13] "character" "character" "double"    "double"    "double"    "double"   
+## [19] "double"
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Para calcular o número de valores únicos em cada coluna do dataset \texttt{iris}, podemos usar o seguinte:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{output }\OtherTok{\textless{}{-}} \FunctionTok{vector}\NormalTok{(}\StringTok{"integer"}\NormalTok{, }\FunctionTok{ncol}\NormalTok{(iris))}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \FunctionTok{seq\_along}\NormalTok{(iris)) \{}
+\NormalTok{  output[[i]] }\OtherTok{\textless{}{-}}\NormalTok{ iris[[}\DecValTok{1}\NormalTok{]] }\SpecialCharTok{\%\textgreater{}\%} 
+                    \FunctionTok{unique}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} 
+                    \FunctionTok{length}\NormalTok{()}
+\NormalTok{\}}
+\NormalTok{output}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 35 35 35 35 35
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Para gerar 10 distribuições normais aleatórias para cara um dos valores citados de \texttt{\$mu\$}, podemos usar o seguinte:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{n }\OtherTok{\textless{}{-}} \DecValTok{10}
+\NormalTok{mu }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{10}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{100}\NormalTok{)}
+\NormalTok{normals }\OtherTok{\textless{}{-}} \FunctionTok{vector}\NormalTok{(}\StringTok{"list"}\NormalTok{, }\FunctionTok{length}\NormalTok{(mu))}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \FunctionTok{seq\_along}\NormalTok{(normals)) \{}
+\NormalTok{  normals[[i]] }\OtherTok{\textless{}{-}} \FunctionTok{rnorm}\NormalTok{(n, }\AttributeTok{mean =}\NormalTok{ mu[[i]])}
+\NormalTok{\}}
+\FunctionTok{str}\NormalTok{(normals)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## List of 4
+##  $ : num [1:10] -10.73 -10 -9.96 -10.08 -11.44 ...
+##  $ : num [1:10] -1.73208 1.56672 -0.00232 -1.70247 -0.44541 ...
+##  $ : num [1:10] 11 11.2 10.3 13 10.8 ...
+##  $ : num [1:10] 100.1 100.1 99.5 100.4 101.4 ...
+\end{verbatim}
+
+\end{solution}
+
+\hypertarget{exr17-2-2}{%
+\subsection*{Exercício 17.2.2}\label{exr17-2-2}}
+\addcontentsline{toc}{subsection}{Exercício 17.2.2}
+
+Elimine o loop for em cada um dos exemplos a seguir aproveitando umafunção existente que dê certo com vetores.
+
+\begin{verbatim}
+out <- ""
+for(x in letters) {
+  out <- stringr::str_c(out, x)
+}
+
+x <- sample(100)
+sd <- 0
+for (i in seq_along(x)) {
+  sd <- sd + (x[i] - mean(x)) ^ 2
+}
+sd <- sqrt(sd / (length(x) - 1))
+
+x <- runif(100)
+out <- vector("numeric", length(x))
+out[1] <- x[1]
+for (i in 2:length(x)) {
+  out[i] <- out[i - 1] + x[i]
+}
+\end{verbatim}
+
+\begin{solution}
+
+O primeiro loop apenas concatena os valores do vetor, e poderia ser substituído por:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{stringr}\SpecialCharTok{::}\FunctionTok{str\_c}\NormalTok{(letters, }\AttributeTok{collapse =} \StringTok{""}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "abcdefghijklmnopqrstuvwxyz"
+\end{verbatim}
+
+O segundo loop realiza o cálculo do desvio padrão e poderia ser substituído por:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(}\DecValTok{100}\NormalTok{)}
+\NormalTok{sd }\OtherTok{\textless{}{-}} \FunctionTok{sd}\NormalTok{(x)}
+\NormalTok{sd}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 29.01149
+\end{verbatim}
+
+O último loop calcula a soma cumulativa de um vetor e poderia ser substituído por:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{runif}\NormalTok{(}\DecValTok{100}\NormalTok{)}
+\NormalTok{out }\OtherTok{\textless{}{-}} \FunctionTok{cumsum}\NormalTok{(x)}
+\NormalTok{out}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   [1]  0.2572815  1.1457001  1.5118728  1.8483491  2.3397333  2.9097265
+##   [7]  3.0872929  3.1317986  3.3224914  3.9239125  4.7038568  5.5200874
+##  [13]  5.9441593  6.6539919  7.5219770  7.9547654  8.8467541  9.0955731
+##  [19]  9.5690328  9.9886702 10.7598633 10.9359290 11.2412137 12.1920925
+##  [25] 13.0547005 13.8234923 14.2151050 15.0699200 15.5914086 16.4549200
+##  [31] 17.3370220 17.4762505 17.5858642 18.1081476 18.5948556 19.1380059
+##  [37] 19.9337042 20.4013983 20.5771706 21.5081549 22.3908396 22.7804413
+##  [43] 23.5796598 23.7720321 24.7393117 25.3826406 26.1983845 26.3564150
+##  [49] 26.4410362 27.2032355 27.5534973 28.4484181 29.0132912 29.2616818
+##  [55] 30.0191523 30.2041911 30.9101051 31.8101128 31.8424050 31.8786969
+##  [61] 32.1482703 32.7815440 33.5148150 33.6695798 34.6358251 34.7996830
+##  [67] 35.1643949 35.6798028 36.3626268 36.8739988 37.8701034 38.2668433
+##  [73] 38.5423096 39.4186862 40.3594053 41.3308475 41.7546059 41.8308115
+##  [79] 42.3920118 42.4861142 42.8592834 43.5868129 43.8119073 43.8740754
+##  [85] 43.9105414 44.7087668 45.4139320 46.3877225 46.6938680 46.9515579
+##  [91] 47.3986625 47.6681668 48.5075824 49.1864887 49.7103348 50.4188946
+##  [97] 50.6924011 50.9450650 51.6772872 52.3409410
+\end{verbatim}
+
+\end{solution}
+
+\hypertarget{exr17-2-3}{%
+\subsection*{Exercício 17.2.3}\label{exr17-2-3}}
+\addcontentsline{toc}{subsection}{Exercício 17.2.3}
+
+Combine suas habilidades de escrita de funções e loops for:
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  Escreva um loop for que imprima (\texttt{print()}) a letra da música infantil ``Alice the Camel''.
+\item
+  Converta a cantiga infantil ``Ten in the Bed'' em uma função. Generalize-a para qualquer número de pessoas em qualquer estrutura de dormir.
+\end{enumerate}
+
+\begin{solution}
+\leavevmode
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{humps }\OtherTok{\textless{}{-}} \DecValTok{5}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \FunctionTok{seq}\NormalTok{(humps, }\DecValTok{0}\NormalTok{, }\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{)) \{}
+  \FunctionTok{cat}\NormalTok{(}
+    \FunctionTok{str\_c}\NormalTok{(}\StringTok{"Alice the camel has "}\NormalTok{, }\FunctionTok{rep}\NormalTok{(i, }\DecValTok{3}\NormalTok{), }\StringTok{" humps"}\NormalTok{, }\AttributeTok{collapse =} \StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{), }
+    \AttributeTok{collapse =} \StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}
+\NormalTok{  )}
+  
+  \ControlFlowTok{if}\NormalTok{(i }\SpecialCharTok{==} \DecValTok{0}\NormalTok{) \{}
+    \FunctionTok{cat}\NormalTok{(}\StringTok{"Now Alice is a horse.}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\NormalTok{  \} }\ControlFlowTok{else}\NormalTok{ \{}
+    \FunctionTok{cat}\NormalTok{(}\StringTok{"So go, Alice, go. Boom, boom, boom!}\SpecialCharTok{\textbackslash{}n\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\NormalTok{  \}}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Alice the camel has 5 humps
+## Alice the camel has 5 humps
+## Alice the camel has 5 humps 
+## So go, Alice, go. Boom, boom, boom!
+## 
+## Alice the camel has 4 humps
+## Alice the camel has 4 humps
+## Alice the camel has 4 humps 
+## So go, Alice, go. Boom, boom, boom!
+## 
+## Alice the camel has 3 humps
+## Alice the camel has 3 humps
+## Alice the camel has 3 humps 
+## So go, Alice, go. Boom, boom, boom!
+## 
+## Alice the camel has 2 humps
+## Alice the camel has 2 humps
+## Alice the camel has 2 humps 
+## So go, Alice, go. Boom, boom, boom!
+## 
+## Alice the camel has 1 humps
+## Alice the camel has 1 humps
+## Alice the camel has 1 humps 
+## So go, Alice, go. Boom, boom, boom!
+## 
+## Alice the camel has 0 humps
+## Alice the camel has 0 humps
+## Alice the camel has 0 humps 
+## Now Alice is a horse.
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{n\_in\_the\_bed }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(}\AttributeTok{n =} \DecValTok{10}\NormalTok{, }\AttributeTok{structure =} \StringTok{"bed"}\NormalTok{) \{}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{"LYRICS FOR "}\NormalTok{, n, }\StringTok{" IN THE "}\NormalTok{, }\FunctionTok{str\_to\_upper}\NormalTok{(structure), }\StringTok{"}\SpecialCharTok{\textbackslash{}n\textbackslash{}n}\StringTok{"}\NormalTok{)}
+  
+  \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in}\NormalTok{ n}\SpecialCharTok{:}\DecValTok{2}\NormalTok{) \{}
+    \FunctionTok{cat}\NormalTok{(}\StringTok{"There were "}\NormalTok{, i, }\StringTok{" in the "}\NormalTok{, structure, }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+    \FunctionTok{cat}\NormalTok{(}\StringTok{"And the little one said }\SpecialCharTok{\textbackslash{}"}\StringTok{Roll over, roll over}\SpecialCharTok{\textbackslash{}"\textbackslash{}n}\StringTok{"}\NormalTok{)}
+    \FunctionTok{cat}\NormalTok{(}\StringTok{"So they all rolled over and one fell out }\SpecialCharTok{\textbackslash{}n\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\NormalTok{  \}}
+
+  \FunctionTok{cat}\NormalTok{(}\StringTok{"There was "}\NormalTok{, i }\SpecialCharTok{{-}} \DecValTok{1}\NormalTok{, }\StringTok{" in the bad}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{"And the little one said, }\SpecialCharTok{\textbackslash{}"}\StringTok{Goodnight}\SpecialCharTok{\textbackslash{}"}\StringTok{ }\SpecialCharTok{\textbackslash{}n\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\NormalTok{\}}
+
+\FunctionTok{n\_in\_the\_bed}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## LYRICS FOR  10  IN THE  BED 
+## 
+## There were  10  in the  bed 
+## And the little one said "Roll over, roll over"
+## So they all rolled over and one fell out 
+## 
+## There were  9  in the  bed 
+## And the little one said "Roll over, roll over"
+## So they all rolled over and one fell out 
+## 
+## There were  8  in the  bed 
+## And the little one said "Roll over, roll over"
+## So they all rolled over and one fell out 
+## 
+## There were  7  in the  bed 
+## And the little one said "Roll over, roll over"
+## So they all rolled over and one fell out 
+## 
+## There were  6  in the  bed 
+## And the little one said "Roll over, roll over"
+## So they all rolled over and one fell out 
+## 
+## There were  5  in the  bed 
+## And the little one said "Roll over, roll over"
+## So they all rolled over and one fell out 
+## 
+## There were  4  in the  bed 
+## And the little one said "Roll over, roll over"
+## So they all rolled over and one fell out 
+## 
+## There were  3  in the  bed 
+## And the little one said "Roll over, roll over"
+## So they all rolled over and one fell out 
+## 
+## There were  2  in the  bed 
+## And the little one said "Roll over, roll over"
+## So they all rolled over and one fell out 
+## 
+## There was  1  in the bad
+## And the little one said, "Goodnight"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{n\_in\_the\_bed}\NormalTok{(}\DecValTok{5}\NormalTok{, }\StringTok{"rede"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## LYRICS FOR  5  IN THE  REDE 
+## 
+## There were  5  in the  rede 
+## And the little one said "Roll over, roll over"
+## So they all rolled over and one fell out 
+## 
+## There were  4  in the  rede 
+## And the little one said "Roll over, roll over"
+## So they all rolled over and one fell out 
+## 
+## There were  3  in the  rede 
+## And the little one said "Roll over, roll over"
+## So they all rolled over and one fell out 
+## 
+## There were  2  in the  rede 
+## And the little one said "Roll over, roll over"
+## So they all rolled over and one fell out 
+## 
+## There was  1  in the bad
+## And the little one said, "Goodnight"
+\end{verbatim}
+
+\end{solution}
+
+\hypertarget{exr17-2-4}{%
+\subsection*{Exercício 17.2.4}\label{exr17-2-4}}
+\addcontentsline{toc}{subsection}{Exercício 17.2.4}
+
+x
+
+\begin{solution}
+x
+\end{solution}
 
 \hypertarget{variauxe7uxf5es-do-loop-for}{%
 \section{\texorpdfstring{Variações do loop \texttt{for}}{Variações do loop for}}\label{variauxe7uxf5es-do-loop-for}}
