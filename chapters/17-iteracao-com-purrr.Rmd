@@ -2,7 +2,109 @@
 
 ## Introdução
 
+Não temos exercícios para esta seção.
+
 ## Loops `for`
+
+### Exercício 17.2.1 {- #exr17-2-1}
+
+::: {.enunciado}
+Escreva loops for para:
+
+a. Calcular a média de cada coluna em `mtcars`.
+b. Determinar o tipo de cada colunas em `nycflights13::flights`.
+c. Calcular o número de valores únicos em cada coluna de `iris`.
+d. Gerar 10 valores aleatórias normalmente distribuídos para cada `$mu$ = -10, 0, 10, 100`.
+
+Pense sobre saída, seuência e corpo *antes* de começar a escrever o loop.
+:::
+
+::: {.solution}
+a. Para calcular a média de cada uma das colunas de `mtcars`, podemos utilizar o seguinte *loop*:
+```{r}
+output <- vector("double", ncol(mtcars))
+for(i in seq_along(mtcars)) {
+  output[[i]] <- mean(mtcars[[i]])
+}
+
+output
+```
+
+
+b. Para determinar o tipo de cada uma das colunas de `nycflights13::flights`, podemos usar o seguinte:
+
+```{r}
+output <- vector("character", ncol(flights))
+for (i in seq_along(flights)) {
+  output[[i]] <- typeof(flights[[i]])
+}
+
+output
+```
+c. Para calcular o número de valores únicos em cada coluna do dataset `iris`, podemos usar o seguinte:
+
+```{r}
+output <- vector("integer", ncol(iris))
+for (i in seq_along(iris)) {
+  output[[i]] <- iris[[1]] %>% 
+                    unique() %>% 
+                    length()
+}
+output
+```
+d. Para gerar 10 distribuições normais aleatórias para cara um dos valores citados de `$mu$`, podemos usar o seguinte:
+
+```{r}
+n <- 10
+mu <- c(-10, 0, 10, 100)
+normals <- vector("list", length(mu))
+for (i in seq_along(normals)) {
+  normals[[i]] <- rnorm(n, mean = mu[[i]])
+}
+str(normals)
+```
+:::
+
+### Exercício 17.2.2 {- #exr17-2-2}
+
+::: {.enunciado}
+Elimine o loop for em cada um dos exemplos a seguir aproveitando umafunção existente que dê certo com vetores.
+
+```
+out <- ""
+for(x in letters) {
+  out <- stringr::str_c(out, x)
+}
+
+x <- sample(100)
+sd <- 0
+```
+
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 17.2.3 {- #exr17-2-3}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 17.2.4 {- #exr17-2-4}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::
 
 ## Variações do loop `for`
 
