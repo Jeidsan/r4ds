@@ -4817,16 +4817,16 @@ Pratique referir-se a nomes de variáveis não sintáticos, no data frame a segu
 ## # A tibble: 10 x 3
 ##      one   two three
 ##    <int> <dbl> <dbl>
-##  1     1  1.20  1.20
-##  2     2  4.77  2.38
-##  3     3  5.31  1.77
-##  4     4  7.10  1.78
-##  5     5  9.55  1.91
-##  6     6  9.94  1.66
-##  7     7 14.3   2.04
-##  8     8 18.0   2.25
-##  9     9 19.2   2.13
-## 10    10 20.7   2.07
+##  1     1  1.92  1.92
+##  2     2  3.49  1.75
+##  3     3  7.03  2.34
+##  4     4  6.84  1.71
+##  5     5 11.6   2.33
+##  6     6 12.5   2.08
+##  7     7 14.8   2.12
+##  8     8 14.1   1.76
+##  9     9 18.0   2.00
+## 10    10 17.9   1.79
 \end{verbatim}
 
 \end{solution}
@@ -9119,7 +9119,7 @@ Escreva uma função que diga ``good morning'', ``good afternoon'', ou ``good ev
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "Bom dia!"
+## [1] "Boa noite!"
 \end{verbatim}
 
 \begin{Shaded}
@@ -9856,6 +9856,14 @@ Desde que a lista informada tenha a quantidade correta de elementos, não há pr
 \hypertarget{iterauxe7uxe3o-com-purrr}{%
 \chapter{\texorpdfstring{Iteração com \texttt{purrr}}{Iteração com purrr}}\label{iterauxe7uxe3o-com-purrr}}
 
+Em um dos exercícios desta seção, iremos comparar a performance de dois métodos utilizando o pacote \textbf{rbenchmark}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(}\StringTok{"rbenchmark"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
 \hypertarget{introduuxe7uxe3o-13}{%
 \section{Introdução}\label{introduuxe7uxe3o-13}}
 
@@ -9983,10 +9991,10 @@ Pense sobre saída, seuência e corpo \emph{antes} de começar a escrever o loop
 
 \begin{verbatim}
 ## List of 4
-##  $ : num [1:10] -10.73 -10 -9.96 -10.08 -11.44 ...
-##  $ : num [1:10] -1.73208 1.56672 -0.00232 -1.70247 -0.44541 ...
-##  $ : num [1:10] 11 11.2 10.3 13 10.8 ...
-##  $ : num [1:10] 100.1 100.1 99.5 100.4 101.4 ...
+##  $ : num [1:10] -9.97 -10.26 -11.75 -9.1 -10.31 ...
+##  $ : num [1:10] -0.78 1.558 -1.3 0.932 -0.754 ...
+##  $ : num [1:10] 9.32 9.45 9.77 10.39 9.75 ...
+##  $ : num [1:10] 99.9 99.7 99.1 100.8 99.9 ...
 \end{verbatim}
 
 \end{solution}
@@ -10057,23 +10065,23 @@ O último loop calcula a soma cumulativa de um vetor e poderia ser substituído 
 \end{Shaded}
 
 \begin{verbatim}
-##   [1]  0.2572815  1.1457001  1.5118728  1.8483491  2.3397333  2.9097265
-##   [7]  3.0872929  3.1317986  3.3224914  3.9239125  4.7038568  5.5200874
-##  [13]  5.9441593  6.6539919  7.5219770  7.9547654  8.8467541  9.0955731
-##  [19]  9.5690328  9.9886702 10.7598633 10.9359290 11.2412137 12.1920925
-##  [25] 13.0547005 13.8234923 14.2151050 15.0699200 15.5914086 16.4549200
-##  [31] 17.3370220 17.4762505 17.5858642 18.1081476 18.5948556 19.1380059
-##  [37] 19.9337042 20.4013983 20.5771706 21.5081549 22.3908396 22.7804413
-##  [43] 23.5796598 23.7720321 24.7393117 25.3826406 26.1983845 26.3564150
-##  [49] 26.4410362 27.2032355 27.5534973 28.4484181 29.0132912 29.2616818
-##  [55] 30.0191523 30.2041911 30.9101051 31.8101128 31.8424050 31.8786969
-##  [61] 32.1482703 32.7815440 33.5148150 33.6695798 34.6358251 34.7996830
-##  [67] 35.1643949 35.6798028 36.3626268 36.8739988 37.8701034 38.2668433
-##  [73] 38.5423096 39.4186862 40.3594053 41.3308475 41.7546059 41.8308115
-##  [79] 42.3920118 42.4861142 42.8592834 43.5868129 43.8119073 43.8740754
-##  [85] 43.9105414 44.7087668 45.4139320 46.3877225 46.6938680 46.9515579
-##  [91] 47.3986625 47.6681668 48.5075824 49.1864887 49.7103348 50.4188946
-##  [97] 50.6924011 50.9450650 51.6772872 52.3409410
+##   [1]  0.2448021  1.0846189  1.5409067  1.9506627  2.6788844  3.1942583
+##   [7]  4.0889722  4.6317874  4.7800782  5.3494580  5.4099540  6.1648935
+##  [13]  6.9771153  7.5670190  8.5576616  9.3538749  9.5380961  9.9997092
+##  [19] 10.9072406 11.5538913 12.3095090 12.5009210 13.2536923 14.0627979
+##  [25] 15.0208344 15.9316936 16.4699645 16.6501682 17.6215658 18.0855744
+##  [31] 18.9290304 19.2833546 19.4793201 20.2015143 20.9912986 21.4594738
+##  [37] 22.0377006 22.2998110 22.3279894 22.8726532 23.3011550 23.3271056
+##  [43] 23.4552012 23.4575761 23.6119647 24.1221020 24.5107183 25.3543966
+##  [49] 25.3913404 25.5290018 26.2120140 26.5562957 27.1136077 27.5536633
+##  [55] 27.6396399 27.9557515 28.3072822 28.4326469 29.3545282 30.3217416
+##  [61] 30.4278290 31.1362993 31.4604321 32.4158086 33.0869841 33.4643942
+##  [67] 34.2466623 34.9731012 35.2184170 35.8750820 36.0283344 36.2610092
+##  [73] 36.7029735 37.2904027 38.1459599 38.2647719 38.8906966 39.0256188
+##  [79] 39.2389598 39.7870370 40.3601119 40.5661453 40.9127045 41.2590925
+##  [85] 41.3429961 41.3866135 41.8786894 42.7428727 43.5849977 43.6618716
+##  [91] 44.4006755 44.5713872 45.4076948 45.8843401 46.4904678 46.5265496
+##  [97] 46.9250673 47.2952867 47.8938951 48.2976890
 \end{verbatim}
 
 \end{solution}
@@ -10091,6 +10099,8 @@ Combine suas habilidades de escrita de funções e loops for:
   Escreva um loop for que imprima (\texttt{print()}) a letra da música infantil ``Alice the Camel''.
 \item
   Converta a cantiga infantil ``Ten in the Bed'' em uma função. Generalize-a para qualquer número de pessoas em qualquer estrutura de dormir.
+\item
+  Converta a música ``99 Bottles of Beer on the Wall'' em uma função. Generalize-a para qualquer número de qualquer tipo de recipiente contendo qualquer líquido em qualquer superfície.
 \end{enumerate}
 
 \begin{solution}
@@ -10250,16 +10260,127 @@ Combine suas habilidades de escrita de funções e loops for:
 ## And the little one said, "Goodnight"
 \end{verbatim}
 
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{beverage\_in\_the\_surface }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(}\AttributeTok{n =} \DecValTok{99}\NormalTok{, }\AttributeTok{recipient =} \StringTok{"bottle"}\NormalTok{, }\AttributeTok{beverage =} \StringTok{"beer"}\NormalTok{, }\AttributeTok{surface =} \StringTok{"wall"}\NormalTok{) \{}
+
+  \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \FunctionTok{seq}\NormalTok{(n, }\DecValTok{2}\NormalTok{, }\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{)) \{}
+    \FunctionTok{cat}\NormalTok{(i, }\StringTok{" "}\NormalTok{, recipient, }\StringTok{" of "}\NormalTok{, beverage, }\StringTok{" in the "}\NormalTok{, surface, }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, }\AttributeTok{collapse =} \StringTok{""}\NormalTok{, }\AttributeTok{sep =} \StringTok{""}\NormalTok{)}
+    \FunctionTok{cat}\NormalTok{(}\StringTok{"Take one down and pass it around}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, }\AttributeTok{collapse =} \StringTok{""}\NormalTok{, }\AttributeTok{sep =} \StringTok{""}\NormalTok{)}
+    \FunctionTok{cat}\NormalTok{(i }\SpecialCharTok{{-}} \DecValTok{1}\NormalTok{, }\StringTok{" "}\NormalTok{, recipient, }\StringTok{" of "}\NormalTok{, beverage, }\StringTok{" in the "}\NormalTok{, surface, }\StringTok{"}\SpecialCharTok{\textbackslash{}n\textbackslash{}n}\StringTok{"}\NormalTok{, }\AttributeTok{collapse =} \StringTok{""}\NormalTok{, }\AttributeTok{sep =} \StringTok{""}\NormalTok{)}
+\NormalTok{  \}}
+  
+  \ControlFlowTok{if}\NormalTok{(i }\SpecialCharTok{==} \DecValTok{2}\NormalTok{) \{}
+    \FunctionTok{cat}\NormalTok{(i }\SpecialCharTok{{-}} \DecValTok{1}\NormalTok{, }\StringTok{" "}\NormalTok{, recipient, }\StringTok{" of "}\NormalTok{, beverage, }\StringTok{" in the "}\NormalTok{, surface, }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, }\AttributeTok{collapse =} \StringTok{""}\NormalTok{, }\AttributeTok{sep =} \StringTok{""}\NormalTok{)}
+    \FunctionTok{cat}\NormalTok{(}\StringTok{"Take one down and pass it around}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, }\AttributeTok{collapse =} \StringTok{""}\NormalTok{, }\AttributeTok{sep =} \StringTok{""}\NormalTok{)}
+    \FunctionTok{cat}\NormalTok{(}\StringTok{"No more "}\NormalTok{, recipient, }\StringTok{" of "}\NormalTok{, beverage, }\StringTok{" in the "}\NormalTok{, surface, }\StringTok{"}\SpecialCharTok{\textbackslash{}n\textbackslash{}n}\StringTok{"}\NormalTok{, }\AttributeTok{collapse =} \StringTok{""}\NormalTok{, }\AttributeTok{sep =} \StringTok{""}\NormalTok{)}
+    
+    \FunctionTok{cat}\NormalTok{(}\StringTok{"No more "}\NormalTok{, recipient, }\StringTok{" of "}\NormalTok{, beverage, }\StringTok{" in the "}\NormalTok{, surface, }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, }\AttributeTok{collapse =} \StringTok{""}\NormalTok{, }\AttributeTok{sep =} \StringTok{""}\NormalTok{)}
+    \FunctionTok{cat}\NormalTok{(}\StringTok{"Go to the store and buy some more}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, }\AttributeTok{collapse =} \StringTok{""}\NormalTok{, }\AttributeTok{sep =} \StringTok{""}\NormalTok{)}
+    \FunctionTok{cat}\NormalTok{(n, }\StringTok{" "}\NormalTok{, recipient, }\StringTok{" of "}\NormalTok{, beverage, }\StringTok{" in the "}\NormalTok{, surface, }\StringTok{"}\SpecialCharTok{\textbackslash{}n\textbackslash{}n}\StringTok{"}\NormalTok{, }\AttributeTok{collapse =} \StringTok{""}\NormalTok{, }\AttributeTok{sep =} \StringTok{""}\NormalTok{)}
+\NormalTok{  \}}
+\NormalTok{\}}
+
+\FunctionTok{beverage\_in\_the\_surface}\NormalTok{(}\DecValTok{5}\NormalTok{, }\AttributeTok{surface =} \StringTok{"sofa"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 5 bottle of beer in the sofa
+## Take one down and pass it around
+## 4 bottle of beer in the sofa
+## 
+## 4 bottle of beer in the sofa
+## Take one down and pass it around
+## 3 bottle of beer in the sofa
+## 
+## 3 bottle of beer in the sofa
+## Take one down and pass it around
+## 2 bottle of beer in the sofa
+## 
+## 2 bottle of beer in the sofa
+## Take one down and pass it around
+## 1 bottle of beer in the sofa
+## 
+## 1 bottle of beer in the sofa
+## Take one down and pass it around
+## No more bottle of beer in the sofa
+## 
+## No more bottle of beer in the sofa
+## Go to the store and buy some more
+## 5 bottle of beer in the sofa
+\end{verbatim}
+
 \end{solution}
 
 \hypertarget{exr17-2-4}{%
 \subsection*{Exercício 17.2.4}\label{exr17-2-4}}
 \addcontentsline{toc}{subsection}{Exercício 17.2.4}
 
-x
+É comum ver loops for que não pré-alocam a saída e, em vez disso, aumentam o comprimento de um vetor a cada passo:
+
+\begin{verbatim}
+output <- vector("integer", 0)
+for (i in seq_along(x)) {
+  output <- c(output, lengths(x[[i]]))
+}
+output
+\end{verbatim}
+
+Como isso afeta o desempenho? Projete e execute um experimento.
 
 \begin{solution}
-x
+Para avaliar o benefício de usar a alocação prévia para o vetor de saída, vamos inicialmente definir duas funções. A primeira delas, utiliza a alocação prévia da saída, enquanto a segunda, atualiza o vetor de saída a cada passo.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{no\_alloc }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x) \{}
+\NormalTok{  out }\OtherTok{\textless{}{-}} \FunctionTok{vector}\NormalTok{(}\StringTok{"integer"}\NormalTok{, }\DecValTok{0}\NormalTok{)}
+  \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \FunctionTok{seq\_along}\NormalTok{(x)) \{}
+\NormalTok{    out }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(out, }\FunctionTok{lengths}\NormalTok{(x[[i]]))}
+\NormalTok{  \}}
+\NormalTok{  out}
+\NormalTok{\}}
+
+\NormalTok{with\_alloc }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x) \{}
+\NormalTok{  out }\OtherTok{\textless{}{-}} \FunctionTok{vector}\NormalTok{(}\StringTok{"integer"}\NormalTok{, }\FunctionTok{length}\NormalTok{(x))}
+  \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \FunctionTok{seq\_along}\NormalTok{(x)) \{}
+\NormalTok{    out[[i]] }\OtherTok{\textless{}{-}} \FunctionTok{lengths}\NormalTok{(x[[i]])}
+\NormalTok{  \}}
+\NormalTok{  out}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Com as funções definidas, vamos avaliar o tempo de execução utilizando a biblioteca \textbf{rbenchmark}. Vamos utilizar um objeto simples como argumento: um vetor com mil números inteiros.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{:}\DecValTok{1000}
+\FunctionTok{benchmark}\NormalTok{(}
+  \StringTok{"No allocation"} \OtherTok{=} \FunctionTok{no\_alloc}\NormalTok{(x), }
+  \StringTok{"With allocation"} \OtherTok{=} \FunctionTok{with\_alloc}\NormalTok{(x)}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##              test replications elapsed relative user.self sys.self user.child
+## 1   No allocation          100    0.25    4.167      0.20     0.04         NA
+## 2 With allocation          100    0.06    1.000      0.07     0.00         NA
+##   sys.child
+## 1        NA
+## 2        NA
+\end{verbatim}
+
+Já podemos verificar uma diferença considerável. O método sem alocação prévia demorou aproximadamente 7.5 vezes mais para ser executado!
 \end{solution}
 
 \hypertarget{variauxe7uxf5es-do-loop-for}{%

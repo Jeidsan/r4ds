@@ -768,7 +768,7 @@ div.csl-indent {
 <div id="estudo-de-caso-1" class="section level2 unnumbered hasAnchor">
 <h2>Estudo de caso<a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#estudo-de-caso-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Como dito na introdução, o conjunto de dados contém informações sobre os casos de tuberculose no mundo. As informações epidemiológicas contidas nesta base dados são riquíssimas, porém é desafiador trabalhar com os dados na forma em que são fornecidos:</p>
-<div class="sourceCode" id="cb602"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb602-1"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb602-1" tabindex="-1"></a>who</span></code></pre></div>
+<div class="sourceCode" id="cb609"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb609-1"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb609-1" tabindex="-1"></a>who</span></code></pre></div>
 <pre><code>## # A tibble: 7,240 × 60
 ##    country   iso2  iso3   year
 ##    &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;
@@ -796,13 +796,13 @@ div.csl-indent {
 <li>Nós ainda não sabemos o que são todas as outras colunas, mas dada a estrutura dos comes das variáveis, provavelmente são valores, não variáveis.</li>
 </ul>
 <p>Então precisamos reunir todas as colunas de <code>new_sp_m014</code> até <code>newrel_f65</code>. Não sabemos, contudo, o que esses valores representam, então lhe daremos o nome genérico de “key”. Nós sabemos que as células representam a contagem de casos, então usaremos a variável <code>cases</code>. Há vários valores faltantes na representação atual, então, por enquanto, usaremos <code>na.rm</code> só para podermos focar nos valores que são apresentados.</p>
-<div class="sourceCode" id="cb604"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb604-1"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb604-1" tabindex="-1"></a>(who1 <span class="ot">&lt;-</span> who <span class="sc">%&gt;%</span></span>
-<span id="cb604-2"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb604-2" tabindex="-1"></a>  <span class="fu">gather</span>(</span>
-<span id="cb604-3"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb604-3" tabindex="-1"></a>    new_sp_m014<span class="sc">:</span>newrel_f65,</span>
-<span id="cb604-4"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb604-4" tabindex="-1"></a>    <span class="at">key =</span> <span class="st">&quot;key&quot;</span>,</span>
-<span id="cb604-5"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb604-5" tabindex="-1"></a>    <span class="at">value =</span> <span class="st">&quot;cases&quot;</span>,</span>
-<span id="cb604-6"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb604-6" tabindex="-1"></a>    <span class="at">na.rm =</span> <span class="cn">TRUE</span></span>
-<span id="cb604-7"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb604-7" tabindex="-1"></a>  ))</span></code></pre></div>
+<div class="sourceCode" id="cb611"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb611-1"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb611-1" tabindex="-1"></a>(who1 <span class="ot">&lt;-</span> who <span class="sc">%&gt;%</span></span>
+<span id="cb611-2"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb611-2" tabindex="-1"></a>  <span class="fu">gather</span>(</span>
+<span id="cb611-3"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb611-3" tabindex="-1"></a>    new_sp_m014<span class="sc">:</span>newrel_f65,</span>
+<span id="cb611-4"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb611-4" tabindex="-1"></a>    <span class="at">key =</span> <span class="st">&quot;key&quot;</span>,</span>
+<span id="cb611-5"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb611-5" tabindex="-1"></a>    <span class="at">value =</span> <span class="st">&quot;cases&quot;</span>,</span>
+<span id="cb611-6"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb611-6" tabindex="-1"></a>    <span class="at">na.rm =</span> <span class="cn">TRUE</span></span>
+<span id="cb611-7"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb611-7" tabindex="-1"></a>  ))</span></code></pre></div>
 <pre><code>## # A tibble: 76,046 × 6
 ##    country   iso2  iso3   year
 ##    &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;
@@ -820,8 +820,8 @@ div.csl-indent {
 ## # ℹ 2 more variables:
 ## #   key &lt;chr&gt;, cases &lt;dbl&gt;</code></pre>
 <p>Podemos conseguir algumas dicas da estrutura dos valores na nova coluna <code>key</code> ao contá-los:</p>
-<div class="sourceCode" id="cb606"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb606-1"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb606-1" tabindex="-1"></a>who1 <span class="sc">%&gt;%</span></span>
-<span id="cb606-2"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb606-2" tabindex="-1"></a>  <span class="fu">count</span>(key)</span></code></pre></div>
+<div class="sourceCode" id="cb613"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb613-1"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb613-1" tabindex="-1"></a>who1 <span class="sc">%&gt;%</span></span>
+<span id="cb613-2"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb613-2" tabindex="-1"></a>  <span class="fu">count</span>(key)</span></code></pre></div>
 <pre><code>## # A tibble: 56 × 2
 ##    key              n
 ##    &lt;chr&gt;        &lt;int&gt;
@@ -861,8 +861,8 @@ div.csl-indent {
 <li>65 = 65 ou mais</li>
 </ul>
 <p>Precisamos fazer uma pequena correção no formato dos nomes e colunas: infelismente os nomes são levemente inconsistentes porque, em vez de <code>new_rel</code>, temos <code>newrel</code> (é difícil identificar isso aqui, mas se você não fizer a correção, teremos erros nos passos subsequentes).</p>
-<div class="sourceCode" id="cb608"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb608-1"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb608-1" tabindex="-1"></a>(who2 <span class="ot">&lt;-</span> who1 <span class="sc">%&gt;%</span></span>
-<span id="cb608-2"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb608-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">key =</span> stringr<span class="sc">::</span><span class="fu">str_replace</span>(key, <span class="st">&quot;newrel&quot;</span>, <span class="st">&quot;new_rel&quot;</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb615"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb615-1"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb615-1" tabindex="-1"></a>(who2 <span class="ot">&lt;-</span> who1 <span class="sc">%&gt;%</span></span>
+<span id="cb615-2"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb615-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">key =</span> stringr<span class="sc">::</span><span class="fu">str_replace</span>(key, <span class="st">&quot;newrel&quot;</span>, <span class="st">&quot;new_rel&quot;</span>)))</span></code></pre></div>
 <pre><code>## # A tibble: 76,046 × 6
 ##    country   iso2  iso3   year
 ##    &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;
@@ -880,8 +880,8 @@ div.csl-indent {
 ## # ℹ 2 more variables:
 ## #   key &lt;chr&gt;, cases &lt;dbl&gt;</code></pre>
 <p>Podemos agora separar os valores em cada código com duas passagens de <code>separate()</code>. A primeira passagem separará os códigos em cada underscore:</p>
-<div class="sourceCode" id="cb610"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb610-1"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb610-1" tabindex="-1"></a>(who3 <span class="ot">&lt;-</span> who2 <span class="sc">%&gt;%</span></span>
-<span id="cb610-2"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb610-2" tabindex="-1"></a>   <span class="fu">separate</span>(key, <span class="fu">c</span>(<span class="st">&quot;new&quot;</span>, <span class="st">&quot;type&quot;</span>, <span class="st">&quot;sexage&quot;</span>), <span class="at">sep =</span> <span class="st">&quot;_&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb617"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb617-1"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb617-1" tabindex="-1"></a>(who3 <span class="ot">&lt;-</span> who2 <span class="sc">%&gt;%</span></span>
+<span id="cb617-2"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb617-2" tabindex="-1"></a>   <span class="fu">separate</span>(key, <span class="fu">c</span>(<span class="st">&quot;new&quot;</span>, <span class="st">&quot;type&quot;</span>, <span class="st">&quot;sexage&quot;</span>), <span class="at">sep =</span> <span class="st">&quot;_&quot;</span>))</span></code></pre></div>
 <pre><code>## # A tibble: 76,046 × 8
 ##    country   iso2  iso3   year
 ##    &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;
@@ -900,14 +900,14 @@ div.csl-indent {
 ## #   new &lt;chr&gt;, type &lt;chr&gt;,
 ## #   sexage &lt;chr&gt;, cases &lt;dbl&gt;</code></pre>
 <p>Depois podemos deixar de lado a coluna <code>new</code>, porque ela é constante neste conjunto de dados. Enquanto estamos deixando colunas de lado, vamos deixar de lado também <code>iso2</code>e <code>iso3</code>, já que são redundantes.</p>
-<div class="sourceCode" id="cb612"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb612-1"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb612-1" tabindex="-1"></a>who3 <span class="sc">%&gt;%</span> </span>
-<span id="cb612-2"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb612-2" tabindex="-1"></a>  <span class="fu">count</span>(new)</span></code></pre></div>
+<div class="sourceCode" id="cb619"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb619-1"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb619-1" tabindex="-1"></a>who3 <span class="sc">%&gt;%</span> </span>
+<span id="cb619-2"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb619-2" tabindex="-1"></a>  <span class="fu">count</span>(new)</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 2
 ##   new       n
 ##   &lt;chr&gt; &lt;int&gt;
 ## 1 new   76046</code></pre>
-<div class="sourceCode" id="cb614"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb614-1"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb614-1" tabindex="-1"></a>(who4 <span class="ot">&lt;-</span> who3 <span class="sc">%&gt;%</span></span>
-<span id="cb614-2"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb614-2" tabindex="-1"></a>    <span class="fu">select</span>(<span class="sc">-</span>new, <span class="sc">-</span>iso2, <span class="sc">-</span>iso3))</span></code></pre></div>
+<div class="sourceCode" id="cb621"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb621-1"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb621-1" tabindex="-1"></a>(who4 <span class="ot">&lt;-</span> who3 <span class="sc">%&gt;%</span></span>
+<span id="cb621-2"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb621-2" tabindex="-1"></a>    <span class="fu">select</span>(<span class="sc">-</span>new, <span class="sc">-</span>iso2, <span class="sc">-</span>iso3))</span></code></pre></div>
 <pre><code>## # A tibble: 76,046 × 5
 ##    country   year type  sexage
 ##    &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
@@ -925,8 +925,8 @@ div.csl-indent {
 ## # ℹ 1 more variable:
 ## #   cases &lt;dbl&gt;</code></pre>
 <p>Em seguida vamos separar <code>sexage</code> em <code>sex</code> e <code>age</code> ao separar depois do primeiro caractere:</p>
-<div class="sourceCode" id="cb616"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb616-1"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb616-1" tabindex="-1"></a>(who5 <span class="ot">&lt;-</span> who4 <span class="sc">%&gt;%</span></span>
-<span id="cb616-2"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb616-2" tabindex="-1"></a>   <span class="fu">separate</span>(sexage, <span class="fu">c</span>(<span class="st">&quot;sex&quot;</span>, <span class="st">&quot;age&quot;</span>), <span class="at">sep =</span> <span class="dv">1</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb623"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb623-1"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb623-1" tabindex="-1"></a>(who5 <span class="ot">&lt;-</span> who4 <span class="sc">%&gt;%</span></span>
+<span id="cb623-2"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb623-2" tabindex="-1"></a>   <span class="fu">separate</span>(sexage, <span class="fu">c</span>(<span class="st">&quot;sex&quot;</span>, <span class="st">&quot;age&quot;</span>), <span class="at">sep =</span> <span class="dv">1</span>))</span></code></pre></div>
 <pre><code>## # A tibble: 76,046 × 6
 ##    country    year type  sex  
 ##    &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;
@@ -945,19 +945,19 @@ div.csl-indent {
 ## #   age &lt;chr&gt;, cases &lt;dbl&gt;</code></pre>
 <p>O conjunto de dados who agora está arrumado!</p>
 <p>Mostrei um pedaço de código de cada vez, atribuindo cada resultado provisório a uma nova variável. Normalmente não é assim que você trabalha interativamente. Em vez disso, você construitira gradualmente um pipe complexo:</p>
-<div class="sourceCode" id="cb618"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb618-1"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb618-1" tabindex="-1"></a>who <span class="sc">%&gt;%</span></span>
-<span id="cb618-2"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb618-2" tabindex="-1"></a>  <span class="fu">gather</span>(</span>
-<span id="cb618-3"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb618-3" tabindex="-1"></a>    new_sp_m014<span class="sc">:</span>newrel_f65, </span>
-<span id="cb618-4"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb618-4" tabindex="-1"></a>    <span class="at">key =</span> <span class="st">&quot;code&quot;</span>,</span>
-<span id="cb618-5"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb618-5" tabindex="-1"></a>    <span class="at">value =</span> <span class="st">&quot;cases&quot;</span>,</span>
-<span id="cb618-6"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb618-6" tabindex="-1"></a>    <span class="at">na.rm =</span> <span class="cn">TRUE</span></span>
-<span id="cb618-7"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb618-7" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb618-8"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb618-8" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb618-9"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb618-9" tabindex="-1"></a>    <span class="at">code =</span> stringr<span class="sc">::</span><span class="fu">str_replace</span>(code, <span class="st">&quot;newrel&quot;</span>, <span class="st">&quot;new_rel&quot;</span>)</span>
-<span id="cb618-10"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb618-10" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb618-11"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb618-11" tabindex="-1"></a>  <span class="fu">separate</span>(code, <span class="fu">c</span>(<span class="st">&quot;new&quot;</span>, <span class="st">&quot;type&quot;</span>, <span class="st">&quot;sexage&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb618-12"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb618-12" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>new, <span class="sc">-</span>iso2, <span class="sc">-</span>iso3) <span class="sc">%&gt;%</span></span>
-<span id="cb618-13"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb618-13" tabindex="-1"></a>  <span class="fu">separate</span>(sexage, <span class="fu">c</span>(<span class="st">&quot;sex&quot;</span>, <span class="st">&quot;age&quot;</span>), <span class="at">sep =</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb625"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb625-1"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb625-1" tabindex="-1"></a>who <span class="sc">%&gt;%</span></span>
+<span id="cb625-2"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb625-2" tabindex="-1"></a>  <span class="fu">gather</span>(</span>
+<span id="cb625-3"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb625-3" tabindex="-1"></a>    new_sp_m014<span class="sc">:</span>newrel_f65, </span>
+<span id="cb625-4"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb625-4" tabindex="-1"></a>    <span class="at">key =</span> <span class="st">&quot;code&quot;</span>,</span>
+<span id="cb625-5"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb625-5" tabindex="-1"></a>    <span class="at">value =</span> <span class="st">&quot;cases&quot;</span>,</span>
+<span id="cb625-6"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb625-6" tabindex="-1"></a>    <span class="at">na.rm =</span> <span class="cn">TRUE</span></span>
+<span id="cb625-7"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb625-7" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb625-8"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb625-8" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb625-9"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb625-9" tabindex="-1"></a>    <span class="at">code =</span> stringr<span class="sc">::</span><span class="fu">str_replace</span>(code, <span class="st">&quot;newrel&quot;</span>, <span class="st">&quot;new_rel&quot;</span>)</span>
+<span id="cb625-10"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb625-10" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb625-11"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb625-11" tabindex="-1"></a>  <span class="fu">separate</span>(code, <span class="fu">c</span>(<span class="st">&quot;new&quot;</span>, <span class="st">&quot;type&quot;</span>, <span class="st">&quot;sexage&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb625-12"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb625-12" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>new, <span class="sc">-</span>iso2, <span class="sc">-</span>iso3) <span class="sc">%&gt;%</span></span>
+<span id="cb625-13"><a href="apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr.html#cb625-13" tabindex="-1"></a>  <span class="fu">separate</span>(sexage, <span class="fu">c</span>(<span class="st">&quot;sex&quot;</span>, <span class="st">&quot;age&quot;</span>), <span class="at">sep =</span> <span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 76,046 × 6
 ##    country    year type  sex  
 ##    &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;

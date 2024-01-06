@@ -1,5 +1,12 @@
 # Iteração com `purrr`
 
+Em um dos exercícios desta seção, iremos comparar a performance de dois métodos utilizando o pacote **rbenchmark**.
+
+```{r}
+library("rbenchmark")
+```
+
+
 ## Introdução
 
 Não temos exercícios para esta seção.
@@ -122,6 +129,7 @@ Combine suas habilidades de escrita de funções e loops for:
 
 a. Escreva um loop for que imprima (`print()`) a letra da música infantil "Alice the Camel".
 b. Converta a cantiga infantil "Ten in the Bed" em uma função. Generalize-a para qualquer número de pessoas em qualquer estrutura de dormir.
+c. Converta a música "99 Bottles of Beer on the Wall" em uma função. Generalize-a para qualquer número de qualquer tipo de recipiente contendo qualquer líquido em qualquer superfície.
 :::
 
 ::: {.solution}
@@ -161,16 +169,82 @@ n_in_the_bed <- function(n = 10, structure = "bed") {
 n_in_the_bed()
 n_in_the_bed(5, "rede")
 ```
+
+c.
+
+```{r}
+beverage_in_the_surface <- function(n = 99, recipient = "bottle", beverage = "beer", surface = "wall") {
+
+  for (i in seq(n, 2, -1)) {
+    cat(i, " ", recipient, " of ", beverage, " in the ", surface, "\n", collapse = "", sep = "")
+    cat("Take one down and pass it around\n", collapse = "", sep = "")
+    cat(i - 1, " ", recipient, " of ", beverage, " in the ", surface, "\n\n", collapse = "", sep = "")
+  }
+  
+  if(i == 2) {
+    cat(i - 1, " ", recipient, " of ", beverage, " in the ", surface, "\n", collapse = "", sep = "")
+    cat("Take one down and pass it around\n", collapse = "", sep = "")
+    cat("No more ", recipient, " of ", beverage, " in the ", surface, "\n\n", collapse = "", sep = "")
+    
+    cat("No more ", recipient, " of ", beverage, " in the ", surface, "\n", collapse = "", sep = "")
+    cat("Go to the store and buy some more\n", collapse = "", sep = "")
+    cat(n, " ", recipient, " of ", beverage, " in the ", surface, "\n\n", collapse = "", sep = "")
+  }
+}
+
+beverage_in_the_surface(5, surface = "sofa")
+```
+
 :::
 
 ### Exercício 17.2.4 {- #exr17-2-4}
 
 ::: {.enunciado}
-x
+É comum ver loops for que não pré-alocam a saída e, em vez disso, aumentam o comprimento de um vetor a cada passo:
+
+```
+output <- vector("integer", 0)
+for (i in seq_along(x)) {
+  output <- c(output, lengths(x[[i]]))
+}
+output
+```
+
+Como isso afeta o desempenho? Projete e execute um experimento.
 :::
 
 ::: {.solution}
-x
+Para avaliar o benefício de usar a alocação prévia para o vetor de saída, vamos inicialmente definir duas funções. A primeira delas, utiliza a alocação prévia da saída, enquanto a segunda, atualiza o vetor de saída a cada passo. 
+
+```{r}
+no_alloc <- function(x) {
+  out <- vector("integer", 0)
+  for (i in seq_along(x)) {
+    out <- c(out, lengths(x[[i]]))
+  }
+  out
+}
+
+with_alloc <- function(x) {
+  out <- vector("integer", length(x))
+  for (i in seq_along(x)) {
+    out[[i]] <- lengths(x[[i]])
+  }
+  out
+}
+```
+
+Com as funções definidas, vamos avaliar o tempo de execução utilizando a biblioteca **rbenchmark**. Vamos utilizar um objeto simples como argumento: um vetor com mil números inteiros.
+
+```{r}
+x <- 1:1000
+benchmark(
+  "No allocation" = no_alloc(x), 
+  "With allocation" = with_alloc(x)
+)
+```
+
+Já podemos verificar uma diferença considerável. O método sem alocação prévia demorou aproximadamente 7.5 vezes mais para ser executado!
 :::
 
 ## Variações do loop `for`
