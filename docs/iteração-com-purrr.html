@@ -23,7 +23,7 @@
 <meta name="author" content="Jeidsan A. da C. Pereira" />
 
 
-<meta name="date" content="2024-01-05" />
+<meta name="date" content="2024-01-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -662,7 +662,13 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="iteração-com-purrr.html"><a href="iteração-com-purrr.html#exr17-2-3"><i class="fa fa-check"></i>Exercício 17.2.3</a></li>
 <li class="chapter" data-level="" data-path="iteração-com-purrr.html"><a href="iteração-com-purrr.html#exr17-2-4"><i class="fa fa-check"></i>Exercício 17.2.4</a></li>
 </ul></li>
-<li class="chapter" data-level="17.3" data-path="iteração-com-purrr.html"><a href="iteração-com-purrr.html#variações-do-loop-for"><i class="fa fa-check"></i><b>17.3</b> Variações do loop <code>for</code></a></li>
+<li class="chapter" data-level="17.3" data-path="iteração-com-purrr.html"><a href="iteração-com-purrr.html#variações-do-loop-for"><i class="fa fa-check"></i><b>17.3</b> Variações do loop <code>for</code></a>
+<ul>
+<li class="chapter" data-level="" data-path="iteração-com-purrr.html"><a href="iteração-com-purrr.html#exr17-3-1"><i class="fa fa-check"></i>Exercício 17.3.1</a></li>
+<li class="chapter" data-level="" data-path="iteração-com-purrr.html"><a href="iteração-com-purrr.html#exr17-3-2"><i class="fa fa-check"></i>Exercício 17.3.2</a></li>
+<li class="chapter" data-level="" data-path="iteração-com-purrr.html"><a href="iteração-com-purrr.html#exr17-3-3"><i class="fa fa-check"></i>Exercício 17.3.3</a></li>
+<li class="chapter" data-level="" data-path="iteração-com-purrr.html"><a href="iteração-com-purrr.html#exr17-3-4"><i class="fa fa-check"></i>Exercício 17.3.4</a></li>
+</ul></li>
 <li class="chapter" data-level="17.4" data-path="iteração-com-purrr.html"><a href="iteração-com-purrr.html#loops-for-versus-funcionais"><i class="fa fa-check"></i><b>17.4</b> Loops <code>for</code> <em>versus</em> funcionais</a></li>
 <li class="chapter" data-level="17.5" data-path="iteração-com-purrr.html"><a href="iteração-com-purrr.html#as-funções-map"><i class="fa fa-check"></i><b>17.5</b> As funções <code>map</code></a></li>
 <li class="chapter" data-level="17.6" data-path="iteração-com-purrr.html"><a href="iteração-com-purrr.html#lidando-com-falhas"><i class="fa fa-check"></i><b>17.6</b> Lidando com falhas</a></li>
@@ -828,10 +834,10 @@ div.csl-indent {
 <span id="cb588-6"><a href="iteração-com-purrr.html#cb588-6" tabindex="-1"></a>}</span>
 <span id="cb588-7"><a href="iteração-com-purrr.html#cb588-7" tabindex="-1"></a><span class="fu">str</span>(normals)</span></code></pre></div>
 <pre><code>## List of 4
-##  $ : num [1:10] -10.28 -7.66 -9.73 -9.65 -10.49 ...
-##  $ : num [1:10] 0.685 0.208 0.744 -0.351 1.111 ...
-##  $ : num [1:10] 10.75 9.77 9.81 8.62 10.28 ...
-##  $ : num [1:10] 99.8 98.6 98.7 100.1 99.5 ...</code></pre>
+##  $ : num [1:10] -9.27 -10.37 -8.67 -8.89 -9.15 ...
+##  $ : num [1:10] -0.666 0.226 0.587 -0.654 -0.205 ...
+##  $ : num [1:10] 10.01 8.79 10.12 12.47 10.71 ...
+##  $ : num [1:10] 101.1 99.4 98.9 99.9 100 ...</code></pre>
 </div>
 </div>
 <div id="exr17-2-2" class="section level3 unnumbered hasAnchor">
@@ -870,23 +876,23 @@ for (i in 2:length(x)) {
 <div class="sourceCode" id="cb595"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb595-1"><a href="iteração-com-purrr.html#cb595-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">100</span>)</span>
 <span id="cb595-2"><a href="iteração-com-purrr.html#cb595-2" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">cumsum</span>(x)</span>
 <span id="cb595-3"><a href="iteração-com-purrr.html#cb595-3" tabindex="-1"></a>out</span></code></pre></div>
-<pre><code>##   [1]  0.8203825  1.7189227  2.1572016  2.7539417  3.0003910  3.5282147
-##   [7]  3.7376789  4.4992963  4.6777908  5.2121979  6.0424773  6.2805438
-##  [13]  6.3621650  6.5983781  7.3871650  8.2310318  9.0110337  9.4597143
-##  [19]  9.8460203 10.5149123 10.7895698 11.5806341 11.8814797 12.5333087
-##  [25] 13.2342383 14.0306490 14.2307726 14.8446164 15.3216789 16.0943704
-##  [31] 16.8144485 17.6814138 18.3243977 19.1764307 20.0624316 20.3827941
-##  [37] 20.7037108 21.3702843 21.7147076 22.2785313 22.4818052 22.7764968
-##  [43] 22.8236726 23.4017685 23.9558034 24.6997316 25.6494391 26.0198708
-##  [49] 26.8127804 27.3565427 28.2803697 28.4216729 28.5563867 29.2167412
-##  [55] 29.4432462 30.1546868 30.3032515 31.2168100 31.9557793 32.5342092
-##  [61] 33.3246881 33.6080364 34.3527318 34.6218212 35.1084827 35.7101836
-##  [67] 36.0694087 36.1152322 36.6724401 37.3962659 37.5225956 38.3830865
-##  [73] 39.0336045 39.8014768 40.2870225 40.8524929 40.8565186 41.8119106
-##  [79] 42.6464195 42.9964962 43.2760852 43.8291704 44.3278384 44.7350568
-##  [85] 45.4160960 46.3280746 47.3121955 48.0705050 48.5482322 48.6678575
-##  [91] 48.7056413 49.6304892 50.4422589 51.3899641 51.5794021 51.8049782
-##  [97] 51.8999872 51.9052466 52.1661466 52.8168793</code></pre>
+<pre><code>##   [1]  0.1474647  0.5114697  0.7706927  1.1578102  2.1537263  2.7777306
+##   [7]  3.0288815  3.4351040  4.1740398  4.7313574  4.9011880  5.0602615
+##  [13]  5.6480838  5.7372228  6.0718354  6.8095478  7.5614897  7.7578357
+##  [19]  8.7100394  9.0514754  9.3858380  9.6258414  9.6305431 10.4543663
+##  [25] 11.1472211 11.1643861 11.9483227 12.7516704 12.9654697 13.9550465
+##  [31] 14.5617414 15.2500383 16.0363703 16.5919805 17.2727262 17.3914075
+##  [37] 17.4953949 18.1717435 18.4087417 18.7873988 19.1344145 20.0108314
+##  [43] 20.2430124 20.9019532 21.4431684 21.5027192 22.1415197 22.1572171
+##  [49] 22.3400986 22.5935968 22.9871338 23.2376147 24.2163124 24.9142845
+##  [55] 25.2914286 25.4393719 26.1625790 26.8890934 27.4788075 28.3868850
+##  [61] 28.8343590 29.2658521 29.3625717 29.3685257 29.7362471 29.8362403
+##  [67] 30.0294297 30.5824118 30.7497477 31.5721599 32.0634606 32.4666727
+##  [73] 33.0768477 33.4152001 34.0953143 34.2500615 34.3966743 34.9695888
+##  [79] 35.9351695 36.3566024 37.1912687 38.0331766 38.5683631 38.8093366
+##  [85] 39.5749119 39.6998298 39.7335963 40.2150556 41.1851490 41.8837153
+##  [91] 42.4225825 42.5513206 43.3319922 44.1107535 44.3399751 44.3639861
+##  [97] 44.7189260 45.1510701 45.3834761 45.6577558</code></pre>
 </div>
 </div>
 <div id="exr17-2-3" class="section level3 unnumbered hasAnchor">
@@ -1107,8 +1113,8 @@ output</code></pre>
 <span id="cb607-4"><a href="iteração-com-purrr.html#cb607-4" tabindex="-1"></a>  <span class="st">&quot;With allocation&quot;</span> <span class="ot">=</span> <span class="fu">with_alloc</span>(x)</span>
 <span id="cb607-5"><a href="iteração-com-purrr.html#cb607-5" tabindex="-1"></a>)</span></code></pre></div>
 <pre><code>##              test replications elapsed relative user.self sys.self user.child
-## 1   No allocation          100    0.25    3.125      0.25        0         NA
-## 2 With allocation          100    0.08    1.000      0.08        0         NA
+## 1   No allocation          100    0.29    4.143      0.25     0.03         NA
+## 2 With allocation          100    0.07    1.000      0.06     0.00         NA
 ##   sys.child
 ## 1        NA
 ## 2        NA</code></pre>
@@ -1118,6 +1124,158 @@ output</code></pre>
 </div>
 <div id="variações-do-loop-for" class="section level2 hasAnchor" number="17.3">
 <h2><span class="header-section-number">17.3</span> Variações do loop <code>for</code><a href="iteração-com-purrr.html#variações-do-loop-for" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="exr17-3-1" class="section level3 unnumbered hasAnchor">
+<h3>Exercício 17.3.1<a href="iteração-com-purrr.html#exr17-3-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="enunciado">
+<p>Imagine que você tenha um diretório cheio de arquivos CSV que deseja ler. Você tem os caminhos deles em um vetor, <code>files &lt;- dir("data/", pattern = "\\.csv$", full.names = TRUE)</code>, e agora quer ler cada um com <code>read_csv()</code>. Escreva o loop que os carregará em um único data frame.</p>
+</div>
+<div class="solution">
+<p><span id="unlabeled-div-247" class="solution"><em>Solução</em>. </span></p>
+<div class="sourceCode" id="cb609"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb609-1"><a href="iteração-com-purrr.html#cb609-1" tabindex="-1"></a>files <span class="ot">&lt;-</span> <span class="fu">dir</span>(<span class="st">&quot;data</span><span class="sc">\\</span><span class="st">&quot;</span>, <span class="at">pattern =</span> <span class="st">&quot;</span><span class="sc">\\</span><span class="st">.csv$&quot;</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb609-2"><a href="iteração-com-purrr.html#cb609-2" tabindex="-1"></a></span>
+<span id="cb609-3"><a href="iteração-com-purrr.html#cb609-3" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="st">&quot;list&quot;</span>, <span class="fu">length</span>(files))</span>
+<span id="cb609-4"><a href="iteração-com-purrr.html#cb609-4" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(files)) {</span>
+<span id="cb609-5"><a href="iteração-com-purrr.html#cb609-5" tabindex="-1"></a>  df[[i]] <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(files[[i]])</span>
+<span id="cb609-6"><a href="iteração-com-purrr.html#cb609-6" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## Rows: 169 Columns: 8
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr (1): Plot
+## dbl (5): No.stems, Height, Weight, Seed.heads, Seeds.in.25.heads
+## lgl (2): Seed.herbivore, Root.herbivore
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<div class="sourceCode" id="cb611"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb611-1"><a href="iteração-com-purrr.html#cb611-1" tabindex="-1"></a><span class="fu">print</span>(df)</span></code></pre></div>
+<pre><code>## [[1]]
+## # A tibble: 169 × 8
+##    Plot   Seed.herbivore
+##    &lt;chr&gt;  &lt;lgl&gt;         
+##  1 plot-2 TRUE          
+##  2 plot-2 TRUE          
+##  3 plot-2 TRUE          
+##  4 plot-2 TRUE          
+##  5 plot-2 TRUE          
+##  6 plot-2 TRUE          
+##  7 plot-4 FALSE         
+##  8 plot-6 TRUE          
+##  9 plot-6 TRUE          
+## 10 plot-6 TRUE          
+## # ℹ 159 more rows
+## # ℹ 6 more variables:
+## #   Root.herbivore &lt;lgl&gt;,
+## #   No.stems &lt;dbl&gt;,
+## #   Height &lt;dbl&gt;,
+## #   Weight &lt;dbl&gt;, …</code></pre>
+<div class="sourceCode" id="cb613"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb613-1"><a href="iteração-com-purrr.html#cb613-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(df)</span>
+<span id="cb613-2"><a href="iteração-com-purrr.html#cb613-2" tabindex="-1"></a></span>
+<span id="cb613-3"><a href="iteração-com-purrr.html#cb613-3" tabindex="-1"></a><span class="fu">print</span>(df)</span></code></pre></div>
+<pre><code>## # A tibble: 169 × 8
+##    Plot   Seed.herbivore
+##    &lt;chr&gt;  &lt;lgl&gt;         
+##  1 plot-2 TRUE          
+##  2 plot-2 TRUE          
+##  3 plot-2 TRUE          
+##  4 plot-2 TRUE          
+##  5 plot-2 TRUE          
+##  6 plot-2 TRUE          
+##  7 plot-4 FALSE         
+##  8 plot-6 TRUE          
+##  9 plot-6 TRUE          
+## 10 plot-6 TRUE          
+## # ℹ 159 more rows
+## # ℹ 6 more variables:
+## #   Root.herbivore &lt;lgl&gt;,
+## #   No.stems &lt;dbl&gt;,
+## #   Height &lt;dbl&gt;,
+## #   Weight &lt;dbl&gt;, …</code></pre>
+</div>
+</div>
+<div id="exr17-3-2" class="section level3 unnumbered hasAnchor">
+<h3>Exercício 17.3.2<a href="iteração-com-purrr.html#exr17-3-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="enunciado">
+<p>O que acontece se você usar <code>for (nm in names(x))</code> e <code>x</code> não tiver nomes? E se somente alguns dos elementos forem nomeados? E se os nomes não forem únicos?</p>
+</div>
+<div class="solution">
+<p><span id="unlabeled-div-248" class="solution"><em>Solução</em>. </span>Caso o objeto <code>x</code> não tenha nomes, nenhum passo do loop será executado.</p>
+<div class="sourceCode" id="cb615"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb615-1"><a href="iteração-com-purrr.html#cb615-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)</span>
+<span id="cb615-2"><a href="iteração-com-purrr.html#cb615-2" tabindex="-1"></a><span class="cf">for</span> (nm <span class="cf">in</span> <span class="fu">names</span>(x)) {</span>
+<span id="cb615-3"><a href="iteração-com-purrr.html#cb615-3" tabindex="-1"></a>  <span class="fu">print</span>(nm)</span>
+<span id="cb615-4"><a href="iteração-com-purrr.html#cb615-4" tabindex="-1"></a>}</span></code></pre></div>
+<p>Caso apenas alguns dos elementos tenha nome, os elementos não nomeados estarão com a propriedade <code>name</code> igual a <code>NA</code>, o que resultará em erros explicitos ao tentar buscá-los.</p>
+<div class="sourceCode" id="cb616"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb616-1"><a href="iteração-com-purrr.html#cb616-1" tabindex="-1"></a><span class="fu">names</span>(x) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>)</span>
+<span id="cb616-2"><a href="iteração-com-purrr.html#cb616-2" tabindex="-1"></a><span class="cf">for</span> (nm <span class="cf">in</span> <span class="fu">names</span>(x)) {</span>
+<span id="cb616-3"><a href="iteração-com-purrr.html#cb616-3" tabindex="-1"></a>  <span class="fu">print</span>(x[[nm]])</span>
+<span id="cb616-4"><a href="iteração-com-purrr.html#cb616-4" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## [1] 1
+## [1] 2</code></pre>
+<pre><code>## Error in x[[nm]]: índice fora de limites</code></pre>
+<p>Caso tenhamos nomes repetidos, apenas o primeiro elemento será recuperado.</p>
+<div class="sourceCode" id="cb619"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb619-1"><a href="iteração-com-purrr.html#cb619-1" tabindex="-1"></a><span class="fu">names</span>(x) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;a&quot;</span>)</span>
+<span id="cb619-2"><a href="iteração-com-purrr.html#cb619-2" tabindex="-1"></a><span class="cf">for</span> (nm <span class="cf">in</span> <span class="fu">names</span>(x)) {</span>
+<span id="cb619-3"><a href="iteração-com-purrr.html#cb619-3" tabindex="-1"></a>  <span class="fu">print</span>(x[[nm]])</span>
+<span id="cb619-4"><a href="iteração-com-purrr.html#cb619-4" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## [1] 1
+## [1] 2
+## [1] 1</code></pre>
+</div>
+</div>
+<div id="exr17-3-3" class="section level3 unnumbered hasAnchor">
+<h3>Exercício 17.3.3<a href="iteração-com-purrr.html#exr17-3-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="enunciado">
+<p>Escreva uma função que imprima a média de cada coluna numérica em um data frame, junto com seu nome. Por exemplo, <code>show_mean(iris)</code> imprimiria:</p>
+<pre><code>show_mean(iris)
+#&gt; Sepal.Length: 5.84
+#&gt; Sepal.Width:  3.06
+#&gt; Petal.Length: 3.76
+#&gt; Petal.Width:  1.20</code></pre>
+</div>
+<div class="solution">
+<p><span id="unlabeled-div-249" class="solution"><em>Solução</em>. </span></p>
+<div class="sourceCode" id="cb622"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb622-1"><a href="iteração-com-purrr.html#cb622-1" tabindex="-1"></a>show_mean <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">digits =</span> <span class="dv">2</span>) {</span>
+<span id="cb622-2"><a href="iteração-com-purrr.html#cb622-2" tabindex="-1"></a>  names <span class="ot">&lt;-</span> <span class="fu">names</span>(x)</span>
+<span id="cb622-3"><a href="iteração-com-purrr.html#cb622-3" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(x)) {</span>
+<span id="cb622-4"><a href="iteração-com-purrr.html#cb622-4" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">is.numeric</span>(x[[i]])) {</span>
+<span id="cb622-5"><a href="iteração-com-purrr.html#cb622-5" tabindex="-1"></a>      name <span class="ot">&lt;-</span> names[[i]]</span>
+<span id="cb622-6"><a href="iteração-com-purrr.html#cb622-6" tabindex="-1"></a>      mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(x[[i]], <span class="at">rm.na =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb622-7"><a href="iteração-com-purrr.html#cb622-7" tabindex="-1"></a>      max_length <span class="ot">&lt;-</span> <span class="fu">max</span>(<span class="fu">str_length</span>(names))</span>
+<span id="cb622-8"><a href="iteração-com-purrr.html#cb622-8" tabindex="-1"></a>      </span>
+<span id="cb622-9"><a href="iteração-com-purrr.html#cb622-9" tabindex="-1"></a>      <span class="fu">cat</span>(</span>
+<span id="cb622-10"><a href="iteração-com-purrr.html#cb622-10" tabindex="-1"></a>        <span class="fu">str_pad</span>(<span class="fu">str_c</span>(name, <span class="st">&quot;:&quot;</span>), max_length <span class="sc">+</span> <span class="dv">1</span>, <span class="at">side =</span> <span class="st">&quot;right&quot;</span>),</span>
+<span id="cb622-11"><a href="iteração-com-purrr.html#cb622-11" tabindex="-1"></a>        <span class="fu">format</span>(mean, <span class="at">digits =</span> digits, <span class="at">nsmall =</span> digits),</span>
+<span id="cb622-12"><a href="iteração-com-purrr.html#cb622-12" tabindex="-1"></a>        <span class="at">sep =</span> <span class="st">&quot; &quot;</span>,</span>
+<span id="cb622-13"><a href="iteração-com-purrr.html#cb622-13" tabindex="-1"></a>        <span class="at">collapse =</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span></span>
+<span id="cb622-14"><a href="iteração-com-purrr.html#cb622-14" tabindex="-1"></a>      )</span>
+<span id="cb622-15"><a href="iteração-com-purrr.html#cb622-15" tabindex="-1"></a>    }</span>
+<span id="cb622-16"><a href="iteração-com-purrr.html#cb622-16" tabindex="-1"></a>  }</span>
+<span id="cb622-17"><a href="iteração-com-purrr.html#cb622-17" tabindex="-1"></a>}</span>
+<span id="cb622-18"><a href="iteração-com-purrr.html#cb622-18" tabindex="-1"></a></span>
+<span id="cb622-19"><a href="iteração-com-purrr.html#cb622-19" tabindex="-1"></a><span class="fu">show_mean</span>(iris)</span></code></pre></div>
+<pre><code>## Sepal.Length: 5.84 
+## Sepal.Width:  3.06 
+## Petal.Length: 3.76 
+## Petal.Width:  1.20</code></pre>
+</div>
+</div>
+<div id="exr17-3-4" class="section level3 unnumbered hasAnchor">
+<h3>Exercício 17.3.4<a href="iteração-com-purrr.html#exr17-3-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="enunciado">
+<p>O que este código faz? Como ele funciona?</p>
+<pre><code>trans &lt;- list(
+  disp = function(x) x * 0.0163871,
+  am = function(x) {
+    factor(x, labels = c(&quot;auto&quot;, &quot;manual&quot;))
+  }
+)
+
+for (var in names(trans)) {
+  mtcars[[var]] &lt;- trans[[var]](mtcars[[var]])
+}</code></pre>
+</div>
+<div class="solution">
+<p><span id="unlabeled-div-250" class="solution"><em>Solução</em>. </span>O código altera os valores das colunas <code>disp</code> e <code>am</code> do data frame <code>mtcars</code>. Inicialmente o código define uma lista contendo duas funções (<code>disp</code> e <code>am</code>) e, após, faz um loop percorrendo os nomes dos elementos nesta lista e, em cada passo, altera o valor da coluna correspondente, chamando a função da lista e passando a coluna como argumento.</p>
+</div>
+</div>
 </div>
 <div id="loops-for-versus-funcionais" class="section level2 hasAnchor" number="17.4">
 <h2><span class="header-section-number">17.4</span> Loops <code>for</code> <em>versus</em> funcionais<a href="iteração-com-purrr.html#loops-for-versus-funcionais" class="anchor-section" aria-label="Anchor link to header"></a></h2>

@@ -249,6 +249,127 @@ Já podemos verificar uma diferença considerável. O método sem alocação pr�
 
 ## Variações do loop `for`
 
+### Exercício 17.3.1 {- #exr17-3-1}
+
+::: {.enunciado}
+Imagine que você tenha um diretório cheio de arquivos CSV que deseja ler. Você tem os caminhos deles em um vetor, `files <- dir("data/", pattern = "\\.csv$", full.names = TRUE)`, e agora quer ler cada um com `read_csv()`. Escreva o loop que os carregará em um único data frame.
+:::
+
+::: {.solution}
+```{r}
+files <- dir("data\\", pattern = "\\.csv$", full.names = TRUE)
+
+df <- vector("list", length(files))
+for (i in seq_along(files)) {
+  df[[i]] <- read_csv(files[[i]])
+}
+
+print(df)
+
+df <- bind_rows(df)
+
+print(df)
+```
+
+:::
+
+### Exercício 17.3.2 {- #exr17-3-2}
+
+::: {.enunciado}
+O que acontece se você usar `for (nm in names(x))` e `x` não tiver nomes? E se somente alguns dos elementos forem nomeados? E se os nomes não forem únicos?
+:::
+
+::: {.solution}
+Caso o objeto `x` não tenha nomes, nenhum passo do loop será executado.
+
+```{r}
+x <- c(1,2,3)
+for (nm in names(x)) {
+  print(nm)
+}
+```
+
+Caso apenas alguns dos elementos tenha nome, os elementos não nomeados estarão com a propriedade `name` igual a `NA`, o que resultará em erros explicitos ao tentar buscá-los.
+
+```{r, error = TRUE}
+names(x) <- c("a", "b")
+for (nm in names(x)) {
+  print(x[[nm]])
+}
+```
+Caso tenhamos nomes repetidos, apenas o primeiro elemento será recuperado.
+
+```{r}
+names(x) <- c("a", "b", "a")
+for (nm in names(x)) {
+  print(x[[nm]])
+}
+```
+
+:::
+
+### Exercício 17.3.3 {- #exr17-3-3}
+
+::: {.enunciado}
+Escreva uma função que imprima a média de cada coluna numérica em um data frame, junto com seu nome. Por exemplo, `show_mean(iris)` imprimiria:
+
+```
+show_mean(iris)
+#> Sepal.Length: 5.84
+#> Sepal.Width:  3.06
+#> Petal.Length: 3.76
+#> Petal.Width:  1.20
+```
+:::
+
+::: {.solution}
+```{r}
+show_mean <- function(x, digits = 2) {
+  names <- names(x)
+  for (i in seq_along(x)) {
+    if (is.numeric(x[[i]])) {
+      name <- names[[i]]
+      mean <- mean(x[[i]], rm.na = TRUE)
+      max_length <- max(str_length(names))
+      
+      cat(
+        str_pad(str_c(name, ":"), max_length + 1, side = "right"),
+        format(mean, digits = digits, nsmall = digits),
+        sep = " ",
+        collapse = "\n"
+      )
+    }
+  }
+}
+
+show_mean(iris)
+```
+:::
+
+### Exercício 17.3.4 {- #exr17-3-4}
+
+::: {.enunciado}
+O que este código faz? Como ele funciona?
+
+```
+trans <- list(
+  disp = function(x) x * 0.0163871,
+  am = function(x) {
+    factor(x, labels = c("auto", "manual"))
+  }
+)
+
+for (var in names(trans)) {
+  mtcars[[var]] <- trans[[var]](mtcars[[var]])
+}
+```
+
+:::
+
+::: {.solution}
+O código altera os valores das colunas `disp` e `am` do data frame `mtcars`. Inicialmente o código define uma lista contendo duas funções (`disp` e `am`) e, após, faz um loop percorrendo os nomes dos elementos nesta lista e, em cada passo, altera o valor da coluna correspondente, chamando a função da lista e passando a coluna como argumento.
+:::
+
 ## Loops `for` _versus_ funcionais
 
 ## As funções `map`

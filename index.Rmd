@@ -84,4 +84,5 @@ Dúvidas ou sugestões de melhoria podem ser encaminhadas para o e-mail *jeidsan
 - [Exercício 16.4.3](#exr16-4-3);
 - [Exercício 16.4.5](#exr16-4-5);
 - [Exercício 16.5.1](#exr16-5-1);
--
+- [Exercício 17.3.1](#exr17-3-1);
+- 

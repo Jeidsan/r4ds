@@ -233,7 +233,7 @@
 \makeatother
 \subtitle{Solução dos exercícios}
 \author{Jeidsan A. da C. Pereira}
-\date{2024-01-05}
+\date{2024-01-09}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Teorema}[chapter]
@@ -350,6 +350,8 @@ Dúvidas ou sugestões de melhoria podem ser encaminhadas para o e-mail \emph{\h
   \protect\hyperlink{exr16-4-5}{Exercício 16.4.5};
 \item
   \protect\hyperlink{exr16-5-1}{Exercício 16.5.1};
+\item
+  \protect\hyperlink{exr17-3-1}{Exercício 17.3.1};
 \item
 \end{itemize}
 
@@ -4817,16 +4819,16 @@ Pratique referir-se a nomes de variáveis não sintáticos, no data frame a segu
 ## # A tibble: 10 x 3
 ##      one   two three
 ##    <int> <dbl> <dbl>
-##  1     1  1.92  1.92
-##  2     2  3.49  1.75
-##  3     3  7.03  2.34
-##  4     4  6.84  1.71
-##  5     5 11.6   2.33
-##  6     6 12.5   2.08
-##  7     7 14.8   2.12
-##  8     8 14.1   1.76
-##  9     9 18.0   2.00
-## 10    10 17.9   1.79
+##  1     1  1.87  1.87
+##  2     2  3.39  1.69
+##  3     3  6.80  2.27
+##  4     4  9.54  2.39
+##  5     5 11.4   2.28
+##  6     6 13.8   2.31
+##  7     7 14.5   2.06
+##  8     8 15.8   1.97
+##  9     9 18.8   2.08
+## 10    10 19.0   1.90
 \end{verbatim}
 
 \end{solution}
@@ -9991,10 +9993,10 @@ Pense sobre saída, seuência e corpo \emph{antes} de começar a escrever o loop
 
 \begin{verbatim}
 ## List of 4
-##  $ : num [1:10] -9.97 -10.26 -11.75 -9.1 -10.31 ...
-##  $ : num [1:10] -0.78 1.558 -1.3 0.932 -0.754 ...
-##  $ : num [1:10] 9.32 9.45 9.77 10.39 9.75 ...
-##  $ : num [1:10] 99.9 99.7 99.1 100.8 99.9 ...
+##  $ : num [1:10] -10.86 -9.42 -8.94 -11.25 -8.82 ...
+##  $ : num [1:10] 0.623 -1.122 -1.338 0.342 0.155 ...
+##  $ : num [1:10] 9.65 9.67 9.97 9.15 10.37 ...
+##  $ : num [1:10] 100.3 99.5 100 100.9 101.8 ...
 \end{verbatim}
 
 \end{solution}
@@ -10065,23 +10067,23 @@ O último loop calcula a soma cumulativa de um vetor e poderia ser substituído 
 \end{Shaded}
 
 \begin{verbatim}
-##   [1]  0.2448021  1.0846189  1.5409067  1.9506627  2.6788844  3.1942583
-##   [7]  4.0889722  4.6317874  4.7800782  5.3494580  5.4099540  6.1648935
-##  [13]  6.9771153  7.5670190  8.5576616  9.3538749  9.5380961  9.9997092
-##  [19] 10.9072406 11.5538913 12.3095090 12.5009210 13.2536923 14.0627979
-##  [25] 15.0208344 15.9316936 16.4699645 16.6501682 17.6215658 18.0855744
-##  [31] 18.9290304 19.2833546 19.4793201 20.2015143 20.9912986 21.4594738
-##  [37] 22.0377006 22.2998110 22.3279894 22.8726532 23.3011550 23.3271056
-##  [43] 23.4552012 23.4575761 23.6119647 24.1221020 24.5107183 25.3543966
-##  [49] 25.3913404 25.5290018 26.2120140 26.5562957 27.1136077 27.5536633
-##  [55] 27.6396399 27.9557515 28.3072822 28.4326469 29.3545282 30.3217416
-##  [61] 30.4278290 31.1362993 31.4604321 32.4158086 33.0869841 33.4643942
-##  [67] 34.2466623 34.9731012 35.2184170 35.8750820 36.0283344 36.2610092
-##  [73] 36.7029735 37.2904027 38.1459599 38.2647719 38.8906966 39.0256188
-##  [79] 39.2389598 39.7870370 40.3601119 40.5661453 40.9127045 41.2590925
-##  [85] 41.3429961 41.3866135 41.8786894 42.7428727 43.5849977 43.6618716
-##  [91] 44.4006755 44.5713872 45.4076948 45.8843401 46.4904678 46.5265496
-##  [97] 46.9250673 47.2952867 47.8938951 48.2976890
+##   [1]  0.3542217  1.2066628  1.5562067  1.6600676  2.3283339  2.7780284
+##   [7]  3.4833606  3.9452060  4.5743925  5.0562818  5.4628472  5.6810845
+##  [13]  6.0929996  6.8975979  7.2996487  8.1824222  8.2887451  8.4979148
+##  [19]  8.8025227  9.6207885 10.2815727 11.1534405 11.3665219 12.2019959
+##  [25] 12.5263643 13.3836670 13.4399613 13.9766350 14.2749618 14.7038138
+##  [31] 15.3125193 15.7117542 16.3805165 17.1927829 17.6986538 18.1498544
+##  [37] 19.1437904 19.9721259 20.0535090 20.7054352 21.0316203 21.0752619
+##  [43] 22.0217433 22.1462167 22.9068988 23.5801478 24.1893750 24.4149368
+##  [49] 25.3378842 25.6297294 26.3797077 26.6522095 26.9626453 27.4794949
+##  [55] 28.1580722 28.4779382 29.1365377 29.7336396 30.7163599 31.1688596
+##  [61] 31.8577564 32.1709299 32.5752324 33.4905507 34.0417765 34.4950291
+##  [67] 35.0613617 35.6143261 35.6220860 36.4430063 36.6271213 37.4365251
+##  [73] 37.9294061 38.4676600 38.5708919 39.0914767 39.9682912 40.6705361
+##  [79] 40.6874776 41.3227981 42.0502416 42.6367111 42.7821400 43.7104414
+##  [85] 44.7018080 44.8792217 45.6361988 46.2601247 46.5659573 46.9869515
+##  [91] 47.9500917 48.5522476 48.6552041 48.9045074 49.3136467 50.1514088
+##  [97] 51.1176360 51.4945908 51.7225368 52.6660117
 \end{verbatim}
 
 \end{solution}
@@ -10373,8 +10375,8 @@ Com as funções definidas, vamos avaliar o tempo de execução utilizando a bib
 
 \begin{verbatim}
 ##              test replications elapsed relative user.self sys.self user.child
-## 1   No allocation          100    0.25    4.167      0.20     0.04         NA
-## 2 With allocation          100    0.06    1.000      0.07     0.00         NA
+## 1   No allocation          100    0.27      4.5      0.18     0.08         NA
+## 2 With allocation          100    0.06      1.0      0.06     0.00         NA
 ##   sys.child
 ## 1        NA
 ## 2        NA
@@ -10385,6 +10387,230 @@ Já podemos verificar uma diferença considerável. O método sem alocação pr�
 
 \hypertarget{variauxe7uxf5es-do-loop-for}{%
 \section{\texorpdfstring{Variações do loop \texttt{for}}{Variações do loop for}}\label{variauxe7uxf5es-do-loop-for}}
+
+\hypertarget{exr17-3-1}{%
+\subsection*{Exercício 17.3.1}\label{exr17-3-1}}
+\addcontentsline{toc}{subsection}{Exercício 17.3.1}
+
+Imagine que você tenha um diretório cheio de arquivos CSV que deseja ler. Você tem os caminhos deles em um vetor, \texttt{files\ \textless{}-\ dir("data/",\ pattern\ =\ "\textbackslash{}\textbackslash{}.csv\$",\ full.names\ =\ TRUE)}, e agora quer ler cada um com \texttt{read\_csv()}. Escreva o loop que os carregará em um único data frame.
+
+\begin{solution}
+\leavevmode
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{files }\OtherTok{\textless{}{-}} \FunctionTok{dir}\NormalTok{(}\StringTok{"data}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{"}\NormalTok{, }\AttributeTok{pattern =} \StringTok{"}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{.csv$"}\NormalTok{, }\AttributeTok{full.names =} \ConstantTok{TRUE}\NormalTok{)}
+
+\NormalTok{df }\OtherTok{\textless{}{-}} \FunctionTok{vector}\NormalTok{(}\StringTok{"list"}\NormalTok{, }\FunctionTok{length}\NormalTok{(files))}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \FunctionTok{seq\_along}\NormalTok{(files)) \{}
+\NormalTok{  df[[i]] }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(files[[i]])}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Rows: 169 Columns: 8
+## -- Column specification --------------------------------------------------------
+## Delimiter: ","
+## chr (1): Plot
+## dbl (5): No.stems, Height, Weight, Seed.heads, Seeds.in.25.heads
+## lgl (2): Seed.herbivore, Root.herbivore
+## 
+## i Use `spec()` to retrieve the full column specification for this data.
+## i Specify the column types or set `show_col_types = FALSE` to quiet this message.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [[1]]
+## # A tibble: 169 x 8
+##    Plot   Seed.herbivore
+##    <chr>  <lgl>         
+##  1 plot-2 TRUE          
+##  2 plot-2 TRUE          
+##  3 plot-2 TRUE          
+##  4 plot-2 TRUE          
+##  5 plot-2 TRUE          
+##  6 plot-2 TRUE          
+##  7 plot-4 FALSE         
+##  8 plot-6 TRUE          
+##  9 plot-6 TRUE          
+## 10 plot-6 TRUE          
+## # i 159 more rows
+## # i 6 more variables:
+## #   Root.herbivore <lgl>,
+## #   No.stems <dbl>,
+## #   Height <dbl>,
+## #   Weight <dbl>, ...
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\OtherTok{\textless{}{-}} \FunctionTok{bind\_rows}\NormalTok{(df)}
+
+\FunctionTok{print}\NormalTok{(df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 169 x 8
+##    Plot   Seed.herbivore
+##    <chr>  <lgl>         
+##  1 plot-2 TRUE          
+##  2 plot-2 TRUE          
+##  3 plot-2 TRUE          
+##  4 plot-2 TRUE          
+##  5 plot-2 TRUE          
+##  6 plot-2 TRUE          
+##  7 plot-4 FALSE         
+##  8 plot-6 TRUE          
+##  9 plot-6 TRUE          
+## 10 plot-6 TRUE          
+## # i 159 more rows
+## # i 6 more variables:
+## #   Root.herbivore <lgl>,
+## #   No.stems <dbl>,
+## #   Height <dbl>,
+## #   Weight <dbl>, ...
+\end{verbatim}
+
+\end{solution}
+
+\hypertarget{exr17-3-2}{%
+\subsection*{Exercício 17.3.2}\label{exr17-3-2}}
+\addcontentsline{toc}{subsection}{Exercício 17.3.2}
+
+O que acontece se você usar \texttt{for\ (nm\ in\ names(x))} e \texttt{x} não tiver nomes? E se somente alguns dos elementos forem nomeados? E se os nomes não forem únicos?
+
+\begin{solution}
+
+Caso o objeto \texttt{x} não tenha nomes, nenhum passo do loop será executado.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{)}
+\ControlFlowTok{for}\NormalTok{ (nm }\ControlFlowTok{in} \FunctionTok{names}\NormalTok{(x)) \{}
+  \FunctionTok{print}\NormalTok{(nm)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Caso apenas alguns dos elementos tenha nome, os elementos não nomeados estarão com a propriedade \texttt{name} igual a \texttt{NA}, o que resultará em erros explicitos ao tentar buscá-los.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{names}\NormalTok{(x) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"a"}\NormalTok{, }\StringTok{"b"}\NormalTok{)}
+\ControlFlowTok{for}\NormalTok{ (nm }\ControlFlowTok{in} \FunctionTok{names}\NormalTok{(x)) \{}
+  \FunctionTok{print}\NormalTok{(x[[nm]])}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1
+## [1] 2
+\end{verbatim}
+
+\begin{verbatim}
+## Error in x[[nm]]: índice fora de limites
+\end{verbatim}
+
+Caso tenhamos nomes repetidos, apenas o primeiro elemento será recuperado.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{names}\NormalTok{(x) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"a"}\NormalTok{, }\StringTok{"b"}\NormalTok{, }\StringTok{"a"}\NormalTok{)}
+\ControlFlowTok{for}\NormalTok{ (nm }\ControlFlowTok{in} \FunctionTok{names}\NormalTok{(x)) \{}
+  \FunctionTok{print}\NormalTok{(x[[nm]])}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1
+## [1] 2
+## [1] 1
+\end{verbatim}
+
+\end{solution}
+
+\hypertarget{exr17-3-3}{%
+\subsection*{Exercício 17.3.3}\label{exr17-3-3}}
+\addcontentsline{toc}{subsection}{Exercício 17.3.3}
+
+Escreva uma função que imprima a média de cada coluna numérica em um data frame, junto com seu nome. Por exemplo, \texttt{show\_mean(iris)} imprimiria:
+
+\begin{verbatim}
+show_mean(iris)
+#> Sepal.Length: 5.84
+#> Sepal.Width:  3.06
+#> Petal.Length: 3.76
+#> Petal.Width:  1.20
+\end{verbatim}
+
+\begin{solution}
+\leavevmode
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{show\_mean }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x, }\AttributeTok{digits =} \DecValTok{2}\NormalTok{) \{}
+\NormalTok{  names }\OtherTok{\textless{}{-}} \FunctionTok{names}\NormalTok{(x)}
+  \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \FunctionTok{seq\_along}\NormalTok{(x)) \{}
+    \ControlFlowTok{if}\NormalTok{ (}\FunctionTok{is.numeric}\NormalTok{(x[[i]])) \{}
+\NormalTok{      name }\OtherTok{\textless{}{-}}\NormalTok{ names[[i]]}
+\NormalTok{      mean }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(x[[i]], }\AttributeTok{rm.na =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{      max\_length }\OtherTok{\textless{}{-}} \FunctionTok{max}\NormalTok{(}\FunctionTok{str\_length}\NormalTok{(names))}
+      
+      \FunctionTok{cat}\NormalTok{(}
+        \FunctionTok{str\_pad}\NormalTok{(}\FunctionTok{str\_c}\NormalTok{(name, }\StringTok{":"}\NormalTok{), max\_length }\SpecialCharTok{+} \DecValTok{1}\NormalTok{, }\AttributeTok{side =} \StringTok{"right"}\NormalTok{),}
+        \FunctionTok{format}\NormalTok{(mean, }\AttributeTok{digits =}\NormalTok{ digits, }\AttributeTok{nsmall =}\NormalTok{ digits),}
+        \AttributeTok{sep =} \StringTok{" "}\NormalTok{,}
+        \AttributeTok{collapse =} \StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}
+\NormalTok{      )}
+\NormalTok{    \}}
+\NormalTok{  \}}
+\NormalTok{\}}
+
+\FunctionTok{show\_mean}\NormalTok{(iris)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Sepal.Length: 5.84 
+## Sepal.Width:  3.06 
+## Petal.Length: 3.76 
+## Petal.Width:  1.20
+\end{verbatim}
+
+\end{solution}
+
+\hypertarget{exr17-3-4}{%
+\subsection*{Exercício 17.3.4}\label{exr17-3-4}}
+\addcontentsline{toc}{subsection}{Exercício 17.3.4}
+
+O que este código faz? Como ele funciona?
+
+\begin{verbatim}
+trans <- list(
+  disp = function(x) x * 0.0163871,
+  am = function(x) {
+    factor(x, labels = c("auto", "manual"))
+  }
+)
+
+for (var in names(trans)) {
+  mtcars[[var]] <- trans[[var]](mtcars[[var]])
+}
+\end{verbatim}
+
+\begin{solution}
+O código altera os valores das colunas \texttt{disp} e \texttt{am} do data frame \texttt{mtcars}. Inicialmente o código define uma lista contendo duas funções (\texttt{disp} e \texttt{am}) e, após, faz um loop percorrendo os nomes dos elementos nesta lista e, em cada passo, altera o valor da coluna correspondente, chamando a função da lista e passando a coluna como argumento.
+\end{solution}
 
 \hypertarget{loops-for-versus-funcionais}{%
 \section{\texorpdfstring{Loops \texttt{for} \emph{versus} funcionais}{Loops for versus funcionais}}\label{loops-for-versus-funcionais}}
