@@ -372,12 +372,118 @@ O código altera os valores das colunas `disp` e `am` do data frame `mtcars`. In
 
 ## Loops `for` _versus_ funcionais
 
+### Exercício 17.4.1 {- #exr17-4-1}
+
+::: {.enunciado}
+Leia a documentação de `apply()`. No segundo caso, quais dois loops `for` ela generaliza?
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 17.4.2 {- #exr17-4-2}
+
+::: {.enunciado}
+Adapte `col_summary()` para que se aplique apenas a colunas numéricas. Você pode querer começar com uma função `is_numeric()` que retorne um vetor lógico que tenha `TRUE` corespondente a cada coluna numérica.
+:::
+
+::: {.solution}
+x
+:::
+
 ## As funções `map`
+
+### Exercício 17.5.1 {- #exr17-5-1}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 17.5.2 {- #exr17-5-2}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 17.5.3 {- #exr17-5-3}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 17.5.4 {- #exr17-5-4}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 17.5.5 {- #exr17-5-5}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::
 
 ## Lidando com falhas
 
+Não temos exercícios para esta seção.
+
 ## Fazendo `map` com vários argumentos
+
+Não temos exercícios para esta seção.
 
 ## Walk
 
+Não temos exercícios para esta seção.
+
 ## Outros padrões para loops `for`
+
+### Exercício 17.9.1 {- #exr17-9-1}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 17.9.2 {- #exr17-9-2}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 17.9.3 {- #exr17-9-3}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::

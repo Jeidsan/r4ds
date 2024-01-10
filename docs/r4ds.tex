@@ -233,7 +233,7 @@
 \makeatother
 \subtitle{Solução dos exercícios}
 \author{Jeidsan A. da C. Pereira}
-\date{2024-01-09}
+\date{2024-01-10}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Teorema}[chapter]
@@ -352,6 +352,14 @@ Dúvidas ou sugestões de melhoria podem ser encaminhadas para o e-mail \emph{\h
   \protect\hyperlink{exr16-5-1}{Exercício 16.5.1};
 \item
   \protect\hyperlink{exr17-3-1}{Exercício 17.3.1};
+\item
+  \protect\hyperlink{exr17-4-1}{Exercício 17.4.1};
+\item
+  \protect\hyperlink{exr17-4-1}{Exercício 17.4.1};
+\item
+  Exercícios da seção 17.5;
+\item
+  Exercícios da seção 17.9;
 \item
 \end{itemize}
 
@@ -4819,16 +4827,16 @@ Pratique referir-se a nomes de variáveis não sintáticos, no data frame a segu
 ## # A tibble: 10 x 3
 ##      one   two three
 ##    <int> <dbl> <dbl>
-##  1     1  1.87  1.87
-##  2     2  3.39  1.69
-##  3     3  6.80  2.27
-##  4     4  9.54  2.39
-##  5     5 11.4   2.28
-##  6     6 13.8   2.31
-##  7     7 14.5   2.06
-##  8     8 15.8   1.97
-##  9     9 18.8   2.08
-## 10    10 19.0   1.90
+##  1     1  3.51  3.51
+##  2     2  6.19  3.09
+##  3     3  7.39  2.46
+##  4     4  6.99  1.75
+##  5     5  9.87  1.97
+##  6     6 12.7   2.12
+##  7     7 16.3   2.33
+##  8     8 18.0   2.25
+##  9     9 19.6   2.18
+## 10    10 22.3   2.23
 \end{verbatim}
 
 \end{solution}
@@ -9121,7 +9129,7 @@ Escreva uma função que diga ``good morning'', ``good afternoon'', ou ``good ev
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "Boa noite!"
+## [1] "Bom dia!"
 \end{verbatim}
 
 \begin{Shaded}
@@ -9993,10 +10001,10 @@ Pense sobre saída, seuência e corpo \emph{antes} de começar a escrever o loop
 
 \begin{verbatim}
 ## List of 4
-##  $ : num [1:10] -10.86 -9.42 -8.94 -11.25 -8.82 ...
-##  $ : num [1:10] 0.623 -1.122 -1.338 0.342 0.155 ...
-##  $ : num [1:10] 9.65 9.67 9.97 9.15 10.37 ...
-##  $ : num [1:10] 100.3 99.5 100 100.9 101.8 ...
+##  $ : num [1:10] -9.62 -9.43 -10.68 -11.03 -8.24 ...
+##  $ : num [1:10] -0.919 -0.458 -1.24 1.463 0.112 ...
+##  $ : num [1:10] 7.01 8.57 10.48 9.78 9.31 ...
+##  $ : num [1:10] 101.6 99.5 99 100.1 101.2 ...
 \end{verbatim}
 
 \end{solution}
@@ -10067,23 +10075,21 @@ O último loop calcula a soma cumulativa de um vetor e poderia ser substituído 
 \end{Shaded}
 
 \begin{verbatim}
-##   [1]  0.3542217  1.2066628  1.5562067  1.6600676  2.3283339  2.7780284
-##   [7]  3.4833606  3.9452060  4.5743925  5.0562818  5.4628472  5.6810845
-##  [13]  6.0929996  6.8975979  7.2996487  8.1824222  8.2887451  8.4979148
-##  [19]  8.8025227  9.6207885 10.2815727 11.1534405 11.3665219 12.2019959
-##  [25] 12.5263643 13.3836670 13.4399613 13.9766350 14.2749618 14.7038138
-##  [31] 15.3125193 15.7117542 16.3805165 17.1927829 17.6986538 18.1498544
-##  [37] 19.1437904 19.9721259 20.0535090 20.7054352 21.0316203 21.0752619
-##  [43] 22.0217433 22.1462167 22.9068988 23.5801478 24.1893750 24.4149368
-##  [49] 25.3378842 25.6297294 26.3797077 26.6522095 26.9626453 27.4794949
-##  [55] 28.1580722 28.4779382 29.1365377 29.7336396 30.7163599 31.1688596
-##  [61] 31.8577564 32.1709299 32.5752324 33.4905507 34.0417765 34.4950291
-##  [67] 35.0613617 35.6143261 35.6220860 36.4430063 36.6271213 37.4365251
-##  [73] 37.9294061 38.4676600 38.5708919 39.0914767 39.9682912 40.6705361
-##  [79] 40.6874776 41.3227981 42.0502416 42.6367111 42.7821400 43.7104414
-##  [85] 44.7018080 44.8792217 45.6361988 46.2601247 46.5659573 46.9869515
-##  [91] 47.9500917 48.5522476 48.6552041 48.9045074 49.3136467 50.1514088
-##  [97] 51.1176360 51.4945908 51.7225368 52.6660117
+##   [1]  0.317729  1.102455  1.362178  2.130122  2.824290  2.997912  3.892509
+##   [8]  4.375967  5.355707  6.221848  6.804676  6.898213  7.487627  8.204525
+##  [15]  8.779202  9.036663  9.850827 10.460761 11.327822 11.585799 12.182870
+##  [22] 13.070437 13.416978 14.292203 14.750917 15.226016 15.808067 16.080975
+##  [29] 16.592101 17.322767 17.467438 17.818052 18.180706 19.058907 19.207885
+##  [36] 20.061159 20.283912 21.021190 21.497409 21.779874 22.211214 22.685642
+##  [43] 23.399549 23.991743 24.929015 25.539400 26.464538 26.725575 27.061818
+##  [50] 27.096340 27.104843 27.757360 28.219332 28.881212 29.480295 30.091530
+##  [57] 30.821447 31.468884 32.328407 33.142847 33.787257 34.232512 35.101117
+##  [64] 35.323500 35.655750 36.042714 36.579299 36.882594 37.402128 38.325928
+##  [71] 38.408840 38.526292 39.247904 39.886138 40.300539 40.953571 41.312403
+##  [78] 42.086479 42.634948 42.785606 43.045790 43.752162 44.435123 44.919873
+##  [85] 45.231547 46.186583 46.582195 46.801500 47.624063 48.473256 48.960886
+##  [92] 49.744023 50.019916 50.720106 50.981223 51.922561 52.260597 52.497842
+##  [99] 52.520034 52.700399
 \end{verbatim}
 
 \end{solution}
@@ -10375,8 +10381,8 @@ Com as funções definidas, vamos avaliar o tempo de execução utilizando a bib
 
 \begin{verbatim}
 ##              test replications elapsed relative user.self sys.self user.child
-## 1   No allocation          100    0.27      4.5      0.18     0.08         NA
-## 2 With allocation          100    0.06      1.0      0.06     0.00         NA
+## 1   No allocation          100    0.23    2.875      0.22     0.02         NA
+## 2 With allocation          100    0.08    1.000      0.08     0.00         NA
 ##   sys.child
 ## 1        NA
 ## 2        NA
@@ -10615,20 +10621,126 @@ O código altera os valores das colunas \texttt{disp} e \texttt{am} do data fram
 \hypertarget{loops-for-versus-funcionais}{%
 \section{\texorpdfstring{Loops \texttt{for} \emph{versus} funcionais}{Loops for versus funcionais}}\label{loops-for-versus-funcionais}}
 
+\hypertarget{exr17-4-1}{%
+\subsection*{Exercício 17.4.1}\label{exr17-4-1}}
+\addcontentsline{toc}{subsection}{Exercício 17.4.1}
+
+Leia a documentação de \texttt{apply()}. No segundo caso, quais dois loops \texttt{for} ela generaliza?
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr17-4-2}{%
+\subsection*{Exercício 17.4.2}\label{exr17-4-2}}
+\addcontentsline{toc}{subsection}{Exercício 17.4.2}
+
+Adapte \texttt{col\_summary()} para que se aplique apenas a colunas numéricas. Você pode querer começar com uma função \texttt{is\_numeric()} que retorne um vetor lógico que tenha \texttt{TRUE} corespondente a cada coluna numérica.
+
+\begin{solution}
+x
+\end{solution}
+
 \hypertarget{as-funuxe7uxf5es-map}{%
 \section{\texorpdfstring{As funções \texttt{map}}{As funções map}}\label{as-funuxe7uxf5es-map}}
+
+\hypertarget{exr17-5-1}{%
+\subsection*{Exercício 17.5.1}\label{exr17-5-1}}
+\addcontentsline{toc}{subsection}{Exercício 17.5.1}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr17-5-2}{%
+\subsection*{Exercício 17.5.2}\label{exr17-5-2}}
+\addcontentsline{toc}{subsection}{Exercício 17.5.2}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr17-5-3}{%
+\subsection*{Exercício 17.5.3}\label{exr17-5-3}}
+\addcontentsline{toc}{subsection}{Exercício 17.5.3}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr17-5-4}{%
+\subsection*{Exercício 17.5.4}\label{exr17-5-4}}
+\addcontentsline{toc}{subsection}{Exercício 17.5.4}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr17-5-5}{%
+\subsection*{Exercício 17.5.5}\label{exr17-5-5}}
+\addcontentsline{toc}{subsection}{Exercício 17.5.5}
+
+x
+
+\begin{solution}
+x
+\end{solution}
 
 \hypertarget{lidando-com-falhas}{%
 \section{Lidando com falhas}\label{lidando-com-falhas}}
 
+Não temos exercícios para esta seção.
+
 \hypertarget{fazendo-map-com-vuxe1rios-argumentos}{%
 \section{\texorpdfstring{Fazendo \texttt{map} com vários argumentos}{Fazendo map com vários argumentos}}\label{fazendo-map-com-vuxe1rios-argumentos}}
+
+Não temos exercícios para esta seção.
 
 \hypertarget{walk}{%
 \section{Walk}\label{walk}}
 
+Não temos exercícios para esta seção.
+
 \hypertarget{outros-padruxf5es-para-loops-for}{%
 \section{\texorpdfstring{Outros padrões para loops \texttt{for}}{Outros padrões para loops for}}\label{outros-padruxf5es-para-loops-for}}
+
+\hypertarget{exr17-9-1}{%
+\subsection*{Exercício 17.9.1}\label{exr17-9-1}}
+\addcontentsline{toc}{subsection}{Exercício 17.9.1}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr17-9-2}{%
+\subsection*{Exercício 17.9.2}\label{exr17-9-2}}
+\addcontentsline{toc}{subsection}{Exercício 17.9.2}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr17-9-3}{%
+\subsection*{Exercício 17.9.3}\label{exr17-9-3}}
+\addcontentsline{toc}{subsection}{Exercício 17.9.3}
+
+x
+
+\begin{solution}
+x
+\end{solution}
 
 \hypertarget{part-modelar}{%
 \part{Modelar}\label{part-modelar}}
