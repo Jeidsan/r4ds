@@ -233,7 +233,7 @@
 \makeatother
 \subtitle{Solução dos exercícios}
 \author{Jeidsan A. da C. Pereira}
-\date{2024-01-10}
+\date{2024-01-12}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Teorema}[chapter]
@@ -361,6 +361,17 @@ Dúvidas ou sugestões de melhoria podem ser encaminhadas para o e-mail \emph{\h
 \item
   Exercícios da seção 17.9;
 \item
+  Avaliar melhor a resposta ao \protect\hyperlink{exr18-2-1}{Exercício 18.2.1};
+\item
+  \protect\hyperlink{exr18-2-3}{Exercício 18.2.3};
+\item
+  \protect\hyperlink{exr18-3-4}{Exercício 18.3.4};
+\item
+  Buscar uma explicação para o fato de não haver diferença no \protect\hyperlink{exr18-4-1}{Exercício 18.4.1};
+\item
+  \protect\hyperlink{exr18-4-3}{Exercício 18.4.3};
+\item
+  \protect\hyperlink{exr18-4-4}{Exercício 18.4.4};
 \end{itemize}
 
 \mainmatter
@@ -4827,16 +4838,16 @@ Pratique referir-se a nomes de variáveis não sintáticos, no data frame a segu
 ## # A tibble: 10 x 3
 ##      one   two three
 ##    <int> <dbl> <dbl>
-##  1     1  3.51  3.51
-##  2     2  6.19  3.09
-##  3     3  7.39  2.46
-##  4     4  6.99  1.75
-##  5     5  9.87  1.97
-##  6     6 12.7   2.12
-##  7     7 16.3   2.33
-##  8     8 18.0   2.25
-##  9     9 19.6   2.18
-## 10    10 22.3   2.23
+##  1     1  1.45  1.45
+##  2     2  4.11  2.06
+##  3     3  5.15  1.72
+##  4     4  7.73  1.93
+##  5     5  9.51  1.90
+##  6     6 10.7   1.79
+##  7     7 13.5   1.93
+##  8     8 14.8   1.85
+##  9     9 17.9   1.99
+## 10    10 18.9   1.89
 \end{verbatim}
 
 \end{solution}
@@ -9129,7 +9140,7 @@ Escreva uma função que diga ``good morning'', ``good afternoon'', ou ``good ev
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "Bom dia!"
+## [1] "Boa tarde!"
 \end{verbatim}
 
 \begin{Shaded}
@@ -10001,10 +10012,10 @@ Pense sobre saída, seuência e corpo \emph{antes} de começar a escrever o loop
 
 \begin{verbatim}
 ## List of 4
-##  $ : num [1:10] -9.62 -9.43 -10.68 -11.03 -8.24 ...
-##  $ : num [1:10] -0.919 -0.458 -1.24 1.463 0.112 ...
-##  $ : num [1:10] 7.01 8.57 10.48 9.78 9.31 ...
-##  $ : num [1:10] 101.6 99.5 99 100.1 101.2 ...
+##  $ : num [1:10] -7.57 -10.4 -11.14 -9.35 -9.74 ...
+##  $ : num [1:10] -1.3503 -0.0439 -0.5073 -0.862 -0.6956 ...
+##  $ : num [1:10] 10.98 11.08 9.23 11.82 9.72 ...
+##  $ : num [1:10] 99.7 98.5 97.7 99.8 100.2 ...
 \end{verbatim}
 
 \end{solution}
@@ -10075,21 +10086,23 @@ O último loop calcula a soma cumulativa de um vetor e poderia ser substituído 
 \end{Shaded}
 
 \begin{verbatim}
-##   [1]  0.317729  1.102455  1.362178  2.130122  2.824290  2.997912  3.892509
-##   [8]  4.375967  5.355707  6.221848  6.804676  6.898213  7.487627  8.204525
-##  [15]  8.779202  9.036663  9.850827 10.460761 11.327822 11.585799 12.182870
-##  [22] 13.070437 13.416978 14.292203 14.750917 15.226016 15.808067 16.080975
-##  [29] 16.592101 17.322767 17.467438 17.818052 18.180706 19.058907 19.207885
-##  [36] 20.061159 20.283912 21.021190 21.497409 21.779874 22.211214 22.685642
-##  [43] 23.399549 23.991743 24.929015 25.539400 26.464538 26.725575 27.061818
-##  [50] 27.096340 27.104843 27.757360 28.219332 28.881212 29.480295 30.091530
-##  [57] 30.821447 31.468884 32.328407 33.142847 33.787257 34.232512 35.101117
-##  [64] 35.323500 35.655750 36.042714 36.579299 36.882594 37.402128 38.325928
-##  [71] 38.408840 38.526292 39.247904 39.886138 40.300539 40.953571 41.312403
-##  [78] 42.086479 42.634948 42.785606 43.045790 43.752162 44.435123 44.919873
-##  [85] 45.231547 46.186583 46.582195 46.801500 47.624063 48.473256 48.960886
-##  [92] 49.744023 50.019916 50.720106 50.981223 51.922561 52.260597 52.497842
-##  [99] 52.520034 52.700399
+##   [1]  0.3235055  1.0364683  1.5263462  2.1547442  2.3646824  2.3973233
+##   [7]  2.7982511  3.7291259  4.6485133  5.3526062  6.1084669  6.1402944
+##  [13]  6.5072250  7.0432772  7.7608927  8.6145680  9.6100147 10.1413286
+##  [19] 10.9365368 11.6733671 12.1629506 12.5410234 12.9614182 13.1311587
+##  [25] 13.9707576 14.2174211 14.3900472 15.3550786 15.7773262 16.6111337
+##  [31] 17.0830531 17.5402123 18.2039328 18.7034467 18.8212008 19.4890307
+##  [37] 20.2586614 20.4170967 21.0118355 21.7477859 22.7220393 23.6790086
+##  [43] 24.0390157 24.3397327 25.2049385 25.4629468 25.5884417 26.3942660
+##  [49] 27.0195854 27.1524293 27.4190462 27.8303458 28.5101468 28.5557045
+##  [55] 29.4139732 29.4579140 29.8130164 30.4905311 30.4905332 31.1199702
+##  [61] 31.3134477 32.0991742 32.9071775 33.0069346 33.2748399 33.9937027
+##  [67] 34.7096097 34.8296896 35.2699232 35.6770007 36.3753297 37.0057445
+##  [73] 37.0371973 37.2872798 37.4987687 38.1145264 38.9915917 39.6716201
+##  [79] 40.2007249 41.0295297 41.1823538 41.4170823 42.0605091 42.2617453
+##  [85] 43.0455077 43.2043910 43.9682140 44.2768098 44.3141699 44.7043680
+##  [91] 45.1661197 45.4877023 46.1762392 46.2554617 46.4648548 47.2970344
+##  [97] 47.4520550 47.6117812 47.6671008 48.6662360
 \end{verbatim}
 
 \end{solution}
@@ -10381,8 +10394,8 @@ Com as funções definidas, vamos avaliar o tempo de execução utilizando a bib
 
 \begin{verbatim}
 ##              test replications elapsed relative user.self sys.self user.child
-## 1   No allocation          100    0.23    2.875      0.22     0.02         NA
-## 2 With allocation          100    0.08    1.000      0.08     0.00         NA
+## 1   No allocation          100    0.25    3.571      0.25        0         NA
+## 2 With allocation          100    0.07    1.000      0.06        0         NA
 ##   sys.child
 ## 1        NA
 ## 2        NA
@@ -10748,20 +10761,508 @@ x
 \hypertarget{o-buxe1sico-de-modelos-com-modelr}{%
 \chapter{\texorpdfstring{O básico de modelos com \texttt{modelr}}{O básico de modelos com modelr}}\label{o-buxe1sico-de-modelos-com-modelr}}
 
+Neste capítulo, utilizaremos o pacote \textbf{modelr}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(modelr)}
+\end{Highlighting}
+\end{Shaded}
+
 \hypertarget{introduuxe7uxe3o-14}{%
 \section{Introdução}\label{introduuxe7uxe3o-14}}
+
+Não temos exercícios para esta seção.
 
 \hypertarget{um-modelo-simples}{%
 \section{Um modelo simples}\label{um-modelo-simples}}
 
-\hypertarget{visualizando-modelos-fuxf3rmulas-e-famuxedlias-de-modelos}{%
-\section{Visualizando modelos fórmulas e famílias de modelos}\label{visualizando-modelos-fuxf3rmulas-e-famuxedlias-de-modelos}}
+\hypertarget{exr18-2-1}{%
+\subsection*{Exercício 18.2.1}\label{exr18-2-1}}
+\addcontentsline{toc}{subsection}{Exercício 18.2.1}
+
+A desvantagem do modelo linear é que ele é sensível a valores incomuns, porque a distância incorpora um termo quadrado. Encaixe um modelo linear nos seguintes dados simulados e viualize os resultados. Reexecute algumas vezes para gerar diferentes conjuntos de dados simulados. O que você nota sobre o modelo?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sim1a }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}
+  \AttributeTok{x =} \FunctionTok{rep}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{, }\AttributeTok{each =} \DecValTok{3}\NormalTok{),}
+  \AttributeTok{y =}\NormalTok{ x }\SpecialCharTok{*} \FloatTok{1.5} \SpecialCharTok{+} \DecValTok{6} \SpecialCharTok{+} \FunctionTok{rt}\NormalTok{(}\FunctionTok{length}\NormalTok{(x), }\AttributeTok{df =} \DecValTok{2}\NormalTok{)}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{solution}
+\leavevmode
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(i) \{}
+  \FunctionTok{tibble}\NormalTok{(}
+    \AttributeTok{x =} \FunctionTok{rep}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{, }\AttributeTok{each =} \DecValTok{3}\NormalTok{),}
+    \AttributeTok{y =}\NormalTok{ x }\SpecialCharTok{*} \FloatTok{1.5} \SpecialCharTok{+} \DecValTok{6} \SpecialCharTok{+} \FunctionTok{rt}\NormalTok{(}\FunctionTok{length}\NormalTok{(x), }\AttributeTok{df =} \DecValTok{2}\NormalTok{),}
+    \AttributeTok{.id =}\NormalTok{ i}
+\NormalTok{  )}
+\NormalTok{\}}
+
+\NormalTok{models }\OtherTok{\textless{}{-}} \FunctionTok{map\_df}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{12}\NormalTok{, data)}
+
+\FunctionTok{ggplot}\NormalTok{(models, }\FunctionTok{aes}\NormalTok{(x, y)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"lm"}\NormalTok{, }\AttributeTok{color =} \StringTok{"red"}\NormalTok{, }\AttributeTok{se =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{.id, }\AttributeTok{ncol =} \DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using formula = 'y ~ x'
+\end{verbatim}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-276-1.pdf}
+
+\end{solution}
+
+\hypertarget{exr18-2-2}{%
+\subsection*{Exercício 18.2.2}\label{exr18-2-2}}
+\addcontentsline{toc}{subsection}{Exercício 18.2.2}
+
+Uma maneira de tornar os modelos lineares mais robustos é usar uma medida de distância diferente. Por exemplo, em vez de distância da raiz quadrática média, você poderia usar a distância média absoluta:
+
+\begin{verbatim}
+measure_distance <- function(mod, data) {
+  diff <- data$y - make_prediction(mod, data)
+  mean(abs(diff))
+}
+\end{verbatim}
+
+Use \texttt{optim()} para ajustar esse modelo nos dados previamente simulados e compare-o ao modelo linear.
+
+\begin{solution}
+Inicialmente, vamos reescrever as duas distancias e construir os modelos lineares.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Definindo a distância baseada no erro quadrático médio}
+\NormalTok{erro\_quadratico\_medio }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(mod, data) \{}
+\NormalTok{  diff }\OtherTok{\textless{}{-}}\NormalTok{ data}\SpecialCharTok{$}\NormalTok{y }\SpecialCharTok{{-}}\NormalTok{ (mod[}\DecValTok{1}\NormalTok{] }\SpecialCharTok{+}\NormalTok{ data}\SpecialCharTok{$}\NormalTok{x }\SpecialCharTok{*}\NormalTok{ mod[}\DecValTok{2}\NormalTok{])}
+  \FunctionTok{sqrt}\NormalTok{(}\FunctionTok{mean}\NormalTok{(diff }\SpecialCharTok{\^{}} \DecValTok{2}\NormalTok{))}
+\NormalTok{\}}
+
+\CommentTok{\# Definindo a distância baseada na média da distãncia absoluta}
+\NormalTok{distancia\_media\_absoluta }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(mod, data) \{}
+\NormalTok{  diff }\OtherTok{\textless{}{-}}\NormalTok{ data}\SpecialCharTok{$}\NormalTok{y }\SpecialCharTok{{-}} \FunctionTok{make\_prediction}\NormalTok{(mod, data)}
+  \FunctionTok{mean}\NormalTok{(}\FunctionTok{abs}\NormalTok{(diff))}
+\NormalTok{\}}
+
+\CommentTok{\# Definindo a função auxiliar}
+\NormalTok{make\_prediction }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(mod, data) \{}
+\NormalTok{  mod[}\DecValTok{1}\NormalTok{] }\SpecialCharTok{+}\NormalTok{ mod[}\DecValTok{2}\NormalTok{] }\SpecialCharTok{*}\NormalTok{ data}\SpecialCharTok{$}\NormalTok{x}
+\NormalTok{\}}
+
+\CommentTok{\# Gerando o modelo otimizado}
+\NormalTok{modelo\_erro\_quadratico\_medio }\OtherTok{\textless{}{-}} \FunctionTok{optim}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{), erro\_quadratico\_medio, }\AttributeTok{data =}\NormalTok{ sim1a)}
+\NormalTok{modelo\_distancia\_media\_absoluta }\OtherTok{\textless{}{-}} \FunctionTok{optim}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{), distancia\_media\_absoluta, }\AttributeTok{data =}\NormalTok{ sim1a)}
+\end{Highlighting}
+\end{Shaded}
+
+Agora iremos plotar cada um dos modelos junto aos dados, para que possamos compará-los visualmente.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(sim1a, }\FunctionTok{aes}\NormalTok{(x,y)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_abline}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{intercept =}\NormalTok{ modelo\_erro\_quadratico\_medio}\SpecialCharTok{$}\NormalTok{par[[}\DecValTok{1}\NormalTok{]], }\AttributeTok{slope =}\NormalTok{ modelo\_erro\_quadratico\_medio}\SpecialCharTok{$}\NormalTok{par[[}\DecValTok{2}\NormalTok{]]), }\AttributeTok{color =} \StringTok{"red"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_abline}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{intercept =}\NormalTok{ modelo\_distancia\_media\_absoluta}\SpecialCharTok{$}\NormalTok{par[[}\DecValTok{1}\NormalTok{]], }\AttributeTok{slope =}\NormalTok{ modelo\_distancia\_media\_absoluta}\SpecialCharTok{$}\NormalTok{par[[}\DecValTok{2}\NormalTok{]]), }\AttributeTok{color =} \StringTok{"blue"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-278-1.pdf}
+
+A diferença é visível no gráfico, contudo ainda nos parece difícil dizer qual das duas curvas se adequa melhor. Poderíamos tentar compara a variável \texttt{value} em cada modelo, mas vale ressaltar que, como foram construídas com base em cálculos diferentes de distância, os valores não nos parecem comparáveis.
+\end{solution}
+
+\hypertarget{exr18-2-3}{%
+\subsection*{Exercício 18.2.3}\label{exr18-2-3}}
+\addcontentsline{toc}{subsection}{Exercício 18.2.3}
+
+Um desafio ao realizar otimização numérica é que ela só garante encontrar um ótimo local. Qual é o problema com a otimização de um modelo de três parâmetros como este?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model1 }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(a, data) \{}
+\NormalTok{  a[}\DecValTok{1}\NormalTok{] }\SpecialCharTok{+}\NormalTok{ data}\SpecialCharTok{$}\NormalTok{x }\SpecialCharTok{*}\NormalTok{ a[}\DecValTok{2}\NormalTok{] }\SpecialCharTok{+}\NormalTok{ a[}\DecValTok{3}\NormalTok{]}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{visualizando-modelos}{%
+\section{Visualizando modelos}\label{visualizando-modelos}}
+
+\hypertarget{exr18-3-1}{%
+\subsection*{Exercício 18.3.1}\label{exr18-3-1}}
+\addcontentsline{toc}{subsection}{Exercício 18.3.1}
+
+Em vez de usar \texttt{lm()} para ajustar uma linha reta, você pode usar \texttt{loess()} para ajustar uma curva suave. Repita o processo de ajuste de modelos, geração de grade, previsões e visualização em \texttt{sim1} usando \texttt{loess()}, em vez de \texttt{lm()}. Como o resultado se compara a \texttt{geom\_smooth()}?
+
+\begin{solution}
+Inicialmente vamos ajustar o modelo e construir um novo data frame contendo, além dos dados, a predição e o resíduo.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{modelo\_loess }\OtherTok{\textless{}{-}} \FunctionTok{loess}\NormalTok{(y }\SpecialCharTok{\textasciitilde{}}\NormalTok{ x, sim1)}
+
+\NormalTok{dados\_ajustados }\OtherTok{\textless{}{-}}\NormalTok{ sim1 }\SpecialCharTok{\%\textgreater{}\%}
+                      \FunctionTok{add\_predictions}\NormalTok{(modelo\_loess) }\SpecialCharTok{\%\textgreater{}\%}
+                      \FunctionTok{add\_residuals}\NormalTok{(modelo\_loess)}
+\end{Highlighting}
+\end{Shaded}
+
+Na sequência vamos plotar o gráfico com os dados e o resultado da predição:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(dados\_ajustados, }\FunctionTok{aes}\NormalTok{(x)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ y)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ pred), }\AttributeTok{color =} \StringTok{"red"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-281-1.pdf}
+
+E também os dados junto à \texttt{geom\_smooth()}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(dados\_ajustados, }\FunctionTok{aes}\NormalTok{(x, y)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"loess"}\NormalTok{,}\AttributeTok{se =} \ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using formula = 'y ~ x'
+\end{verbatim}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-282-1.pdf}
+
+Notamos que não há diferença entre o modelo ajustado pela função \texttt{loess()} e o gerado pela \texttt{geom\_smooth()}.
+
+Agora plotaremos os residuos:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(dados\_ajustados, }\FunctionTok{aes}\NormalTok{(x)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ resid)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_ref\_line}\NormalTok{(}\AttributeTok{h =} \DecValTok{0}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-283-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(dados\_ajustados, }\FunctionTok{aes}\NormalTok{(resid)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_freqpoly}\NormalTok{(}\AttributeTok{binwidth =} \FloatTok{0.5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-284-1.pdf}
+Como não identificamos um padrão para os resíduos, podemos entender que o modelo é útil para explicar o comportamento dos dados, isto é, parece explicar o máximo possível dos dados, deixando o menor resíduo possível.
+\end{solution}
+
+\hypertarget{exr18-3-2}{%
+\subsection*{Exercício 18.3.2}\label{exr18-3-2}}
+\addcontentsline{toc}{subsection}{Exercício 18.3.2}
+
+\texttt{add\_preditions()} é pareado com \texttt{gather\_predictions()} e \texttt{spread\_predictions()}. Como essas três funções diferem?
+
+\begin{solution}
+Enquanto a função \texttt{add\_predictions()} trabalha apenas com um modelo por vez, as funções \texttt{spread\_predictions()} e \texttt{gather\_predictions()} conseguem trabalhar com uma lista de modelos, facilitando a comparação entre diversos modelos.
+\end{solution}
+
+\hypertarget{exr18-3-3}{%
+\subsection*{Exercício 18.3.3}\label{exr18-3-3}}
+\addcontentsline{toc}{subsection}{Exercício 18.3.3}
+
+O que \texttt{geom\_ref\_line()} faz? De qual pacote ela vem? Por que exibir uma linha de referência em gráficos mostrando resíduos é útil e importante?
+
+\begin{solution}
+Esta função é uma otimização das funções \texttt{geom\_hline()} e \texttt{geom\_vline()} que desenham linhas horizontais e verticais, respectivamente, num gráfico. Ela está definida no pacote \textbf{mdelr} e é bastante útil porque nos permite desenhar uma referência para os resíduos.
+\end{solution}
+
+\hypertarget{exr18-3-4}{%
+\subsection*{Exercício 18.3.4}\label{exr18-3-4}}
+\addcontentsline{toc}{subsection}{Exercício 18.3.4}
+
+Por que você pode querer observar o polígono de frequência dos resíduos absolutos? Quais são os prós e os contras d=comparados a observar os resíduos brutos?
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{fuxf3rmulas-e-famuxedlias-de-modelos}{%
+\section{Fórmulas e famílias de modelos}\label{fuxf3rmulas-e-famuxedlias-de-modelos}}
+
+\hypertarget{exr18-4-1}{%
+\subsection*{Exercício 18.4.1}\label{exr18-4-1}}
+\addcontentsline{toc}{subsection}{Exercício 18.4.1}
+
+O que acontece se você repetir a análise de \texttt{sim2} usando um modelo sem uma intersecção? O que acontece com a equação do modelo? E com as previsões?
+
+\begin{solution}
+Para executar o modelo sem a intersecção, precisamos adicionar \texttt{-\ 1} ou \texttt{+\ 0} à nossa fórmula.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mod2 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(y }\SpecialCharTok{\textasciitilde{}}\NormalTok{ x, }\AttributeTok{data =}\NormalTok{ sim2)}
+\NormalTok{mod2a }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(y }\SpecialCharTok{\textasciitilde{}}\NormalTok{ x }\SpecialCharTok{{-}} \DecValTok{1}\NormalTok{, }\AttributeTok{data =}\NormalTok{ sim2)}
+
+\NormalTok{sim2 }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{data\_grid}\NormalTok{(x) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{spread\_predictions}\NormalTok{(mod2, mod2a)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 4 x 3
+##   x      mod2 mod2a
+##   <chr> <dbl> <dbl>
+## 1 a      1.15  1.15
+## 2 b      8.12  8.12
+## 3 c      6.13  6.13
+## 4 d      1.91  1.91
+\end{verbatim}
+
+Neste caso, não temos mudanças nos valores das predições. (Por quê?)
+\end{solution}
+
+\hypertarget{exr18-4-2}{%
+\subsection*{Exercício 18.4.2}\label{exr18-4-2}}
+\addcontentsline{toc}{subsection}{Exercício 18.4.2}
+
+Use \texttt{model\_matrix()} para explorar as equações geradas para os modelos que eu ajustei em \texttt{sim3} e \texttt{sim4}. Por que \texttt{*} é um bom atalho para cada interação?
+
+\begin{solution}
+Para começar, vamos gerar as equações para esses doisa datasets:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x3 }\OtherTok{\textless{}{-}} \FunctionTok{model\_matrix}\NormalTok{(y }\SpecialCharTok{\textasciitilde{}}\NormalTok{ x1 }\SpecialCharTok{*}\NormalTok{ x2, }\AttributeTok{data =}\NormalTok{ sim3)}
+\NormalTok{x4 }\OtherTok{\textless{}{-}} \FunctionTok{model\_matrix}\NormalTok{(y }\SpecialCharTok{\textasciitilde{}}\NormalTok{ x1 }\SpecialCharTok{*}\NormalTok{ x2, }\AttributeTok{data =}\NormalTok{ sim4)}
+\end{Highlighting}
+\end{Shaded}
+
+Agora vamos visualizar \texttt{x3}, lembrando que o conjunto \texttt{sim3} contém uma variável categórica e uma contínua:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x3}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 120 x 8
+##    `(Intercept)`    x1   x2b
+##            <dbl> <dbl> <dbl>
+##  1             1     1     0
+##  2             1     1     0
+##  3             1     1     0
+##  4             1     1     1
+##  5             1     1     1
+##  6             1     1     1
+##  7             1     1     0
+##  8             1     1     0
+##  9             1     1     0
+## 10             1     1     0
+## # i 110 more rows
+## # i 5 more variables:
+## #   x2c <dbl>, x2d <dbl>,
+## #   `x1:x2b` <dbl>,
+## #   `x1:x2c` <dbl>, ...
+\end{verbatim}
+
+Podemos notar que foram criadas as variáveis \texttt{x2*} correspondentes aos valores de x2 (exceto para a categoria \texttt{a}, que é o complemento do conjunto). Também foram criadas as colunas \texttt{x1:x2*} que corresponde ao produto das colunas \texttt{x1} e \texttt{x2*}. Podemos confirmar isso usando o seguinte:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{all}\NormalTok{(x3[[}\StringTok{"x1:x2b"}\NormalTok{]] }\SpecialCharTok{==}\NormalTok{ x3[[}\StringTok{"x1"}\NormalTok{]] }\SpecialCharTok{*}\NormalTok{ x3[[}\StringTok{"x2b"}\NormalTok{]])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{all}\NormalTok{(x3[[}\StringTok{"x1:x2c"}\NormalTok{]] }\SpecialCharTok{==}\NormalTok{ x3[[}\StringTok{"x1"}\NormalTok{]] }\SpecialCharTok{*}\NormalTok{ x3[[}\StringTok{"x2c"}\NormalTok{]])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{all}\NormalTok{(x3[[}\StringTok{"x1:x2d"}\NormalTok{]] }\SpecialCharTok{==}\NormalTok{ x3[[}\StringTok{"x1"}\NormalTok{]] }\SpecialCharTok{*}\NormalTok{ x3[[}\StringTok{"x2d"}\NormalTok{]])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+
+Agora avaliaremos o caso do conjunto \texttt{sim4}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x4}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 300 x 4
+##    `(Intercept)`    x1     x2
+##            <dbl> <dbl>  <dbl>
+##  1             1    -1 -1    
+##  2             1    -1 -1    
+##  3             1    -1 -1    
+##  4             1    -1 -0.778
+##  5             1    -1 -0.778
+##  6             1    -1 -0.778
+##  7             1    -1 -0.556
+##  8             1    -1 -0.556
+##  9             1    -1 -0.556
+## 10             1    -1 -0.333
+## # i 290 more rows
+## # i 1 more variable:
+## #   `x1:x2` <dbl>
+\end{verbatim}
+
+Como ambas as variiáveis são contínuas, nenhuma delas precisou ser quebrada. O modelo gerou a coluna \texttt{x1:x2} como o produto de \texttt{x1} por \texttt{x2}. O que confirmamos assim:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{all}\NormalTok{(x4[[}\StringTok{"x1:x2"}\NormalTok{]] }\SpecialCharTok{==}\NormalTok{ x4[[}\StringTok{"x1"}\NormalTok{]] }\SpecialCharTok{*}\NormalTok{ x4[[}\StringTok{"x2"}\NormalTok{]])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+
+Utilizar o \texttt{*} é útil quando desejamos considerar no modelo o efeito da interação entre duas ou mais variáveis.
+\end{solution}
+
+\hypertarget{exr18-4-3}{%
+\subsection*{Exercício 18.4.3}\label{exr18-4-3}}
+\addcontentsline{toc}{subsection}{Exercício 18.4.3}
+
+Usando os princípios básicos, converta em funções as fórmulas nos dois modelos a seguir. (Dica: comece convertendo a variável categórica em variáveis 0-1)
+
+\begin{verbatim}
+mod1 <- lm(y ~ x1 + x2, data = sim3)
+mod2 <- lm(y ~ x1 * x2, data = sim3)
+\end{verbatim}
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr18-4-4}{%
+\subsection*{Exercício 18.4.4}\label{exr18-4-4}}
+\addcontentsline{toc}{subsection}{Exercício 18.4.4}
+
+Para \texttt{sim4}, qual é melhor, \texttt{mod1} ou \texttt{mod2}? Acredito que \texttt{mod2} faz um trabalho levemente melhor removendo padrões, mas é bem sutil. Você consegue criar um gráfico que suporte minha afirmação?
+
+\begin{solution}
+Inicialmente vamos construir os dois modelos (note que ambos usam a mesma métrica para cálculo do resíduo, dessa forma, poderemos compará-los).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mod1 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(y }\SpecialCharTok{\textasciitilde{}}\NormalTok{ x1 }\SpecialCharTok{+}\NormalTok{ x2, sim4)}
+\NormalTok{mod2 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(y }\SpecialCharTok{\textasciitilde{}}\NormalTok{ x1 }\SpecialCharTok{*}\NormalTok{ x2, sim4)}
+\end{Highlighting}
+\end{Shaded}
+
+Agora, para avaliar os modelos, vamos dar uma olhada nos resíduos.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{residuos }\OtherTok{\textless{}{-}}\NormalTok{ sim4 }\SpecialCharTok{\%\textgreater{}\%}
+              \FunctionTok{gather\_residuals}\NormalTok{(mod1, mod2)}
+
+\NormalTok{residuos }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(resid, }\AttributeTok{color =}\NormalTok{ model)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_freqpoly}\NormalTok{(}\AttributeTok{binwidth =} \FloatTok{0.5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-292-1.pdf}
+Para ambos os modelos, vemos que os resícuos se concentram em torno de zero. Isso nos ajuda a ver que ambos os modelos são úteis, mas não nos ajuda na comparação entre eles. Vamos adicionar mais uma camada ao gráfico para tentar visualizar melhor.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{residuos }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(resid, }\AttributeTok{color =}\NormalTok{ model)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_freqpoly}\NormalTok{(}\AttributeTok{binwidth =} \FloatTok{0.5}\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{geom\_rug}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-293-1.pdf}
+O gráfico ainda não é muito explicativo, mas conseguimos visualizar uma pequena diferença: a calda de \texttt{mod1} parece ser um pouco mais longa, isto é, o modelo possui resíduos mais extremos, se comparado ao \texttt{mod2}.
+
+Vamos visualizar também o valor absoluto dos resíduos:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{residuos }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\FunctionTok{abs}\NormalTok{(resid), }\AttributeTok{color =}\NormalTok{ model)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_freqpoly}\NormalTok{(}\AttributeTok{binwidth =} \FloatTok{0.5}\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{geom\_rug}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-294-1.pdf}
+A tendência ainda se mantém. Indicando que \texttt{mod2} é levemente melhor do que \texttt{mod1}. Vamos verificar ainda o desvio padrão dos resíduos de cada modelo:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{residuos }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(model) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}
+    \AttributeTok{mean =} \FunctionTok{mean}\NormalTok{(resid),}
+    \AttributeTok{sd =} \FunctionTok{sd}\NormalTok{(resid)}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 2 x 3
+##   model     mean    sd
+##   <chr>    <dbl> <dbl>
+## 1 mod1  1.85e-16  2.10
+## 2 mod2  1.32e-16  2.07
+\end{verbatim}
+
+Notamos que, apesar de pequena, existe uma diferença entre os modelos e \texttt{mod2} realmente gera um resíduo menor, ou seja, ele é um pouco melhor do que seu ``adversário''.
+\end{solution}
 
 \hypertarget{valores-faltantes-2}{%
 \section{Valores faltantes}\label{valores-faltantes-2}}
 
+Não temos exercícios para esta seção.
+
 \hypertarget{outras-famuxedlias-de-modelos}{%
 \section{Outras famílias de modelos}\label{outras-famuxedlias-de-modelos}}
+
+Não temos exercícios para esta seção.
 
 \hypertarget{construuxe7uxe3o-de-modelos}{%
 \chapter{Construção de modelos}\label{construuxe7uxe3o-de-modelos}}

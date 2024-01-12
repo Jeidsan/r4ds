@@ -122,7 +122,8 @@ outros-padrões-para-loops-for
 o-básico-de-modelos-com-modelr
 introdução-14
 um-modelo-simples
-visualizando-modelos-fórmulas-e-famílias-de-modelos
+visualizando-modelos
+fórmulas-e-famílias-de-modelos
 valores-faltantes-2
 outras-famílias-de-modelos
 construção-de-modelos

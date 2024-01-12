@@ -89,4 +89,9 @@ Dúvidas ou sugestões de melhoria podem ser encaminhadas para o e-mail *jeidsan
 - [Exercício 17.4.1](#exr17-4-1);
 - Exercícios da seção 17.5;
 - Exercícios da seção 17.9;
-- 
+- Avaliar melhor a resposta ao [Exercício 18.2.1](#exr18-2-1);
+- [Exercício 18.2.3](#exr18-2-3);
+- [Exercício 18.3.4](#exr18-3-4);
+- Buscar uma explicação para o fato de não haver diferença no [Exercício 18.4.1](#exr18-4-1);
+- [Exercício 18.4.3](#exr18-4-3);
+- [Exercício 18.4.4](#exr18-4-4);
