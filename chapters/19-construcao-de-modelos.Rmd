@@ -2,8 +2,254 @@
 
 ## Introdução
 
+Não temos exercícios para esta seção.
+
 ## Por que diamantes de baixa qualidade são mais caros? 
+
+Para esta seção, necessitamos do seguinte código:
+
+```{r}
+diamonds2 <- diamonds %>%
+  filter(carat <= 2.5) %>%
+  mutate(
+    lprice = log2(price),
+    lcarat = log2(carat)
+  )
+
+mod_diamond2 <- lm(lprice ~ lcarat + color + cut + clarity, data = diamonds2)
+
+diamonds2 <- add_residuals(diamonds2, mod_diamond2, "lresid2")
+```
+
+
+### Exercício 19.2.1 {- #exr19-2-1}
+
+::: {.enunciado}
+No gráfico `lcarat` *versus* `lprice` há algumas listras verticais claras. O que elas representam?
+:::
+
+::: {.solution}
+Eles representam a concentração de diamantes com valores arredondados para números "human friendly", "bonitos".
+:::
+
+### Exercício 19.2.2 {- #exr19-2-2}
+
+::: {.enunciado}
+Se `log(price) = a_0 + a_1 * log(carat)`, o que isso diz sobre o relacionamento entre `price` e `carat`?
+:::
+
+::: {.solution}
+De modo bastante simplificado, se há uma relação linear entre $log_2(carat)$ e $log_2(price)$, podemos afirmar que há uma relação exponencial entre `carat` e `price`. Isso significa que o aumento de $x$ unidades em `carat`, corresponde a um crescimento da ordem de $2^x$ em `price`.
+:::
+
+### Exercício 19.2.3 {- #exr19-2-3}
+
+::: {.enunciado}
+Extraia os diamantes que tenham resíduos muito altos ou muito baixos. Há alguma coisa estranha sobre esses diamantes? Eles são particularmente ruins ou bons, ou você acha que são erros de precificação?
+:::
+
+::: {.solution}
+Não enocntrei nada que possa indicar uma relação escondida. Acredito que as diferenças se devem a erros de precificação ou de entrada de dados.
+:::
+
+### Exercício 19.2.4 {- #exr19-2-4}
+
+::: {.enunciado}
+O modelo final, `mod_diamonds2`, faz um bom trabalho na previsão dos preços de diamantes? Você confiaria nele para dizer quanto gastar se fosse comprar um diamante?
+:::
+
+::: {.solution}
+Antes de responder a questão, vamos da uma olhada na distribuição dos resíduos, no desvio padrão e mais algumas estatísticas sobre os erros.
+
+```{r}
+ggplot(diamonds2, aes(lcarat, lresid2)) +
+  geom_hex(bins = 50) +
+  geom_ref_line(h = 0, size = 0.25) +
+  geom_ref_line(h = 0.75, size = 0.25, colour = "red") +
+  geom_ref_line(h = -0.75, size = 0.25, colour = "red")
+```
+
+```{r}
+diamonds2 %>%
+  summarise(
+    sd = sd(lresid2),
+    rmse = sqrt(mean(lresid2^2)),
+    mae = mean(abs(lresid2)),
+    p025 = quantile(2^lresid2, 0.025),
+    p975 = quantile(2^lresid2, 0.975)
+  )
+```
+Avaliando os dados, vemos que o erro quadrático médio é de aproximadamente `0.19` o que corresponderia a um erro em torno de 14%. Se usarmos o erro médio (em torno de `0.15`), teríamos um erro na casa de 11%. Ademais, temos que 95% das previsões erram entre 23% e 31%.
+
+Concluímos que, para uma ideia geral de preços, o modelo parece ser muito bom, contudo para uma empresa que trabalhe com compra e/ou venda de diamantes, um modelo mais robusto seria necessário. 
+:::
+
 
 ## O que afeta o número de voos diários?
 
+Para solução dos exercícios desta seção, precisaremos do seguinte código:
+
+```{r}
+daily <- flights %>%
+  mutate(date = make_date(year, month, day)) %>%
+  group_by(date) %>%
+  summarise(n = n())
+
+daily <- daily %>%
+  mutate(wday = wday(date, label = TRUE))
+
+term <- function(date) {
+  cut(date,
+    breaks = ymd(20130101, 20130605, 20130825, 20140101),
+    labels = c("spring", "summer", "fall")
+  )
+}
+
+daily <- daily %>%
+  mutate(term = term(date))
+
+mod <- lm(n ~ wday, data = daily)
+
+daily <- daily %>%
+  add_residuals(mod)
+
+mod1 <- lm(n ~ wday, data = daily)
+mod2 <- lm(n ~ wday * term, data = daily)
+```
+
+### Exercício 19.3.1 {- #exr19-3-1}
+
+::: {.enunciado}
+Use suas habilidades de detetive no Google para pensar o porquê de haver menos voos do que o esperado para os dias 20 de janeiro, 26 de maio e 1º de setembro. (Dida: todos têm a mesma explicação.) Como esses dias seriam generalizados para outro ano?
+:::
+
+::: {.solution}
+Os três dias antecedem feriados nacionais nos EUA. Como a maioria dos voos são a trabalho, é esperada um queda no número de voos no dia anterior (similar à queda que ocorre nos sábados).
+
+A regra geral para os feriados seria:
+- Dia de Martin Luther King Jr.: terceira segunda-feira de janeiro;
+- Memorial Day: última segunda-feira de maio;
+- Dia do trabalho: primeira segunda-feira de setembro.
+:::
+
+### Exercício 19.3.2 {- #exr19-3-2}
+
+::: {.enunciado}
+O que os três dias com resíduos positivos altos representam? Como esses dias seriam generalizados para outro ano?
+
+```{r}
+daily %>%
+  top_n(3, resid)
+```
+:::
+
+::: {.solution}
+Esses dias correspondem aos finais de semana imediatamente após o dia de ação de graças e o natal. Podemos generalizar para os demais anos considerando as datas desses feriados.
+:::
+
+### Exercício 19.3.3 {- #exr19-3-3}
+
+::: {.enunciado}
+Crie uma nova variável que separe a variável `wday` em períodos, mas somente para os sábados. Por exemplo, ela deve ter `Thurs`, `Fri`, menos `Sat-summer`, `Sat-spring`, `Sat-fall`. Como esse modelo se compara com o modelo com cada combinação de `wday` e `term`?
+:::
+
+::: {.solution}
+Iniciaremos usando a função `case_when()` para criar a nova variável.
+
+```{r}
+daily <- daily %>%
+  mutate(
+    wday2 =
+      case_when(
+        wday == "sáb" & term == "summer" ~ "sáb_summer",
+        wday == "sáb" & term == "fall" ~ "sáb_fall",
+        wday == "sáb" & term == "spring" ~ "sáb_spring",
+        TRUE ~ as.character(wday)
+      )
+  )
+```
+
+Na sequência, criaremos o modelo de predição:
+
+```{r}
+mod3 <- lm(n ~ wday2, daily)
+```
+
+E exibiremos um gráfico comparando os modelos:
+
+```{r}
+daily %>%
+  gather_residuals(sab = mod3, all = mod2) %>%
+  ggplot(aes(date, resid, color = model)) +
+    geom_line(alpha = 0.75) +
+    tema
+```
+Devido à quantidade de dados, fica difícil visualizar alguma coisa. Vamos construir um novo gráfico com base apenas na diferença entre os resíduos.
+
+```{r}
+daily %>%
+  spread_residuals(sab = mod3, all = mod2) %>%
+  mutate(diff = sab - all) %>%
+  ggplot(aes(date, diff)) +
+    geom_line(alpha = 0.75) +
+    tema
+```
+Notamos que o o modelo que contém a separação conforme período escolar apresenta maiores diferenças durante o outono e menores na primavera.
+
+Precisamo encontrar ainda uma maneira mais adequada de comparar modelos! Esta questão será marcada para revisão!
+
+:::
+
+### Exercício 19.3.4 {- #exr19-3-4}
+
+::: {.enunciado}
+Crie uma nova variável `wday` que combine o dia da semana, período (para sábados) e feriados nacionais. COmo se parecem os resíduos desse modelo?
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 19.3.5 {- #exr19-3-5}
+
+::: {.enunciado}
+O que acontece se você encaixar um efeito dia da semana que varie por mês (por exemplo, `n ~ wday * month`)? Por que isso não é útil?
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 19.3.6 {- #exr19-3-6}
+
+::: {.enunciado}
+Como você esperaria que o modelo `n ~ wday + ns(date, 5)` fosse? A partir de seus conhecimentos sobre dados, por que você esperaria que ele não fosse particularmente eficaz?
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 19.3.7 {- #exr19-3-7}
+
+::: {.enunciado}
+Nós formulamos a hipótese de que pessoas viajando aos domingos são mais propensas a serem viajantes a negócios, que precisam estar em algum lugar na segunda-feira. Explore essa hipótese observando como ela se desmembra com base na distância e no tempo: se for verdade, você esperaria ver mais voos nos domingos a noite para lugares distantes.
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 19.3.8 {- #exr19-3-8}
+
+::: {.enunciado}
+É um pouco frustrante que domingo e sábado estejam em pontas separadas do gráfico. Escreva uma pequena função para estabelecer os níveis do fator para que a semana comece na segunda-feira.
+:::
+
+::: {.solution}
+x
+:::
+
 ## Aprendendo mais sobre modelos
+
+Não temos exercícios para esta seção.

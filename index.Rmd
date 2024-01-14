@@ -24,6 +24,7 @@ library(fueleconomy)
 library(stringr)
 library(forcats)
 library(lubridate)
+library(modelr)
 
 options(repr.plot.width = 24, repr.plot.height = 13)
 
@@ -95,3 +96,10 @@ Dúvidas ou sugestões de melhoria podem ser encaminhadas para o e-mail *jeidsan
 - Buscar uma explicação para o fato de não haver diferença no [Exercício 18.4.1](#exr18-4-1);
 - [Exercício 18.4.3](#exr18-4-3);
 - [Exercício 18.4.4](#exr18-4-4);
+- Devo incluir os aspectos matemáticos para mostrar a relação entre as variáveis citadas no [Exercício 19.2.2](#exr19-2-2)?
+- Revisar [Exercício 19.2.3](#exr19-2-3);
+- Revisar [Exercício 19.3.4](#exr19-3-4);
+-  [Exercício 19.3.5](#exr19-3-5);
+-  [Exercício 19.3.6](#exr19-3-6);
+-  [Exercício 19.3.7](#exr19-3-7);
+-  [Exercício 19.3.8](#exr19-3-8);

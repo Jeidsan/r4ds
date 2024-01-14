@@ -1,0 +1,624 @@
+---
+output:
+  word_document: default
+  pdf_document: default
+  html_document: default
+---
+
+# Construção de modelos
+
+## Por que diamantes de baixa qualidade são mais caros?
+
+Vamos iniciar carregando as bibliotecas necessárias:
+
+```{r}
+library(tidyverse)
+library(modelr)
+options(na.action = na.warn)
+
+library(nycflights13)
+library(lubridate)
+```
+
+Vou também definir um tema para ser utilizado nos gráficos.
+
+```{r}
+tema <- theme(
+        plot.title   = element_text(size = 14, vjust = +2, hjust = 0.5),
+        axis.title.y = element_text(size = 12, vjust = +4),
+        axis.title.x = element_text(size = 12, vjust = -2),
+        axis.text.y  = element_text(size = 10),
+        axis.text.x  = element_text(size = 10),
+        legend.text  = element_text(size = 10),
+        strip.text   = element_text(size = 10)
+    )
+```
+
+Na sequência, vamos relembrar algumas informações sobre o conjunto de dados `diamonds`:
+
+```{r}
+ggplot(diamonds, aes(cut, price)) + 
+  geom_boxplot() +
+  labs(
+    title = "Gráfico 1 - Preco do diamente conforme o corte"
+  ) +
+  tema
+```
+
+```{r}
+ggplot(diamonds, aes(color, price)) +
+  geom_boxplot() +
+  labs(
+    title = "Gráfico 2 - Preco do diamente conforme a cor"
+  ) +
+  tema
+```
+
+```{r}
+ggplot(diamonds, aes(clarity, price)) + 
+  geom_boxplot() +
+  labs(
+    title = "Gráfico 3 - Preco do diamente conforme a claridade"
+  ) +
+  tema
+```
+
+```{r}
+ggplot(diamonds, aes(carat, price)) + 
+  geom_hex(bins = 50) +
+  labs(
+    title = "Gráfico 4 - Preço do diamente conforme o peso",
+  ) +
+  tema
+```
+
+Como o peso do diamante é um fator extremamente forte na composição do seu preço, vamos fazer alguns ajustes nos dados para que possamos trabalhar melhor o nosso modelo. Primeiro vamos avaliar os outliers:
+
+```{r}
+ggplot(diamonds, aes(carat)) +
+  geom_boxplot() +
+  labs(
+    title = "Gráfico 5 - Distribuição dos pesos dos diamantes"
+  ) +
+  tema
+```
+
+Notamos no Gráfico 5 que existem alguns valores extremos para o peso dos diamantes, vamos definir o ponto de corte como 2.5ct. Note o formato da distribuição dos dados no Gráfico 4, o preço parece crescer exponencialmente à medida que o peso do diamante cresce. Por essa razão, vamos realizar uma transformação logritmica nas variáveis `price` e `carat`.
+
+```{r}
+diamonds2 <- diamonds %>%
+                filter(carat <= 2.5) %>%
+                mutate(
+                  lprice = log2(price),
+                  lcarat = log2(carat)
+                )
+```
+
+Vamos agora refazer o Gráfico 4 utilizando essas adaptações:
+
+```{r}
+ggplot(diamonds2, aes(lcarat, lprice)) +
+  geom_hex(bins = 50) +
+  labs(
+    title = expression(paste("Gráfico 6 - Preços dos diamantes conforme o peso (em ", log[2], " )"))
+  ) +
+  tema
+```
+
+Observe que a transformação logarítmica tornou a distribuição dos dados linear. Isso é interessante pois é mais fácil modelar relações lineares!
+
+```{r}
+mod_diamonds <- lm(lprice ~ lcarat, data = diamonds2)
+```
+
+Vamos agora ver o resultado do modelo. Primeiro, irei compará-lo com os dados transformados:
+
+```{r}
+grid2 <- diamonds2 %>%
+          data_grid(lcarat = seq_range(lcarat, 20)) %>%
+          add_predictions(mod_diamonds) %>%
+          mutate(lprice = pred)
+
+ggplot(diamonds2, aes(lcarat, lprice)) +
+  geom_hex(bins = 50) +
+  geom_line(data = grid2, color = "red") +
+  labs(
+    title = "Gráfico 7 - Preço dos diamantes conforme o peso (em log2)"
+  ) +
+  tema
+```
+
+Agora desfazendo a transformação em $log_{2}$:
+
+```{r}
+grid <- diamonds2 %>%
+          data_grid(carat = seq_range(carat, 20)) %>%
+          mutate(lcarat = log2(carat)) %>%
+          add_predictions(mod_diamonds, "lprice") %>%
+          mutate(price = 2 ^lprice)
+
+ggplot(diamonds2, aes(carat, price)) +
+  geom_hex(bins = 50) +
+  geom_line(data = grid, color = "red") +
+  labs(
+    title = "Gráfico 8 - Preço dos diamantes conforme o peso"
+  ) +
+  tema
+```
+
+Em ambos os casos, podemos perceber que o modelo captura o padrão forte causado pelo peso dos diamantes, contudo há ainda um erro relativamente grande. Vamos estudar os resíduos.
+
+```{r}
+diamonds2 <- diamonds2 %>%
+                add_residuals(mod_diamonds, "lresid")
+```
+
+```{r}
+ggplot(diamonds2, aes(lcarat, lresid)) +
+  geom_hex() +
+  labs(
+    title = "Gráfico 9 - Resíduo do preço dos diamantes conforme o peso (log2)"
+  ) +
+  tema
+```
+
+Com os dados dos resíduos, podemos repetir a análise dos gráficos 1, 2 e 3.
+
+```{r}
+ggplot(diamonds2, aes(cut, lresid)) +
+  geom_boxplot() +
+  labs(
+    title = "Gráfico 10 - Resíduo do preço dos diamantes conforme o corte"
+  ) +
+  tema
+```
+
+```{r}
+ggplot(diamonds2, aes(color, lresid)) +
+  geom_boxplot() +
+  labs(
+    title = "Gráfico 11 - Resíduo do preço dos diamantes conforme a cor"
+  ) +
+  tema
+```
+
+```{r}
+ggplot(diamonds2, aes(clarity, lresid)) +
+  geom_boxplot() +
+  labs(
+    title = "Gráfico 12 - Resíduo do preço dos diamantes conforme a clareza"
+  ) +
+  tema
+```
+
+Apesar de o modelo que construímos capturar bem o padrão definido por `carat`, os gráficos 10, 11 e 12 nos mostram que ainda resta algum padrão nos dados, padrões estes definidos pelas variáveis `cut`, `color` e `clarity`. Vamos então criar um novo modelo incluindo essas variáveis.
+
+```{r}
+mod_diamonds2 <- lm(lprice ~ lcarat + cut + color + clarity, diamonds2)
+```
+
+Como agora estamos tratando quatro variáveis, fica difícil construir uma visualização completa do modelo, contudo, podemos exibí-lo por partes, isto é, uma dimensão por vez:
+
+```{r}
+diamonds2 %>%
+  data_grid(cut, .model = mod_diamonds2) %>%
+  add_predictions(mod_diamonds2) %>%
+  ggplot(aes(cut, pred)) +
+    geom_point() +
+    labs(
+      title = "Gráfico 11 - Preço previsto para o diamante conforme o corte"
+    ) +
+    tema
+```
+
+```{r}
+diamonds2 %>%
+  data_grid(color, .model = mod_diamonds2) %>%
+  add_predictions(mod_diamonds2) %>%
+  ggplot(aes(color, pred)) +
+    geom_point() +
+    labs(
+      title = "Gráfico 12 - Preço previsto para o diamante conforme a cor"
+    ) +
+    tema
+```
+
+```{r}
+diamonds2 %>%
+  data_grid(clarity, .model = mod_diamonds2) %>%
+  add_predictions(mod_diamonds2) %>%
+  ggplot(aes(clarity, pred)) +
+    geom_point() +
+    labs(
+      title = "Gráfico 13 - Preço previsto para o diamante conforme a clareza"
+    ) +
+    tema
+```
+
+Vamos agora avaliar os resíduos:
+
+```{r}
+diamonds2 <- diamonds2 %>%
+              add_residuals(mod_diamonds2, "lresid2")
+
+ggplot(diamonds2, aes(carat, lresid2)) +
+  geom_hex(bins = 50) +
+  labs(
+    title = "Gráfico 14 - Resíduo deixado pelo modelo conforme peso do diamante ",
+    x = "Peso do diamante (ct)",
+    y = expression(paste("Preço residual ( ", log[2], " )"))
+  ) +
+  guides(
+    fill = guide_colourbar(title="Quantidade")
+  ) +
+  tema
+```
+
+Note que ainda temos alguns diamantes para os quais o resíduo é realmente grande, mas, no geral, o modelo parece útil. Vamos analisar os diamantes problemáticos para verificar se conseguimos alguma informação adicional que possa nos ajudar a melhorar o modelo.
+
+```{r}
+diamonds2 %>%
+  filter(abs(lresid2) > 1) %>%
+  add_predictions(mod_diamonds2) %>%
+  mutate(
+    pred = round(2 ^ pred),
+    diff = price - pred
+  ) %>%
+  select(price, pred, diff, carat:table, x:z) %>%
+  arrange(desc(price))
+```
+
+Olhando a tabela, percebemos que apenas 16 observações tem preços extremamente diferentes do previsto e não encontramos nenhum novo insight nos dados que possa nos ajudar a melhorar o modelo. Um exercício interessante, seria alterar nosso modelo para considerar a fórmula `log2(price) ~ log2(carat) * cut * color * clarity`.
+
+
+## O que afeta o número de voos diários?
+
+Nesta seção rabalharemos com o dataset de voos saindo da cidade de nova Yourk no ano de 2013.
+
+```{r}
+(daily <- flights %>%
+            mutate(date = make_date(year, month, day)) %>%
+            group_by(date) %>%
+            count())
+```
+
+```{r}
+ggplot(daily, aes(date, n)) +
+  geom_line() +
+  labs(
+    title = "Gráfico 15 - Número de voos por dia",
+    x = "Data",
+    y = "Número de voos"
+  ) +
+  tema
+```
+
+Pela curva do gráfico, é possível identificar que há uma sazonalidade acontecendo. Sabemos que o dia da semana interfere fortemente no número de voos (isto é, há dias da semana que são muito mais movimentados do que os outros).
+
+Vamos iniciar avaliando a distribuição dos voos por dia da semana.
+
+```{r}
+(daily <- daily %>%
+            mutate(wday = wday(date, label = TRUE)))
+```
+
+```{r}
+ggplot(daily, aes(wday, n)) +
+  geom_boxplot() + 
+  labs(
+    title = "Gráfico 16 - Número de voos por dia da semana",
+    x = "Dia da semana",
+    y = "Número de voos"
+  ) + 
+  tema
+```
+
+Notamos que a quantidade de voos aos finais de semana é muito menor. Isso ocorre em função de a maioria dos voos se referirem a viagens de negócio (é razoável que alguém viage no domingo para uma reunião na segunda, mas o mesmo não ocorre nos sábados!).
+
+Vamos remover esse padrão dos dados usando um modelo.
+
+```{r}
+mod <- lm(n ~ wday, data = daily)
+
+grid <- daily %>%
+          data_grid(wday) %>%
+          add_predictions(mod, "n")
+
+ggplot(daily, aes(wday, n)) +
+  geom_boxplot() +
+  geom_point(
+    data = grid,
+    color = "red",
+    size = 4
+  ) +
+  labs(
+    title = "Gráfico 17 - Número de voos por dia da semana (com dados do modelo)",
+    x = "Dia da semana",
+    y = "Número de voos"
+  ) + 
+  tema
+```
+
+Agora iremos calcular o resíduo e visualizá-los:
+
+```{r}
+daily <- daily %>%
+            add_residuals(mod)
+
+ggplot(daily, aes(date, resid)) +
+  geom_ref_line(h = 0) +
+  geom_line() +
+  labs(
+    title = "Gráfico 18 - Número de voos por dia sem o efeito do dia da semana",
+    x = "Data",
+    y = "Número de voos"
+  ) +
+  tema
+```
+
+Ainda há um efeito de regularidade não captado pelo modelo. Vamos adicionar uma linha para cada dia da semana para visualizarmos melhor.
+
+```{r}
+ggplot(daily, aes(date, resid, color = wday)) +
+  geom_ref_line(h = 0) +
+  geom_line() +
+  labs(
+    title = "Gráfico 19 - Número de voos por dia sem o efeito do dia da semana",
+    x = "Data",
+    y = "Número de voos",
+    color = "Dia da semana"
+  ) +
+  tema
+```
+
+O modelo ainda falha ao capturar alguns padrões: como mais voos nos sábados durante o verão (no hemisfério norte) e menos durante o outono. Contudo, ainda podemos perceber uma tendência suave:
+
+```{r}
+ggplot(daily, aes(date, resid)) +
+  geom_ref_line(h = 0) +
+  geom_line() +
+  geom_smooth(se = FALSE, span = 0.20) +
+  labs(
+    title = "Gráfico 20 - Número de voos por dia sem o efeito do dia da semana",
+    x = "Data",
+    y = "Número de voos",
+    color = "Dia da semana"
+  ) +
+  scale_x_date(
+    date_breaks = "1 month",
+    date_labels = "%b"
+  ) +
+  tema
+
+```
+
+Podemos notar que há menos voos em janeiro e dezembro (inverno/natal) e mais entre julho e setembro (verão). Como só temos os dados de um ano, não podemos confirmar essa tendência, então ficamos restritos à nosso conhecimento de mundo. 
+
+Na sequência, queremos tratar o efeito dos sábados no nosso modelo. Vamos iniciar voltando aos dados brutos e plotando apenas os sábados.
+
+```{r}
+daily %>%
+  filter(wday == "sáb") %>%
+  ggplot(aes(date, n)) +
+    geom_line() +
+    geom_point() +
+    labs(
+      title = "Gráfico 21 - Número de voos por sábado",
+      x = "Data",
+      y = "Número de voos",
+      color = "Data"
+    ) +
+    scale_x_date(
+      date_breaks = "1 month",
+      date_labels = "%b"
+    ) +
+    tema
+```
+
+Parece haver uma alta demanda durante o verão e depois uma queda no outono. Isso talvez esteja relacionado aos períodos escolares norte americanos. Vamos avaliar!
+
+Inicialmente vamos definir uma função para classificar os voos conforme o período escolar.
+
+```{r}
+term <- function(date) {
+  cut(
+    date,
+    breaks = ymd("20130101","20130605","20130825","20140101"),
+    labels = c("spring", "summer", "fall")
+  )
+}
+```
+
+Vamos agora adicionar uma nova coluna ao data frame contendo essa variável.
+
+```{r}
+daily <- daily %>%
+            mutate(term = term(date))
+```
+
+E vamos reconstruir o gráfico anterior separando os voos por período.
+
+```{r}
+daily %>%
+  filter(wday == "sáb") %>%
+  ggplot(aes(date, n, color = term)) +
+    geom_line() +
+    geom_point() +
+    labs(
+      title = "Gráfico 22 - Número de voos por sábado",
+      x = "Data",
+      y = "Número de voos",
+      color = "Período escolar"
+    ) +
+    scale_x_date(
+      date_breaks = "1 month",
+      date_labels = "%b"
+    ) +
+    tema
+```
+
+Podemos também avaliar como essa variável afeta outros dias da semana.
+
+```{r}
+daily %>%
+  ggplot(aes(wday, n, color = term)) +
+    geom_boxplot() +
+    labs(
+      title = "Gráfico 23 - Número de voos por dia da semana",
+      x = "Data",
+      y = "Número de voos",
+      color = "Período escolar"
+    ) +
+    tema
+```
+
+Notamos que o período afeta significativamente o número de voos, independente do dia da semana. Vamos então incluir essa informação no nosso modelo.
+
+```{r}
+mod1 <- lm(n ~ wday, daily)
+mod2 <- lm(n ~ wday * term, daily)
+
+daily %>% 
+  gather_residuals(`Sem período` = mod1, `Com período` = mod2) %>%
+  ggplot(aes(date, resid, color = model)) +
+    geom_line(alpha = 0.75) + 
+    labs(
+      title = "Gráfico 24 - Número de voos por dia",
+      x = "Data",
+      y = "Número de voos",
+      color = "Modelo utilizado"
+    ) +
+    scale_x_date(
+      date_breaks = "1 month",
+      date_labels = "%b"
+    ) +
+    tema
+```
+
+Vejamos algumas estatísticas sobre cada modelo:
+
+```{r}
+(mod1_stats <- daily %>% 
+                gather_residuals(mod1) %>%
+                summarise(
+                  sd = sd(resid),
+                  rmse = sqrt(mean(resid^2)),
+                  mae = mean(abs(resid)),
+                  iqr = IQR(resid)
+                ))
+```
+
+
+```{r}
+(mod2_stats <- daily %>% 
+                gather_residuals(mod2) %>%
+                summarise(
+                  sd = sd(resid),
+                  rmse = sqrt(mean(resid^2)),
+                  mae = mean(abs(resid)),
+                  iqr = IQR(resid)
+                ))
+```
+
+Notamos que o novo modelo realmente reduz o erro, mas precisamos compará-lo com os dados brutos.
+
+```{r}
+grid <- daily %>%
+          data_grid(wday, term) %>%
+          add_predictions(mod2)
+
+ggplot(daily, aes(wday, n)) +
+  geom_boxplot() +
+  geom_point(
+    data = grid, 
+    mapping = aes(y = pred),
+    color = "red"
+  ) +
+  facet_wrap(~term) +
+  labs(
+    title = "Gráfico 25 - "
+  ) +
+  tema
+                          
+```
+
+Não é difícil verificar que o modelo tendeu para a média do número de voos, contudo o nosso *dataset* tem muitos outliers, o que torna a tendência para a média um problema. Vamos utilizar um modelo menos sensível a outliers: `MASS::rlm`
+
+```{r}
+mod3 <- MASS::rlm(n ~ wday * term, daily)
+(mod3_stats <- daily %>% 
+                gather_residuals(mod3) %>%
+                summarise(
+                  sd = sd(resid),
+                  rmse = sqrt(mean(resid^2)),
+                  mae = mean(abs(resid)),
+                  iqr = IQR(resid)
+                ))
+```
+Comparando as estatísticas, `mod3` tem um menor desvio padrão e uma menor distância interquartílica, apesar dos erros serem maiores do que o `mod2`.
+
+
+```{r}
+daily %>%
+  add_residuals(mod3, "resid") %>%
+  ggplot(aes(date, resid)) +
+    geom_ref_line(h = 0) +
+    geom_line() +
+    labs(
+      title = "Gráfico 26 - "
+    ) +
+    tema
+```
+
+O novo modelo mostra melhor a tendência de longo prazo dos voos, com destaque para os outliers positivos e negativos.
+
+Vamos avançar mais um passo e utilizar *splines* para construir um novo modelo.
+
+```{r}
+library(splines)
+mod4 <- MASS::rlm(n ~ wday * ns(date, 5), data = daily)
+```
+
+```{r}
+(mod4_stats <- daily %>% 
+                gather_residuals(mod4) %>%
+                summarise(
+                  sd = sd(resid),
+                  rmse = sqrt(mean(resid^2)),
+                  mae = mean(abs(resid)),
+                  iqr = IQR(resid)
+                ))
+```
+
+Notamos que com o uso de splines, todos os parâmetros de comparação foram reduzidos, indicando que o modelo é ainda melhor do que os anteriores.
+
+```{r}
+daily %>%
+  add_residuals(mod4, "resid") %>%
+  ggplot(aes(date, resid)) +
+    geom_ref_line(h = 0) +
+    geom_line() +
+    labs(
+      title = "Gráfico 27 - "
+    ) +
+    tema
+```
+
+Note que os resíduos gerados pelo `mod4` tem um comportamento semelhante ao anterior, contudo, ao separar por dia da semana, ele mostra um comportamento interessante:
+
+```{r}
+daily %>%
+  data_grid(wday, date = seq_range(daily$date, n = 13)) %>%
+  add_predictions(mod4) %>%
+  ggplot(aes(date, pred, color = wday)) +
+    geom_line() +
+    geom_point() +
+    labs(
+      title = "Gráfico 28 - "
+    ) +
+    tema
+```
+
+As predições monstram um comportamento diferenciado apenas para o final de semana, sendo o sábado o dia da semana com maior variação. Se compararmos o Gráfico 28 com os gráficos 21 e 22, perceberemos que esse comportamento também ocorre nos dados brutos. 
+
+Nossa conclusão é que o modelo usando splines é bastante robusto e explica bem o número diário de voos. 

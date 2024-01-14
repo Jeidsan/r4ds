@@ -233,7 +233,7 @@
 \makeatother
 \subtitle{Solução dos exercícios}
 \author{Jeidsan A. da C. Pereira}
-\date{2024-01-12}
+\date{2024-01-14}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Teorema}[chapter]
@@ -372,6 +372,20 @@ Dúvidas ou sugestões de melhoria podem ser encaminhadas para o e-mail \emph{\h
   \protect\hyperlink{exr18-4-3}{Exercício 18.4.3};
 \item
   \protect\hyperlink{exr18-4-4}{Exercício 18.4.4};
+\item
+  Devo incluir os aspectos matemáticos para mostrar a relação entre as variáveis citadas no \protect\hyperlink{exr19-2-2}{Exercício 19.2.2}?
+\item
+  Revisar \protect\hyperlink{exr19-2-3}{Exercício 19.2.3};
+\item
+  Revisar \protect\hyperlink{exr19-3-4}{Exercício 19.3.4};
+\item
+  \protect\hyperlink{exr19-3-5}{Exercício 19.3.5};
+\item
+  \protect\hyperlink{exr19-3-6}{Exercício 19.3.6};
+\item
+  \protect\hyperlink{exr19-3-7}{Exercício 19.3.7};
+\item
+  \protect\hyperlink{exr19-3-8}{Exercício 19.3.8};
 \end{itemize}
 
 \mainmatter
@@ -4838,16 +4852,16 @@ Pratique referir-se a nomes de variáveis não sintáticos, no data frame a segu
 ## # A tibble: 10 x 3
 ##      one   two three
 ##    <int> <dbl> <dbl>
-##  1     1  1.45  1.45
-##  2     2  4.11  2.06
-##  3     3  5.15  1.72
-##  4     4  7.73  1.93
-##  5     5  9.51  1.90
-##  6     6 10.7   1.79
-##  7     7 13.5   1.93
-##  8     8 14.8   1.85
-##  9     9 17.9   1.99
-## 10    10 18.9   1.89
+##  1     1  1.78  1.78
+##  2     2  4.71  2.35
+##  3     3  6.02  2.01
+##  4     4 10.1   2.53
+##  5     5  9.92  1.98
+##  6     6 12.0   2.00
+##  7     7 15.4   2.20
+##  8     8 16.3   2.03
+##  9     9 19.1   2.12
+## 10    10 18.3   1.83
 \end{verbatim}
 
 \end{solution}
@@ -10012,10 +10026,10 @@ Pense sobre saída, seuência e corpo \emph{antes} de começar a escrever o loop
 
 \begin{verbatim}
 ## List of 4
-##  $ : num [1:10] -7.57 -10.4 -11.14 -9.35 -9.74 ...
-##  $ : num [1:10] -1.3503 -0.0439 -0.5073 -0.862 -0.6956 ...
-##  $ : num [1:10] 10.98 11.08 9.23 11.82 9.72 ...
-##  $ : num [1:10] 99.7 98.5 97.7 99.8 100.2 ...
+##  $ : num [1:10] -11.02 -9.83 -9.14 -12.5 -10.09 ...
+##  $ : num [1:10] 0.418 -0.236 -0.213 1.713 1.322 ...
+##  $ : num [1:10] 10.88 9.85 11.6 11.23 11.14 ...
+##  $ : num [1:10] 98.8 99.7 99.5 103.1 100.5 ...
 \end{verbatim}
 
 \end{solution}
@@ -10086,23 +10100,23 @@ O último loop calcula a soma cumulativa de um vetor e poderia ser substituído 
 \end{Shaded}
 
 \begin{verbatim}
-##   [1]  0.3235055  1.0364683  1.5263462  2.1547442  2.3646824  2.3973233
-##   [7]  2.7982511  3.7291259  4.6485133  5.3526062  6.1084669  6.1402944
-##  [13]  6.5072250  7.0432772  7.7608927  8.6145680  9.6100147 10.1413286
-##  [19] 10.9365368 11.6733671 12.1629506 12.5410234 12.9614182 13.1311587
-##  [25] 13.9707576 14.2174211 14.3900472 15.3550786 15.7773262 16.6111337
-##  [31] 17.0830531 17.5402123 18.2039328 18.7034467 18.8212008 19.4890307
-##  [37] 20.2586614 20.4170967 21.0118355 21.7477859 22.7220393 23.6790086
-##  [43] 24.0390157 24.3397327 25.2049385 25.4629468 25.5884417 26.3942660
-##  [49] 27.0195854 27.1524293 27.4190462 27.8303458 28.5101468 28.5557045
-##  [55] 29.4139732 29.4579140 29.8130164 30.4905311 30.4905332 31.1199702
-##  [61] 31.3134477 32.0991742 32.9071775 33.0069346 33.2748399 33.9937027
-##  [67] 34.7096097 34.8296896 35.2699232 35.6770007 36.3753297 37.0057445
-##  [73] 37.0371973 37.2872798 37.4987687 38.1145264 38.9915917 39.6716201
-##  [79] 40.2007249 41.0295297 41.1823538 41.4170823 42.0605091 42.2617453
-##  [85] 43.0455077 43.2043910 43.9682140 44.2768098 44.3141699 44.7043680
-##  [91] 45.1661197 45.4877023 46.1762392 46.2554617 46.4648548 47.2970344
-##  [97] 47.4520550 47.6117812 47.6671008 48.6662360
+##   [1]  0.3538083  0.3945823  0.4413880  0.9897417  1.0329999  1.6483127
+##   [7]  2.3156320  2.7272238  3.3362075  3.5521414  4.5418137  4.6921853
+##  [13]  5.0117227  5.2465283  6.1707765  6.9333120  7.0665232  7.5412228
+##  [19]  8.2346457  9.0208561  9.9201496 10.0388252 10.8936189 11.4841401
+##  [25] 11.5573675 12.4204475 12.6321860 13.2910739 14.2209617 15.1347410
+##  [31] 15.6365591 16.1661659 16.9592488 17.6838586 17.9201595 18.8353828
+##  [37] 19.0609482 19.9513397 20.1841585 20.8475252 21.0276840 21.5650052
+##  [43] 22.1351938 22.5162037 22.7999979 23.0728642 23.3926577 24.3613883
+##  [49] 24.3614335 25.0024871 25.5479950 26.4360941 27.1160498 27.5545142
+##  [55] 28.1310179 28.1989308 29.0028257 29.0760067 29.3954062 30.1728611
+##  [61] 31.1167954 31.6799687 32.5587460 33.0302280 33.6687764 34.3573347
+##  [67] 34.3869736 34.9669715 35.1002186 35.3692568 36.0703883 36.3249867
+##  [73] 36.8086244 36.8479010 37.2757523 38.2720669 38.9864245 39.3124931
+##  [79] 39.8056399 40.3899609 40.5266476 41.1383906 41.4979187 42.3978495
+##  [85] 42.9589725 43.2538442 43.7279552 43.9528413 44.8358273 45.6492699
+##  [91] 45.9494113 46.2500975 46.2925701 46.4735129 47.2107887 47.7805391
+##  [97] 48.2776787 48.4318656 48.9712018 49.2358491
 \end{verbatim}
 
 \end{solution}
@@ -10394,8 +10408,8 @@ Com as funções definidas, vamos avaliar o tempo de execução utilizando a bib
 
 \begin{verbatim}
 ##              test replications elapsed relative user.self sys.self user.child
-## 1   No allocation          100    0.25    3.571      0.25        0         NA
-## 2 With allocation          100    0.07    1.000      0.06        0         NA
+## 1   No allocation          100    0.28        4      0.25     0.03         NA
+## 2 With allocation          100    0.07        1      0.08     0.00         NA
 ##   sys.child
 ## 1        NA
 ## 2        NA
@@ -11270,14 +11284,302 @@ Não temos exercícios para esta seção.
 \hypertarget{introduuxe7uxe3o-15}{%
 \section{Introdução}\label{introduuxe7uxe3o-15}}
 
+Não temos exercícios para esta seção.
+
 \hypertarget{por-que-diamantes-de-baixa-qualidade-suxe3o-mais-caros}{%
 \section{Por que diamantes de baixa qualidade são mais caros?}\label{por-que-diamantes-de-baixa-qualidade-suxe3o-mais-caros}}
+
+Para esta seção, necessitamos do seguinte código:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{diamonds2 }\OtherTok{\textless{}{-}}\NormalTok{ diamonds }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(carat }\SpecialCharTok{\textless{}=} \FloatTok{2.5}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{lprice =} \FunctionTok{log2}\NormalTok{(price),}
+    \AttributeTok{lcarat =} \FunctionTok{log2}\NormalTok{(carat)}
+\NormalTok{  )}
+
+\NormalTok{mod\_diamond2 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(lprice }\SpecialCharTok{\textasciitilde{}}\NormalTok{ lcarat }\SpecialCharTok{+}\NormalTok{ color }\SpecialCharTok{+}\NormalTok{ cut }\SpecialCharTok{+}\NormalTok{ clarity, }\AttributeTok{data =}\NormalTok{ diamonds2)}
+
+\NormalTok{diamonds2 }\OtherTok{\textless{}{-}} \FunctionTok{add\_residuals}\NormalTok{(diamonds2, mod\_diamond2, }\StringTok{"lresid2"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{exr19-2-1}{%
+\subsection*{Exercício 19.2.1}\label{exr19-2-1}}
+\addcontentsline{toc}{subsection}{Exercício 19.2.1}
+
+No gráfico \texttt{lcarat} \emph{versus} \texttt{lprice} há algumas listras verticais claras. O que elas representam?
+
+\begin{solution}
+Eles representam a concentração de diamantes com valores arredondados para números ``human friendly'', ``bonitos''.
+\end{solution}
+
+\hypertarget{exr19-2-2}{%
+\subsection*{Exercício 19.2.2}\label{exr19-2-2}}
+\addcontentsline{toc}{subsection}{Exercício 19.2.2}
+
+Se \texttt{log(price)\ =\ a\_0\ +\ a\_1\ *\ log(carat)}, o que isso diz sobre o relacionamento entre \texttt{price} e \texttt{carat}?
+
+\begin{solution}
+De modo bastante simplificado, se há uma relação linear entre \(log_2(carat)\) e \(log_2(price)\), podemos afirmar que há uma relação exponencial entre \texttt{carat} e \texttt{price}. Isso significa que o aumento de \(x\) unidades em \texttt{carat}, corresponde a um crescimento da ordem de \(2^x\) em \texttt{price}.
+\end{solution}
+
+\hypertarget{exr19-2-3}{%
+\subsection*{Exercício 19.2.3}\label{exr19-2-3}}
+\addcontentsline{toc}{subsection}{Exercício 19.2.3}
+
+Extraia os diamantes que tenham resíduos muito altos ou muito baixos. Há alguma coisa estranha sobre esses diamantes? Eles são particularmente ruins ou bons, ou você acha que são erros de precificação?
+
+\begin{solution}
+Não enocntrei nada que possa indicar uma relação escondida. Acredito que as diferenças se devem a erros de precificação ou de entrada de dados.
+\end{solution}
+
+\hypertarget{exr19-2-4}{%
+\subsection*{Exercício 19.2.4}\label{exr19-2-4}}
+\addcontentsline{toc}{subsection}{Exercício 19.2.4}
+
+O modelo final, \texttt{mod\_diamonds2}, faz um bom trabalho na previsão dos preços de diamantes? Você confiaria nele para dizer quanto gastar se fosse comprar um diamante?
+
+\begin{solution}
+Antes de responder a questão, vamos da uma olhada na distribuição dos resíduos, no desvio padrão e mais algumas estatísticas sobre os erros.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(diamonds2, }\FunctionTok{aes}\NormalTok{(lcarat, lresid2)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_hex}\NormalTok{(}\AttributeTok{bins =} \DecValTok{50}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_ref\_line}\NormalTok{(}\AttributeTok{h =} \DecValTok{0}\NormalTok{, }\AttributeTok{size =} \FloatTok{0.25}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_ref\_line}\NormalTok{(}\AttributeTok{h =} \FloatTok{0.75}\NormalTok{, }\AttributeTok{size =} \FloatTok{0.25}\NormalTok{, }\AttributeTok{colour =} \StringTok{"red"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_ref\_line}\NormalTok{(}\AttributeTok{h =} \SpecialCharTok{{-}}\FloatTok{0.75}\NormalTok{, }\AttributeTok{size =} \FloatTok{0.25}\NormalTok{, }\AttributeTok{colour =} \StringTok{"red"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-297-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{diamonds2 }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}
+    \AttributeTok{sd =} \FunctionTok{sd}\NormalTok{(lresid2),}
+    \AttributeTok{rmse =} \FunctionTok{sqrt}\NormalTok{(}\FunctionTok{mean}\NormalTok{(lresid2}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{)),}
+    \AttributeTok{mae =} \FunctionTok{mean}\NormalTok{(}\FunctionTok{abs}\NormalTok{(lresid2)),}
+    \AttributeTok{p025 =} \FunctionTok{quantile}\NormalTok{(}\DecValTok{2}\SpecialCharTok{\^{}}\NormalTok{lresid2, }\FloatTok{0.025}\NormalTok{),}
+    \AttributeTok{p975 =} \FunctionTok{quantile}\NormalTok{(}\DecValTok{2}\SpecialCharTok{\^{}}\NormalTok{lresid2, }\FloatTok{0.975}\NormalTok{)}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1 x 5
+##      sd  rmse   mae  p025
+##   <dbl> <dbl> <dbl> <dbl>
+## 1 0.192 0.192 0.149 0.774
+## # i 1 more variable:
+## #   p975 <dbl>
+\end{verbatim}
+
+Avaliando os dados, vemos que o erro quadrático médio é de aproximadamente \texttt{0.19} o que corresponderia a um erro em torno de 14\%. Se usarmos o erro médio (em torno de \texttt{0.15}), teríamos um erro na casa de 11\%. Ademais, temos que 95\% das previsões erram entre 23\% e 31\%.
+
+Concluímos que, para uma ideia geral de preços, o modelo parece ser muito bom, contudo para uma empresa que trabalhe com compra e/ou venda de diamantes, um modelo mais robusto seria necessário.
+\end{solution}
 
 \hypertarget{o-que-afeta-o-nuxfamero-de-voos-diuxe1rios}{%
 \section{O que afeta o número de voos diários?}\label{o-que-afeta-o-nuxfamero-de-voos-diuxe1rios}}
 
+Para solução dos exercícios desta seção, precisaremos do seguinte código:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{daily }\OtherTok{\textless{}{-}}\NormalTok{ flights }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{date =} \FunctionTok{make\_date}\NormalTok{(year, month, day)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(date) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{n =} \FunctionTok{n}\NormalTok{())}
+
+\NormalTok{daily }\OtherTok{\textless{}{-}}\NormalTok{ daily }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{wday =} \FunctionTok{wday}\NormalTok{(date, }\AttributeTok{label =} \ConstantTok{TRUE}\NormalTok{))}
+
+\NormalTok{term }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(date) \{}
+  \FunctionTok{cut}\NormalTok{(date,}
+    \AttributeTok{breaks =} \FunctionTok{ymd}\NormalTok{(}\DecValTok{20130101}\NormalTok{, }\DecValTok{20130605}\NormalTok{, }\DecValTok{20130825}\NormalTok{, }\DecValTok{20140101}\NormalTok{),}
+    \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"spring"}\NormalTok{, }\StringTok{"summer"}\NormalTok{, }\StringTok{"fall"}\NormalTok{)}
+\NormalTok{  )}
+\NormalTok{\}}
+
+\NormalTok{daily }\OtherTok{\textless{}{-}}\NormalTok{ daily }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{term =} \FunctionTok{term}\NormalTok{(date))}
+
+\NormalTok{mod }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(n }\SpecialCharTok{\textasciitilde{}}\NormalTok{ wday, }\AttributeTok{data =}\NormalTok{ daily)}
+
+\NormalTok{daily }\OtherTok{\textless{}{-}}\NormalTok{ daily }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{add\_residuals}\NormalTok{(mod)}
+
+\NormalTok{mod1 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(n }\SpecialCharTok{\textasciitilde{}}\NormalTok{ wday, }\AttributeTok{data =}\NormalTok{ daily)}
+\NormalTok{mod2 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(n }\SpecialCharTok{\textasciitilde{}}\NormalTok{ wday }\SpecialCharTok{*}\NormalTok{ term, }\AttributeTok{data =}\NormalTok{ daily)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{exr19-3-1}{%
+\subsection*{Exercício 19.3.1}\label{exr19-3-1}}
+\addcontentsline{toc}{subsection}{Exercício 19.3.1}
+
+Use suas habilidades de detetive no Google para pensar o porquê de haver menos voos do que o esperado para os dias 20 de janeiro, 26 de maio e 1º de setembro. (Dida: todos têm a mesma explicação.) Como esses dias seriam generalizados para outro ano?
+
+\begin{solution}
+Os três dias antecedem feriados nacionais nos EUA. Como a maioria dos voos são a trabalho, é esperada um queda no número de voos no dia anterior (similar à queda que ocorre nos sábados).
+
+A regra geral para os feriados seria:
+- Dia de Martin Luther King Jr.: terceira segunda-feira de janeiro;
+- Memorial Day: última segunda-feira de maio;
+- Dia do trabalho: primeira segunda-feira de setembro.
+\end{solution}
+
+\hypertarget{exr19-3-2}{%
+\subsection*{Exercício 19.3.2}\label{exr19-3-2}}
+\addcontentsline{toc}{subsection}{Exercício 19.3.2}
+
+O que os três dias com resíduos positivos altos representam? Como esses dias seriam generalizados para outro ano?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{daily }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{top\_n}\NormalTok{(}\DecValTok{3}\NormalTok{, resid)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 3 x 5
+##   date           n wday  term 
+##   <date>     <int> <ord> <fct>
+## 1 2013-11-30   857 sáb   fall 
+## 2 2013-12-01   987 dom   fall 
+## 3 2013-12-28   814 sáb   fall 
+## # i 1 more variable:
+## #   resid <dbl>
+\end{verbatim}
+
+\begin{solution}
+Esses dias correspondem aos finais de semana imediatamente após o dia de ação de graças e o natal. Podemos generalizar para os demais anos considerando as datas desses feriados.
+\end{solution}
+
+\hypertarget{exr19-3-3}{%
+\subsection*{Exercício 19.3.3}\label{exr19-3-3}}
+\addcontentsline{toc}{subsection}{Exercício 19.3.3}
+
+Crie uma nova variável que separe a variável \texttt{wday} em períodos, mas somente para os sábados. Por exemplo, ela deve ter \texttt{Thurs}, \texttt{Fri}, menos \texttt{Sat-summer}, \texttt{Sat-spring}, \texttt{Sat-fall}. Como esse modelo se compara com o modelo com cada combinação de \texttt{wday} e \texttt{term}?
+
+\begin{solution}
+Iniciaremos usando a função \texttt{case\_when()} para criar a nova variável.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{daily }\OtherTok{\textless{}{-}}\NormalTok{ daily }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{wday2 =}
+      \FunctionTok{case\_when}\NormalTok{(}
+\NormalTok{        wday }\SpecialCharTok{==} \StringTok{"sáb"} \SpecialCharTok{\&}\NormalTok{ term }\SpecialCharTok{==} \StringTok{"summer"} \SpecialCharTok{\textasciitilde{}} \StringTok{"sáb\_summer"}\NormalTok{,}
+\NormalTok{        wday }\SpecialCharTok{==} \StringTok{"sáb"} \SpecialCharTok{\&}\NormalTok{ term }\SpecialCharTok{==} \StringTok{"fall"} \SpecialCharTok{\textasciitilde{}} \StringTok{"sáb\_fall"}\NormalTok{,}
+\NormalTok{        wday }\SpecialCharTok{==} \StringTok{"sáb"} \SpecialCharTok{\&}\NormalTok{ term }\SpecialCharTok{==} \StringTok{"spring"} \SpecialCharTok{\textasciitilde{}} \StringTok{"sáb\_spring"}\NormalTok{,}
+        \ConstantTok{TRUE} \SpecialCharTok{\textasciitilde{}} \FunctionTok{as.character}\NormalTok{(wday)}
+\NormalTok{      )}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+Na sequência, criaremos o modelo de predição:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mod3 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(n }\SpecialCharTok{\textasciitilde{}}\NormalTok{ wday2, daily)}
+\end{Highlighting}
+\end{Shaded}
+
+E exibiremos um gráfico comparando os modelos:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{daily }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{gather\_residuals}\NormalTok{(}\AttributeTok{sab =}\NormalTok{ mod3, }\AttributeTok{all =}\NormalTok{ mod2) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(date, resid, }\AttributeTok{color =}\NormalTok{ model)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_line}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.75}\NormalTok{) }\SpecialCharTok{+}
+\NormalTok{    tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-303-1.pdf}
+Devido à quantidade de dados, fica difícil visualizar alguma coisa. Vamos construir um novo gráfico com base apenas na diferença entre os resíduos.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{daily }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{spread\_residuals}\NormalTok{(}\AttributeTok{sab =}\NormalTok{ mod3, }\AttributeTok{all =}\NormalTok{ mod2) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{diff =}\NormalTok{ sab }\SpecialCharTok{{-}}\NormalTok{ all) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(date, diff)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_line}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.75}\NormalTok{) }\SpecialCharTok{+}
+\NormalTok{    tema}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-304-1.pdf}
+Notamos que o o modelo que contém a separação conforme período escolar apresenta maiores diferenças durante o outono e menores na primavera.
+
+Precisamo encontrar ainda uma maneira mais adequada de comparar modelos! Esta questão será marcada para revisão!
+\end{solution}
+
+\hypertarget{exr19-3-4}{%
+\subsection*{Exercício 19.3.4}\label{exr19-3-4}}
+\addcontentsline{toc}{subsection}{Exercício 19.3.4}
+
+Crie uma nova variável \texttt{wday} que combine o dia da semana, período (para sábados) e feriados nacionais. COmo se parecem os resíduos desse modelo?
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr19-3-5}{%
+\subsection*{Exercício 19.3.5}\label{exr19-3-5}}
+\addcontentsline{toc}{subsection}{Exercício 19.3.5}
+
+O que acontece se você encaixar um efeito dia da semana que varie por mês (por exemplo, \texttt{n\ \textasciitilde{}\ wday\ *\ month})? Por que isso não é útil?
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr19-3-6}{%
+\subsection*{Exercício 19.3.6}\label{exr19-3-6}}
+\addcontentsline{toc}{subsection}{Exercício 19.3.6}
+
+Como você esperaria que o modelo \texttt{n\ \textasciitilde{}\ wday\ +\ ns(date,\ 5)} fosse? A partir de seus conhecimentos sobre dados, por que você esperaria que ele não fosse particularmente eficaz?
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr19-3-7}{%
+\subsection*{Exercício 19.3.7}\label{exr19-3-7}}
+\addcontentsline{toc}{subsection}{Exercício 19.3.7}
+
+Nós formulamos a hipótese de que pessoas viajando aos domingos são mais propensas a serem viajantes a negócios, que precisam estar em algum lugar na segunda-feira. Explore essa hipótese observando como ela se desmembra com base na distância e no tempo: se for verdade, você esperaria ver mais voos nos domingos a noite para lugares distantes.
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr19-3-8}{%
+\subsection*{Exercício 19.3.8}\label{exr19-3-8}}
+\addcontentsline{toc}{subsection}{Exercício 19.3.8}
+
+É um pouco frustrante que domingo e sábado estejam em pontas separadas do gráfico. Escreva uma pequena função para estabelecer os níveis do fator para que a semana comece na segunda-feira.
+
+\begin{solution}
+x
+\end{solution}
+
 \hypertarget{aprendendo-mais-sobre-modelos}{%
 \section{Aprendendo mais sobre modelos}\label{aprendendo-mais-sobre-modelos}}
+
+Não temos exercícios para esta seção.
 
 \hypertarget{muitos-modelos-com-purrr-e-broom}{%
 \chapter{\texorpdfstring{Muitos modelos com \texttt{purrr} e \texttt{broom}}{Muitos modelos com purrr e broom}}\label{muitos-modelos-com-purrr-e-broom}}
