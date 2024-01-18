@@ -233,7 +233,7 @@
 \makeatother
 \subtitle{Solução dos exercícios}
 \author{Jeidsan A. da C. Pereira}
-\date{2024-01-14}
+\date{2024-01-18}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Teorema}[chapter]
@@ -386,6 +386,10 @@ Dúvidas ou sugestões de melhoria podem ser encaminhadas para o e-mail \emph{\h
   \protect\hyperlink{exr19-3-7}{Exercício 19.3.7};
 \item
   \protect\hyperlink{exr19-3-8}{Exercício 19.3.8};
+\item
+  Exercícios da seção 20.4;
+\item
+  Exercícios da seção 20.5;
 \end{itemize}
 
 \mainmatter
@@ -4852,16 +4856,16 @@ Pratique referir-se a nomes de variáveis não sintáticos, no data frame a segu
 ## # A tibble: 10 x 3
 ##      one   two three
 ##    <int> <dbl> <dbl>
-##  1     1  1.78  1.78
-##  2     2  4.71  2.35
-##  3     3  6.02  2.01
-##  4     4 10.1   2.53
-##  5     5  9.92  1.98
-##  6     6 12.0   2.00
-##  7     7 15.4   2.20
-##  8     8 16.3   2.03
-##  9     9 19.1   2.12
-## 10    10 18.3   1.83
+##  1     1  2.14  2.14
+##  2     2  3.37  1.68
+##  3     3  5.88  1.96
+##  4     4  8.29  2.07
+##  5     5  8.52  1.70
+##  6     6 12.6   2.09
+##  7     7 13.6   1.95
+##  8     8 16.6   2.08
+##  9     9 17.2   1.92
+## 10    10 22.3   2.23
 \end{verbatim}
 
 \end{solution}
@@ -9154,7 +9158,7 @@ Escreva uma função que diga ``good morning'', ``good afternoon'', ou ``good ev
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "Boa tarde!"
+## [1] "Bom dia!"
 \end{verbatim}
 
 \begin{Shaded}
@@ -10026,10 +10030,10 @@ Pense sobre saída, seuência e corpo \emph{antes} de começar a escrever o loop
 
 \begin{verbatim}
 ## List of 4
-##  $ : num [1:10] -11.02 -9.83 -9.14 -12.5 -10.09 ...
-##  $ : num [1:10] 0.418 -0.236 -0.213 1.713 1.322 ...
-##  $ : num [1:10] 10.88 9.85 11.6 11.23 11.14 ...
-##  $ : num [1:10] 98.8 99.7 99.5 103.1 100.5 ...
+##  $ : num [1:10] -11.55 -10.27 -9.73 -8.64 -11.06 ...
+##  $ : num [1:10] -0.355 2.159 0.902 0.872 -0.862 ...
+##  $ : num [1:10] 9.12 9.74 9.44 10.87 10.85 ...
+##  $ : num [1:10] 98.8 99.1 98.1 99.1 100.3 ...
 \end{verbatim}
 
 \end{solution}
@@ -10100,23 +10104,23 @@ O último loop calcula a soma cumulativa de um vetor e poderia ser substituído 
 \end{Shaded}
 
 \begin{verbatim}
-##   [1]  0.3538083  0.3945823  0.4413880  0.9897417  1.0329999  1.6483127
-##   [7]  2.3156320  2.7272238  3.3362075  3.5521414  4.5418137  4.6921853
-##  [13]  5.0117227  5.2465283  6.1707765  6.9333120  7.0665232  7.5412228
-##  [19]  8.2346457  9.0208561  9.9201496 10.0388252 10.8936189 11.4841401
-##  [25] 11.5573675 12.4204475 12.6321860 13.2910739 14.2209617 15.1347410
-##  [31] 15.6365591 16.1661659 16.9592488 17.6838586 17.9201595 18.8353828
-##  [37] 19.0609482 19.9513397 20.1841585 20.8475252 21.0276840 21.5650052
-##  [43] 22.1351938 22.5162037 22.7999979 23.0728642 23.3926577 24.3613883
-##  [49] 24.3614335 25.0024871 25.5479950 26.4360941 27.1160498 27.5545142
-##  [55] 28.1310179 28.1989308 29.0028257 29.0760067 29.3954062 30.1728611
-##  [61] 31.1167954 31.6799687 32.5587460 33.0302280 33.6687764 34.3573347
-##  [67] 34.3869736 34.9669715 35.1002186 35.3692568 36.0703883 36.3249867
-##  [73] 36.8086244 36.8479010 37.2757523 38.2720669 38.9864245 39.3124931
-##  [79] 39.8056399 40.3899609 40.5266476 41.1383906 41.4979187 42.3978495
-##  [85] 42.9589725 43.2538442 43.7279552 43.9528413 44.8358273 45.6492699
-##  [91] 45.9494113 46.2500975 46.2925701 46.4735129 47.2107887 47.7805391
-##  [97] 48.2776787 48.4318656 48.9712018 49.2358491
+##   [1]  0.1506122  0.5999997  1.2173687  1.4298333  1.9115572  2.1519551
+##   [7]  2.4625424  2.8644669  3.6456225  4.4342450  4.4566881  5.3412343
+##  [13]  5.8171890  6.6458936  7.0612572  7.8449935  7.9325799  8.5894121
+##  [19]  9.1893221  9.3270027 10.1310642 10.3525059 11.1623970 11.4048169
+##  [25] 11.9185093 12.8815081 13.3226107 13.3800220 14.1615810 14.2769528
+##  [31] 14.5316823 14.5904011 14.6324842 15.4292223 16.1888616 16.4862354
+##  [37] 16.6887621 16.8251247 17.4998959 17.9009114 18.0000264 18.3979919
+##  [43] 18.5835125 19.3037069 19.6321698 20.5951443 21.2957542 21.8537043
+##  [49] 22.8533672 23.8333804 24.1839024 24.2304392 24.8365608 25.1211775
+##  [55] 25.2164912 26.0017325 26.4028640 26.4955477 27.0697464 27.7631287
+##  [61] 28.2850887 28.5603616 28.8652456 29.6735566 30.3208788 31.2565623
+##  [67] 31.8185630 31.9176141 31.9946824 32.0792669 32.5806014 32.8924134
+##  [73] 33.3880436 34.1931000 34.7432085 34.8351539 35.5548025 35.9221775
+##  [79] 35.9399349 36.0747286 36.5231078 37.0250263 37.0754056 37.6755878
+##  [85] 37.7196656 38.0894311 38.1730922 38.4977804 39.2766615 39.7949091
+##  [91] 39.8596255 39.9738517 40.6382597 41.3155308 41.4752921 42.0889188
+##  [97] 42.6975511 43.1338915 43.4951295 43.5322842
 \end{verbatim}
 
 \end{solution}
@@ -10408,8 +10412,8 @@ Com as funções definidas, vamos avaliar o tempo de execução utilizando a bib
 
 \begin{verbatim}
 ##              test replications elapsed relative user.self sys.self user.child
-## 1   No allocation          100    0.28        4      0.25     0.03         NA
-## 2 With allocation          100    0.07        1      0.08     0.00         NA
+## 1   No allocation          100    0.23    3.286      0.24        0         NA
+## 2 With allocation          100    0.07    1.000      0.06        0         NA
 ##   sys.child
 ## 1        NA
 ## 2        NA
@@ -11587,20 +11591,268 @@ Não temos exercícios para esta seção.
 \hypertarget{introduuxe7uxe3o-16}{%
 \section{Introdução}\label{introduuxe7uxe3o-16}}
 
+Não temos exercícios para esta seção.
+
 \hypertarget{gapminder}{%
 \section{\texorpdfstring{\texttt{gapminder}}{gapminder}}\label{gapminder}}
+
+\hypertarget{exr20-2-1}{%
+\subsection*{Exercício 20.2.1}\label{exr20-2-1}}
+\addcontentsline{toc}{subsection}{Exercício 20.2.1}
+
+Uma tendência linear parece ser simples demais para a tendência geral. Você consegue fazer algo melhor com um polinômio quadrático? Como imterpreta os coeficientes do quadrático? (Dica: você pode querer transformar \texttt{year} para que tenha média zero)
+
+\begin{solution}
+Vamos utilizar a função \texttt{poly} para contruir um modelo colocando \texttt{lifeExp} em função de uma transformação de uma \texttt{year}.
+Vamos utilizar a função \texttt{poly} para construir o modelo:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{country\_model }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(df) \{}
+  \FunctionTok{lm}\NormalTok{(lifeExp }\SpecialCharTok{\textasciitilde{}} \FunctionTok{poly}\NormalTok{((year }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(year)) }\SpecialCharTok{/} \FunctionTok{sd}\NormalTok{(year), }\DecValTok{2}\NormalTok{), }\AttributeTok{data =}\NormalTok{ df)}
+\NormalTok{\}}
+
+\NormalTok{(by\_country }\OtherTok{\textless{}{-}}\NormalTok{ gapminder }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(country, continent) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{nest}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{model =} \FunctionTok{map}\NormalTok{(data, country\_model)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{resids =} \FunctionTok{map2}\NormalTok{(data, model, add\_residuals)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 142 x 5
+## # Groups:   country,
+## #   continent [142]
+##    country  continent data    
+##    <fct>    <fct>     <list>  
+##  1 Afghani~ Asia      <tibble>
+##  2 Albania  Europe    <tibble>
+##  3 Algeria  Africa    <tibble>
+##  4 Angola   Africa    <tibble>
+##  5 Argenti~ Americas  <tibble>
+##  6 Austral~ Oceania   <tibble>
+##  7 Austria  Europe    <tibble>
+##  8 Bahrain  Asia      <tibble>
+##  9 Banglad~ Asia      <tibble>
+## 10 Belgium  Europe    <tibble>
+## # i 132 more rows
+## # i 2 more variables:
+## #   model <list>,
+## #   resids <list>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{unnest}\NormalTok{(by\_country, resids) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(year, resid)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_line}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{group =}\NormalTok{ country), }\AttributeTok{alpha =}\NormalTok{ .}\DecValTok{5}\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{se =} \ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using method = 'gam' and formula = 'y ~ s(x, bs = "cs")'
+\end{verbatim}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-306-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{by\_country }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{glance =} \FunctionTok{map}\NormalTok{(model, broom}\SpecialCharTok{::}\NormalTok{glance)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{unnest}\NormalTok{(glance, }\AttributeTok{.drop =} \ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(continent, r.squared)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_jitter}\NormalTok{(}\AttributeTok{width =} \FloatTok{0.5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: The `.drop` argument of `unnest()` is deprecated as of tidyr 1.0.0.
+## i All list-columns are now preserved.
+## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+## generated.
+\end{verbatim}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-307-1.pdf}
+\end{solution}
+
+\hypertarget{exr20-2-2}{%
+\subsection*{Exercício 20.2.2}\label{exr20-2-2}}
+\addcontentsline{toc}{subsection}{Exercício 20.2.2}
+
+Explore outros métodos para visualizar a distribuição de \(R^2\) por continente. Você pode querer experimentar o pacote \textbf{ggbeeswarm}, que fornece métodos similares para evitar sobreposições como interferências, mas usa métodos deterministicos.
+
+\begin{solution}
+\leavevmode
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggbeeswarm)}
+
+\NormalTok{by\_country }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{glance =} \FunctionTok{map}\NormalTok{(model, broom}\SpecialCharTok{::}\NormalTok{glance)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{unnest}\NormalTok{(glance, }\AttributeTok{.drop =} \ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(continent, r.squared)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_beeswarm}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: The `.drop` argument of `unnest()` is deprecated as of tidyr 1.0.0.
+## i All list-columns are now preserved.
+## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+## generated.
+\end{verbatim}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-308-1.pdf}
+
+\end{solution}
+
+\hypertarget{exr20-2-3}{%
+\subsection*{Exercício 20.2.3}\label{exr20-2-3}}
+\addcontentsline{toc}{subsection}{Exercício 20.2.3}
+
+Para criar o último gráfico (mostrando os dados para os países com os piores ajustes de modelo), precisamos de dois passos: criar um data frame com uma linha por país e, então, fazer um \emph{semijoin} com o conjunto de dados original. É possível evitar esse join se usarmos \texttt{unnest()}, em vez de \texttt{unnest(.drop\ =\ TRUE)}. Como?
+
+\begin{solution}
+\leavevmode
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{gapminder }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(country, continent) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{nest}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{model =} \FunctionTok{map}\NormalTok{(data, }\SpecialCharTok{\textasciitilde{}}\FunctionTok{lm}\NormalTok{(lifeExp }\SpecialCharTok{\textasciitilde{}}\NormalTok{ year, .))) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{glance =} \FunctionTok{map}\NormalTok{(model, broom}\SpecialCharTok{::}\NormalTok{glance)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{unnest}\NormalTok{(glance) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{unnest}\NormalTok{(data) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(r.squared }\SpecialCharTok{\textless{}}\NormalTok{ .}\DecValTok{25}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(year, lifeExp, }\AttributeTok{color =}\NormalTok{ country)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_line}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-309-1.pdf}
+
+\end{solution}
 
 \hypertarget{list-columns}{%
 \section{List-columns}\label{list-columns}}
 
+Não temos exercícios para esta seção.
+
 \hypertarget{criando-list-columns}{%
 \section{Criando list-columns}\label{criando-list-columns}}
+
+\hypertarget{exr20-4-1}{%
+\subsection*{Exercício 20.4.1}\label{exr20-4-1}}
+\addcontentsline{toc}{subsection}{Exercício 20.4.1}
+
+Liste todas as funções que você puder pensar que recebem um vetor atômico e retorna uma lista.
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr20-4-2}{%
+\subsection*{Exercício 20.4.2}\label{exr20-4-2}}
+\addcontentsline{toc}{subsection}{Exercício 20.4.2}
+
+Pense em funções úteis de resumo que, como \texttt{quantile()}, retornem valores múltiplos.
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr20-4-3}{%
+\subsection*{Exercício 20.4.3}\label{exr20-4-3}}
+\addcontentsline{toc}{subsection}{Exercício 20.4.3}
+
+O que está faltando no data frame a seguir? Como \texttt{quantile()} retorna o pedaço que falta? Por que isso não é útil?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mtcars }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(cyl) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarize}\NormalTok{(}\AttributeTok{q =} \FunctionTok{list}\NormalTok{(}\FunctionTok{quantile}\NormalTok{(mpg))) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{unnest}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: `cols` is now required when using `unnest()`.
+## i Please use `cols = c(q)`.
+\end{verbatim}
+
+\begin{verbatim}
+## # A tibble: 15 x 2
+##      cyl     q
+##    <dbl> <dbl>
+##  1     4  21.4
+##  2     4  22.8
+##  3     4  26  
+##  4     4  30.4
+##  5     4  33.9
+##  6     6  17.8
+##  7     6  18.6
+##  8     6  19.7
+##  9     6  21  
+## 10     6  21.4
+## 11     8  10.4
+## 12     8  14.4
+## 13     8  15.2
+## 14     8  16.2
+## 15     8  19.2
+\end{verbatim}
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr20-4-4}{%
+\subsection*{Exercício 20.4.4}\label{exr20-4-4}}
+\addcontentsline{toc}{subsection}{Exercício 20.4.4}
+
+O que este código faz? Porque ele pode ser útil?
+
+\begin{verbatim}
+mtcars %>%
+  group_by(cyl) %>%
+  summarise_each(funs(list))
+\end{verbatim}
+
+\begin{solution}
+x
+\end{solution}
 
 \hypertarget{simplificando-list-columns}{%
 \section{Simplificando list-columns}\label{simplificando-list-columns}}
 
+\hypertarget{exr20-5-1}{%
+\subsection*{Exercício 20.5.1}\label{exr20-5-1}}
+\addcontentsline{toc}{subsection}{Exercício 20.5.1}
+
+Por que a função \texttt{lenghts()} pode ser útil para criar colunas de vetores atômicos a partir de list-columns?
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr20-5-2}{%
+\subsection*{Exercício 20.5.2}\label{exr20-5-2}}
+\addcontentsline{toc}{subsection}{Exercício 20.5.2}
+
+Liste os tipos mais comuns de vetores encontrados em um data frame. O que torna as listas diferentes?
+
+\begin{solution}
+x
+\end{solution}
+
 \hypertarget{criando-dados-tidy-com-broom}{%
 \section{\texorpdfstring{Criando dados tidy com \texttt{broom}}{Criando dados tidy com broom}}\label{criando-dados-tidy-com-broom}}
+
+Não temos exercícios para esta seção.
 
 \hypertarget{part-comunicar}{%
 \part{Comunicar}\label{part-comunicar}}

@@ -2,13 +2,175 @@
 
 ## Introdução
 
+Não temos exercícios para esta seção.
+
 ## `gapminder`
+
+### Exercício 20.2.1 {- #exr20-2-1}
+
+::: {.enunciado}
+Uma tendência linear parece ser simples demais para a tendência geral. Você consegue fazer algo melhor com um polinômio quadrático? Como imterpreta os coeficientes do quadrático? (Dica: você pode querer transformar `year` para que tenha média zero)
+:::
+
+::: {.solution}
+
+Vamos utilizar a função `poly` para contruir um modelo colocando `lifeExp` em função de uma transformação de uma  `year`. 
+Vamos utilizar a função `poly` para construir o modelo:
+
+```{r}
+country_model <- function(df) {
+  lm(lifeExp ~ poly((year - mean(year)) / sd(year), 2), data = df)
+}
+
+(by_country <- gapminder %>%
+  group_by(country, continent) %>%
+  nest() %>%
+  mutate(model = map(data, country_model)) %>%
+  mutate(resids = map2(data, model, add_residuals)))
+```
+
+```{r}
+unnest(by_country, resids) %>%
+  ggplot(aes(year, resid)) +
+    geom_line(aes(group = country), alpha = .5) +
+    geom_smooth(se = FALSE)
+```
+```{r}
+by_country %>%
+  mutate(glance = map(model, broom::glance)) %>%
+  unnest(glance, .drop = TRUE) %>%
+  ggplot(aes(continent, r.squared)) +
+  geom_jitter(width = 0.5)
+```
+:::
+
+### Exercício 20.2.2 {- #exr20-2-2}
+
+::: {.enunciado}
+Explore outros métodos para visualizar a distribuição de $R^2$ por continente. Você pode querer experimentar o pacote **ggbeeswarm**, que fornece métodos similares para evitar sobreposições  como interferências, mas usa métodos deterministicos.
+:::
+
+::: {.solution}
+```{r}
+library(ggbeeswarm)
+
+by_country %>%
+  mutate(glance = map(model, broom::glance)) %>%
+  unnest(glance, .drop = TRUE) %>%
+  ggplot(aes(continent, r.squared)) +
+  geom_beeswarm()
+
+```
+
+:::
+
+### Exercício 20.2.3 {- #exr20-2-3}
+
+::: {.enunciado}
+Para criar o último gráfico (mostrando os dados para os países com os piores ajustes de modelo), precisamos de dois passos: criar um data frame com uma linha por país e, então, fazer um *semijoin* com o conjunto de dados original. É possível evitar esse join se usarmos `unnest()`, em vez de `unnest(.drop = TRUE)`. Como?
+:::
+
+::: {.solution}
+```{r}
+gapminder %>%
+  group_by(country, continent) %>%
+  nest() %>%
+  mutate(model = map(data, ~lm(lifeExp ~ year, .))) %>%
+  mutate(glance = map(model, broom::glance)) %>%
+  unnest(glance) %>%
+  unnest(data) %>%
+  filter(r.squared < .25) %>%
+  ggplot(aes(year, lifeExp, color = country)) +
+    geom_line()
+```
+
+:::
 
 ## List-columns
 
+Não temos exercícios para esta seção.
+
 ## Criando list-columns
+
+### Exercício 20.4.1 {- #exr20-4-1}
+
+::: {.enunciado}
+Liste todas as funções que você puder pensar que recebem um vetor atômico e retorna uma lista.
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 20.4.2 {- #exr20-4-2}
+
+::: {.enunciado}
+Pense em funções úteis de resumo que, como `quantile()`, retornem valores múltiplos.
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 20.4.3 {- #exr20-4-3}
+
+::: {.enunciado}
+O que está faltando no data frame a seguir? Como `quantile()` retorna o pedaço que falta? Por que isso não é útil?
+
+```{r}
+mtcars %>%
+  group_by(cyl) %>%
+  summarize(q = list(quantile(mpg))) %>%
+  unnest()
+```
+
+
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 20.4.4 {- #exr20-4-4}
+
+::: {.enunciado}
+O que este código faz? Porque ele pode ser útil?
+
+```
+mtcars %>%
+  group_by(cyl) %>%
+  summarise_each(funs(list))
+```
+
+:::
+
+::: {.solution}
+x
+:::
 
 ## Simplificando list-columns 
 
+### Exercício 20.5.1 {- #exr20-5-1}
+
+::: {.enunciado}
+Por que a função `lenghts()` pode ser útil para criar colunas de vetores atômicos a partir de list-columns?
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 20.5.2 {- #exr20-5-2}
+
+::: {.enunciado}
+Liste os tipos mais comuns de vetores encontrados em um data frame. O que torna as listas diferentes?
+:::
+
+::: {.solution}
+x
+:::
+
 ## Criando dados tidy com `broom`
+
+Não temos exercícios para esta seção.
 

@@ -1,0 +1,164 @@
+# Muitos modelos com **purrr** e **broom**
+
+Para este capítulo usaremos algumas bibliotecas:
+
+```{r}
+library(modelr)
+library(tidyverse)
+library(gapminder)
+library(broom)
+library(gridExtra)
+```
+
+Vamos iniciar nossa análise olhando os dados do dataset *gapminder*:
+
+```{r}
+gapminder
+```
+
+Ao tentarmos visualizar a evolução da expectativa de vida ao longo dos anos, temos um gráfico bastante poluído:
+
+```{r}
+gapminder %>%
+  ggplot(aes(year, lifeExp, group = country)) +
+    geom_line(alpha = .5)
+```
+
+Note que usamos o atributo `group` em lugar de `color`. Isto se deve ao fato de que a estética `color` produz uma legenda enorme que atrapalha a visualização do próprio gráfico. Outro motivo é que, neste caso, queremos apenas avaliar a tendência geral e não comparar os países, logo apenas o agrupamento é suficiente.
+
+Nós percebemos uma tendência geral de crescimento linear, mas ainda vemos algumas anomalias. Utilizando um modelo linear, vamos remover esse padrão para que possamos avaliar melhor a tendência e o padrão restante.
+
+Para um único país, é fácil fazer isso:
+
+```{r}
+nz <- filter(gapminder, country == "New Zealand")
+nz_mod <- lm(lifeExp ~ year, data = nz)
+
+nz1 <- nz %>% 
+          ggplot(aes(year, lifeExp)) +
+            geom_line() +
+            ggtitle("Dados = ")
+
+nz2 <- nz %>%
+          add_predictions(nz_mod) %>%
+          ggplot(aes(year, pred)) +
+            geom_line() +
+            ggtitle("Modelo + ")
+
+nz3 <- nz %>%
+          add_residuals(nz_mod) %>%
+          ggplot(aes(year, resid)) +
+            geom_line() +
+            ggtitle("Resíduo")
+
+grid.arrange(nz1, nz2, nz3, ncol = 3)
+
+```
+
+Para conseguir fazer o mesmo para uma sequência de paízes, poderíamos utilizar uma função, mas há um modo mais fácil usando data frames aninhados.]
+
+```{r}
+(by_country <- gapminder %>%
+                group_by(country, continent) %>%
+                nest())
+```
+
+Agora temos uma coluna do nosso data frame que é uma lista de data frames. Podemos então utilizar a função `map()` para gerar os modelos dinamicamente.
+
+```{r}
+country_model <- function(df) {
+  lm(lifeExp ~ year, data = df)
+}
+
+(by_country <- by_country %>%
+                mutate(model = map(data, country_model)))
+```
+
+Vamos agora adicionar ao nosso data frame os resíduos gerados pelos modelos:
+
+```{r}
+(by_country <- by_country %>%
+                  mutate(resid = map2(data, model, add_residuals)))
+
+```
+
+Para que consigamos plotar os dados, precisaremos desaninhá-los usando a função `unnest()`:
+
+```{r}
+(resids <- unnest(by_country, resid))
+```
+
+```{r}
+resids %>%
+  ggplot(aes(year, resid)) +
+  geom_line(aes(group = country), alpha = .5) +
+  geom_smooth(se = FALSE, color = "red")
+```
+
+Para alguns países, ainda temos um comportamente estranho. Algum padrão não foi capturado. Vamos quebrar os dados por continente para facilitar nossa análise.
+
+```{r}
+resids %>%
+  ggplot(aes(year, resid)) +
+  geom_line(aes(group = country), alpha = .5) +
+  geom_ref_line(h = 0, size = 1) +
+  facet_wrap(~continent)
+```
+
+Parece que o nosso modelo não se ajusta muito bem na África e na Ásia. 
+
+```{r}
+resids %>%
+  ggplot(aes(resid)) +
+  geom_density() +
+  facet_wrap(~continent)
+```
+
+Vamos utilizar o pacore **broom** para avaliar o caso.
+
+```{r}
+(glances <- by_country %>%
+              mutate(glance = map(model, glance)) %>%
+              unnest(glance, .drop = TRUE) %>%
+              select(country, continent, r.squared:nobs))
+```
+
+Vamos utilizar o coeficiente de determinação ($R^2$) para avaliar os nossos modelos. Quanto mais próximo de 1, maor a capacidade do modelo de explicar a variação nos dados.
+
+```{r}
+glances %>%
+  arrange(r.squared)
+```
+
+Podemos notar que os menores valores estão na África.
+
+```{r}
+glances %>%
+  ggplot(aes(continent, r.squared)) +
+  geom_jitter(width = .5)
+```
+
+Podemos selecionar os países com pior valor de $R^2$ e desenhá-los num gráfico:
+
+```{r}
+(bad_fit <- filter(glances, r.squared < 0.25))
+```
+
+```{r}
+gapminder %>%
+  semi_join(bad_fit, by = "country") %>%
+  ggplot(aes(year, lifeExp, color = country)) +
+    geom_line()
+```
+
+
+
+
+
+
+
+
+
+
+
+
