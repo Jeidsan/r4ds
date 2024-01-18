@@ -1,1 +1,3 @@
 # Fluxo de trabalho de R Markdown
+
+Não temos exercícios para este capítulo.

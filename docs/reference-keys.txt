@@ -156,15 +156,5 @@ temas
 salvando-seus-gráficos
 aprendendo-mais-2
 formatos-r-markdown
-introdução-19
-opções-de-saída
-documentos
-notebooks
-apresentações
-dashboards
-interatividade
-sites
-outros-formatos
-aprendendo-mais-3
 fluxo-de-trabalho-de-r-markdown
 apendice-a---estudo-de-caso-sobre-a-arrumação-de-dados-com-tidyr

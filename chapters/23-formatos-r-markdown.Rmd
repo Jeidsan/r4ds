@@ -1,21 +1,3 @@
 # Formatos R Markdown
 
-## Introdução
-
-## Opções de saída
-
-## Documentos
-
-## Notebooks
-
-## Apresentações
-
-## Dashboards
-
-## Interatividade
-
-## Sites
-
-## Outros formatos
-
-## Aprendendo mais
+Não temos exercícios para este capítulo.

@@ -390,6 +390,8 @@ Dúvidas ou sugestões de melhoria podem ser encaminhadas para o e-mail \emph{\h
   Exercícios da seção 20.4;
 \item
   Exercícios da seção 20.5;
+\item
+  Exercícios do capítulo 21;
 \end{itemize}
 
 \mainmatter
@@ -4856,16 +4858,16 @@ Pratique referir-se a nomes de variáveis não sintáticos, no data frame a segu
 ## # A tibble: 10 x 3
 ##      one   two three
 ##    <int> <dbl> <dbl>
-##  1     1  2.14  2.14
-##  2     2  3.37  1.68
-##  3     3  5.88  1.96
-##  4     4  8.29  2.07
-##  5     5  8.52  1.70
-##  6     6 12.6   2.09
-##  7     7 13.6   1.95
-##  8     8 16.6   2.08
-##  9     9 17.2   1.92
-## 10    10 22.3   2.23
+##  1     1  3.27  3.27
+##  2     2  2.96  1.48
+##  3     3  4.52  1.51
+##  4     4  7.62  1.90
+##  5     5  9.96  1.99
+##  6     6 12.3   2.05
+##  7     7 13.9   1.99
+##  8     8 15.4   1.92
+##  9     9 18.5   2.06
+## 10    10 19.0   1.90
 \end{verbatim}
 
 \end{solution}
@@ -9158,7 +9160,7 @@ Escreva uma função que diga ``good morning'', ``good afternoon'', ou ``good ev
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "Bom dia!"
+## [1] "Boa tarde!"
 \end{verbatim}
 
 \begin{Shaded}
@@ -10030,10 +10032,10 @@ Pense sobre saída, seuência e corpo \emph{antes} de começar a escrever o loop
 
 \begin{verbatim}
 ## List of 4
-##  $ : num [1:10] -11.55 -10.27 -9.73 -8.64 -11.06 ...
-##  $ : num [1:10] -0.355 2.159 0.902 0.872 -0.862 ...
-##  $ : num [1:10] 9.12 9.74 9.44 10.87 10.85 ...
-##  $ : num [1:10] 98.8 99.1 98.1 99.1 100.3 ...
+##  $ : num [1:10] -9.86 -9.06 -9.67 -8.21 -9.02 ...
+##  $ : num [1:10] 1.5291 0.0964 -0.1237 0.5918 1.3581 ...
+##  $ : num [1:10] 10.53 11.21 11.56 10.37 9.76 ...
+##  $ : num [1:10] 101.6 99.3 100.2 100.4 101.4 ...
 \end{verbatim}
 
 \end{solution}
@@ -10104,23 +10106,23 @@ O último loop calcula a soma cumulativa de um vetor e poderia ser substituído 
 \end{Shaded}
 
 \begin{verbatim}
-##   [1]  0.1506122  0.5999997  1.2173687  1.4298333  1.9115572  2.1519551
-##   [7]  2.4625424  2.8644669  3.6456225  4.4342450  4.4566881  5.3412343
-##  [13]  5.8171890  6.6458936  7.0612572  7.8449935  7.9325799  8.5894121
-##  [19]  9.1893221  9.3270027 10.1310642 10.3525059 11.1623970 11.4048169
-##  [25] 11.9185093 12.8815081 13.3226107 13.3800220 14.1615810 14.2769528
-##  [31] 14.5316823 14.5904011 14.6324842 15.4292223 16.1888616 16.4862354
-##  [37] 16.6887621 16.8251247 17.4998959 17.9009114 18.0000264 18.3979919
-##  [43] 18.5835125 19.3037069 19.6321698 20.5951443 21.2957542 21.8537043
-##  [49] 22.8533672 23.8333804 24.1839024 24.2304392 24.8365608 25.1211775
-##  [55] 25.2164912 26.0017325 26.4028640 26.4955477 27.0697464 27.7631287
-##  [61] 28.2850887 28.5603616 28.8652456 29.6735566 30.3208788 31.2565623
-##  [67] 31.8185630 31.9176141 31.9946824 32.0792669 32.5806014 32.8924134
-##  [73] 33.3880436 34.1931000 34.7432085 34.8351539 35.5548025 35.9221775
-##  [79] 35.9399349 36.0747286 36.5231078 37.0250263 37.0754056 37.6755878
-##  [85] 37.7196656 38.0894311 38.1730922 38.4977804 39.2766615 39.7949091
-##  [91] 39.8596255 39.9738517 40.6382597 41.3155308 41.4752921 42.0889188
-##  [97] 42.6975511 43.1338915 43.4951295 43.5322842
+##   [1]  0.8162778  0.8995471  1.2501733  1.5706654  2.3974889  2.5969998
+##   [7]  3.4516104  4.4313224  4.7503161  4.8233062  5.3818888  5.8890517
+##  [13]  6.2648123  6.6163234  7.3978031  7.6359332  8.2608480  9.1802566
+##  [19]  9.3731847  9.5278986  9.9339832 10.4419825 10.7631179 11.7329333
+##  [25] 12.5612082 13.4106039 13.4684729 13.7204871 14.5843307 15.0003687
+##  [31] 15.7212309 16.4690820 16.8235465 17.6613948 18.2249205 18.4913073
+##  [37] 18.8353543 19.3242196 19.4354521 19.6612423 20.1653280 20.6260032
+##  [43] 21.2132083 21.8408130 22.6174177 23.4020559 24.2615373 25.0302267
+##  [49] 25.9332135 26.2365417 26.7383043 27.6744365 27.9730091 28.2301689
+##  [55] 28.4989443 29.1074631 29.8351155 29.9999358 30.8566402 30.9136951
+##  [61] 31.3326990 31.7968486 31.8959842 32.1655914 33.0997741 33.5743143
+##  [67] 34.2486232 35.0237582 35.3977515 36.3752270 36.6034115 36.8372459
+##  [73] 36.9158122 37.7491771 37.9490799 38.8978485 39.3699200 39.6919088
+##  [79] 40.2841364 40.4037505 40.6750713 40.6942903 40.8442678 41.6325616
+##  [85] 41.6678382 42.3280058 43.0359109 43.7599386 44.5802862 44.9049056
+##  [91] 45.2657072 45.7871450 45.8251936 46.6542890 47.3113793 47.9499729
+##  [97] 48.7523401 48.7891097 48.9955359 49.9379003
 \end{verbatim}
 
 \end{solution}
@@ -10412,8 +10414,8 @@ Com as funções definidas, vamos avaliar o tempo de execução utilizando a bib
 
 \begin{verbatim}
 ##              test replications elapsed relative user.self sys.self user.child
-## 1   No allocation          100    0.23    3.286      0.24        0         NA
-## 2 With allocation          100    0.07    1.000      0.06        0         NA
+## 1   No allocation          100    0.27      4.5      0.23     0.03         NA
+## 2 With allocation          100    0.06      1.0      0.07     0.00         NA
 ##   sys.child
 ## 1        NA
 ## 2        NA
@@ -11911,38 +11913,12 @@ Não temos exercícios para esta seção.
 \hypertarget{formatos-r-markdown}{%
 \chapter{Formatos R Markdown}\label{formatos-r-markdown}}
 
-\hypertarget{introduuxe7uxe3o-19}{%
-\section{Introdução}\label{introduuxe7uxe3o-19}}
-
-\hypertarget{opuxe7uxf5es-de-sauxedda}{%
-\section{Opções de saída}\label{opuxe7uxf5es-de-sauxedda}}
-
-\hypertarget{documentos}{%
-\section{Documentos}\label{documentos}}
-
-\hypertarget{notebooks}{%
-\section{Notebooks}\label{notebooks}}
-
-\hypertarget{apresentauxe7uxf5es}{%
-\section{Apresentações}\label{apresentauxe7uxf5es}}
-
-\hypertarget{dashboards}{%
-\section{Dashboards}\label{dashboards}}
-
-\hypertarget{interatividade}{%
-\section{Interatividade}\label{interatividade}}
-
-\hypertarget{sites}{%
-\section{Sites}\label{sites}}
-
-\hypertarget{outros-formatos}{%
-\section{Outros formatos}\label{outros-formatos}}
-
-\hypertarget{aprendendo-mais-3}{%
-\section{Aprendendo mais}\label{aprendendo-mais-3}}
+Não temos exercícios para este capítulo.
 
 \hypertarget{fluxo-de-trabalho-de-r-markdown}{%
 \chapter{Fluxo de trabalho de R Markdown}\label{fluxo-de-trabalho-de-r-markdown}}
+
+Não temos exercícios para este capítulo.
 
 \hypertarget{appendix-apuxe9ndices}{%
 \appendix \addcontentsline{toc}{chapter}{\appendixname}}
@@ -11951,8 +11927,8 @@ Não temos exercícios para esta seção.
 \hypertarget{apendice-a---estudo-de-caso-sobre-a-arrumauxe7uxe3o-de-dados-com-tidyr}{%
 \chapter{\texorpdfstring{Apendice A - Estudo de caso sobre a arrumação de dados com \texttt{tidyr}}{Apendice A - Estudo de caso sobre a arrumação de dados com tidyr}}\label{apendice-a---estudo-de-caso-sobre-a-arrumauxe7uxe3o-de-dados-com-tidyr}}
 
-\hypertarget{introduuxe7uxe3o-20}{%
-\section*{Introdução}\label{introduuxe7uxe3o-20}}
+\hypertarget{introduuxe7uxe3o-19}{%
+\section*{Introdução}\label{introduuxe7uxe3o-19}}
 \addcontentsline{toc}{section}{Introdução}
 
 Neste apêndice, reproduzimos o estudo de caso conduzido pelos autores para exemplificar o uso do \texttt{tidyr} na arrumação de dados no capítulo 9 do livro.

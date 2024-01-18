@@ -106,3 +106,4 @@ Dúvidas ou sugestões de melhoria podem ser encaminhadas para o e-mail *jeidsan
 - [Exercício 19.3.8](#exr19-3-8);
 - Exercícios da seção 20.4;
 - Exercícios da seção 20.5;
+- Exercícios do capítulo 21;
