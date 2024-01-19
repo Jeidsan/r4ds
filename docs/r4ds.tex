@@ -233,7 +233,7 @@
 \makeatother
 \subtitle{Solução dos exercícios}
 \author{Jeidsan A. da C. Pereira}
-\date{2024-01-18}
+\date{2024-01-19}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Teorema}[chapter]
@@ -392,6 +392,11 @@ Dúvidas ou sugestões de melhoria podem ser encaminhadas para o e-mail \emph{\h
   Exercícios da seção 20.5;
 \item
   Exercícios do capítulo 21;
+\item
+  \protect\hyperlink{exr22-2-2}{Exercício 22.2.2};
+\item
+  \protect\hyperlink{exr22-2-3}{Exercício 22.2.3};
+\item
 \end{itemize}
 
 \mainmatter
@@ -4858,16 +4863,16 @@ Pratique referir-se a nomes de variáveis não sintáticos, no data frame a segu
 ## # A tibble: 10 x 3
 ##      one   two three
 ##    <int> <dbl> <dbl>
-##  1     1  3.27  3.27
-##  2     2  2.96  1.48
-##  3     3  4.52  1.51
-##  4     4  7.62  1.90
-##  5     5  9.96  1.99
-##  6     6 12.3   2.05
-##  7     7 13.9   1.99
-##  8     8 15.4   1.92
-##  9     9 18.5   2.06
-## 10    10 19.0   1.90
+##  1     1  2.86  2.86
+##  2     2  4.66  2.33
+##  3     3  8.79  2.93
+##  4     4  8.55  2.14
+##  5     5  9.83  1.97
+##  6     6 11.0   1.83
+##  7     7 14.6   2.08
+##  8     8 15.0   1.87
+##  9     9 16.3   1.81
+## 10    10 21.7   2.17
 \end{verbatim}
 
 \end{solution}
@@ -10032,10 +10037,10 @@ Pense sobre saída, seuência e corpo \emph{antes} de começar a escrever o loop
 
 \begin{verbatim}
 ## List of 4
-##  $ : num [1:10] -9.86 -9.06 -9.67 -8.21 -9.02 ...
-##  $ : num [1:10] 1.5291 0.0964 -0.1237 0.5918 1.3581 ...
-##  $ : num [1:10] 10.53 11.21 11.56 10.37 9.76 ...
-##  $ : num [1:10] 101.6 99.3 100.2 100.4 101.4 ...
+##  $ : num [1:10] -9.82 -10.06 -12.12 -11.81 -11.07 ...
+##  $ : num [1:10] -0.6659 -0.0913 0.4559 0.8231 -1.4465 ...
+##  $ : num [1:10] 10.64 9.39 8.15 10.16 10.14 ...
+##  $ : num [1:10] 100.7 99 100.4 99.8 100.1 ...
 \end{verbatim}
 
 \end{solution}
@@ -10106,23 +10111,23 @@ O último loop calcula a soma cumulativa de um vetor e poderia ser substituído 
 \end{Shaded}
 
 \begin{verbatim}
-##   [1]  0.8162778  0.8995471  1.2501733  1.5706654  2.3974889  2.5969998
-##   [7]  3.4516104  4.4313224  4.7503161  4.8233062  5.3818888  5.8890517
-##  [13]  6.2648123  6.6163234  7.3978031  7.6359332  8.2608480  9.1802566
-##  [19]  9.3731847  9.5278986  9.9339832 10.4419825 10.7631179 11.7329333
-##  [25] 12.5612082 13.4106039 13.4684729 13.7204871 14.5843307 15.0003687
-##  [31] 15.7212309 16.4690820 16.8235465 17.6613948 18.2249205 18.4913073
-##  [37] 18.8353543 19.3242196 19.4354521 19.6612423 20.1653280 20.6260032
-##  [43] 21.2132083 21.8408130 22.6174177 23.4020559 24.2615373 25.0302267
-##  [49] 25.9332135 26.2365417 26.7383043 27.6744365 27.9730091 28.2301689
-##  [55] 28.4989443 29.1074631 29.8351155 29.9999358 30.8566402 30.9136951
-##  [61] 31.3326990 31.7968486 31.8959842 32.1655914 33.0997741 33.5743143
-##  [67] 34.2486232 35.0237582 35.3977515 36.3752270 36.6034115 36.8372459
-##  [73] 36.9158122 37.7491771 37.9490799 38.8978485 39.3699200 39.6919088
-##  [79] 40.2841364 40.4037505 40.6750713 40.6942903 40.8442678 41.6325616
-##  [85] 41.6678382 42.3280058 43.0359109 43.7599386 44.5802862 44.9049056
-##  [91] 45.2657072 45.7871450 45.8251936 46.6542890 47.3113793 47.9499729
-##  [97] 48.7523401 48.7891097 48.9955359 49.9379003
+##   [1]  0.9465743  1.5495124  2.4700419  2.7406080  3.4313253  4.0743286
+##   [7]  4.8178170  5.3924114  6.3320392  6.6878085  7.5348192  8.1930433
+##  [13]  8.4144702  9.1414547  9.7692519 10.4535963 11.0728527 11.3779059
+##  [19] 11.7181031 12.2562467 12.8168579 13.3293044 13.9421392 14.4629342
+##  [25] 15.2635128 16.1610348 16.3347116 16.8281350 16.9839226 17.4661546
+##  [31] 18.2306666 18.8182408 18.9560289 18.9626794 19.0038814 19.3887142
+##  [37] 20.3513463 21.0559380 21.0959176 21.2520878 21.5908668 21.9104135
+##  [43] 22.1062846 23.0452767 23.9428274 24.7871435 24.8607800 25.6721471
+##  [49] 25.8709577 26.0417020 26.9582490 27.3950728 28.1656051 28.9623611
+##  [55] 29.2889834 29.5915934 29.7061535 30.5887601 30.8478487 31.4653000
+##  [61] 32.2428607 32.9066629 33.7609059 34.4635674 35.1269455 36.0804550
+##  [67] 36.0945110 37.0387947 37.8590191 38.3012748 38.6538216 39.1435539
+##  [73] 39.4878324 39.7410914 40.6328138 40.7857594 41.6356333 41.8075878
+##  [79] 42.0881499 42.9602272 42.9661924 43.8735715 44.6747800 45.2744626
+##  [85] 45.9513279 46.7607724 47.7468632 47.8589869 48.3661212 48.8145081
+##  [91] 48.8522828 48.8889326 49.6460435 50.6136927 51.3786747 52.3621559
+##  [97] 52.4339908 52.7184779 53.1493939 53.6916188
 \end{verbatim}
 
 \end{solution}
@@ -10414,8 +10419,8 @@ Com as funções definidas, vamos avaliar o tempo de execução utilizando a bib
 
 \begin{verbatim}
 ##              test replications elapsed relative user.self sys.self user.child
-## 1   No allocation          100    0.27      4.5      0.23     0.03         NA
-## 2 With allocation          100    0.06      1.0      0.07     0.00         NA
+## 1   No allocation          100    0.22    3.143      0.22        0         NA
+## 2 With allocation          100    0.07    1.000      0.06        0         NA
 ##   sys.child
 ## 1        NA
 ## 2        NA
@@ -11889,26 +11894,356 @@ Não temos exercícios para esta seção.
 \hypertarget{introduuxe7uxe3o-18}{%
 \section{Introdução}\label{introduuxe7uxe3o-18}}
 
+Não temos exercícios para esta seção.
+
 \hypertarget{ruxf3tulo}{%
 \section{Rótulo}\label{ruxf3tulo}}
+
+\hypertarget{exr22-2-1}{%
+\subsection*{Exercício 22.2.1}\label{exr22-2-1}}
+\addcontentsline{toc}{subsection}{Exercício 22.2.1}
+
+Crie um gráfico sobre os dados de economia de combustível com rótulos \texttt{title}, \texttt{subtitle}, \texttt{caption}, \texttt{x}, \texttt{y} e \texttt{colour} customizados.
+
+\begin{solution}
+\leavevmode
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mpg }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(displ, hwy)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{color =}\NormalTok{ class)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{se =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{labs}\NormalTok{(}
+      \AttributeTok{title =} \StringTok{"Eficiência energética"}\NormalTok{,}
+      \AttributeTok{subtitle =} \StringTok{"Consumo de combustível conforme cilindradas do motor e tipo de veículo"}\NormalTok{,}
+      \AttributeTok{caption =} \StringTok{"Fonte: Fuel Economy {-} U.S. Department of Energy"}\NormalTok{,}
+      \AttributeTok{x =} \StringTok{"Número de cilindros do motor"}\NormalTok{,}
+      \AttributeTok{y =} \StringTok{"Consumo de combustível (mpg)"}\NormalTok{,}
+      \AttributeTok{colour =} \StringTok{"Tipo de veículo"}
+\NormalTok{    )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using method = 'loess' and formula = 'y ~ x'
+\end{verbatim}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-311-1.pdf}
+
+\end{solution}
+
+\hypertarget{exr22-2-2}{%
+\subsection*{Exercício 22.2.2}\label{exr22-2-2}}
+\addcontentsline{toc}{subsection}{Exercício 22.2.2}
+
+A \texttt{geom\_smooth()} é, de certa forma, ilusória, porque \texttt{hwy} para motores grandes é inclinada para cima devido à inclusão de carros esporte leves com motores grandes. Use suas ferramentas de modelagem para ajustar e exibir um modelo melhor.
+
+\begin{solution}
+Inicialmente vamos criar um modelo linear considerando apenas o tamanho do motor e o consumo de combustível.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mod1 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(hwy }\SpecialCharTok{\textasciitilde{}}\NormalTok{ displ, mpg)}
+\NormalTok{mod1\_stats }\OtherTok{\textless{}{-}}\NormalTok{ broom}\SpecialCharTok{::}\FunctionTok{glance}\NormalTok{(mod1)}
+\NormalTok{mod1\_data }\OtherTok{\textless{}{-}}\NormalTok{ mpg }\SpecialCharTok{\%\textgreater{}\%}
+                \FunctionTok{add\_predictions}\NormalTok{(mod1) }\SpecialCharTok{\%\textgreater{}\%}
+                \FunctionTok{add\_residuals}\NormalTok{(mod1)}
+
+\NormalTok{mod1\_data }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(displ, hwy)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{color =}\NormalTok{ class)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_line}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ pred)) }\SpecialCharTok{+}
+    \FunctionTok{labs}\NormalTok{(}
+      \AttributeTok{title =} \StringTok{"Modelo Linear"}
+\NormalTok{    )}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-312-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mod1\_data }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(displ, resid)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_jitter}\NormalTok{() }\SpecialCharTok{+}
+    \FunctionTok{geom\_ref\_line}\NormalTok{(}\AttributeTok{h =} \DecValTok{0}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-313-1.pdf}
+Como os resíduos do modelo apresentam uma variação ruim, vamos tentar utilizar uma função polinomial.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mod2 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(hwy }\SpecialCharTok{\textasciitilde{}} \FunctionTok{poly}\NormalTok{(displ, }\DecValTok{2}\NormalTok{), mpg)}
+\NormalTok{mod2\_stats }\OtherTok{\textless{}{-}}\NormalTok{ broom}\SpecialCharTok{::}\FunctionTok{glance}\NormalTok{(mod2)}
+\NormalTok{mod2\_data }\OtherTok{\textless{}{-}}\NormalTok{ mpg }\SpecialCharTok{\%\textgreater{}\%}
+                \FunctionTok{add\_predictions}\NormalTok{(mod2) }\SpecialCharTok{\%\textgreater{}\%}
+                \FunctionTok{add\_residuals}\NormalTok{(mod2)}
+
+\NormalTok{mod2\_data }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(displ, hwy)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{color =}\NormalTok{ class)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_line}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ pred)) }\SpecialCharTok{+}
+    \FunctionTok{labs}\NormalTok{(}
+      \AttributeTok{title =} \StringTok{"Modelo Linear"}
+\NormalTok{    )}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-314-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mod2\_data }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(displ, resid)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_jitter}\NormalTok{() }\SpecialCharTok{+}
+    \FunctionTok{geom\_ref\_line}\NormalTok{(}\AttributeTok{h =} \DecValTok{0}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-315-1.pdf}
+
+Ainda temos parâmetros ruins, vamos aumentar o grau do polinômio.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mod3 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(hwy }\SpecialCharTok{\textasciitilde{}} \FunctionTok{poly}\NormalTok{(displ, }\DecValTok{5}\NormalTok{), mpg)}
+\NormalTok{mod3\_stats }\OtherTok{\textless{}{-}}\NormalTok{ broom}\SpecialCharTok{::}\FunctionTok{glance}\NormalTok{(mod3)}
+\NormalTok{mod3\_data }\OtherTok{\textless{}{-}}\NormalTok{ mpg }\SpecialCharTok{\%\textgreater{}\%}
+                \FunctionTok{add\_predictions}\NormalTok{(mod3) }\SpecialCharTok{\%\textgreater{}\%}
+                \FunctionTok{add\_residuals}\NormalTok{(mod3)}
+
+\NormalTok{mod3\_data }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(displ, hwy)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{color =}\NormalTok{ class)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_line}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ pred)) }\SpecialCharTok{+}
+    \FunctionTok{labs}\NormalTok{(}
+      \AttributeTok{title =} \StringTok{"Modelo Linear"}
+\NormalTok{    )}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-316-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mod3\_data }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(displ, resid)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_jitter}\NormalTok{() }\SpecialCharTok{+}
+    \FunctionTok{geom\_ref\_line}\NormalTok{(}\AttributeTok{h =} \DecValTok{0}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-317-1.pdf}
+
+Parece que o problema não se resolverá pela simples mudança no grau do polinômio. Tentaremos então uma padronização da variável \texttt{displ}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{z }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x, n) \{}
+  \FunctionTok{poly}\NormalTok{((x }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(x)) }\SpecialCharTok{/} \FunctionTok{sd}\NormalTok{(x), n)}
+\NormalTok{\}}
+
+\NormalTok{mod4 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(hwy }\SpecialCharTok{\textasciitilde{}} \FunctionTok{z}\NormalTok{(displ, }\DecValTok{5}\NormalTok{) }\SpecialCharTok{+}\NormalTok{ class, mpg)}
+\NormalTok{mod4\_stats }\OtherTok{\textless{}{-}}\NormalTok{ broom}\SpecialCharTok{::}\FunctionTok{glance}\NormalTok{(mod4)}
+\NormalTok{mod4\_data }\OtherTok{\textless{}{-}}\NormalTok{ mpg }\SpecialCharTok{\%\textgreater{}\%}
+                \FunctionTok{add\_predictions}\NormalTok{(mod4) }\SpecialCharTok{\%\textgreater{}\%}
+                \FunctionTok{add\_residuals}\NormalTok{(mod4)}
+
+\NormalTok{mod4\_data }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(displ, hwy)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+    \FunctionTok{geom\_line}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ pred)) }\SpecialCharTok{+}
+    \FunctionTok{labs}\NormalTok{(}
+      \AttributeTok{title =} \StringTok{"Modelo Linear"}
+\NormalTok{    )}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-318-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mod4\_data }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(displ, resid)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_jitter}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{color =}\NormalTok{ class)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_ref\_line}\NormalTok{(}\AttributeTok{h =} \DecValTok{0}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-319-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mod5 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(hwy }\SpecialCharTok{\textasciitilde{}} \FunctionTok{poly}\NormalTok{(displ, }\DecValTok{5}\NormalTok{) }\SpecialCharTok{*}\NormalTok{ class, mpg)}
+\NormalTok{mod5\_stats }\OtherTok{\textless{}{-}}\NormalTok{ broom}\SpecialCharTok{::}\FunctionTok{glance}\NormalTok{(mod5)}
+\NormalTok{mod5\_data }\OtherTok{\textless{}{-}}\NormalTok{ mpg }\SpecialCharTok{\%\textgreater{}\%}
+                \FunctionTok{add\_predictions}\NormalTok{(mod5) }\SpecialCharTok{\%\textgreater{}\%}
+                \FunctionTok{add\_residuals}\NormalTok{(mod5)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in predict.lm(model, data): prediction from rank-deficient fit; attr(*,
+## "non-estim") has doubtful cases
+
+## Warning in predict.lm(model, data): prediction from rank-deficient fit; attr(*,
+## "non-estim") has doubtful cases
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mod5\_data }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(displ, hwy)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{color =}\NormalTok{ class)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_line}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ pred)) }\SpecialCharTok{+}
+    \FunctionTok{labs}\NormalTok{(}
+      \AttributeTok{title =} \StringTok{"Modelo Linear"}
+\NormalTok{    )}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-320-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mod5\_data }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(displ, resid)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_jitter}\NormalTok{() }\SpecialCharTok{+}
+    \FunctionTok{geom\_ref\_line}\NormalTok{(}\AttributeTok{h =} \DecValTok{0}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4ds_files/figure-latex/unnamed-chunk-321-1.pdf}
+\end{solution}
+
+\hypertarget{exr22-2-3}{%
+\subsection*{Exercício 22.2.3}\label{exr22-2-3}}
+\addcontentsline{toc}{subsection}{Exercício 22.2.3}
+
+Pegue um gráfico exploratório que você criou no último mês e adicione títulos informativos para facilitar o entendimento de outras pessoas.
+
+\begin{solution}
+x
+\end{solution}
 
 \hypertarget{anotauxe7uxf5es}{%
 \section{Anotações}\label{anotauxe7uxf5es}}
 
+\hypertarget{exr22-3-1}{%
+\subsection*{Exercício 22.3.1}\label{exr22-3-1}}
+\addcontentsline{toc}{subsection}{Exercício 22.3.1}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr22-3-2}{%
+\subsection*{Exercício 22.3.2}\label{exr22-3-2}}
+\addcontentsline{toc}{subsection}{Exercício 22.3.2}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr22-3-3}{%
+\subsection*{Exercício 22.3.3}\label{exr22-3-3}}
+\addcontentsline{toc}{subsection}{Exercício 22.3.3}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr22-3-4}{%
+\subsection*{Exercício 22.3.4}\label{exr22-3-4}}
+\addcontentsline{toc}{subsection}{Exercício 22.3.4}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr22-3-5}{%
+\subsection*{Exercício 22.3.5}\label{exr22-3-5}}
+\addcontentsline{toc}{subsection}{Exercício 22.3.5}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
 \hypertarget{escalas}{%
 \section{Escalas}\label{escalas}}
+
+\hypertarget{exr22-4-1}{%
+\subsection*{Exercício 22.4.1}\label{exr22-4-1}}
+\addcontentsline{toc}{subsection}{Exercício 22.4.1}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr22-4-2}{%
+\subsection*{Exercício 22.4.2}\label{exr22-4-2}}
+\addcontentsline{toc}{subsection}{Exercício 22.4.2}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr22-4-3}{%
+\subsection*{Exercício 22.4.3}\label{exr22-4-3}}
+\addcontentsline{toc}{subsection}{Exercício 22.4.3}
+
+x
+
+\begin{solution}
+x
+\end{solution}
+
+\hypertarget{exr22-4-4}{%
+\subsection*{Exercício 22.4.4}\label{exr22-4-4}}
+\addcontentsline{toc}{subsection}{Exercício 22.4.4}
+
+x
+
+\begin{solution}
+x
+\end{solution}
 
 \hypertarget{dando-zoom}{%
 \section{Dando zoom}\label{dando-zoom}}
 
+Não temos exercícios para esta seção.
+
 \hypertarget{temas}{%
 \section{Temas}\label{temas}}
+
+Não temos exercícios para esta seção.
 
 \hypertarget{salvando-seus-gruxe1ficos}{%
 \section{Salvando seus gráficos}\label{salvando-seus-gruxe1ficos}}
 
+Não temos exercícios para esta seção.
+
 \hypertarget{aprendendo-mais-2}{%
 \section{Aprendendo mais}\label{aprendendo-mais-2}}
+
+Não temos exercícios para esta seção.
 
 \hypertarget{formatos-r-markdown}{%
 \chapter{Formatos R Markdown}\label{formatos-r-markdown}}

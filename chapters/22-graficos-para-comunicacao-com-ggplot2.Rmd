@@ -2,16 +2,282 @@
 
 ## Introdução
 
+Não temos exercícios para esta seção.
+
 ## Rótulo
+
+### Exercício 22.2.1 {- #exr22-2-1}
+
+::: {.enunciado}
+Crie um gráfico sobre os dados de economia de combustível com rótulos `title`, `subtitle`, `caption`, `x`, `y` e `colour` customizados.
+:::
+
+::: {.solution}
+```{r}
+mpg %>%
+  ggplot(aes(displ, hwy)) +
+    geom_point(aes(color = class)) +
+    geom_smooth(se = FALSE) +
+    labs(
+      title = "Eficiência energética",
+      subtitle = "Consumo de combustível conforme cilindradas do motor e tipo de veículo",
+      caption = "Fonte: Fuel Economy - U.S. Department of Energy",
+      x = "Número de cilindros do motor",
+      y = "Consumo de combustível (mpg)",
+      colour = "Tipo de veículo"
+    )
+```
+:::
+
+### Exercício 22.2.2 {- #exr22-2-2}
+
+::: {.enunciado}
+A `geom_smooth()` é, de certa forma, ilusória, porque `hwy` para motores grandes é inclinada para cima devido à inclusão de carros esporte leves com motores grandes. Use suas ferramentas de modelagem para ajustar e exibir um modelo melhor.
+:::
+
+::: {.solution}
+Inicialmente vamos criar um modelo linear considerando apenas o tamanho do motor e o consumo de combustível.
+
+```{r}
+mod1 <- lm(hwy ~ displ, mpg)
+mod1_stats <- broom::glance(mod1)
+mod1_data <- mpg %>%
+                add_predictions(mod1) %>%
+                add_residuals(mod1)
+
+mod1_data %>%
+  ggplot(aes(displ, hwy)) +
+    geom_point(aes(color = class)) +
+    geom_line(aes(y = pred)) +
+    labs(
+      title = "Modelo Linear"
+    )
+```
+```{r}
+mod1_data %>%
+  ggplot(aes(displ, resid)) +
+    geom_jitter() +
+    geom_ref_line(h = 0)
+```
+Como os resíduos do modelo apresentam uma variação ruim, vamos tentar utilizar uma função polinomial.
+
+```{r}
+mod2 <- lm(hwy ~ poly(displ, 2), mpg)
+mod2_stats <- broom::glance(mod2)
+mod2_data <- mpg %>%
+                add_predictions(mod2) %>%
+                add_residuals(mod2)
+
+mod2_data %>%
+  ggplot(aes(displ, hwy)) +
+    geom_point(aes(color = class)) +
+    geom_line(aes(y = pred)) +
+    labs(
+      title = "Modelo Linear"
+    )
+```
+```{r}
+mod2_data %>%
+  ggplot(aes(displ, resid)) +
+    geom_jitter() +
+    geom_ref_line(h = 0)
+```
+
+Ainda temos parâmetros ruins, vamos aumentar o grau do polinômio.
+
+```{r}
+mod3 <- lm(hwy ~ poly(displ, 5), mpg)
+mod3_stats <- broom::glance(mod3)
+mod3_data <- mpg %>%
+                add_predictions(mod3) %>%
+                add_residuals(mod3)
+
+mod3_data %>%
+  ggplot(aes(displ, hwy)) +
+    geom_point(aes(color = class)) +
+    geom_line(aes(y = pred)) +
+    labs(
+      title = "Modelo Linear"
+    )
+
+```
+
+```{r}
+mod3_data %>%
+  ggplot(aes(displ, resid)) +
+    geom_jitter() +
+    geom_ref_line(h = 0)
+```
+
+Parece que o problema não se resolverá pela simples mudança no grau do polinômio. Tentaremos então uma padronização da variável `displ`.
+
+```{r}
+z <- function(x, n) {
+  poly((x - mean(x)) / sd(x), n)
+}
+
+mod4 <- lm(hwy ~ z(displ, 5) + class, mpg)
+mod4_stats <- broom::glance(mod4)
+mod4_data <- mpg %>%
+                add_predictions(mod4) %>%
+                add_residuals(mod4)
+
+mod4_data %>%
+  ggplot(aes(displ, hwy)) +
+    geom_point() +
+    geom_line(aes(y = pred)) +
+    labs(
+      title = "Modelo Linear"
+    )
+```
+
+```{r}
+mod4_data %>%
+  ggplot(aes(displ, resid)) +
+    geom_jitter(aes(color = class)) +
+    geom_ref_line(h = 0)
+```
+
+```{r}
+mod5 <- lm(hwy ~ poly(displ, 5) * class, mpg)
+mod5_stats <- broom::glance(mod5)
+mod5_data <- mpg %>%
+                add_predictions(mod5) %>%
+                add_residuals(mod5)
+
+mod5_data %>%
+  ggplot(aes(displ, hwy)) +
+    geom_point(aes(color = class)) +
+    geom_line(aes(y = pred)) +
+    labs(
+      title = "Modelo Linear"
+    )
+```
+
+```{r}
+mod5_data %>%
+  ggplot(aes(displ, resid)) +
+    geom_jitter() +
+    geom_ref_line(h = 0)
+```
+:::
+
+### Exercício 22.2.3 {- #exr22-2-3}
+
+::: {.enunciado}
+Pegue um gráfico exploratório que você criou no último mês e adicione títulos informativos para facilitar o entendimento de outras pessoas.
+:::
+
+::: {.solution}
+x
+:::
 
 ## Anotações
 
+### Exercício 22.3.1 {- #exr22-3-1}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 22.3.2 {- #exr22-3-2}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 22.3.3 {- #exr22-3-3}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 22.3.4 {- #exr22-3-4}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 22.3.5 {- #exr22-3-5}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::
+
 ## Escalas
+
+### Exercício 22.4.1 {- #exr22-4-1}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 22.4.2 {- #exr22-4-2}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 22.4.3 {- #exr22-4-3}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::
+
+### Exercício 22.4.4 {- #exr22-4-4}
+
+::: {.enunciado}
+x
+:::
+
+::: {.solution}
+x
+:::
 
 ## Dando zoom
 
+Não temos exercícios para esta seção.
+
 ## Temas
+
+Não temos exercícios para esta seção.
 
 ## Salvando seus gráficos
 
+Não temos exercícios para esta seção.
+
 ## Aprendendo mais
+
+Não temos exercícios para esta seção.
